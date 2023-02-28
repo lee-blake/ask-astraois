@@ -10,7 +10,7 @@ public class HalfCircleDegreeCoordinate {
     private static final int UNITS_PER_ARCMINUTE = 60*1000;
     private static final int UNITS_PER_ARCSECOND = 1000;
 
-    private final int units;
+    private final long units;
 
     public HalfCircleDegreeCoordinate(int degrees, int arcminutes, double arcseconds) {
         int sign = degrees / Math.abs(degrees);
@@ -18,7 +18,7 @@ public class HalfCircleDegreeCoordinate {
                 + UNITS_PER_ARCMINUTE*arcminutes
                 + (int)(UNITS_PER_ARCSECOND*arcseconds);
         int unitsBeforePositiveNormalization = (sign*unitsNoModNoSign) % MAX_UNITS;
-        this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
+        this.units = ((long)unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
     }
 
     @Override
