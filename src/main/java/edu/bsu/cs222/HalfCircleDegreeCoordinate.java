@@ -18,12 +18,7 @@ public class HalfCircleDegreeCoordinate {
                 + UNITS_PER_ARCMINUTE*arcminutes
                 + (int)(UNITS_PER_ARCSECOND*arcseconds);
         int unitsBeforePositiveNormalization = (sign*unitsNoModNoSign) % MAX_UNITS;
-        if (unitsBeforePositiveNormalization < 0) {
-             this.units = MAX_UNITS + unitsBeforePositiveNormalization;
-        }
-        else {
-            this.units = unitsBeforePositiveNormalization;
-        }
+        this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
     }
 
     @Override
