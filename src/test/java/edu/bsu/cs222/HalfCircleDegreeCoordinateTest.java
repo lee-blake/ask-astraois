@@ -71,4 +71,12 @@ public class HalfCircleDegreeCoordinateTest {
         boolean result = coordinate0.equals(coordinate1);
         Assertions.assertTrue(result);
     }
+
+    @Test
+    public void testEqualsNegationAndComplementAreEqual() {
+        HalfCircleDegreeCoordinate negation = new HalfCircleDegreeCoordinate(-45, 20, 20.0);
+        HalfCircleDegreeCoordinate complement = new HalfCircleDegreeCoordinate(134, 39, 40.0);
+        boolean result = negation.equals(complement);
+        Assertions.assertTrue(result);
+    }
 }
