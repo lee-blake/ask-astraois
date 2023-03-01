@@ -1,3 +1,4 @@
 # Project settings
 .idea/*
 .gradle/*
+.build/*
