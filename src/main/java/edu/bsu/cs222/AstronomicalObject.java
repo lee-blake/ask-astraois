@@ -10,8 +10,9 @@ public class AstronomicalObject {
         this.name = name;
         this.raDecCoords = raDecCoords;
     }
+
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if(o instanceof AstronomicalObject other) {
             return this.name.equals(other.name) && this.raDecCoords.equals(other.raDecCoords);
         }

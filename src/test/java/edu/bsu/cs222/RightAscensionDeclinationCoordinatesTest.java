@@ -8,7 +8,7 @@ public class RightAscensionDeclinationCoordinatesTest {
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
     @Test
-    public void testEqualsNonRightAscensionDeclinationsCoordinatesNotEqual(){
+    public void testEqualsNonRightAscensionDeclinationsCoordinatesNotEqual() {
         HourCoordinate ra = new HourCoordinate(17, 30,30);
         HalfCircleDegreeCoordinate dec = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords = new RightAscensionDeclinationCoordinates(ra,dec);
@@ -17,7 +17,7 @@ public class RightAscensionDeclinationCoordinatesTest {
     }
 
     @Test
-    public void testEqualsSameRaAndDecEqual(){
+    public void testEqualsSameRaAndDecEqual() {
         HourCoordinate ra1 = new HourCoordinate(17, 30,30);
         HalfCircleDegreeCoordinate dec1 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(ra1,dec1);
@@ -29,7 +29,7 @@ public class RightAscensionDeclinationCoordinatesTest {
     }
 
     @Test
-    public void testEqualsRightAscensionDifferentNotEqual(){
+    public void testEqualsRightAscensionDifferentNotEqual() {
         HourCoordinate ra1 = new HourCoordinate(18, 30,30);
         HalfCircleDegreeCoordinate dec1 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(ra1,dec1);
@@ -41,7 +41,7 @@ public class RightAscensionDeclinationCoordinatesTest {
     }
 
     @Test
-    public void testEqualsDeclinationDifferentNotEqual(){
+    public void testEqualsDeclinationDifferentNotEqual() {
         HourCoordinate ra1 = new HourCoordinate(17, 30,30);
         HalfCircleDegreeCoordinate dec1 = new HalfCircleDegreeCoordinate(44, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(ra1,dec1);
@@ -53,7 +53,7 @@ public class RightAscensionDeclinationCoordinatesTest {
     }
 
     @Test
-    public void testEqualsDeclinationAndRightAscensionDifferentNotEqual(){
+    public void testEqualsDeclinationAndRightAscensionDifferentNotEqual() {
         HourCoordinate ra1 = new HourCoordinate(18, 30,30);
         HalfCircleDegreeCoordinate dec1 = new HalfCircleDegreeCoordinate(44, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(ra1,dec1);
