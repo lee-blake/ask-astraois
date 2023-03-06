@@ -11,7 +11,8 @@ import picocli.CommandLine.Option;
                 AddCommand.class,
                 RemoveCommand.class,
                 CompleteCommand.class,
-                UncompleteCommand.class
+                UncompleteCommand.class,
+                ViewCommand.class
         }
 )
 public class Main {
@@ -33,7 +34,7 @@ public class Main {
         // Should use args instead of myArgs
         // try-catch is necessary to be able to get any useful error messages in IntelliJ
         // Also need to capture exit code from execution and exit with it
-        String[] myArgs = new String[]{"uncomplete","x","--help"};
+        String[] myArgs = new String[]{"view"};
         try {
             new CommandLine(new Main()).execute(myArgs);
         }
