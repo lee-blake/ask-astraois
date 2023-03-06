@@ -9,7 +9,8 @@ import picocli.CommandLine.Option;
         description = "Maintain a journal of astronomical objects to view via its subcommands.",
         subcommands = {
                 AddCommand.class,
-                RemoveCommand.class
+                RemoveCommand.class,
+                CompleteCommand.class
         }
 )
 public class Main {
@@ -31,7 +32,7 @@ public class Main {
         // Should use args instead of myArgs
         // try-catch is necessary to be able to get any useful error messages in IntelliJ
         // Also need to capture exit code from execution and exit with it
-        String[] myArgs = new String[]{"remove","--help"};
+        String[] myArgs = new String[]{"complete","x","--help"};
         try {
             new CommandLine(new Main()).execute(myArgs);
         }
