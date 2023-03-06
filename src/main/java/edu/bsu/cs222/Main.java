@@ -5,8 +5,11 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Command(
-        name="ask-astraeus",
-        description="Maintain a list of astronomical objects to view."
+        name = "ask-astraeus",
+        description = "Maintain a journal of astronomical objects to view.",
+        subcommands = {
+                AddCommand.class
+        }
 )
 public class Main {
 
@@ -16,9 +19,9 @@ public class Main {
     // canonical way to require a subcommand with PicoCLI). Therefore, there is no other way around this warning.
     @SuppressWarnings("unused")
     @Option(
-            names={"-h","--help"},
-            usageHelp=true,
-            description="Display this help message"
+            names = {"-h","--help"},
+            usageHelp = true,
+            description = "Display this help message"
     )
     private boolean helpRequested;
 
@@ -27,7 +30,7 @@ public class Main {
         // Should use args instead of myArgs
         // try-catch is necessary to be able to get any useful error messages in IntelliJ
         // Also need to capture exit code from execution and exit with it
-        String[] myArgs = new String[]{"--help"};
+        String[] myArgs = new String[]{"add","testobject","--ra=23.0","--dec=10c.24"};
         try {
             new CommandLine(new Main()).execute(myArgs);
         }
