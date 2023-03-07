@@ -3,6 +3,8 @@ package edu.bsu.cs222;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class ObjectListTest {
 
     public AstronomicalObject buildM13Object() {
@@ -49,5 +51,70 @@ public class ObjectListTest {
                 ObjectListEntryAlreadyExistsException.class,
                 () -> objectList.addEntry(duplicateEntry)
         );
+    }
+
+
+    // This suppression is needed to verify this intended functionality where anything of another
+    // type is not equal.
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Test
+    public void testEqualsNonObjectListNotEqual() {
+        ObjectList list = new ObjectList();
+        String otherObject = "";
+        boolean result = list.equals(otherObject);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsBothEmptyIsEqual() {
+        ObjectList list1 = new ObjectList();
+        ObjectList list2 = new ObjectList();
+        boolean result = list1.equals(list2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testEqualsDifferentOneElementNotEqual() throws ObjectListEntryAlreadyExistsException {
+        ObjectList list1 = new ObjectList();
+        list1.addEntry(new ObjectListEntry(buildM13Object()));
+        ObjectList list2 = new ObjectList();
+        list2.addEntry(new ObjectListEntry(buildM31Object()));
+        boolean result = list1.equals(list2);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsIdenticalNonemptyIsEqual() throws ObjectListEntryAlreadyExistsException {
+        ObjectList list1 = new ObjectList();
+        list1.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        list1.addEntry(new ObjectListEntry(buildM31Object()));
+        ObjectList list2 = new ObjectList();
+        list2.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        list2.addEntry(new ObjectListEntry(buildM31Object()));
+        boolean result = list1.equals(list2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testEqualsProperSubsetNotEqual() throws ObjectListEntryAlreadyExistsException {
+        ObjectList list1 = new ObjectList();
+        list1.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        ObjectList list2 = new ObjectList();
+        list2.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        list2.addEntry(new ObjectListEntry(buildM31Object()));
+        boolean result = list1.equals(list2);
+        Assertions.assertFalse(result);
     }
 }
