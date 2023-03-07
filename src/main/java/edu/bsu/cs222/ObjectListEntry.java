@@ -11,4 +11,8 @@ public class ObjectListEntry {
     public String getName() {
         return this.astronomicalObject.getName();
     }
+
+    public AstronomicalObject getAstronomicalObject() {
+        return this.astronomicalObject;
+    }
 }
