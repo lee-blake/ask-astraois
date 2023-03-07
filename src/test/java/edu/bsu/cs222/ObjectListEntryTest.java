@@ -3,6 +3,8 @@ package edu.bsu.cs222;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class ObjectListEntryTest {
 
     public AstronomicalObject buildM13Object() {
@@ -53,5 +55,44 @@ public class ObjectListEntryTest {
         AstronomicalObject retrievedObject = entry.getAstronomicalObject();
         boolean result = freshM31Object.equals(retrievedObject);
         Assertions.assertTrue(result);
+    }
+
+
+    // This suppression is needed to verify this intended functionality where anything of another
+    // type is not equal.
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Test
+    public void testEqualsNonObjectListEntryNotEqual() {
+        ObjectListEntry entry = new ObjectListEntry(buildM13Object());
+        String otherObject = "";
+        boolean result = entry.equals(otherObject);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsSameObjectAndCompletionIsEqual() {
+        ObjectListEntry entry1 = new ObjectListEntry(buildM13Object());
+        ObjectListEntry entry2 = new ObjectListEntry(buildM13Object());
+        boolean result = entry1.equals(entry2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testEqualsDifferentObjectNotEqual() {
+        ObjectListEntry entry1 = new ObjectListEntry(buildM13Object());
+        ObjectListEntry entry2 = new ObjectListEntry(buildM31Object());
+        boolean result = entry1.equals(entry2);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsDifferentCompletionNotEqual() {
+        ObjectListEntry entry1 = new ObjectListEntry(buildM13Object());
+        ObjectListEntry entry2 = new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        boolean result = entry1.equals(entry2);
+        Assertions.assertFalse(result);
     }
 }
