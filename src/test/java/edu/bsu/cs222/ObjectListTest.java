@@ -20,7 +20,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testAddEntry_GetObjectByName() {
+    public void testAddEntry_GetObjectByName() throws ObjectListEntryAlreadyExistsException {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList objectList = new ObjectList();
@@ -36,5 +36,18 @@ public class ObjectListTest {
         AstronomicalObject secondRetrieved = objectList.getEntryByName("M31").getAstronomicalObject();
         boolean secondResult = freshM31Object.equals(secondRetrieved);
         Assertions.assertTrue(secondResult);
+    }
+
+    @Test
+    public void testAddEntryThrowsExceptionOnDuplicateKey() throws ObjectListEntryAlreadyExistsException {
+        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
+        ObjectList objectList = new ObjectList();
+        objectList.addEntry(m13Entry);
+
+        ObjectListEntry duplicateEntry = new ObjectListEntry(buildM13Object());
+        Assertions.assertThrows(
+                ObjectListEntryAlreadyExistsException.class,
+                () -> objectList.addEntry(duplicateEntry)
+        );
     }
 }
