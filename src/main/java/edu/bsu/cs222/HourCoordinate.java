@@ -13,7 +13,7 @@ public class HourCoordinate {
     private final long units;
 
     public HourCoordinate(int hours, int minutes, double seconds) {
-        int sign = hours / Math.abs(hours);
+        int sign = hours == 0 ? 1 :hours / Math.abs(hours);
         long unitsNoModNoSign = sign*UNITS_PER_HOUR*hours
                 + UNITS_PER_MINUTE*minutes
                 + (int)(UNITS_PER_SECOND*seconds);

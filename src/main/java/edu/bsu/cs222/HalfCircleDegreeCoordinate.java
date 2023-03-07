@@ -13,7 +13,7 @@ public class HalfCircleDegreeCoordinate {
     private final long units;
 
     public HalfCircleDegreeCoordinate(int degrees, int arcminutes, double arcseconds) {
-        int sign = degrees / Math.abs(degrees);
+        int sign = degrees == 0 ? 1 : degrees / Math.abs(degrees);
         long unitsNoModNoSign = sign*UNITS_PER_DEGREE*degrees
                 + UNITS_PER_ARCMINUTE *arcminutes
                 + (long)(UNITS_PER_ARCSECOND*arcseconds);
