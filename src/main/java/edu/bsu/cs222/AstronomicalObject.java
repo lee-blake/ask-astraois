@@ -18,4 +18,8 @@ public class AstronomicalObject {
         }
         return false;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
