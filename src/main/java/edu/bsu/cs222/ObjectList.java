@@ -30,6 +30,18 @@ public class ObjectList {
         return nameToEntryMap.get(entryName);
     }
 
+    public void removeEntry(ObjectListEntry entry) throws NameNotFoundException {
+        String entryName = entry.getName();
+        if (!nameToEntryMap.containsKey(entryName)) {
+            throw new NameNotFoundException(
+                    "Cannot remove entry because no entry has name '"
+                            + entryName
+                            + "'."
+            );
+        }
+        nameToEntryMap.remove(entryName);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof ObjectList other) {
