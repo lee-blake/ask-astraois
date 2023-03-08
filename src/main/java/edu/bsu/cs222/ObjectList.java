@@ -1,6 +1,10 @@
 package edu.bsu.cs222;
 
+import org.apache.commons.csv.CSVPrinter;
+
 import javax.naming.NameNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ObjectList {
@@ -59,5 +63,28 @@ public class ObjectList {
             return true;
         }
         return false;
+    }
+
+
+
+    public class ObjectListCSVFormatter {
+
+        private final CSVPrinter csvPrinter;
+
+        public ObjectListCSVFormatter(CSVPrinter printer) {
+            this.csvPrinter = printer;
+        }
+
+        public void printFormattedCSV(Header[] headers) throws IOException {
+             Object[] keyArray = ObjectList.this.nameToEntryMap.keySet().toArray();
+             Arrays.sort(keyArray);
+             for(Object keyAsObject : keyArray) {
+                 String key = (String) keyAsObject;
+                 ObjectListEntry entry = ObjectList.this.nameToEntryMap.get(key);
+                 ObjectListEntry.ObjectListEntryCSVFormatter entryFormatter
+                         = entry.new ObjectListEntryCSVFormatter(this.csvPrinter);
+                 entryFormatter.printFormattedCSV(headers);
+             }
+        }
     }
 }

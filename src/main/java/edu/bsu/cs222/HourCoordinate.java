@@ -1,5 +1,7 @@
 package edu.bsu.cs222;
 
+import java.text.DecimalFormat;
+
 public class HourCoordinate {
 
     // Resolution goes down to 1/15 of a millisecond
@@ -28,4 +30,17 @@ public class HourCoordinate {
         }
             return false;
         }
+
+
+
+    public class HourCoordinateFormatter {
+
+        public String standardHourFormatSpaced() {
+            long hours = units/UNITS_PER_HOUR;
+            long minutes = (units % UNITS_PER_HOUR)/UNITS_PER_MINUTE;
+            double seconds = (units % UNITS_PER_MINUTE)/(double)UNITS_PER_SECOND;
+            return String.format("%02dh %02dm ",hours,minutes)
+                    +(new DecimalFormat("00.#########")).format(seconds) + "s";
+        }
     }
+}

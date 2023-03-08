@@ -1,5 +1,8 @@
 package edu.bsu.cs222;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AstronomicalObject {
 
 
@@ -21,5 +24,21 @@ public class AstronomicalObject {
 
     public String getName() {
         return this.name;
+    }
+
+
+
+    public class AstronomicalObjectCSVFormatter {
+
+        public Map<Header, String> getCSVValueMap() {
+            AstronomicalObject parent = AstronomicalObject.this;
+            Map<Header, String> objectCSVValueMap = new HashMap<>();
+            objectCSVValueMap.put(Header.NAME,parent.name);
+            RightAscensionDeclinationCoordinates.RightAscensionDeclinationCoordinatesCSVFormatter raDecFormatter
+                    = parent.raDecCoords.new RightAscensionDeclinationCoordinatesCSVFormatter();
+            Map<Header, String> raDecCoordsCSVValueMap = raDecFormatter.getCSVValueMap();
+            objectCSVValueMap.putAll(raDecCoordsCSVValueMap);
+            return objectCSVValueMap;
+        }
     }
 }

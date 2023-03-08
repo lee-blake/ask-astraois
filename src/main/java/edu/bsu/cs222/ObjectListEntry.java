@@ -1,5 +1,10 @@
 package edu.bsu.cs222;
 
+import org.apache.commons.csv.CSVPrinter;
+
+import java.io.IOException;
+import java.util.Map;
+
 public class ObjectListEntry {
 
     private final AstronomicalObject astronomicalObject;
@@ -30,5 +35,29 @@ public class ObjectListEntry {
                     && this.completionStatus.equals(other.completionStatus);
         }
         return false;
+    }
+
+    public class ObjectListEntryCSVFormatter {
+
+        private final CSVPrinter csvPrinter;
+
+        public ObjectListEntryCSVFormatter(CSVPrinter printer) {
+            this.csvPrinter = printer;
+        }
+
+        public void printFormattedCSV(Header[] headers) throws IOException {
+            ObjectListEntry parent = ObjectListEntry.this;
+            AstronomicalObject.AstronomicalObjectCSVFormatter objectFormatter
+                    = parent.astronomicalObject.new AstronomicalObjectCSVFormatter();
+            Map<Header,String> mainCSVValueMap = objectFormatter.getCSVValueMap();
+            CompletionStatus.CompletionStatusCSVFormatter completionFormatter
+                    = parent.completionStatus.new CompletionStatusCSVFormatter();
+            Map<Header,String> completionCSVValueMap = completionFormatter.getCSVValueMap();
+            mainCSVValueMap.putAll(completionCSVValueMap);
+            for(Header header: headers) {
+                this.csvPrinter.print(mainCSVValueMap.get(header));
+            }
+            this.csvPrinter.println();
+        }
     }
 }

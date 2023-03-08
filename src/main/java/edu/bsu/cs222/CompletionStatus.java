@@ -1,6 +1,8 @@
 package edu.bsu.cs222;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CompletionStatus {
 
@@ -27,5 +29,21 @@ public class CompletionStatus {
             }
         }
         return false;
+    }
+
+
+
+    public class CompletionStatusCSVFormatter {
+
+        public Map<Header, String> getCSVValueMap() {
+            HashMap<Header, String> csvValueMap = new HashMap<>();
+            // No completion = empty cell. This is how most users store N/A in CSV.
+            String completionDateString = "";
+            if(CompletionStatus.this.complete) {
+                completionDateString = CompletionStatus.this.dateOfCompletion.toString();
+            }
+            csvValueMap.put(Header.COMPLETION_DATE,completionDateString);
+            return csvValueMap;
+        }
     }
 }
