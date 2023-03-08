@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+import javax.naming.NameNotFoundException;
 import java.util.HashMap;
 
 public class ObjectList {
@@ -18,7 +19,14 @@ public class ObjectList {
         nameToEntryMap.put(entryName,entry);
     }
 
-    public ObjectListEntry getEntryByName(String entryName) {
+    public ObjectListEntry getEntryByName(String entryName) throws NameNotFoundException {
+        if(!nameToEntryMap.containsKey(entryName)) {
+            throw new NameNotFoundException(
+                    "Cannot get entry because no entry has name '"
+                    + entryName
+                    + "'."
+            );
+        }
         return nameToEntryMap.get(entryName);
     }
 

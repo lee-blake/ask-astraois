@@ -3,6 +3,7 @@ package edu.bsu.cs222;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.naming.NameNotFoundException;
 import java.time.LocalDate;
 
 public class ObjectListTest {
@@ -22,7 +23,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testAddEntry_GetObjectByName() throws ObjectListEntryAlreadyExistsException {
+    public void testAddEntry_GetObjectByName() throws ObjectListEntryAlreadyExistsException, NameNotFoundException {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList objectList = new ObjectList();
@@ -38,6 +39,17 @@ public class ObjectListTest {
         AstronomicalObject secondRetrieved = objectList.getEntryByName("M31").getAstronomicalObject();
         boolean secondResult = freshM31Object.equals(secondRetrieved);
         Assertions.assertTrue(secondResult);
+    }
+
+    @Test
+    public void testGetObjectByNameObjectNotMissing() throws ObjectListEntryAlreadyExistsException {
+        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
+        ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
+        ObjectList objectList = new ObjectList();
+        objectList.addEntry(m13Entry);
+        objectList.addEntry(m31Entry);
+        Assertions.assertThrows(
+                NameNotFoundException.class, () -> objectList.getEntryByName("m14"));
     }
 
     @Test
