@@ -47,7 +47,9 @@ public class ObjectListTest {
         objectList.addEntry(m13Entry);
         objectList.addEntry(m31Entry);
         Assertions.assertThrows(
-                NameNotFoundException.class, () -> objectList.getEntryByName("m14"));
+                NameNotFoundException.class,
+                () -> objectList.getEntryByName("M14")
+        );
     }
 
     @Test
@@ -113,39 +115,37 @@ public class ObjectListTest {
 
     @Test
     public void testEqualsProperSubsetNotEqual() throws ObjectListEntryAlreadyExistsException {
-        ObjectList list1 = new ObjectList();
-        list1.addEntry(new ObjectListEntry(
+        ObjectList subset = new ObjectList();
+        subset.addEntry(new ObjectListEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
-        ObjectList list2 = new ObjectList();
-        list2.addEntry(new ObjectListEntry(
+        ObjectList superset = new ObjectList();
+        superset.addEntry(new ObjectListEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
-        list2.addEntry(new ObjectListEntry(buildM31Object()));
-        boolean result = list1.equals(list2);
+        superset.addEntry(new ObjectListEntry(buildM31Object()));
+        boolean result = subset.equals(superset);
         Assertions.assertFalse(result);
     }
 
 
 
     @Test
-    public void testRemoveEntryRemoves() throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
+    public void testRemoveEntryActuallyRemoves() throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
-        ObjectList objectList1 = new ObjectList();
-        objectList1.addEntry(m13Entry);
-        objectList1.addEntry(m31Entry);
+        ObjectList actual = new ObjectList();
+        actual.addEntry(m13Entry);
+        actual.addEntry(m31Entry);
 
         ObjectListEntry freshm13Entry = new ObjectListEntry(buildM13Object());
-        ObjectList objectList2 = new ObjectList();
-        objectList2.addEntry(freshm13Entry);
+        ObjectList expected = new ObjectList();
+        expected.addEntry(freshm13Entry);
 
-        objectList1.removeEntry(m31Entry);
-        boolean result = objectList1.equals(objectList2);
-        Assertions.assertTrue(result);
-        Assertions.assertEquals(objectList2,objectList1);
+        actual.removeEntry(m31Entry);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
@@ -156,7 +156,8 @@ public class ObjectListTest {
         objectList.addEntry(m13Entry);
 
         Assertions.assertThrows(
-                NameNotFoundException.class, () -> objectList.removeEntry(m31Entry));
-
+                NameNotFoundException.class,
+                () -> objectList.removeEntry(m31Entry)
+        );
     }
 }

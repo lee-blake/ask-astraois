@@ -87,12 +87,12 @@ public class ObjectListEntryTest {
 
     @Test
     public void testEqualsDifferentCompletionNotEqual() {
-        ObjectListEntry entry1 = new ObjectListEntry(buildM13Object());
-        ObjectListEntry entry2 = new ObjectListEntry(
+        ObjectListEntry incomplete = new ObjectListEntry(buildM13Object());
+        ObjectListEntry complete = new ObjectListEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         );
-        boolean result = entry1.equals(entry2);
+        boolean result = incomplete.equals(complete);
         Assertions.assertFalse(result);
     }
 }
