@@ -118,4 +118,35 @@ public class CSVConverterTest {
                 """;
         Assertions.assertEquals(expectedString,outputCSVString);
     }
+
+
+
+    @Test
+    public void testBuildObjectListFromCSVEmptyList() throws IOException, ObjectListEntryAlreadyExistsException {
+        CSVConverter converter = new CSVConverter();
+        ObjectList emptyList = new ObjectList();
+        String csvString = "Name,Right Ascension,Declination,Completion Date\r";
+        ObjectList retrievedList = converter.buildObjectListFromCSV(csvString);
+        boolean result = emptyList.equals(retrievedList);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testBuildObjectListFromCSVTwoElementList() throws ObjectListEntryAlreadyExistsException, IOException {
+        CSVConverter converter = new CSVConverter();
+        ObjectList twoElementList = new ObjectList();
+        twoElementList.addEntry(new ObjectListEntry(buildM13Object()));
+        twoElementList.addEntry(new ObjectListEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        String csvString = """
+                Name,Right Ascension,Declination,Completion Date\r
+                M13,16h 41m 41.24s,"+36\u00b0 27' 35.5""\",\r
+                M31,00h 42m 44.3s,"+41\u00b0 16' 09""\",2023-01-01\r
+                """;
+        ObjectList retrievedList = converter.buildObjectListFromCSV(csvString);
+        boolean result = twoElementList.equals(retrievedList);
+        Assertions.assertTrue(result);
+    }
 }

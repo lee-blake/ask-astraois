@@ -1,9 +1,13 @@
 package edu.bsu.cs222;
 
 import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.time.LocalDate;
 
 public class CSVConverter {
 
@@ -21,5 +25,74 @@ public class CSVConverter {
         formatter.printFormattedCSV(headers);
         printer.close();
         return csvStringBuilder.toString();
+    }
+
+    // Suppressing warnings for the Unicode escaping of the degree character in this file because the fix -
+    // replacing the escape with the literal character - has caused unmappable character errors when running this
+    // project with default settings. As the inlining of the characters does not impede the functionality, only the
+    // readability, and as the context indicates it is the degree character, fixing this warning will be delayed
+    // until all team members can meet and confirm that the change does not cause errors on their
+    // respective systems.
+    @SuppressWarnings("UnnecessaryUnicodeEscape")
+    public ObjectList buildObjectListFromCSV(String csvString) throws IOException, ObjectListEntryAlreadyExistsException {
+        ObjectList parsedList = new ObjectList();
+        StringReader reader = new StringReader(csvString);
+        //CSVParser parser = CSVParser.parse(csvString, CSVFormat.DEFAULT);
+        CSVParser parser = CSVFormat.Builder.create(CSVFormat.DEFAULT)
+                .setHeader()
+                .setSkipHeaderRecord(true)
+                .build()
+                .parse(reader);
+        for(CSVRecord record: parser) {
+            String name = record.get(Header.NAME.toString());
+            String raString = record.get(Header.RIGHT_ASCENSION.toString())
+                    .replace(" ","");
+            String decString = record.get(Header.DECLINATION.toString())
+                    .replace(" ","");
+            String completionDateString = record.get(Header.COMPLETION_DATE.toString());
+            int raHours = Integer.parseInt(
+                    raString.split("h")[0]
+            );
+            int raMinutes = Integer.parseInt(
+                    raString.split("h")[1]
+                            .split("m")[0]
+            );
+            double raSeconds = Double.parseDouble(
+                    raString.split("m")[1]
+                            .replace("s","")
+            );
+            HourCoordinate rightAscension = new HourCoordinate(raHours,raMinutes,raSeconds);
+            int decDegrees = Integer.parseInt(
+                    decString.split("\u00b0")[0]
+            );
+            int decArcminutes = Integer.parseInt(
+                    decString.split("\u00b0")[1].split("'")[0]
+            );
+            double decArcseconds = Double.parseDouble(
+                    decString.split("'")[1].replace("\"","")
+            );
+            HalfCircleDegreeCoordinate declination = new HalfCircleDegreeCoordinate(
+                    decDegrees,
+                    decArcminutes,
+                    decArcseconds
+            );
+            RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationCoordinates(
+                    rightAscension,
+                    declination
+            );
+            AstronomicalObject objectFromRecord = new AstronomicalObject(
+                    name,
+                    raDec
+            );
+            CompletionStatus completionStatus = completionDateString.equals("")
+                    ? new CompletionStatus()
+                    : new CompletionStatus(LocalDate.parse(completionDateString));
+            ObjectListEntry entryFromRecord = new ObjectListEntry(
+                    objectFromRecord,
+                    completionStatus
+            );
+            parsedList.addEntry(entryFromRecord);
+        }
+        return parsedList;
     }
 }
