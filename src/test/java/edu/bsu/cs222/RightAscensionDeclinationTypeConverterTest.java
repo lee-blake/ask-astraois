@@ -24,8 +24,7 @@ public class RightAscensionDeclinationTypeConverterTest {
             new HalfCircleDegreeCoordinate(0,0,0)
         );
         RightAscensionDeclinationCoordinates actual = converter.convert();
-        boolean result = zero.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(zero,actual);
     }
 
     @Test
@@ -41,7 +40,6 @@ public class RightAscensionDeclinationTypeConverterTest {
                 new HalfCircleDegreeCoordinate(36,27,35.5)
         );
         RightAscensionDeclinationCoordinates actual = converter.convert();
-        boolean result = m13Coords.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(m13Coords,actual);
     }
 }

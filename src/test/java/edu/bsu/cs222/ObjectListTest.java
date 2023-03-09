@@ -32,13 +32,11 @@ public class ObjectListTest {
 
         AstronomicalObject freshM13Object = buildM13Object();
         AstronomicalObject firstRetrieved = objectList.getEntryByName("M13").getAstronomicalObject();
-        boolean firstResult = freshM13Object.equals(firstRetrieved);
-        Assertions.assertTrue(firstResult);
+        Assertions.assertEquals(freshM13Object,firstRetrieved);
 
         AstronomicalObject freshM31Object = buildM31Object();
         AstronomicalObject secondRetrieved = objectList.getEntryByName("M31").getAstronomicalObject();
-        boolean secondResult = freshM31Object.equals(secondRetrieved);
-        Assertions.assertTrue(secondResult);
+        Assertions.assertEquals(freshM31Object,secondRetrieved);
     }
 
     @Test
@@ -130,8 +128,10 @@ public class ObjectListTest {
         Assertions.assertFalse(result);
     }
 
+
+
     @Test
-    public void testEqualsRemoveEntry() throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
+    public void testRemoveEntryRemoves() throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList objectList1 = new ObjectList();
@@ -145,6 +145,7 @@ public class ObjectListTest {
         objectList1.removeEntry(m31Entry);
         boolean result = objectList1.equals(objectList2);
         Assertions.assertTrue(result);
+        Assertions.assertEquals(objectList2,objectList1);
     }
 
     @Test

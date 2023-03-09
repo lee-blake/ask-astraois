@@ -11,8 +11,7 @@ public class HourCoordinateTypeConverterTest {
         HourCoordinateTypeConverter converter = new HourCoordinateTypeConverter(zeroStandardForm);
         HourCoordinate zero = new HourCoordinate(0,0,0);
         HourCoordinate actual = converter.convert();
-        boolean result = zero.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(zero,actual);
     }
 
     @Test
@@ -21,8 +20,7 @@ public class HourCoordinateTypeConverterTest {
         HourCoordinateTypeConverter converter = new HourCoordinateTypeConverter(lastMilliStandardForm);
         HourCoordinate lastMilli = new HourCoordinate(23,59,59.999);
         HourCoordinate actual = converter.convert();
-        boolean result = lastMilli.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(lastMilli,actual);
     }
 
     @Test
@@ -31,7 +29,6 @@ public class HourCoordinateTypeConverterTest {
         HourCoordinateTypeConverter converter = new HourCoordinateTypeConverter(lastMilliStandardForm);
         HourCoordinate lastMilli = new HourCoordinate(23,59,59.999);
         HourCoordinate actual = converter.convert();
-        boolean result = lastMilli.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(lastMilli,actual);
     }
 }

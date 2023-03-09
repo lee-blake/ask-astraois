@@ -17,8 +17,7 @@ public class DegreeCoordinateTypeConverterTest {
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(zeroStandardForm);
         HalfCircleDegreeCoordinate zero = new HalfCircleDegreeCoordinate(0,0,0);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        boolean result = zero.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(zero,actual);
     }
 
     @Test
@@ -27,8 +26,7 @@ public class DegreeCoordinateTypeConverterTest {
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(positiveStandardForm);
         HalfCircleDegreeCoordinate positive = new HalfCircleDegreeCoordinate(72,36,3.2);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        boolean result = positive.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(positive,actual);
     }
 
     @Test
@@ -37,8 +35,7 @@ public class DegreeCoordinateTypeConverterTest {
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeStandardForm);
         HalfCircleDegreeCoordinate negative = new HalfCircleDegreeCoordinate(-85,3,59.9);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        boolean result = negative.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(negative,actual);
     }
 
     @Test
@@ -47,7 +44,6 @@ public class DegreeCoordinateTypeConverterTest {
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeStandardForm);
         HalfCircleDegreeCoordinate negative = new HalfCircleDegreeCoordinate(-85,3,59.9);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        boolean result = negative.equals(actual);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(negative,actual);
     }
 }
