@@ -12,10 +12,7 @@ public class CSVConverter {
 
     public String convertObjectListToCSV(ObjectList listToConvert, Header[] headers) throws IOException {
         StringBuilder csvStringBuilder = new StringBuilder();
-        String[] headerNames = new String[headers.length];
-        for(int i = 0; i < headers.length; i++) {
-            headerNames[i] = headers[i].toString();
-        }
+        String[] headerNames = this.getHeaderNames(headers);
         CSVPrinter printer = CSVFormat.Builder.create(CSVFormat.DEFAULT)
                 .setHeader(headerNames)
                 .build()
@@ -24,6 +21,14 @@ public class CSVConverter {
         formatter.printFormattedCSV(headers);
         printer.close();
         return csvStringBuilder.toString();
+    }
+
+    private String[] getHeaderNames(Header[] headers) {
+        String[] headerNames = new String[headers.length];
+        for(int i = 0; i < headers.length; i++) {
+            headerNames[i] = headers[i].toString();
+        }
+        return headerNames;
     }
 
     // Suppressing warnings for the Unicode escaping of the degree character in this file because the fix -
@@ -36,35 +41,45 @@ public class CSVConverter {
     public ObjectList buildObjectListFromCSV(String csvString) throws IOException, ObjectListEntryAlreadyExistsException {
         ObjectList parsedList = new ObjectList();
         StringReader reader = new StringReader(csvString);
-        //CSVParser parser = CSVParser.parse(csvString, CSVFormat.DEFAULT);
         CSVParser parser = CSVFormat.Builder.create(CSVFormat.DEFAULT)
                 .setHeader()
                 .setSkipHeaderRecord(true)
                 .build()
                 .parse(reader);
         for(CSVRecord record: parser) {
-            String name = record.get(Header.NAME.toString());
-            String rightAscension = record.get(Header.RIGHT_ASCENSION.toString());
-            String declination = record.get(Header.DECLINATION.toString());
-            String completionDate = record.get(Header.COMPLETION_DATE.toString());
-            RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationTypeConverter(
-                    rightAscension,
-                    declination
-            )
-                    .convert();
-            AstronomicalObject objectFromRecord = new AstronomicalObject(
-                    name,
-                    raDec
-            );
-            CompletionStatus completionStatus =
-                    new CSVToCompletionStatusTypeConverter(completionDate)
-                            .convert();
-            ObjectListEntry entryFromRecord = new ObjectListEntry(
-                    objectFromRecord,
-                    completionStatus
-            );
+            ObjectListEntry entryFromRecord = this.getEntryFromCSVRecord(record);
             parsedList.addEntry(entryFromRecord);
         }
         return parsedList;
+    }
+
+    private ObjectListEntry getEntryFromCSVRecord(CSVRecord record) {
+        AstronomicalObject objectFromRecord = this.getAstronomicalObjectFromCSVRecord(record);
+        CompletionStatus completionStatus = this.getCompletionStatusFromCSVRecord(record);
+        return new ObjectListEntry(
+                objectFromRecord,
+                completionStatus
+        );
+    }
+
+    private AstronomicalObject getAstronomicalObjectFromCSVRecord(CSVRecord record) {
+        String name = record.get(Header.NAME.toString());
+        String rightAscension = record.get(Header.RIGHT_ASCENSION.toString());
+        String declination = record.get(Header.DECLINATION.toString());
+        RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationTypeConverter(
+                rightAscension,
+                declination
+        )
+                .convert();
+        return new AstronomicalObject(
+                name,
+                raDec
+        );
+    }
+
+    private CompletionStatus getCompletionStatusFromCSVRecord(CSVRecord record) {
+        String completionDate = record.get(Header.COMPLETION_DATE.toString());
+        return new CSVToCompletionStatusTypeConverter(completionDate)
+                        .convert();
     }
 }
