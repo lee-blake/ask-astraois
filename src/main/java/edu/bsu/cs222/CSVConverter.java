@@ -7,7 +7,6 @@ import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.time.LocalDate;
 
 public class CSVConverter {
 
@@ -84,9 +83,9 @@ public class CSVConverter {
                     name,
                     raDec
             );
-            CompletionStatus completionStatus = completionDateString.equals("")
-                    ? new CompletionStatus()
-                    : new CompletionStatus(LocalDate.parse(completionDateString));
+            CompletionStatus completionStatus =
+                    (new CSVToCompletionStatusTypeConverter(completionDateString))
+                            .convert();
             ObjectListEntry entryFromRecord = new ObjectListEntry(
                     objectFromRecord,
                     completionStatus
