@@ -44,24 +44,20 @@ public class CSVConverter {
                 .parse(reader);
         for(CSVRecord record: parser) {
             String name = record.get(Header.NAME.toString());
-            String raString = record.get(Header.RIGHT_ASCENSION.toString());
-            String decString = record.get(Header.DECLINATION.toString());
-            String completionDateString = record.get(Header.COMPLETION_DATE.toString());
-            HourCoordinate rightAscension = new HourCoordinateTypeConverter(raString)
-                    .convert();
-            HalfCircleDegreeCoordinate declination =
-                    new DegreeCoordinateTypeConverter(decString)
-                            .convertHalfCircle();
-            RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationCoordinates(
+            String rightAscension = record.get(Header.RIGHT_ASCENSION.toString());
+            String declination = record.get(Header.DECLINATION.toString());
+            String completionDate = record.get(Header.COMPLETION_DATE.toString());
+            RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationTypeConverter(
                     rightAscension,
                     declination
-            );
+            )
+                    .convert();
             AstronomicalObject objectFromRecord = new AstronomicalObject(
                     name,
                     raDec
             );
             CompletionStatus completionStatus =
-                    new CSVToCompletionStatusTypeConverter(completionDateString)
+                    new CSVToCompletionStatusTypeConverter(completionDate)
                             .convert();
             ObjectListEntry entryFromRecord = new ObjectListEntry(
                     objectFromRecord,
