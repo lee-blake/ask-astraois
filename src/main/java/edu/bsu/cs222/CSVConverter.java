@@ -44,22 +44,11 @@ public class CSVConverter {
                 .parse(reader);
         for(CSVRecord record: parser) {
             String name = record.get(Header.NAME.toString());
-            String raString = record.get(Header.RIGHT_ASCENSION.toString())
-                    .replace(" ","");
+            String raString = record.get(Header.RIGHT_ASCENSION.toString());
             String decString = record.get(Header.DECLINATION.toString());
             String completionDateString = record.get(Header.COMPLETION_DATE.toString());
-            int raHours = Integer.parseInt(
-                    raString.split("h")[0]
-            );
-            int raMinutes = Integer.parseInt(
-                    raString.split("h")[1]
-                            .split("m")[0]
-            );
-            double raSeconds = Double.parseDouble(
-                    raString.split("m")[1]
-                            .replace("s","")
-            );
-            HourCoordinate rightAscension = new HourCoordinate(raHours,raMinutes,raSeconds);
+            HourCoordinate rightAscension = new HourCoordinateTypeConverter(raString)
+                    .convert();
             HalfCircleDegreeCoordinate declination =
                     new DegreeCoordinateTypeConverter(decString)
                             .convertHalfCircle();
