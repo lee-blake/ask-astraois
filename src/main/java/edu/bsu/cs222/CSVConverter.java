@@ -46,8 +46,7 @@ public class CSVConverter {
             String name = record.get(Header.NAME.toString());
             String raString = record.get(Header.RIGHT_ASCENSION.toString())
                     .replace(" ","");
-            String decString = record.get(Header.DECLINATION.toString())
-                    .replace(" ","");
+            String decString = record.get(Header.DECLINATION.toString());
             String completionDateString = record.get(Header.COMPLETION_DATE.toString());
             int raHours = Integer.parseInt(
                     raString.split("h")[0]
@@ -61,20 +60,9 @@ public class CSVConverter {
                             .replace("s","")
             );
             HourCoordinate rightAscension = new HourCoordinate(raHours,raMinutes,raSeconds);
-            int decDegrees = Integer.parseInt(
-                    decString.split("\u00b0")[0]
-            );
-            int decArcminutes = Integer.parseInt(
-                    decString.split("\u00b0")[1].split("'")[0]
-            );
-            double decArcseconds = Double.parseDouble(
-                    decString.split("'")[1].replace("\"","")
-            );
-            HalfCircleDegreeCoordinate declination = new HalfCircleDegreeCoordinate(
-                    decDegrees,
-                    decArcminutes,
-                    decArcseconds
-            );
+            HalfCircleDegreeCoordinate declination =
+                    new DegreeCoordinateTypeConverter(decString)
+                            .convertHalfCircle();
             RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationCoordinates(
                     rightAscension,
                     declination
@@ -84,7 +72,7 @@ public class CSVConverter {
                     raDec
             );
             CompletionStatus completionStatus =
-                    (new CSVToCompletionStatusTypeConverter(completionDateString))
+                    new CSVToCompletionStatusTypeConverter(completionDateString)
                             .convert();
             ObjectListEntry entryFromRecord = new ObjectListEntry(
                     objectFromRecord,
