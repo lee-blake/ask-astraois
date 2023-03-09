@@ -49,4 +49,18 @@ public class CompletionStatusTest {
         boolean result = status1.equals(status2);
         Assertions.assertTrue(result);
     }
+
+    @Test
+    public void testEqualsIsCompleteConstructedWithDate() {
+        CompletionStatus status = new CompletionStatus(LocalDate.parse("2023-01-01"));
+        boolean result = status.isComplete();
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testEqualsIsCompleteEmptyConstructor() {
+        CompletionStatus status = new CompletionStatus();
+        boolean result = status.isComplete();
+        Assertions.assertFalse(result);
+    }
 }

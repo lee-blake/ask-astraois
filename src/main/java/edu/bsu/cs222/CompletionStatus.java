@@ -18,6 +18,10 @@ public class CompletionStatus {
         this.dateOfCompletion = dateOfCompletion;
     }
 
+    public boolean isComplete() {
+        return CompletionStatus.this.complete;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof CompletionStatus other) {
