@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.time.LocalDate;
+
+import static edu.bsu.cs222.TestObjectFactory.ObjectLists.buildM13M31ObjectList;
 
 // Suppressing warnings for the Unicode escaping of the degree character in this file because the fix - replacing
 // the escape with the literal character - has caused unmappable character errors when running this project
@@ -13,20 +14,6 @@ import java.time.LocalDate;
 // can meet and confirm that the change does not cause errors on their respective systems.
 @SuppressWarnings("UnnecessaryUnicodeEscape")
 public class CSVConverterTest {
-
-    public AstronomicalObject buildM13Object() {
-        HourCoordinate m13RA = new HourCoordinate(16,41,41.24);
-        HalfCircleDegreeCoordinate m13Dec = new HalfCircleDegreeCoordinate(36,27,35.5);
-        RightAscensionDeclinationCoordinates m13Coords = new RightAscensionDeclinationCoordinates(m13RA,m13Dec);
-        return new AstronomicalObject("M13",m13Coords);
-    }
-
-    public AstronomicalObject buildM31Object() {
-        HourCoordinate m31RA = new HourCoordinate(0,42,44.30);
-        HalfCircleDegreeCoordinate m31Dec = new HalfCircleDegreeCoordinate(41,16,9);
-        RightAscensionDeclinationCoordinates m31Coords = new RightAscensionDeclinationCoordinates(m31RA,m31Dec);
-        return new AstronomicalObject("M31",m31Coords);
-    }
 
     @Test
     public void testConvertObjectListToCSVEmptyListCanonicalOrder() throws IOException {
@@ -43,19 +30,16 @@ public class CSVConverterTest {
     }
 
     @Test
-    public void testConvertObjectListToCSVTwoElementListRADecOnlyCanonicalOrder()
-            throws ObjectListEntryAlreadyExistsException, IOException {
+    public void testConvertObjectListToCSVTwoElementListRADecOnlyCanonicalOrder() throws IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementListNoCompletion = new ObjectList();
-        twoElementListNoCompletion.addEntry(new ObjectListEntry(buildM13Object()));
-        twoElementListNoCompletion.addEntry(new ObjectListEntry(buildM31Object()));
+        ObjectList twoElementList = buildM13M31ObjectList();
         Header[] canonicalHeadersNoCompletion = new Header[]{
                 Header.NAME,
                 Header.RIGHT_ASCENSION,
                 Header.DECLINATION
         };
         String outputCSVString = converter.convertObjectListToCSV(
-                twoElementListNoCompletion,
+                twoElementList,
                 canonicalHeadersNoCompletion
         );
         // The abundance of double quotes is a feature of CSV. Pairs of double quotes ("") in CSV translate to a single
@@ -69,19 +53,16 @@ public class CSVConverterTest {
     }
 
     @Test
-    public void testConvertObjectListToCSVTwoElementListRADecOnlyReordered()
-            throws ObjectListEntryAlreadyExistsException, IOException {
+    public void testConvertObjectListToCSVTwoElementListRADecOnlyReordered() throws IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementListNoCompletion = new ObjectList();
-        twoElementListNoCompletion.addEntry(new ObjectListEntry(buildM13Object()));
-        twoElementListNoCompletion.addEntry(new ObjectListEntry(buildM31Object()));
+        ObjectList twoElementList = buildM13M31ObjectList();
         Header[] reorderedHeadersNoCompletion = new Header[]{
                 Header.NAME,
                 Header.DECLINATION,
                 Header.RIGHT_ASCENSION
         };
         String outputCSVString = converter.convertObjectListToCSV(
-                twoElementListNoCompletion,
+                twoElementList,
                 reorderedHeadersNoCompletion
         );
         // The abundance of double quotes is a feature of CSV. Pairs of double quotes ("") in CSV translate to a single
@@ -95,22 +76,16 @@ public class CSVConverterTest {
     }
 
     @Test
-    public void testConvertObjectListToCSVTwoElementListRADecCompletionCanonicalOrder()
-            throws ObjectListEntryAlreadyExistsException, IOException {
+    public void testConvertObjectListToCSVTwoElementListRADecCompletionCanonicalOrder() throws IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementListWithCompletion = new ObjectList();
-        twoElementListWithCompletion.addEntry(new ObjectListEntry(buildM13Object()));
-        twoElementListWithCompletion.addEntry(new ObjectListEntry(
-                buildM31Object(),
-                new CompletionStatus(LocalDate.parse("2023-01-01"))
-        ));
+        ObjectList twoElementList = buildM13M31ObjectList();
         Header[] canonicalHeaders = new Header[]{
                 Header.NAME,
                 Header.RIGHT_ASCENSION,
                 Header.DECLINATION,
                 Header.COMPLETION_DATE
         };
-        String outputCSVString = converter.convertObjectListToCSV(twoElementListWithCompletion,canonicalHeaders);
+        String outputCSVString = converter.convertObjectListToCSV(twoElementList,canonicalHeaders);
         String expectedString = """
                 Name,Right Ascension,Declination,Completion Date\r
                 M13,16h 41m 41.24s,"+36\u00b0 27' 35.5""\",\r
@@ -133,12 +108,7 @@ public class CSVConverterTest {
     @Test
     public void testBuildObjectListFromCSVTwoElementList() throws ObjectListEntryAlreadyExistsException, IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementList = new ObjectList();
-        twoElementList.addEntry(new ObjectListEntry(buildM13Object()));
-        twoElementList.addEntry(new ObjectListEntry(
-                buildM31Object(),
-                new CompletionStatus(LocalDate.parse("2023-01-01"))
-        ));
+        ObjectList twoElementList = buildM13M31ObjectList();
         String csvString = """
                 Name,Right Ascension,Declination,Completion Date\r
                 M13,16h 41m 41.24s,"+36\u00b0 27' 35.5""\",\r

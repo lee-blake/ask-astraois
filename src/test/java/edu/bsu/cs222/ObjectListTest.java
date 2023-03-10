@@ -6,24 +6,16 @@ import org.junit.jupiter.api.Test;
 import javax.naming.NameNotFoundException;
 import java.time.LocalDate;
 
+import static edu.bsu.cs222.TestObjectFactory.AstronomicalObjects.buildM13Object;
+import static edu.bsu.cs222.TestObjectFactory.AstronomicalObjects.buildM31Object;
+import static edu.bsu.cs222.TestObjectFactory.ObjectLists.buildM13M31ObjectList;
+
 public class ObjectListTest {
-
-    public AstronomicalObject buildM13Object() {
-        HourCoordinate m13RA = new HourCoordinate(16,41,41.24);
-        HalfCircleDegreeCoordinate m13Dec = new HalfCircleDegreeCoordinate(36,27,35.5);
-        RightAscensionDeclinationCoordinates m13Coords = new RightAscensionDeclinationCoordinates(m13RA,m13Dec);
-        return new AstronomicalObject("M13",m13Coords);
-    }
-
-    public AstronomicalObject buildM31Object() {
-        HourCoordinate m31RA = new HourCoordinate(0,42,44.30);
-        HalfCircleDegreeCoordinate m31Dec = new HalfCircleDegreeCoordinate(41,16,9);
-        RightAscensionDeclinationCoordinates m31Coords = new RightAscensionDeclinationCoordinates(m31RA,m31Dec);
-        return new AstronomicalObject("M31",m31Coords);
-    }
 
     @Test
     public void testAddEntry_GetObjectByName() throws ObjectListEntryAlreadyExistsException, NameNotFoundException {
+        // The list is the same as in TestObjectFactory but should NOT use that list construction
+        // because we need to test that AddEntry works before using it in TestObjectFactory methods
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList objectList = new ObjectList();
@@ -40,12 +32,8 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testGetObjectByNameObjectThrowsExceptionWhenNameMissing() throws ObjectListEntryAlreadyExistsException {
-        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
-        ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
-        ObjectList objectList = new ObjectList();
-        objectList.addEntry(m13Entry);
-        objectList.addEntry(m31Entry);
+    public void testGetObjectByNameObjectThrowsExceptionWhenNameMissing() {
+        ObjectList objectList = buildM13M31ObjectList();
         Assertions.assertThrows(
                 NameNotFoundException.class,
                 () -> objectList.getEntryByName("M14")
@@ -140,9 +128,9 @@ public class ObjectListTest {
         actual.addEntry(m13Entry);
         actual.addEntry(m31Entry);
 
-        ObjectListEntry freshm13Entry = new ObjectListEntry(buildM13Object());
+        ObjectListEntry freshM13Entry = new ObjectListEntry(buildM13Object());
         ObjectList expected = new ObjectList();
-        expected.addEntry(freshm13Entry);
+        expected.addEntry(freshM13Entry);
 
         actual.removeEntry(m31Entry);
         Assertions.assertEquals(expected,actual);
@@ -166,17 +154,13 @@ public class ObjectListTest {
     @Test
     public void testRemoveEntryByNameActuallyRemoves()
             throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
-        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
-        ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
-        ObjectList actual = new ObjectList();
-        actual.addEntry(m13Entry);
-        actual.addEntry(m31Entry);
-
-        ObjectListEntry freshm13Entry = new ObjectListEntry(buildM13Object());
+        ObjectListEntry freshM13Entry = new ObjectListEntry(buildM13Object());
         ObjectList expected = new ObjectList();
-        expected.addEntry(freshm13Entry);
+        expected.addEntry(freshM13Entry);
 
+        ObjectList actual = buildM13M31ObjectList();
         actual.removeEntryByName("M31");
+
         Assertions.assertEquals(expected,actual);
     }
 

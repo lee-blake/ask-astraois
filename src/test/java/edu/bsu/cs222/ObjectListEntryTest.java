@@ -5,21 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static edu.bsu.cs222.TestObjectFactory.AstronomicalObjects.buildM13Object;
+import static edu.bsu.cs222.TestObjectFactory.AstronomicalObjects.buildM31Object;
+
 public class ObjectListEntryTest {
-
-    public AstronomicalObject buildM13Object() {
-        HourCoordinate m13RA = new HourCoordinate(16,41,41.24);
-        HalfCircleDegreeCoordinate m13Dec = new HalfCircleDegreeCoordinate(36,27,35.5);
-        RightAscensionDeclinationCoordinates m13Coords = new RightAscensionDeclinationCoordinates(m13RA,m13Dec);
-        return new AstronomicalObject("M13",m13Coords);
-    }
-
-    public AstronomicalObject buildM31Object() {
-        HourCoordinate m31RA = new HourCoordinate(0,42,44.30);
-        HalfCircleDegreeCoordinate m31Dec = new HalfCircleDegreeCoordinate(41,16,9);
-        RightAscensionDeclinationCoordinates m31Coords = new RightAscensionDeclinationCoordinates(m31RA,m31Dec);
-        return new AstronomicalObject("M31",m31Coords);
-    }
 
     @Test
     public void testGetNameM13() {
