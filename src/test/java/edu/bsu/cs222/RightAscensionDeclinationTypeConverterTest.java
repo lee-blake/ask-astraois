@@ -13,11 +13,11 @@ public class RightAscensionDeclinationTypeConverterTest {
 
     @Test
     public void testConvertStandardFormatZero() {
-        String raZero = "00h00m00s";
-        String decZero = "0\u00b000'00\"";
+        String rightAscensionOfZeroStandardForm = "00h00m00s";
+        String declinationOfZeroStandardForm = "0\u00b000'00\"";
         RightAscensionDeclinationTypeConverter converter = new RightAscensionDeclinationTypeConverter(
-                raZero,
-                decZero
+                rightAscensionOfZeroStandardForm,
+                declinationOfZeroStandardForm
         );
         RightAscensionDeclinationCoordinates zero = new RightAscensionDeclinationCoordinates(
             new HourCoordinate(0,0,0),
@@ -29,11 +29,11 @@ public class RightAscensionDeclinationTypeConverterTest {
 
     @Test
     public void testConvertStandardFormatM13Coords() {
-        String raM13 = "16h41m41.24s";
-        String decM13 = "+36\u00b027'35.5\"";
+        String rightAscensionOfM13StandardForm = "16h41m41.24s";
+        String declinationOfM13StandardForm = "+36\u00b027'35.5\"";
         RightAscensionDeclinationTypeConverter converter = new RightAscensionDeclinationTypeConverter(
-                raM13,
-                decM13
+                rightAscensionOfM13StandardForm,
+                declinationOfM13StandardForm
         );
         RightAscensionDeclinationCoordinates m13Coords = new RightAscensionDeclinationCoordinates(
                 new HourCoordinate(16,41,41.24),

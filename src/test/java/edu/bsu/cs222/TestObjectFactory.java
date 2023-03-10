@@ -7,16 +7,22 @@ public class TestObjectFactory {
     public static class AstronomicalObjects {
 
         public static AstronomicalObject buildM13Object() {
-            HourCoordinate m13RA = new HourCoordinate(16, 41, 41.24);
-            HalfCircleDegreeCoordinate m13Dec = new HalfCircleDegreeCoordinate(36, 27, 35.5);
-            RightAscensionDeclinationCoordinates m13Coords = new RightAscensionDeclinationCoordinates(m13RA, m13Dec);
+            HourCoordinate m13RightAscension = new HourCoordinate(16, 41, 41.24);
+            HalfCircleDegreeCoordinate m13Declination = new HalfCircleDegreeCoordinate(36, 27, 35.5);
+            RightAscensionDeclinationCoordinates m13Coords = new RightAscensionDeclinationCoordinates(
+                    m13RightAscension,
+                    m13Declination
+            );
             return new AstronomicalObject("M13", m13Coords);
         }
 
         public static AstronomicalObject buildM31Object() {
-            HourCoordinate m31RA = new HourCoordinate(0,42,44.30);
-            HalfCircleDegreeCoordinate m31Dec = new HalfCircleDegreeCoordinate(41,16,9);
-            RightAscensionDeclinationCoordinates m31Coords = new RightAscensionDeclinationCoordinates(m31RA,m31Dec);
+            HourCoordinate m31RightAscension = new HourCoordinate(0,42,44.30);
+            HalfCircleDegreeCoordinate m31Declination = new HalfCircleDegreeCoordinate(41,16,9);
+            RightAscensionDeclinationCoordinates m31Coords = new RightAscensionDeclinationCoordinates(
+                    m31RightAscension,
+                    m31Declination
+            );
             return new AstronomicalObject("M31",m31Coords);
         }
     }
