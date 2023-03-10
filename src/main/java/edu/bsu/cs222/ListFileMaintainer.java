@@ -5,6 +5,13 @@ import java.nio.file.*;
 
 public class ListFileMaintainer {
 
+    public static final Header[] canonicalHeaderOrder = new Header[]{
+            Header.NAME,
+            Header.RIGHT_ASCENSION,
+            Header.DECLINATION,
+            Header.COMPLETION_DATE
+    };
+
     private final Path originalFilePath;
     private final Path backupFilePath;
 
@@ -13,7 +20,7 @@ public class ListFileMaintainer {
         this.backupFilePath = backupPath;
     }
 
-    public void keepBackupCopy() throws IOException {
+    protected void keepBackupCopy() throws IOException {
         try {
             Files.move(this.originalFilePath, this.backupFilePath, StandardCopyOption.REPLACE_EXISTING);
         }
@@ -23,8 +30,21 @@ public class ListFileMaintainer {
         }
     }
 
+    public ObjectList loadObjectListFromFile() throws IOException, ObjectListEntryAlreadyExistsException {
+        String fileCSV = this.readFileToString();
+        CSVConverter converter = new CSVConverter();
+        return converter.buildObjectListFromCSV(fileCSV);
+    }
+
     private String readFileToString() throws IOException {
         return Files.readString(this.originalFilePath);
+    }
+
+    public void saveObjectListToFile(ObjectList listToSave) throws IOException {
+        CSVConverter converter = new CSVConverter();
+        String fileContents = converter.convertObjectListToCSV(listToSave,canonicalHeaderOrder);
+        this.keepBackupCopy();
+        this.writeStringToFile(fileContents);
     }
 
     private void writeStringToFile(String fileContents) throws IOException {
