@@ -160,4 +160,35 @@ public class ObjectListTest {
                 () -> objectList.removeEntry(m31Entry)
         );
     }
+
+
+
+    @Test
+    public void testRemoveEntryByNameActuallyRemoves()
+            throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
+        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
+        ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
+        ObjectList actual = new ObjectList();
+        actual.addEntry(m13Entry);
+        actual.addEntry(m31Entry);
+
+        ObjectListEntry freshm13Entry = new ObjectListEntry(buildM13Object());
+        ObjectList expected = new ObjectList();
+        expected.addEntry(freshm13Entry);
+
+        actual.removeEntryByName("M31");
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testRemoveEntryByNameThrowsNameNotFoundException() throws ObjectListEntryAlreadyExistsException {
+        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
+        ObjectList objectList = new ObjectList();
+        objectList.addEntry(m13Entry);
+
+        Assertions.assertThrows(
+                NameNotFoundException.class,
+                () -> objectList.removeEntryByName("M31")
+        );
+    }
 }
