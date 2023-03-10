@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class AstronomicalObject {
 
-
     private final String name;
     private final RightAscensionDeclinationCoordinates raDecCoords;
 

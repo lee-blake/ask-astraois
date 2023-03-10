@@ -15,11 +15,15 @@ public class HourCoordinate {
     private final long units;
 
     public HourCoordinate(int hours, int minutes, double seconds) {
-        int sign = hours == 0 ? 1 :hours / Math.abs(hours);
+        int sign = (hours == 0) ? 1 :hours / Math.abs(hours);
+        // The sign for the entire expression is given on hours. To make sure arcminutes and arcseconds
+        // also calculate in the same direction, we momentarily drop the sign on hours while adding them all up.
+        // It's also easiest to add them before taking the modulus.
         long unitsNoModNoSign = sign*UNITS_PER_HOUR*hours
                 + UNITS_PER_MINUTE*minutes
                 + (int)(UNITS_PER_SECOND*seconds);
         long unitsBeforePositiveNormalization = (sign*unitsNoModNoSign) % MAX_UNITS;
+        // The modulus must be taken again in case the original was negative.
         this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
     }
 

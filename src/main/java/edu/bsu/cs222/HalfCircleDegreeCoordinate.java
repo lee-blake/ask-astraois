@@ -24,11 +24,13 @@ public class HalfCircleDegreeCoordinate {
                             + " and degrees in (-90,90) except for coordinates <90,0,0> and <-90,0,0>."
             );
         }
-        int sign = degrees == 0 ? 1 : degrees / Math.abs(degrees);
-        long unitsNoModNoSign = sign*UNITS_PER_DEGREE*degrees
+        // The sign for the entire expression is given on degrees. To make sure arcminutes and arcseconds
+        // also calculate in the same direction, we momentarily drop the sign on degrees while adding them all up.
+        int sign = (degrees == 0) ? 1 : degrees / Math.abs(degrees);
+        long unitUnsigned = sign*UNITS_PER_DEGREE*degrees
                 + UNITS_PER_ARCMINUTE *arcminutes
                 + (long)(UNITS_PER_ARCSECOND*arcseconds);
-        this.units = sign*unitsNoModNoSign;
+        this.units = sign*unitUnsigned;
     }
 
     private boolean coordinatesAreValid(int degrees, int arcminutes, double arcseconds) {
