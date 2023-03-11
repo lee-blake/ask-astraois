@@ -80,15 +80,46 @@ public class ObjectList {
         }
 
         public void printFormattedCSV(Header[] headers) throws IOException {
-             Object[] keyArray = ObjectList.this.nameToEntryMap.keySet().toArray();
+             String[] keyArray = ObjectList.this.nameToEntryMap.keySet().toArray(new String[0]);
              Arrays.sort(keyArray);
-             for(Object keyAsObject : keyArray) {
-                 String key = (String) keyAsObject;
+             for(String key : keyArray) {
                  ObjectListEntry entry = ObjectList.this.nameToEntryMap.get(key);
                  ObjectListEntry.ObjectListEntryCSVFormatter entryFormatter
                          = entry.new ObjectListEntryCSVFormatter(this.csvPrinter);
                  entryFormatter.printFormattedCSV(headers);
              }
+        }
+    }
+
+
+
+    public class ObjectListCLIFormatter {
+
+        public String getCLIViewString() throws NameNotFoundException {
+            String[] sortedNames = ObjectList.this.nameToEntryMap.keySet().toArray(new String[0]);
+            Arrays.sort(sortedNames);
+            return this.getCLIViewString(sortedNames);
+        }
+
+        public String getCLIViewString(String[] namesOfEntriesToView) throws NameNotFoundException {
+            ObjectList parent = ObjectList.this;
+            StringBuilder viewStringBuilder = new StringBuilder();
+            viewStringBuilder.append(this.buildCLIViewHeaders());
+            for(String entryName : namesOfEntriesToView) {
+                ObjectListEntry entry = parent.getEntryByName(entryName);
+                ObjectListEntry.ObjectListEntryCLIFormatter viewFormatter = entry.new ObjectListEntryCLIFormatter();
+                viewStringBuilder.append(viewFormatter.getCLIViewStringOfEntry());
+            }
+            return viewStringBuilder.toString();
+        }
+
+        private String buildCLIViewHeaders() {
+            return String.format("%-10s   %-11s   %-12s   %-10s\n",
+                    "Name",
+                    "R.A.",
+                    "Dec.",
+                    "Completed"
+            );
         }
     }
 }

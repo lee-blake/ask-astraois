@@ -39,12 +39,24 @@ public class HourCoordinate {
 
     public class HourCoordinateFormatter {
 
+        private final long hours;
+        private final long minutes;
+        private final double seconds;
+
+        public HourCoordinateFormatter() {
+            this.hours = units/UNITS_PER_HOUR;
+            this.minutes = (units % UNITS_PER_HOUR)/UNITS_PER_MINUTE;
+            this.seconds = (units % UNITS_PER_MINUTE)/(double)UNITS_PER_SECOND;
+        }
+
         public String standardHourFormatSpaced() {
-            long hours = units/UNITS_PER_HOUR;
-            long minutes = (units % UNITS_PER_HOUR)/UNITS_PER_MINUTE;
-            double seconds = (units % UNITS_PER_MINUTE)/(double)UNITS_PER_SECOND;
-            return String.format("%02dh %02dm ",hours,minutes)
-                    +(new DecimalFormat("00.#########")).format(seconds) + "s";
+            return String.format("%02dh %02dm ",this.hours,this.minutes)
+                    +(new DecimalFormat("00.#########")).format(this.seconds) + "s";
+        }
+
+        public String standardHourFormatNoSpacesOneDecimalPlace() {
+            return String.format("%02dh%02dm",this.hours,this.minutes)
+                    +(new DecimalFormat("00.0")).format(this.seconds) + "s";
         }
     }
 }

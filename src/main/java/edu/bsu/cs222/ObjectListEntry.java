@@ -60,4 +60,30 @@ public class ObjectListEntry {
             this.csvPrinter.println();
         }
     }
+
+
+
+    public class ObjectListEntryCLIFormatter {
+
+        public String getCLIViewStringOfEntry() {
+            ObjectListEntry parent = ObjectListEntry.this;
+            AstronomicalObject.AstronomicalObjectCLIViewFormatter objectFormatter
+                    = parent.astronomicalObject.new AstronomicalObjectCLIViewFormatter();
+            Map<Header,String> mainCLIViewValueMap = objectFormatter.getCLIViewValueMap();
+            CompletionStatus.CompletionStatusCLIViewFormatter completionFormatter
+                    = parent.completionStatus.new CompletionStatusCLIViewFormatter();
+            Map<Header,String> completionCLIViewValueMap = completionFormatter.getCLIViewValueMap();
+            mainCLIViewValueMap.putAll(completionCLIViewValueMap);
+            String name = mainCLIViewValueMap.get(Header.NAME);
+            String rightAscension = mainCLIViewValueMap.get(Header.RIGHT_ASCENSION);
+            String declination = mainCLIViewValueMap.get(Header.DECLINATION);
+            String completion = mainCLIViewValueMap.get(Header.COMPLETION_DATE);
+            return String.format("%-10s   %-11s   %-12s   %-10s\n",
+                    name,
+                    rightAscension,
+                    declination,
+                    completion
+            );
+        }
+    }
 }

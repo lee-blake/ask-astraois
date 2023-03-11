@@ -40,4 +40,18 @@ public class AstronomicalObject {
             return objectCSVValueMap;
         }
     }
+
+    public class AstronomicalObjectCLIViewFormatter {
+
+        public Map<Header, String> getCLIViewValueMap() {
+            AstronomicalObject parent = AstronomicalObject.this;
+            Map<Header, String> objectCLIViewValueMap = new HashMap<>();
+            objectCLIViewValueMap.put(Header.NAME,parent.name);
+            RightAscensionDeclinationCoordinates.RightAscensionDeclinationCoordinatesCLIViewFormatter raDecFormatter
+                    = parent.raDecCoords.new RightAscensionDeclinationCoordinatesCLIViewFormatter();
+            Map<Header, String> raDecCoordsCSVValueMap = raDecFormatter.getCLIViewValueMap();
+            objectCLIViewValueMap.putAll(raDecCoordsCSVValueMap);
+            return objectCLIViewValueMap;
+        }
+    }
 }

@@ -50,4 +50,20 @@ public class CompletionStatus {
             return csvValueMap;
         }
     }
+
+
+
+    public class CompletionStatusCLIViewFormatter {
+
+        public Map<Header, String> getCLIViewValueMap() {
+            HashMap<Header, String> cliViewValueMap = new HashMap<>();
+            // No completion = don't print everything. This is the current display of the view command.
+            String completionDateString = "";
+            if (CompletionStatus.this.complete) {
+                completionDateString = CompletionStatus.this.dateOfCompletion.toString();
+            }
+            cliViewValueMap.put(Header.COMPLETION_DATE, completionDateString);
+            return cliViewValueMap;
+        }
+    }
 }

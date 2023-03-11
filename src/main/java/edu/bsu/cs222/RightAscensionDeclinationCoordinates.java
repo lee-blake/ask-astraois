@@ -38,4 +38,22 @@ public class RightAscensionDeclinationCoordinates {
             return csvValueMap;
         }
     }
+
+    public class RightAscensionDeclinationCoordinatesCLIViewFormatter {
+
+        public Map<Header, String> getCLIViewValueMap() {
+            RightAscensionDeclinationCoordinates parent = RightAscensionDeclinationCoordinates.this;
+            Map<Header,String> cliViewValueMap = new HashMap<>();
+            HourCoordinate.HourCoordinateFormatter raFormatter = parent.rightAscension.new HourCoordinateFormatter();
+            cliViewValueMap.put(Header.RIGHT_ASCENSION,raFormatter.standardHourFormatNoSpacesOneDecimalPlace());
+            HalfCircleDegreeCoordinate.HalfCircleDegreeCoordinateFormatter decFormatter
+                    = parent.declination.new HalfCircleDegreeCoordinateFormatter();
+            String declinationString = decFormatter.standardDegreeFormatNoSpacesOneDecimalPlace();
+            if(!declinationString.contains("-")) {
+                declinationString = "+" + declinationString;
+            }
+            cliViewValueMap.put(Header.DECLINATION,declinationString);
+            return cliViewValueMap;
+        }
+    }
 }
