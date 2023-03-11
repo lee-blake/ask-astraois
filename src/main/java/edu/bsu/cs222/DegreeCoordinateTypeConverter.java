@@ -12,17 +12,6 @@ public class DegreeCoordinateTypeConverter {
         this.parseStandardFormat(compactString);
     }
 
-    public HalfCircleDegreeCoordinate convertHalfCircle() {
-        // This may seem dangerous since the values are not initialized, but any non-initialization results
-        // in a throw in the constructor, so we only get this far if everything is OK in terms of parsing.
-        // The values may not be valid, however.
-        return new HalfCircleDegreeCoordinate(
-                this.degrees,
-                this.arcminutes,
-                this.arcseconds
-        );
-    }
-
     private String removeWhitespace(String stringToStrip) {
         return stringToStrip.replace(" ","");
     }
@@ -43,5 +32,16 @@ public class DegreeCoordinateTypeConverter {
         this.degrees = Integer.parseInt(degreesToken);
         this.arcminutes = Integer.parseInt(arcminutesToken);
         this.arcseconds = Double.parseDouble(arcsecondsToken);
+    }
+
+    public HalfCircleDegreeCoordinate convertHalfCircle() {
+        // This may seem dangerous since the values are not initialized, but any non-initialization results
+        // in a throw in the constructor, so we only get this far if everything is OK in terms of parsing.
+        // The values may not be valid, however.
+        return new HalfCircleDegreeCoordinate(
+                this.degrees,
+                this.arcminutes,
+                this.arcseconds
+        );
     }
 }

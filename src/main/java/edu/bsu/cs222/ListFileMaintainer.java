@@ -20,16 +20,6 @@ public class ListFileMaintainer {
         this.backupFilePath = backupPath;
     }
 
-    protected void keepBackupCopy() throws IOException {
-        try {
-            Files.move(this.originalFilePath, this.backupFilePath, StandardCopyOption.REPLACE_EXISTING);
-        }
-        catch(NoSuchFileException exception) {
-            // Do nothing - if the original does not exist to begin with, we will be able to write safely and
-            // so the goal of this method has already been accomplished
-        }
-    }
-
     public ObjectList loadObjectListFromFile() throws IOException, ObjectListEntryAlreadyExistsException {
         String fileCSV = this.readFileToString();
         CSVConverter converter = new CSVConverter();
@@ -45,6 +35,16 @@ public class ListFileMaintainer {
         String fileContents = converter.convertObjectListToCSV(listToSave,canonicalHeaderOrder);
         this.keepBackupCopy();
         this.writeStringToFile(fileContents);
+    }
+
+    protected void keepBackupCopy() throws IOException {
+        try {
+            Files.move(this.originalFilePath, this.backupFilePath, StandardCopyOption.REPLACE_EXISTING);
+        }
+        catch(NoSuchFileException exception) {
+            // Do nothing - if the original does not exist to begin with, we will be able to write safely and
+            // so the goal of this method has already been accomplished
+        }
     }
 
     private void writeStringToFile(String fileContents) throws IOException {
