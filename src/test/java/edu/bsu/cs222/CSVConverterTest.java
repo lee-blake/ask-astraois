@@ -97,7 +97,8 @@ public class CSVConverterTest {
 
 
     @Test
-    public void testBuildObjectListFromCSVEmptyList() throws IOException, EntryAlreadyExistsException {
+    public void testBuildObjectListFromCSVEmptyList()
+            throws InvalidJournalFileContentsException, CouldNotParseJournalFileException {
         CSVConverter converter = new CSVConverter();
         ObjectList emptyList = new ObjectList();
         String csvString = "Name,Right Ascension,Declination,Completion Date\r";
@@ -106,7 +107,8 @@ public class CSVConverterTest {
     }
 
     @Test
-    public void testBuildObjectListFromCSVTwoElementList() throws EntryAlreadyExistsException, IOException {
+    public void testBuildObjectListFromCSVTwoElementList()
+            throws InvalidJournalFileContentsException, CouldNotParseJournalFileException {
         CSVConverter converter = new CSVConverter();
         ObjectList twoElementList = buildM13M31ObjectList();
         String csvString = """
