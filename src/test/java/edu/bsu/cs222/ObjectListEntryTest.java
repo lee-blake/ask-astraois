@@ -84,4 +84,46 @@ public class ObjectListEntryTest {
         boolean result = incomplete.equals(complete);
         Assertions.assertFalse(result);
     }
+
+
+
+    @Test
+    public void testMarkCompleteFirstOf2023() throws EntryAlreadyCompleteException {
+        ObjectListEntry expected = new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        ObjectListEntry actual = new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.markComplete(LocalDate.parse("2023-01-01"));
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testMarkCompleteLastOf2022() throws EntryAlreadyCompleteException {
+        ObjectListEntry expected = new ObjectListEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        );
+        ObjectListEntry actual = new ObjectListEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.markComplete(LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testMarkCompleteThrowsWhenAlreadyComplete() {
+        ObjectListEntry entry = new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        Assertions.assertThrows(
+            EntryAlreadyCompleteException.class,
+                () -> entry.markComplete(LocalDate.parse("2022-12-31"))
+        );
+    }
 }

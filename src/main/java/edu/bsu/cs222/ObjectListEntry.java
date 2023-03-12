@@ -3,12 +3,13 @@ package edu.bsu.cs222;
 import org.apache.commons.csv.CSVPrinter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class ObjectListEntry {
 
     private final AstronomicalObject astronomicalObject;
-    private final CompletionStatus completionStatus;
+    private CompletionStatus completionStatus;
 
     public ObjectListEntry(AstronomicalObject astronomicalObject) {
         this.astronomicalObject = astronomicalObject;
@@ -35,6 +36,13 @@ public class ObjectListEntry {
                     && this.completionStatus.equals(other.completionStatus);
         }
         return false;
+    }
+
+    public void markComplete(LocalDate dateOfCompletion) throws EntryAlreadyCompleteException {
+        if(this.completionStatus.isComplete()) {
+            throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
+        }
+        this.completionStatus = new CompletionStatus(dateOfCompletion);
     }
 
     public class ObjectListEntryCSVFormatter {
