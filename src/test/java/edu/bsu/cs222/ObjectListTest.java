@@ -175,4 +175,49 @@ public class ObjectListTest {
                 () -> objectList.removeEntryByName("M31")
         );
     }
+
+
+
+    @Test
+    public void testMarkCompleteByNameMarksCompleteM13()
+            throws ObjectListEntryAlreadyExistsException, NoSuchEntryException, EntryAlreadyCompleteException {
+        ObjectList expected = new ObjectList();
+        expected.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        ObjectList actual = new ObjectList();
+        actual.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        actual.markCompleteByName("M13",LocalDate.parse("2023-01-01"));
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testMarkCompleteByNameMarksCompleteM31()
+            throws ObjectListEntryAlreadyExistsException, NoSuchEntryException, EntryAlreadyCompleteException {
+        ObjectList expected = new ObjectList();
+        expected.addEntry(new ObjectListEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        ));
+        ObjectList actual = new ObjectList();
+        actual.addEntry(new ObjectListEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        actual.markCompleteByName("M31",LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testMarkCompleteByNameThrowsIfMissing() {
+        ObjectList emptyList = new ObjectList();
+        Assertions.assertThrows(
+            NoSuchEntryException.class,
+                () -> emptyList.markCompleteByName("M13",LocalDate.parse("2023-01-01"))
+        );
+    }
 }

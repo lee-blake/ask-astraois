@@ -3,6 +3,7 @@ package edu.bsu.cs222;
 import org.apache.commons.csv.CSVPrinter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -68,6 +69,11 @@ public class ObjectList {
         return false;
     }
 
+    public void markCompleteByName(String name, LocalDate dateOfCompletion)
+            throws NoSuchEntryException, EntryAlreadyCompleteException {
+        ObjectListEntry entry = this.getEntryByName(name);
+        entry.markComplete(dateOfCompletion);
+    }
 
 
     public class ObjectListCSVFormatter {
