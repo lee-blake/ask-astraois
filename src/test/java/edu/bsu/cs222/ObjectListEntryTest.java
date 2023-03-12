@@ -126,4 +126,32 @@ public class ObjectListEntryTest {
                 () -> entry.markComplete(LocalDate.parse("2022-12-31"))
         );
     }
+
+
+
+    @Test
+    public void testMarkIncompleteMarksIncomplete() throws EntryAlreadyIncompleteException {
+        ObjectListEntry expected = new ObjectListEntry(
+            buildM13Object(),
+            new CompletionStatus()
+        );
+        ObjectListEntry actual = new ObjectListEntry(
+            buildM13Object(),
+            new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        actual.markIncomplete();
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testMarkIncompleteThrowsExceptionIfAlreadyIncomplete() {
+        ObjectListEntry entry = new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        Assertions.assertThrows(
+            EntryAlreadyIncompleteException.class,
+                entry::markIncomplete
+        );
+    }
 }

@@ -29,6 +29,20 @@ public class ObjectListEntry {
         return this.astronomicalObject;
     }
 
+    public void markComplete(LocalDate dateOfCompletion) throws EntryAlreadyCompleteException {
+        if(this.completionStatus.isComplete()) {
+            throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
+        }
+        this.completionStatus = new CompletionStatus(dateOfCompletion);
+    }
+
+    public void markIncomplete() throws EntryAlreadyIncompleteException {
+        if(!this.completionStatus.isComplete()) {
+            throw new EntryAlreadyIncompleteException("Cannot mark an entry incomplete if it is already incomplete!");
+        }
+        this.completionStatus = new CompletionStatus();
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof ObjectListEntry other) {
@@ -38,12 +52,7 @@ public class ObjectListEntry {
         return false;
     }
 
-    public void markComplete(LocalDate dateOfCompletion) throws EntryAlreadyCompleteException {
-        if(this.completionStatus.isComplete()) {
-            throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
-        }
-        this.completionStatus = new CompletionStatus(dateOfCompletion);
-    }
+
 
     public class ObjectListEntryCSVFormatter {
 
