@@ -85,7 +85,8 @@ public class ListFileMaintainerTest {
 
 
     @Test
-    public void testSaveToAndLoadFromFileGivesSameList() throws EntryAlreadyExistsException, IOException {
+    public void testSaveToAndLoadFromFileGivesSameList()
+            throws IOException, InvalidJournalFileContentsException, CouldNotParseJournalFileException {
         ObjectList originalCopy = buildM13M31ObjectList();
         ListFileMaintainer maintainer = new ListFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
         maintainer.saveObjectListToFile(originalCopy);

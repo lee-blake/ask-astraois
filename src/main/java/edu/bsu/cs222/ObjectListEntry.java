@@ -95,7 +95,7 @@ public class ObjectListEntry {
             String rightAscension = mainCLIViewValueMap.get(Header.RIGHT_ASCENSION);
             String declination = mainCLIViewValueMap.get(Header.DECLINATION);
             String completion = mainCLIViewValueMap.get(Header.COMPLETION_DATE);
-            return String.format("%-10s   %-11s   %-12s   %-10s\n",
+            return String.format("%-15s   %-11s   %-12s   %-10s\n",
                     name,
                     rightAscension,
                     declination,

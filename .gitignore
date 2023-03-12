@@ -1,5 +1,8 @@
 # Project settings
 .idea/*
 .gradle/*
+# Build directories
 .build/*
 build/*
+# Save files
+data/*

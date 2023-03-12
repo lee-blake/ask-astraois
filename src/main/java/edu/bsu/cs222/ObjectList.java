@@ -125,7 +125,7 @@ public class ObjectList {
         }
 
         private String buildCLIViewHeaders() {
-            return String.format("%-10s   %-11s   %-12s   %-10s\n",
+            return String.format("%-15s   %-11s   %-12s   %-10s\n",
                     "Name",
                     "R.A.",
                     "Dec.",

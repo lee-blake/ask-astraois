@@ -5,6 +5,8 @@ import java.nio.file.*;
 
 public class ListFileMaintainer {
 
+    public static Path defaultOriginalPath = Paths.get("data/AstraeusJournal.csv");
+    public static Path defaultBackupPath = Paths.get("data/AstraeusJournal.csv.backup");
     public static final Header[] canonicalHeaderOrder = new Header[]{
             Header.NAME,
             Header.RIGHT_ASCENSION,
@@ -20,7 +22,8 @@ public class ListFileMaintainer {
         this.backupFilePath = backupPath;
     }
 
-    public ObjectList loadObjectListFromFile() throws IOException, EntryAlreadyExistsException {
+    public ObjectList loadObjectListFromFile()
+            throws CouldNotParseJournalFileException, IOException, InvalidJournalFileContentsException {
         String fileCSV = this.readFileToString();
         CSVConverter converter = new CSVConverter();
         return converter.buildObjectListFromCSV(fileCSV);
@@ -48,6 +51,6 @@ public class ListFileMaintainer {
     }
 
     private void writeStringToFile(String fileContents) throws IOException {
-        Files.writeString(this.originalFilePath, fileContents);
+        Files.writeString(this.originalFilePath, fileContents,StandardOpenOption.CREATE);
     }
 }

@@ -7,6 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.UncheckedIOException;
 
 public class CSVConverter {
 
@@ -31,19 +32,30 @@ public class CSVConverter {
         return headerNames;
     }
 
-    public ObjectList buildObjectListFromCSV(String csvString) throws IOException, EntryAlreadyExistsException {
+    public ObjectList buildObjectListFromCSV(String csvString)
+            throws CouldNotParseJournalFileException, InvalidJournalFileContentsException {
         ObjectList parsedList = new ObjectList();
         StringReader reader = new StringReader(csvString);
-        CSVParser parser = CSVFormat.Builder.create(CSVFormat.DEFAULT)
-                .setHeader()
-                .setSkipHeaderRecord(true)
-                .build()
-                .parse(reader);
-        for(CSVRecord record: parser) {
-            ObjectListEntry entryFromRecord = this.getEntryFromCSVRecord(record);
-            parsedList.addEntry(entryFromRecord);
+        try {
+            CSVParser parser = CSVFormat.Builder.create(CSVFormat.DEFAULT)
+                    .setHeader()
+                    .setSkipHeaderRecord(true)
+                    .build()
+                    .parse(reader);
+            for (CSVRecord record : parser) {
+                ObjectListEntry entryFromRecord = this.getEntryFromCSVRecord(record);
+                parsedList.addEntry(entryFromRecord);
+            }
+            return parsedList;
         }
-        return parsedList;
+        catch(UncheckedIOException | IOException csvParsingException) {
+            throw new CouldNotParseJournalFileException("Could not parse the journal file - the CSV was not valid!");
+        }
+        catch(EntryAlreadyExistsException duplicateEntryException) {
+            throw new InvalidJournalFileContentsException(
+                    "The journal file is invalid because it contains duplicate entries!"
+            );
+        }
     }
 
     private ObjectListEntry getEntryFromCSVRecord(CSVRecord record) {
