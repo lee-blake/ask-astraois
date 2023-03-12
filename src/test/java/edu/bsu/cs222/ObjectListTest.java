@@ -220,4 +220,49 @@ public class ObjectListTest {
                 () -> emptyList.markCompleteByName("M13",LocalDate.parse("2023-01-01"))
         );
     }
+
+
+
+    @Test
+    public void testMarkIncompleteByNameMarksIncompleteM13()
+            throws EntryAlreadyExistsException, EntryAlreadyIncompleteException, NoSuchEntryException {
+        ObjectList expected = new ObjectList();
+        expected.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        ObjectList actual = new ObjectList();
+        actual.addEntry(new ObjectListEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        actual.markIncompleteByName("M13");
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testMarkIncompleteByNameMarksIncompleteM31()
+            throws EntryAlreadyExistsException, EntryAlreadyIncompleteException, NoSuchEntryException {
+        ObjectList expected = new ObjectList();
+        expected.addEntry(new ObjectListEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        ObjectList actual = new ObjectList();
+        actual.addEntry(new ObjectListEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        ));
+        actual.markIncompleteByName("M31");
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testMarkIncompleteByNameThrowsIfMissing() {
+        ObjectList emptyList = new ObjectList();
+        Assertions.assertThrows(
+                NoSuchEntryException.class,
+                () -> emptyList.markIncompleteByName("M13")
+        );
+    }
 }

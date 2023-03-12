@@ -50,6 +50,17 @@ public class ObjectList {
         nameToEntryMap.remove(entryName);
     }
 
+    public void markCompleteByName(String name, LocalDate dateOfCompletion)
+            throws NoSuchEntryException, EntryAlreadyCompleteException {
+        ObjectListEntry entry = this.getEntryByName(name);
+        entry.markComplete(dateOfCompletion);
+    }
+
+    public void markIncompleteByName(String name) throws NoSuchEntryException, EntryAlreadyIncompleteException {
+        ObjectListEntry entry = this.getEntryByName(name);
+        entry.markIncomplete();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof ObjectList other) {
@@ -69,11 +80,6 @@ public class ObjectList {
         return false;
     }
 
-    public void markCompleteByName(String name, LocalDate dateOfCompletion)
-            throws NoSuchEntryException, EntryAlreadyCompleteException {
-        ObjectListEntry entry = this.getEntryByName(name);
-        entry.markComplete(dateOfCompletion);
-    }
 
 
     public class ObjectListCSVFormatter {
