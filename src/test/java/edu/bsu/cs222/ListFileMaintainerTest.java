@@ -85,7 +85,7 @@ public class ListFileMaintainerTest {
 
 
     @Test
-    public void testSaveToAndLoadFromFileGivesSameList() throws ObjectListEntryAlreadyExistsException, IOException {
+    public void testSaveToAndLoadFromFileGivesSameList() throws EntryAlreadyExistsException, IOException {
         ObjectList originalCopy = buildM13M31ObjectList();
         ListFileMaintainer maintainer = new ListFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
         maintainer.saveObjectListToFile(originalCopy);

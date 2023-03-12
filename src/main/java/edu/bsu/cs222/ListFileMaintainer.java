@@ -20,7 +20,7 @@ public class ListFileMaintainer {
         this.backupFilePath = backupPath;
     }
 
-    public ObjectList loadObjectListFromFile() throws IOException, ObjectListEntryAlreadyExistsException {
+    public ObjectList loadObjectListFromFile() throws IOException, EntryAlreadyExistsException {
         String fileCSV = this.readFileToString();
         CSVConverter converter = new CSVConverter();
         return converter.buildObjectListFromCSV(fileCSV);

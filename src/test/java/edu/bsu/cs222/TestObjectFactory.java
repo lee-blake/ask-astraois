@@ -41,7 +41,7 @@ public class TestObjectFactory {
                 ));
                 return objectList;
             }
-            catch (ObjectListEntryAlreadyExistsException e) {
+            catch (EntryAlreadyExistsException e) {
                 // Should never happen in this method by construction, so we can throw a RuntimeException instead
                 throw new RuntimeException(e);
             }

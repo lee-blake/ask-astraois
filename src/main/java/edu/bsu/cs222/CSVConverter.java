@@ -31,7 +31,7 @@ public class CSVConverter {
         return headerNames;
     }
 
-    public ObjectList buildObjectListFromCSV(String csvString) throws IOException, ObjectListEntryAlreadyExistsException {
+    public ObjectList buildObjectListFromCSV(String csvString) throws IOException, EntryAlreadyExistsException {
         ObjectList parsedList = new ObjectList();
         StringReader reader = new StringReader(csvString);
         CSVParser parser = CSVFormat.Builder.create(CSVFormat.DEFAULT)

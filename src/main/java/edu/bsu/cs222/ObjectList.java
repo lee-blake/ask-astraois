@@ -11,10 +11,10 @@ public class ObjectList {
 
     private final HashMap<String,ObjectListEntry> nameToEntryMap = new HashMap<>();
 
-    public void addEntry(ObjectListEntry entry) throws ObjectListEntryAlreadyExistsException {
+    public void addEntry(ObjectListEntry entry) throws EntryAlreadyExistsException {
         String entryName = entry.getName();
         if(nameToEntryMap.containsKey(entryName)) {
-            throw new ObjectListEntryAlreadyExistsException(
+            throw new EntryAlreadyExistsException(
                     "Cannot add entry because an entry with name '"
                             + entryName
                             + "' already exists!"

@@ -97,7 +97,7 @@ public class CSVConverterTest {
 
 
     @Test
-    public void testBuildObjectListFromCSVEmptyList() throws IOException, ObjectListEntryAlreadyExistsException {
+    public void testBuildObjectListFromCSVEmptyList() throws IOException, EntryAlreadyExistsException {
         CSVConverter converter = new CSVConverter();
         ObjectList emptyList = new ObjectList();
         String csvString = "Name,Right Ascension,Declination,Completion Date\r";
@@ -106,7 +106,7 @@ public class CSVConverterTest {
     }
 
     @Test
-    public void testBuildObjectListFromCSVTwoElementList() throws ObjectListEntryAlreadyExistsException, IOException {
+    public void testBuildObjectListFromCSVTwoElementList() throws EntryAlreadyExistsException, IOException {
         CSVConverter converter = new CSVConverter();
         ObjectList twoElementList = buildM13M31ObjectList();
         String csvString = """
