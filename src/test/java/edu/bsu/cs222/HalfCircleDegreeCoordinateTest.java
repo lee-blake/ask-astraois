@@ -5,6 +5,93 @@ import org.junit.jupiter.api.Test;
 
 public class HalfCircleDegreeCoordinateTest {
 
+    @Test
+    public void testConstructorNegativeArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(45, -30, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(45, 300, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorNegativeArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(45, 30, -30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(45, 30, 60.0)
+        );
+    }
+
+    @Test
+    public void testConstructorBarelyValidArcsecondsNoException() {
+        new HalfCircleDegreeCoordinate(45, 30, 59.9999999999);
+    }
+
+    @Test
+    public void testConstructorLargeNegativeDegreesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(-96, 30, 60.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargePositiveDegreesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(96, 30, 60.0)
+        );
+    }
+
+    @Test
+    public void testConstructorNorthPoleArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(90, 1, 0)
+        );
+    }
+
+    @Test
+    public void testConstructorNorthPoleArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(90, 0, 1)
+        );
+    }
+
+    @Test
+    public void testConstructorSouthPoleArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(-90, 1, 0)
+        );
+    }
+
+    @Test
+    public void testConstructorSouthPoleArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HalfCircleDegreeCoordinate(-90, 0, 1)
+        );
+    }
+
+
+
     // This suppression is needed to verify this intended functionality where anything of another
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
@@ -65,18 +152,10 @@ public class HalfCircleDegreeCoordinateTest {
     }
 
     @Test
-    public void testEqualsDifferenceIsModulusEqual() {
-        HalfCircleDegreeCoordinate coordinate0 = new HalfCircleDegreeCoordinate(45, 30, 30.0);
-        HalfCircleDegreeCoordinate coordinate1 = new HalfCircleDegreeCoordinate(45+180, 30, 30.0);
-        boolean result = coordinate0.equals(coordinate1);
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void testEqualsNegationAndComplementAreEqual() {
-        HalfCircleDegreeCoordinate negation = new HalfCircleDegreeCoordinate(-45, 20, 20.0);
-        HalfCircleDegreeCoordinate complement = new HalfCircleDegreeCoordinate(134, 39, 40.0);
-        boolean result = negation.equals(complement);
-        Assertions.assertTrue(result);
+    public void testEqualsPolesNotEqual() {
+        HalfCircleDegreeCoordinate northPole = new HalfCircleDegreeCoordinate(90, 0, 0);
+        HalfCircleDegreeCoordinate southPole = new HalfCircleDegreeCoordinate(-90, 0, 0);
+        boolean result = northPole.equals(southPole);
+        Assertions.assertFalse(result);
     }
 }
