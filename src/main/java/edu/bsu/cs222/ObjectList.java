@@ -2,7 +2,6 @@ package edu.bsu.cs222;
 
 import org.apache.commons.csv.CSVPrinter;
 
-import javax.naming.NameNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,9 +22,9 @@ public class ObjectList {
         nameToEntryMap.put(entryName,entry);
     }
 
-    public ObjectListEntry getEntryByName(String entryName) throws NameNotFoundException {
+    public ObjectListEntry getEntryByName(String entryName) throws NoSuchEntryException {
         if(!nameToEntryMap.containsKey(entryName)) {
-            throw new NameNotFoundException(
+            throw new NoSuchEntryException(
                     "Cannot get entry because no entry has name '"
                     + entryName
                     + "'."
@@ -34,14 +33,14 @@ public class ObjectList {
         return nameToEntryMap.get(entryName);
     }
 
-    public void removeEntry(ObjectListEntry entry) throws NameNotFoundException {
+    public void removeEntry(ObjectListEntry entry) throws NoSuchEntryException {
         String entryName = entry.getName();
         removeEntryByName(entryName);
     }
 
-    public void removeEntryByName(String entryName) throws NameNotFoundException {
+    public void removeEntryByName(String entryName) throws NoSuchEntryException {
         if (!nameToEntryMap.containsKey(entryName)) {
-            throw new NameNotFoundException(
+            throw new NoSuchEntryException(
                     "Cannot remove entry because no entry has name '"
                             + entryName
                             + "'."
@@ -95,13 +94,13 @@ public class ObjectList {
 
     public class ObjectListCLIFormatter {
 
-        public String getCLIViewString() throws NameNotFoundException {
+        public String getCLIViewString() throws NoSuchEntryException {
             String[] sortedNames = ObjectList.this.nameToEntryMap.keySet().toArray(new String[0]);
             Arrays.sort(sortedNames);
             return this.getCLIViewString(sortedNames);
         }
 
-        public String getCLIViewString(String[] namesOfEntriesToView) throws NameNotFoundException {
+        public String getCLIViewString(String[] namesOfEntriesToView) throws NoSuchEntryException {
             ObjectList parent = ObjectList.this;
             StringBuilder viewStringBuilder = new StringBuilder();
             viewStringBuilder.append(this.buildCLIViewHeaders());

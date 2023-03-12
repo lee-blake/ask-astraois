@@ -3,7 +3,6 @@ package edu.bsu.cs222;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.naming.NameNotFoundException;
 import java.time.LocalDate;
 
 import static edu.bsu.cs222.TestObjectFactory.AstronomicalObjects.buildM13Object;
@@ -13,7 +12,7 @@ import static edu.bsu.cs222.TestObjectFactory.ObjectLists.buildM13M31ObjectList;
 public class ObjectListTest {
 
     @Test
-    public void testAddEntry_GetObjectByName() throws ObjectListEntryAlreadyExistsException, NameNotFoundException {
+    public void testAddEntry_GetObjectByName() throws ObjectListEntryAlreadyExistsException, NoSuchEntryException {
         // The list is the same as in TestObjectFactory but should NOT use that list construction
         // because we need to test that AddEntry works before using it in TestObjectFactory methods
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
@@ -35,7 +34,7 @@ public class ObjectListTest {
     public void testGetObjectByNameObjectThrowsExceptionWhenNameMissing() {
         ObjectList objectList = buildM13M31ObjectList();
         Assertions.assertThrows(
-                NameNotFoundException.class,
+                NoSuchEntryException.class,
                 () -> objectList.getEntryByName("M14")
         );
     }
@@ -52,6 +51,7 @@ public class ObjectListTest {
                 () -> objectList.addEntry(duplicateEntry)
         );
     }
+
 
 
     // This suppression is needed to verify this intended functionality where anything of another
@@ -121,7 +121,7 @@ public class ObjectListTest {
 
 
     @Test
-    public void testRemoveEntryActuallyRemoves() throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
+    public void testRemoveEntryActuallyRemoves() throws ObjectListEntryAlreadyExistsException, NoSuchEntryException {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList actual = new ObjectList();
@@ -137,14 +137,14 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testRemoveEntryThrowsNameNotFoundException() throws ObjectListEntryAlreadyExistsException {
+    public void testRemoveEntryThrowsNoSuchEntryException() throws ObjectListEntryAlreadyExistsException {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList objectList = new ObjectList();
         objectList.addEntry(m13Entry);
 
         Assertions.assertThrows(
-                NameNotFoundException.class,
+                NoSuchEntryException.class,
                 () -> objectList.removeEntry(m31Entry)
         );
     }
@@ -153,7 +153,7 @@ public class ObjectListTest {
 
     @Test
     public void testRemoveEntryByNameActuallyRemoves()
-            throws NameNotFoundException, ObjectListEntryAlreadyExistsException {
+            throws ObjectListEntryAlreadyExistsException, NoSuchEntryException {
         ObjectListEntry freshM13Entry = new ObjectListEntry(buildM13Object());
         ObjectList expected = new ObjectList();
         expected.addEntry(freshM13Entry);
@@ -165,13 +165,13 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testRemoveEntryByNameThrowsNameNotFoundException() throws ObjectListEntryAlreadyExistsException {
+    public void testRemoveEntryByNameThrowsNoSuchEntryException() throws ObjectListEntryAlreadyExistsException {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectList objectList = new ObjectList();
         objectList.addEntry(m13Entry);
 
         Assertions.assertThrows(
-                NameNotFoundException.class,
+                NoSuchEntryException.class,
                 () -> objectList.removeEntryByName("M31")
         );
     }
