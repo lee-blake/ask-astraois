@@ -7,29 +7,46 @@ import picocli.CommandLine.ParseResult;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
-public class CustomExceptionMessageHandler implements IExecutionExceptionHandler {
+public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
 
     @Override
     public int handleExecutionException(Exception ex, CommandLine commandLine, ParseResult parseResult) {
+        if(ex instanceof NoSuchFileOnSaveException) {
+            this.printNoSuchFileOnSaveExceptionMessage(commandLine);
+        }
         if(ex instanceof NoSuchFileException) {
             this.printNoSuchFileExceptionMessage(commandLine);
         }
         else if(ex instanceof IOException exception) {
             this.printGenericIOExceptionMessage(exception, commandLine);
         }
-        else if (ex instanceof InvalidJournalFileContentsException exception) {
+        else if(ex instanceof InvalidJournalFileContentsException exception) {
             this.printInvalidJournalFileContentsExceptionMessage(exception,commandLine);
         }
-        else if (ex instanceof CouldNotParseJournalFileException exception) {
+        else if(ex instanceof CouldNotParseJournalFileException exception) {
             this.printCouldNotParseJournalFileExceptionMessage(exception,commandLine);
         }
-        else if (ex instanceof NoSuchEntryException exception) {
+        else if(ex instanceof NoSuchEntryException exception) {
             this.printNoSuchEntryExceptionMessage(exception,commandLine);
+        }
+        else if(ex instanceof EntryAlreadyExistsException) {
+            this.printEntryAlreadyExistsExceptionMessage(commandLine);
         }
         else {
             ex.printStackTrace();
         }
         return 1;
+    }
+
+    private void printNoSuchFileOnSaveExceptionMessage(CommandLine commandLine) {
+        String message = """
+            Could not save the journal file because it was missing!
+            This usually occurs when the 'data' directory is missing or has bad write permissions.""";
+        commandLine.getErr()
+                .println(
+                        commandLine.getColorScheme()
+                                .errorText(message)
+                );
     }
 
     private void printNoSuchFileExceptionMessage(CommandLine commandLine) {
@@ -83,6 +100,16 @@ public class CustomExceptionMessageHandler implements IExecutionExceptionHandler
     private void printNoSuchEntryExceptionMessage(NoSuchEntryException exception, CommandLine commandLine) {
         String message = "One or more requested journal entries could not be retrieved:\n"
                 + exception.getMessage();
+        commandLine.getErr()
+                .println(
+                        commandLine.getColorScheme()
+                                .errorText(message)
+                );
+    }
+
+    private void printEntryAlreadyExistsExceptionMessage(CommandLine commandLine) {
+        String message = "The new object could not be added because "
+                + "an entry of that name already exists in the journal!";
         commandLine.getErr()
                 .println(
                         commandLine.getColorScheme()

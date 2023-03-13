@@ -34,9 +34,9 @@ public class Main {
         // Should use args instead of myArgs
         // try-catch is necessary to be able to get any useful error messages in IntelliJ
         // Also need to capture exit code from execution and exit with it
-        String[] myArgs = new String[]{"view"};
+        String[] myArgs = new String[]{"add","newObject","--ra","0h6m8.9s","--dec","45* 59' 20\""};
         new CommandLine(new Main())
-                .setExecutionExceptionHandler(new CustomExceptionMessageHandler())
+                .setExecutionExceptionHandler(new CLIExceptionMessageHandler())
                 .execute(myArgs);
     }
 }

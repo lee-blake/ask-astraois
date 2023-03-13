@@ -6,7 +6,7 @@ import picocli.CommandLine.TypeConversionException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class CustomLocalDateTypeConverter implements ITypeConverter<LocalDate> {
+public class CLILocalDateTypeConverter implements ITypeConverter<LocalDate> {
     @Override
     public LocalDate convert(String value) {
         if(value.equalsIgnoreCase("today")) {

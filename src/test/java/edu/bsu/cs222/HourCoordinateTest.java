@@ -5,6 +5,45 @@ import org.junit.jupiter.api.Test;
 
 public class HourCoordinateTest {
 
+    @Test
+    public void testConstructorNegativeMinutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HourCoordinate(12, -30, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeMinutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HourCoordinate(12, 90, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorNegativeSecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HourCoordinate(12, 30, -30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeSecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new HourCoordinate(12, 30, 60.0)
+        );
+    }
+
+    @Test
+    public void testConstructorBarelyValidSecondsNoException() {
+        new HalfCircleDegreeCoordinate(12, 30, 59.9999999999);
+    }
+
+
+
     // This suppression is needed to verify this intended functionality where anything of another
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")

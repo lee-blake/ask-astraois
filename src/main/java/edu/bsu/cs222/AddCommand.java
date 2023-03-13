@@ -4,8 +4,16 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.concurrent.Callable;
 
+// Suppressing warnings for the Unicode escaping of the degree character in this file because the fix - replacing
+// the escape with the literal character - has caused unmappable character errors when running this project
+// with default settings. As the inlining of the characters does not impede the functionality, only the readability,
+// and as the context indicates it is the degree character, fixing this warning will be delayed until all team members
+// can meet and confirm that the change does not cause errors on their respective systems.
+@SuppressWarnings("UnnecessaryUnicodeEscape")
 @Command(
         name = "add",
         description = "Adds an object to the object journal. The name, right ascension, and declination are required, "
@@ -33,24 +41,53 @@ public class AddCommand implements Callable<Integer> {
     @Option(
            names = {"--ra"},
            required = true,
-           description = "The right ascension of the object to add. Accepted forms are: "
-                   + "Fractional hour form (5.894231)",
-           converter = FractionalHourTypeConverter.class
+           description = "The right ascension of the object to add. Accepted forms are:\n"
+                   + "\tStandard hour form (22h 30m 26s)",
+           converter = CLIHourCoordinateTypeConverter.class
     )
-    private double rightAscensionAsFractionalHour;
+    private HourCoordinate rightAscension;
 
     @Option(
             names = {"--dec"},
             required = true,
-            description = "The declination of the object to add. Accepted forms are: "
-                    + "Fractional degree form (45.9238553)",
-            converter = HalfCircleFractionalDegreeTypeConverter.class
+            description = "The declination of the object to add. Accepted forms are:\n"
+                    + "\tStandard degree form (45\u00b0 30' 26\")",
+            converter = CLIHalfCircleDegreeCoordinateTypeConverter.class
     )
-    private double declinationAsFractionalDegree;
+    private HalfCircleDegreeCoordinate declination;
 
     @Override
-    public Integer call() {
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
+            IOException, EntryAlreadyExistsException {
         // TODO implement the logic and a proper return code
-        return null;
+        ListFileMaintainer maintainer = new ListFileMaintainer(
+                ListFileMaintainer.defaultOriginalPath,
+                ListFileMaintainer.defaultBackupPath
+        );
+        // We initialize an empty list so that we can still create the file with a single entry if it doesn't exist
+        ObjectList objectList = new ObjectList();
+        try {
+            objectList = maintainer.loadObjectListFromFile();
+        }
+        catch (NoSuchFileException ignored) {}
+        objectList.addEntry(
+                new ObjectListEntry(
+                        new AstronomicalObject(
+                                this.name,
+                                new RightAscensionDeclinationCoordinates(
+                                        this.rightAscension,
+                                        this.declination
+                                )
+                        ),
+                        new CompletionStatus()
+                )
+        );
+        try {
+            maintainer.saveObjectListToFile(objectList);
+        }
+        catch (NoSuchFileException exception) {
+            throw new NoSuchFileOnSaveException("Encountered a no such file exception on save!");
+        }
+        return 0;
     }
 }

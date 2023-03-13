@@ -33,7 +33,7 @@ public class CompleteCommand implements Callable<Integer> {
             names = {"--on"},
             description = "The date the completion should be marked for. Defaults to current day if not specified.",
             defaultValue = "today",
-            converter = CustomLocalDateTypeConverter.class
+            converter = CLILocalDateTypeConverter.class
     )
     private LocalDate date;
 

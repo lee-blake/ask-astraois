@@ -15,6 +15,15 @@ public class HourCoordinate {
     private final long units;
 
     public HourCoordinate(int hours, int minutes, double seconds) {
+        if(!coordinatesAreValid(hours, minutes, seconds)) {
+            throw new IllegalArgumentException(
+                    "hour coordinates '"
+                            + hours + ","
+                            + minutes + ","
+                            + seconds + "'"
+                            + "were not valid hour coordinates! Minutes and seconds must be in [0,60)."
+            );
+        }
         int sign = (hours == 0) ? 1 :hours / Math.abs(hours);
         // The sign for the entire expression is given on hours. To make sure arcminutes and arcseconds
         // also calculate in the same direction, we momentarily drop the sign on hours while adding them all up.
@@ -25,6 +34,13 @@ public class HourCoordinate {
         long unitsBeforePositiveNormalization = (sign*unitsNoModNoSign) % MAX_UNITS;
         // The modulus must be taken again in case the original was negative.
         this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
+    }
+
+    private boolean coordinatesAreValid(int ignoredHours, int minutes, double seconds) {
+        return minutes >= 0
+                && minutes < 60
+                && seconds >= 0
+                && seconds < 60;
     }
 
     @Override
