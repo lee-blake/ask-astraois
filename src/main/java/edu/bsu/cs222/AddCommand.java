@@ -50,8 +50,10 @@ public class AddCommand implements Callable<Integer> {
     @Option(
             names = {"--dec"},
             required = true,
-            description = "The declination of the object to add. Accepted forms are:\n"
-                    + "\tStandard degree form (45\u00b0 30' 26\")",
+            description = """
+                    The declination of the object to add. Accepted forms are:
+                    \tStandard degree form (45\u00b0 30' 26")
+                    \tAsterisk degree form (45* 30' 26")""",
             converter = CLIHalfCircleDegreeCoordinateTypeConverter.class
     )
     private HalfCircleDegreeCoordinate declination;
@@ -59,7 +61,6 @@ public class AddCommand implements Callable<Integer> {
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
             IOException, EntryAlreadyExistsException {
-        // TODO implement the logic and a proper return code
         ListFileMaintainer maintainer = new ListFileMaintainer(
                 ListFileMaintainer.defaultOriginalPath,
                 ListFileMaintainer.defaultBackupPath

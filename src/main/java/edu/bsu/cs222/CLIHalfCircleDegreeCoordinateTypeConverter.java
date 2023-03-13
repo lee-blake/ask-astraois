@@ -16,7 +16,8 @@ public class CLIHalfCircleDegreeCoordinateTypeConverter implements ITypeConverte
 
         DegreeCoordinateTypeConverter converter;
         try {
-            converter = new DegreeCoordinateTypeConverter(value);
+            String standardizedValue = value.replace("*","\u00b0");
+            converter = new DegreeCoordinateTypeConverter(standardizedValue);
 
         }
         catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
@@ -26,6 +27,7 @@ public class CLIHalfCircleDegreeCoordinateTypeConverter implements ITypeConverte
                             + "' is not a valid degree coordinate - it was not in an acceptable form. "
                             + "Accepted forms:\n"
                             + "\tStandard degree form (40\u00b0 30' 26\")\n"
+                            + "\tAsterisk degree form (40* 30' 26\")\n"
             );
         }
         try {
