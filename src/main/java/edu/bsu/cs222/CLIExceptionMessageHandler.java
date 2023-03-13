@@ -35,6 +35,9 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
         else if(ex instanceof EntryAlreadyCompleteException) {
             this.printEntryAlreadyCompleteExceptionMessage(commandLine);
         }
+        else if(ex instanceof EntryAlreadyIncompleteException) {
+            this.printEntryAlreadyIncompleteExceptionMessage(commandLine);
+        }
         else {
             ex.printStackTrace();
         }
@@ -129,4 +132,16 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
                                 .errorText(message)
                 );
     }
+
+
+    private void printEntryAlreadyIncompleteExceptionMessage(CommandLine commandLine) {
+        String message = "The object could not be marked as incomplete because "
+                + "it is already incomplete in the journal!";
+        commandLine.getErr()
+                .println(
+                        commandLine.getColorScheme()
+                                .errorText(message)
+                );
+    }
+
 }

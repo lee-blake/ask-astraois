@@ -4,6 +4,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 @Command(
@@ -29,8 +30,15 @@ public class UncompleteCommand implements Callable<Integer> {
     private String name;
 
     @Override
-    public Integer call() {
-        // TODO implement the logic and a proper return code
-        return null;
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
+            IOException, EntryAlreadyIncompleteException, NoSuchEntryException {
+        ListFileMaintainer maintainer = new ListFileMaintainer(
+                ListFileMaintainer.defaultOriginalPath,
+                ListFileMaintainer.defaultBackupPath
+        );
+        ObjectList objectList = maintainer.loadObjectListFromFile();
+        objectList.markIncompleteByName(name);
+        maintainer.saveObjectListToFile(objectList);
+        return 0;
     }
 }
