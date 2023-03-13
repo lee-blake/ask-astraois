@@ -35,11 +35,8 @@ public class Main {
         // try-catch is necessary to be able to get any useful error messages in IntelliJ
         // Also need to capture exit code from execution and exit with it
         String[] myArgs = new String[]{"view"};
-        try {
-            new CommandLine(new Main()).execute(myArgs);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        new CommandLine(new Main())
+                .setExecutionExceptionHandler(new CustomExceptionMessageHandler())
+                .execute(myArgs);
     }
 }
