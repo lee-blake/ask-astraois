@@ -14,7 +14,7 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
         if(ex instanceof NoSuchFileOnSaveException) {
             this.printNoSuchFileOnSaveExceptionMessage(commandLine);
         }
-        if(ex instanceof NoSuchFileException) {
+        else if(ex instanceof NoSuchFileException) {
             this.printNoSuchFileExceptionMessage(commandLine);
         }
         else if(ex instanceof IOException exception) {
