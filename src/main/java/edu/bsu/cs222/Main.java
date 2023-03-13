@@ -30,13 +30,9 @@ public class Main {
     private boolean helpRequested;
 
     public static void main(String[] args) {
-        // TODO refactor this later - for easier development only
-        // Should use args instead of myArgs
-        // try-catch is necessary to be able to get any useful error messages in IntelliJ
-        // Also need to capture exit code from execution and exit with it
-        String[] myArgs = new String[]{"add","newObject","--ra","0h6m8.9s","--dec","45* 59' 20\""};
-        new CommandLine(new Main())
+        int exitCode = new CommandLine(new Main())
                 .setExecutionExceptionHandler(new CLIExceptionMessageHandler())
-                .execute(myArgs);
+                .execute(args);
+        System.exit(exitCode);
     }
 }

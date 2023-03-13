@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'edu.bsu.cs222'
@@ -18,4 +19,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass = 'edu.bsu.cs222.Main'
+}
+
+startScripts {
+    applicationName = "ask-astraeus"
 }
