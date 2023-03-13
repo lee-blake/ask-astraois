@@ -32,6 +32,9 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
         else if(ex instanceof EntryAlreadyExistsException) {
             this.printEntryAlreadyExistsExceptionMessage(commandLine);
         }
+        else if(ex instanceof EntryAlreadyCompleteException) {
+            this.printEntryAlreadyCompleteExceptionMessage(commandLine);
+        }
         else {
             ex.printStackTrace();
         }
@@ -110,6 +113,16 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
     private void printEntryAlreadyExistsExceptionMessage(CommandLine commandLine) {
         String message = "The new object could not be added because "
                 + "an entry of that name already exists in the journal!";
+        commandLine.getErr()
+                .println(
+                        commandLine.getColorScheme()
+                                .errorText(message)
+                );
+    }
+
+
+    private void printEntryAlreadyCompleteExceptionMessage(CommandLine commandLine) {
+        String message = "The object could not be marked as complete because it is already complete in the journal!";
         commandLine.getErr()
                 .println(
                         commandLine.getColorScheme()

@@ -4,6 +4,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.concurrent.Callable;
 
@@ -30,16 +31,23 @@ public class CompleteCommand implements Callable<Integer> {
     private String name;
 
     @Option(
-            names = {"--on"},
+            names = {"--on","--date"},
             description = "The date the completion should be marked for. Defaults to current day if not specified.",
             defaultValue = "today",
             converter = CLILocalDateTypeConverter.class
     )
-    private LocalDate date;
+    private LocalDate dateOfCompletion;
 
     @Override
-    public Integer call() {
-        // TODO implement the logic and a proper return code
-        return null;
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
+            IOException, NoSuchEntryException, EntryAlreadyCompleteException {
+        ListFileMaintainer maintainer = new ListFileMaintainer(
+                ListFileMaintainer.defaultOriginalPath,
+                ListFileMaintainer.defaultBackupPath
+        );
+        ObjectList objectList = maintainer.loadObjectListFromFile();
+        objectList.markCompleteByName(name, dateOfCompletion);
+        maintainer.saveObjectListToFile(objectList);
+        return 0;
     }
 }
