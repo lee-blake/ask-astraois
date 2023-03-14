@@ -31,8 +31,7 @@ public class UncompleteCommand implements Callable<Integer> {
     private String name;
 
     @Override
-    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
-            IOException, EntryAlreadyIncompleteException, NoSuchEntryException {
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
         ListFileMaintainer maintainer = new ListFileMaintainer(
                 ListFileMaintainer.defaultOriginalPath,
                 ListFileMaintainer.defaultBackupPath

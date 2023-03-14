@@ -32,8 +32,7 @@ public class ViewCommand implements Callable<Integer> {
     private String[] names;
 
     @Override
-    public Integer call() throws IOException, InvalidJournalFileContentsException,
-            CouldNotParseJournalFileException, NoSuchEntryException {
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
         ListFileMaintainer maintainer = new ListFileMaintainer(
                 ListFileMaintainer.defaultOriginalPath,
                 ListFileMaintainer.defaultBackupPath

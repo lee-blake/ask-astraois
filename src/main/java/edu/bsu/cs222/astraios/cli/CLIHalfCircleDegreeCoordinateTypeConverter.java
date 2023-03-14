@@ -14,7 +14,7 @@ import picocli.CommandLine.TypeConversionException;
 public class CLIHalfCircleDegreeCoordinateTypeConverter implements ITypeConverter<HalfCircleDegreeCoordinate> {
 
     @Override
-    public HalfCircleDegreeCoordinate convert(String value) throws TypeConversionException {
+    public HalfCircleDegreeCoordinate convert(String value) {
         DegreeCoordinateTypeConverter converter;
         try {
             String standardizedValue = value.replace("*","\u00b0");

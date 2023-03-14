@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class CLILocalDateTypeConverter implements ITypeConverter<LocalDate> {
+
     @Override
     public LocalDate convert(String value) {
         if(value.equalsIgnoreCase("today")) {

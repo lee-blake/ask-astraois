@@ -60,8 +60,7 @@ public class AddCommand implements Callable<Integer> {
     private HalfCircleDegreeCoordinate declination;
 
     @Override
-    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
-            IOException, EntryAlreadyExistsException {
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
         ListFileMaintainer maintainer = new ListFileMaintainer(
                 ListFileMaintainer.defaultOriginalPath,
                 ListFileMaintainer.defaultBackupPath

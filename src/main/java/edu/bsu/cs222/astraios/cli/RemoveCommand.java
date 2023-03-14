@@ -31,8 +31,7 @@ public class RemoveCommand implements Callable<Integer> {
     private String name;
 
     @Override
-    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
-            IOException, NoSuchEntryException {
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
         ListFileMaintainer maintainer = new ListFileMaintainer(
                 ListFileMaintainer.defaultOriginalPath,
                 ListFileMaintainer.defaultBackupPath
