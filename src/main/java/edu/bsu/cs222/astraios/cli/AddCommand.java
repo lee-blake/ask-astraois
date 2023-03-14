@@ -66,7 +66,8 @@ public class AddCommand implements Callable<Integer> {
                 ListFileMaintainer.defaultOriginalPath,
                 ListFileMaintainer.defaultBackupPath
         );
-        // We initialize an empty list so that we can still create the file with a single entry if it doesn't exist
+        // We initialize an empty list so that if the file is missing we can still have a list to add to and save to
+        // create the previously non-existent file.
         ObjectList objectList = new ObjectList();
         try {
             objectList = maintainer.loadObjectListFromFile();
