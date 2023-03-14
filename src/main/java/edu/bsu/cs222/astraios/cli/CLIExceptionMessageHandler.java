@@ -144,5 +144,4 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
                                 .errorText(message)
                 );
     }
-
 }

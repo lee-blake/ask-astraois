@@ -15,12 +15,10 @@ public class CLIHalfCircleDegreeCoordinateTypeConverter implements ITypeConverte
 
     @Override
     public HalfCircleDegreeCoordinate convert(String value) throws TypeConversionException {
-
         DegreeCoordinateTypeConverter converter;
         try {
             String standardizedValue = value.replace("*","\u00b0");
             converter = new DegreeCoordinateTypeConverter(standardizedValue);
-
         }
         catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
             throw new TypeConversionException(

@@ -46,7 +46,7 @@ public class ViewCommand implements Callable<Integer> {
     private void printObjects(ObjectList objectList, String[] namesToPrint) throws NoSuchEntryException {
         ObjectList.ObjectListCLIFormatter formatter = objectList.new ObjectListCLIFormatter();
         String toPrint;
-        if (objectList.equals(new ObjectList())){
+        if (objectList.equals(new ObjectList())) {
             toPrint = "The journal currently contains no entries. Please use the 'add' subcommand "
                     + "to add objects to the journal.";
         }
