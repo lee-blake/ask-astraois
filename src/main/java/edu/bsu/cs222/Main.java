@@ -5,7 +5,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Command(
-        name = "ask-astraeus",
+        name = "ask-astraios",
         description = "Maintain a journal of astronomical objects to view via its subcommands.",
         subcommands = {
                 AddCommand.class,

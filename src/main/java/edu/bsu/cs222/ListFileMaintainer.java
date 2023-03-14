@@ -5,8 +5,8 @@ import java.nio.file.*;
 
 public class ListFileMaintainer {
 
-    public static Path defaultOriginalPath = Paths.get("data/AstraeusJournal.csv");
-    public static Path defaultBackupPath = Paths.get("data/AstraeusJournal.csv.backup");
+    public static Path defaultOriginalPath = Paths.get("data/AstraiosJournal.csv");
+    public static Path defaultBackupPath = Paths.get("data/AstraiosJournal.csv.backup");
     public static final Header[] canonicalHeaderOrder = new Header[]{
             Header.NAME,
             Header.RIGHT_ASCENSION,
