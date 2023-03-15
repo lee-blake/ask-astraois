@@ -58,13 +58,7 @@ public class HalfCircleDegreeCoordinate {
     }
 
 
-    // Suppressing warnings for the Unicode escaping of the degree character in this class because the fix -
-    // replacing the escape with the literal character - has caused unmappable character errors when running this
-    // project with default settings. As the inlining of the characters does not impede the functionality, only the
-    // readability, and as the context indicates it is the degree character, fixing this warning will be delayed
-    // until all team members can meet and confirm that the change does not cause errors on their
-    // respective systems.
-    @SuppressWarnings("UnnecessaryUnicodeEscape")
+
     public class HalfCircleDegreeCoordinateFormatter {
 
         private final long degrees;
@@ -78,12 +72,12 @@ public class HalfCircleDegreeCoordinate {
         }
 
         public String standardDegreeFormatSpaced() {
-            return String.format("%02d\u00b0 %02d' ",this.degrees,this.arcminutes)
+            return String.format("%02d° %02d' ",this.degrees,this.arcminutes)
                     +(new DecimalFormat("00.#########")).format(this.arcseconds) + "\"";
         }
 
         public String standardDegreeFormatNoSpacesOneDecimalPlace() {
-            return String.format("%02d\u00b0%02d'",this.degrees,this.arcminutes)
+            return String.format("%02d°%02d'",this.degrees,this.arcminutes)
                     +(new DecimalFormat("00.0")).format(this.arcseconds) + "\"";
         }
     }

@@ -9,12 +9,6 @@ import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.concurrent.Callable;
 
-// Suppressing warnings for the Unicode escaping of the degree character in this file because the fix - replacing
-// the escape with the literal character - has caused unmappable character errors when running this project
-// with default settings. As the inlining of the characters does not impede the functionality, only the readability,
-// and as the context indicates it is the degree character, fixing this warning will be delayed until all team members
-// can meet and confirm that the change does not cause errors on their respective systems.
-@SuppressWarnings("UnnecessaryUnicodeEscape")
 @Command(
         name = "add",
         description = "Adds an object to the object journal. The name, right ascension, and declination are required, "
@@ -53,7 +47,7 @@ public class AddCommand implements Callable<Integer> {
             required = true,
             description = """
                     The declination of the object to add. Accepted forms are:
-                    \tStandard degree form (45\u00b0 30' 26")
+                    \tStandard degree form (45° 30' 26")
                     \tAsterisk degree form (45* 30' 26")""",
             converter = CLIHalfCircleDegreeCoordinateTypeConverter.class
     )

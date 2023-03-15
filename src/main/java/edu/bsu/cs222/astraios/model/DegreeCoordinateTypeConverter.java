@@ -16,16 +16,9 @@ public class DegreeCoordinateTypeConverter {
         return stringToStrip.replace(" ","");
     }
 
-    // Suppressing warnings for the Unicode escaping of the degree character in this file because the fix -
-    // replacing the escape with the literal character - has caused unmappable character errors when running this
-    // project with default settings. As the inlining of the characters does not impede the functionality, only the
-    // readability, and as the context indicates it is the degree character, fixing this warning will be delayed
-    // until all team members can meet and confirm that the change does not cause errors on their
-    // respective systems.
-    @SuppressWarnings("UnnecessaryUnicodeEscape")
     private void parseStandardFormat(String stringToConvert) {
-        String degreesToken = stringToConvert.split("\u00b0")[0];
-        String arcminutesToken = stringToConvert.split("\u00b0")[1]
+        String degreesToken = stringToConvert.split("°")[0];
+        String arcminutesToken = stringToConvert.split("°")[1]
                 .split("'")[0];
         String arcsecondsToken = stringToConvert.split("'")[1]
                 .replace("\"","");
