@@ -14,9 +14,6 @@ import java.util.concurrent.Callable;
 )
 public class RemoveCommand implements Callable<Integer> {
 
-    // Suppressing this since we do need a variable to trigger this help message annotation
-    // but don't need to check it in the logic.
-    @SuppressWarnings("unused")
     @Option(
             names = {"-h","--help"},
             usageHelp = true,

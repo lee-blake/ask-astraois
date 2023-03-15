@@ -17,11 +17,6 @@ import picocli.CommandLine.Option;
 )
 public class Main {
 
-    // Suppressing this because it is necessary to correctly enable help for PicoCLI. We need this help menu to
-    // robustly maintain a list of subcommands, and therefore --help must be used for the main command. However,
-    // the variable must necessarily remain unused because there is no logic in the main class (which is the
-    // canonical way to require a subcommand with PicoCLI). Therefore, there is no other way around this warning.
-    @SuppressWarnings("unused")
     @Option(
             names = {"-h","--help"},
             usageHelp = true,
