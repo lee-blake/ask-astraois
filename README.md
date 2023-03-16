@@ -30,7 +30,6 @@ As part of this project, some warnings have been suppressed globally:
 - responsible for injecting them at runtime:
   - `@picocli.CommandLine.Parameters`
   - `@picocli.CommandLine.Option`
-  - 
 ### Troubleshooting
 #### Unicode
 If the program builds or runs with warnings or errors about character mappings, or if the degree character does not
