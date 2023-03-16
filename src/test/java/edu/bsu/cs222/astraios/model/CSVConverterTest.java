@@ -5,35 +5,35 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectLists.buildM13M31ObjectList;
+import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectJournals.buildM13M31ObjectJournal;
 
 public class CSVConverterTest {
 
     @Test
-    public void testConvertObjectListToCSVEmptyListCanonicalOrder() throws IOException {
+    public void testConvertObjectJournalToCSVEmptyJournalCanonicalOrder() throws IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList emptyList = new ObjectList();
+        ObjectJournal emptyJournal = new ObjectJournal();
         Header[] canonicalHeadersNoCompletion = new Header[]{
                 Header.NAME,
                 Header.RIGHT_ASCENSION,
                 Header.DECLINATION
         };
-        String outputCSVString = converter.convertObjectListToCSV(emptyList,canonicalHeadersNoCompletion);
+        String outputCSVString = converter.convertObjectJournalToCSV(emptyJournal,canonicalHeadersNoCompletion);
         String expectedString = "Name,Right Ascension,Declination\r\n";
         Assertions.assertEquals(expectedString,outputCSVString);
     }
 
     @Test
-    public void testConvertObjectListToCSVTwoElementListRADecOnlyCanonicalOrder() throws IOException {
+    public void testConvertObjectJournalToCSVTwoElementJournalRADecOnlyCanonicalOrder() throws IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementList = buildM13M31ObjectList();
+        ObjectJournal twoElementJournal = buildM13M31ObjectJournal();
         Header[] canonicalHeadersNoCompletion = new Header[]{
                 Header.NAME,
                 Header.RIGHT_ASCENSION,
                 Header.DECLINATION
         };
-        String outputCSVString = converter.convertObjectListToCSV(
-                twoElementList,
+        String outputCSVString = converter.convertObjectJournalToCSV(
+                twoElementJournal,
                 canonicalHeadersNoCompletion
         );
         // The abundance of double quotes is a feature of CSV. Pairs of double quotes ("") in CSV translate to a single
@@ -47,16 +47,16 @@ public class CSVConverterTest {
     }
 
     @Test
-    public void testConvertObjectListToCSVTwoElementListRADecOnlyReordered() throws IOException {
+    public void testConvertObjectJournalToCSVTwoElementJournalRADecOnlyReordered() throws IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementList = buildM13M31ObjectList();
+        ObjectJournal twoElementJournal = buildM13M31ObjectJournal();
         Header[] reorderedHeadersNoCompletion = new Header[]{
                 Header.NAME,
                 Header.DECLINATION,
                 Header.RIGHT_ASCENSION
         };
-        String outputCSVString = converter.convertObjectListToCSV(
-                twoElementList,
+        String outputCSVString = converter.convertObjectJournalToCSV(
+                twoElementJournal,
                 reorderedHeadersNoCompletion
         );
         // The abundance of double quotes is a feature of CSV. Pairs of double quotes ("") in CSV translate to a single
@@ -70,16 +70,16 @@ public class CSVConverterTest {
     }
 
     @Test
-    public void testConvertObjectListToCSVTwoElementListRADecCompletionCanonicalOrder() throws IOException {
+    public void testConvertObjectJournalToCSVTwoElementJournalRADecCompletionCanonicalOrder() throws IOException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementList = buildM13M31ObjectList();
+        ObjectJournal twoElementJournal = buildM13M31ObjectJournal();
         Header[] canonicalHeaders = new Header[]{
                 Header.NAME,
                 Header.RIGHT_ASCENSION,
                 Header.DECLINATION,
                 Header.COMPLETION_DATE
         };
-        String outputCSVString = converter.convertObjectListToCSV(twoElementList,canonicalHeaders);
+        String outputCSVString = converter.convertObjectJournalToCSV(twoElementJournal,canonicalHeaders);
         String expectedString = """
                 Name,Right Ascension,Declination,Completion Date\r
                 M13,16h 41m 41.24s,"+36° 27' 35.5""\",\r
@@ -91,26 +91,26 @@ public class CSVConverterTest {
 
 
     @Test
-    public void testBuildObjectListFromCSVEmptyList()
+    public void testBuildObjectJournalFromCSVEmptyJournal()
             throws InvalidJournalFileContentsException, CouldNotParseJournalFileException {
         CSVConverter converter = new CSVConverter();
-        ObjectList emptyList = new ObjectList();
+        ObjectJournal emptyJournal = new ObjectJournal();
         String csvString = "Name,Right Ascension,Declination,Completion Date\r";
-        ObjectList convertedList = converter.buildObjectListFromCSV(csvString);
-        Assertions.assertEquals(emptyList,convertedList);
+        ObjectJournal convertedJournal = converter.buildObjectJournalFromCSV(csvString);
+        Assertions.assertEquals(emptyJournal,convertedJournal);
     }
 
     @Test
-    public void testBuildObjectListFromCSVTwoElementList()
+    public void testBuildObjectJournalFromCSVTwoElementJournal()
             throws InvalidJournalFileContentsException, CouldNotParseJournalFileException {
         CSVConverter converter = new CSVConverter();
-        ObjectList twoElementList = buildM13M31ObjectList();
+        ObjectJournal twoElementJournal = buildM13M31ObjectJournal();
         String csvString = """
                 Name,Right Ascension,Declination,Completion Date\r
                 M13,16h 41m 41.24s,"+36° 27' 35.5""\",\r
                 M31,00h 42m 44.3s,"+41° 16' 09""\",2023-01-01\r
                 """;
-        ObjectList convertedList = converter.buildObjectListFromCSV(csvString);
-        Assertions.assertEquals(twoElementList,convertedList);
+        ObjectJournal convertedJournal = converter.buildObjectJournalFromCSV(csvString);
+        Assertions.assertEquals(twoElementJournal,convertedJournal);
     }
 }

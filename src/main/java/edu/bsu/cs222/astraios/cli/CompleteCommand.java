@@ -38,14 +38,14 @@ public class CompleteCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
-            IOException {
-        ListFileMaintainer maintainer = new ListFileMaintainer(
-                ListFileMaintainer.defaultOriginalPath,
-                ListFileMaintainer.defaultBackupPath
+            IOException, NoSuchEntryException, EntryAlreadyCompleteException {
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                JournalFileMaintainer.defaultOriginalPath,
+                JournalFileMaintainer.defaultBackupPath
         );
-        ObjectList objectList = maintainer.loadObjectListFromFile();
-        objectList.markCompleteByName(name, dateOfCompletion);
-        maintainer.saveObjectListToFile(objectList);
+        ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
+        objectJournal.markCompleteByName(name, dateOfCompletion);
+        maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
     }
 }

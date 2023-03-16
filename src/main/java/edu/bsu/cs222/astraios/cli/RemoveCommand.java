@@ -29,13 +29,13 @@ public class RemoveCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
-        ListFileMaintainer maintainer = new ListFileMaintainer(
-                ListFileMaintainer.defaultOriginalPath,
-                ListFileMaintainer.defaultBackupPath
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                JournalFileMaintainer.defaultOriginalPath,
+                JournalFileMaintainer.defaultBackupPath
         );
-        ObjectList objectList = maintainer.loadObjectListFromFile();
-        objectList.removeEntryByName(name);
-        maintainer.saveObjectListToFile(objectList);
+        ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
+        objectJournal.removeEntryByName(name);
+        maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
     }
 }

@@ -52,19 +52,19 @@ public class AddCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
-        ListFileMaintainer maintainer = new ListFileMaintainer(
-                ListFileMaintainer.defaultOriginalPath,
-                ListFileMaintainer.defaultBackupPath
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                JournalFileMaintainer.defaultOriginalPath,
+                JournalFileMaintainer.defaultBackupPath
         );
-        // We initialize an empty list so that if the file is missing we can still have a list to add to and save to
-        // create the previously non-existent file.
-        ObjectList objectList = new ObjectList();
+        // We initialize an empty journal so that if the file is missing we can still have a journal to add to and save
+        // to create the previously non-existent file.
+        ObjectJournal objectJournal = new ObjectJournal();
         try {
-            objectList = maintainer.loadObjectListFromFile();
+            objectJournal = maintainer.loadObjectJournalFromFile();
         }
         catch (NoSuchFileException ignored) {}
-        objectList.addEntry(
-                new ObjectListEntry(
+        objectJournal.addEntry(
+                new ObjectJournalEntry(
                         new AstronomicalObject(
                                 this.name,
                                 new RightAscensionDeclinationCoordinates(
@@ -76,7 +76,7 @@ public class AddCommand implements Callable<Integer> {
                 )
         );
         try {
-            maintainer.saveObjectListToFile(objectList);
+            maintainer.saveObjectJournalToFile(objectJournal);
         }
         catch (NoSuchFileException saveException) {
             throw new NoSuchFileOnSaveException("Encountered a no such file exception on save!");
