@@ -63,6 +63,14 @@ public class ObjectListEntry {
         }
 
         public void printFormattedCSV(Header[] headers) throws IOException {
+            Map<Header,String> mainCSVValueMap = this.buildMainCSVValueMap();
+            for(Header header: headers) {
+                this.csvPrinter.print(mainCSVValueMap.get(header));
+            }
+            this.csvPrinter.println();
+        }
+
+        private Map<Header,String> buildMainCSVValueMap() {
             ObjectListEntry parent = ObjectListEntry.this;
             AstronomicalObject.AstronomicalObjectCSVFormatter objectFormatter
                     = parent.astronomicalObject.new AstronomicalObjectCSVFormatter();
@@ -71,10 +79,7 @@ public class ObjectListEntry {
                     = parent.completionStatus.new CompletionStatusCSVFormatter();
             Map<Header,String> completionCSVValueMap = completionFormatter.getCSVValueMap();
             mainCSVValueMap.putAll(completionCSVValueMap);
-            for(Header header: headers) {
-                this.csvPrinter.print(mainCSVValueMap.get(header));
-            }
-            this.csvPrinter.println();
+            return mainCSVValueMap;
         }
     }
 
@@ -83,14 +88,7 @@ public class ObjectListEntry {
     public class ObjectListEntryCLIFormatter {
 
         public String getCLIViewStringOfEntry() {
-            ObjectListEntry parent = ObjectListEntry.this;
-            AstronomicalObject.AstronomicalObjectCLIViewFormatter objectFormatter
-                    = parent.astronomicalObject.new AstronomicalObjectCLIViewFormatter();
-            Map<Header,String> mainCLIViewValueMap = objectFormatter.getCLIViewValueMap();
-            CompletionStatus.CompletionStatusCLIViewFormatter completionFormatter
-                    = parent.completionStatus.new CompletionStatusCLIViewFormatter();
-            Map<Header,String> completionCLIViewValueMap = completionFormatter.getCLIViewValueMap();
-            mainCLIViewValueMap.putAll(completionCLIViewValueMap);
+            Map<Header,String> mainCLIViewValueMap = this.buildMainCLIViewValueMap();
             String name = mainCLIViewValueMap.get(Header.NAME);
             String rightAscension = mainCLIViewValueMap.get(Header.RIGHT_ASCENSION);
             String declination = mainCLIViewValueMap.get(Header.DECLINATION);
@@ -101,6 +99,18 @@ public class ObjectListEntry {
                     declination,
                     completion
             );
+        }
+
+        private Map<Header,String> buildMainCLIViewValueMap() {
+            ObjectListEntry parent = ObjectListEntry.this;
+            AstronomicalObject.AstronomicalObjectCLIViewFormatter objectFormatter
+                    = parent.astronomicalObject.new AstronomicalObjectCLIViewFormatter();
+            Map<Header,String> mainCLIViewValueMap = objectFormatter.getCLIViewValueMap();
+            CompletionStatus.CompletionStatusCLIViewFormatter completionFormatter
+                    = parent.completionStatus.new CompletionStatusCLIViewFormatter();
+            Map<Header,String> completionCLIViewValueMap = completionFormatter.getCLIViewValueMap();
+            mainCLIViewValueMap.putAll(completionCLIViewValueMap);
+            return mainCLIViewValueMap;
         }
     }
 }

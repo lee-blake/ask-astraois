@@ -49,7 +49,7 @@ public class HourCoordinate {
             return this.units == other.units;
         }
             return false;
-        }
+    }
 
 
 
