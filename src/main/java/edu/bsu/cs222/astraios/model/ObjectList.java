@@ -11,6 +11,17 @@ public class ObjectList {
 
     private final HashMap<String, ObjectListEntry> nameToEntryMap = new HashMap<>();
 
+    public ObjectListEntry getEntryByName(String entryName) {
+        if(!nameToEntryMap.containsKey(entryName)) {
+            throw new NoSuchEntryException(
+                    "Cannot get entry because no entry has name '"
+                            + entryName
+                            + "'."
+            );
+        }
+        return nameToEntryMap.get(entryName);
+    }
+
     public void addEntry(ObjectListEntry entry) {
         String entryName = entry.getName();
         if(nameToEntryMap.containsKey(entryName)) {
@@ -23,22 +34,6 @@ public class ObjectList {
         nameToEntryMap.put(entryName,entry);
     }
 
-    public ObjectListEntry getEntryByName(String entryName) {
-        if(!nameToEntryMap.containsKey(entryName)) {
-            throw new NoSuchEntryException(
-                    "Cannot get entry because no entry has name '"
-                    + entryName
-                    + "'."
-            );
-        }
-        return nameToEntryMap.get(entryName);
-    }
-
-    public void removeEntry(ObjectListEntry entry) {
-        String entryName = entry.getName();
-        removeEntryByName(entryName);
-    }
-
     public void removeEntryByName(String entryName) {
         if(!nameToEntryMap.containsKey(entryName)) {
             throw new NoSuchEntryException(
@@ -48,6 +43,11 @@ public class ObjectList {
             );
         }
         nameToEntryMap.remove(entryName);
+    }
+
+    public void removeEntry(ObjectListEntry entry) {
+        String entryName = entry.getName();
+        removeEntryByName(entryName);
     }
 
     public void markCompleteByName(String name, LocalDate dateOfCompletion) {

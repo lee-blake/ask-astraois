@@ -22,17 +22,6 @@ public class ListFileMaintainer {
         this.backupFilePath = backupPath;
     }
 
-    public ObjectList loadObjectListFromFile()
-            throws CouldNotParseJournalFileException, IOException, InvalidJournalFileContentsException {
-        String fileCSV = this.readFileToString();
-        CSVConverter converter = new CSVConverter();
-        return converter.buildObjectListFromCSV(fileCSV);
-    }
-
-    private String readFileToString() throws IOException {
-        return Files.readString(this.originalFilePath);
-    }
-
     public void saveObjectListToFile(ObjectList listToSave) throws IOException {
         CSVConverter converter = new CSVConverter();
         String fileContents = converter.convertObjectListToCSV(listToSave,canonicalHeaderOrder);
@@ -52,5 +41,16 @@ public class ListFileMaintainer {
 
     private void writeStringToFile(String fileContents) throws IOException {
         Files.writeString(this.originalFilePath, fileContents,StandardOpenOption.CREATE);
+    }
+
+    public ObjectList loadObjectListFromFile()
+            throws CouldNotParseJournalFileException, IOException, InvalidJournalFileContentsException {
+        String fileCSV = this.readFileToString();
+        CSVConverter converter = new CSVConverter();
+        return converter.buildObjectListFromCSV(fileCSV);
+    }
+
+    private String readFileToString() throws IOException {
+        return Files.readString(this.originalFilePath);
     }
 }

@@ -15,14 +15,6 @@ public class HourCoordinateTypeConverter {
         return stringToStrip.replace(" ","");
     }
 
-    public HourCoordinate convert() {
-        return new HourCoordinate(
-                this.hours,
-                this.minutes,
-                this.seconds
-        );
-    }
-
     private void parseStandardFormat(String stringToConvert) {
         String hoursToken = stringToConvert.split("h")[0];
         String minutesToken = stringToConvert.split("h")[1]
@@ -33,4 +25,13 @@ public class HourCoordinateTypeConverter {
         this.minutes = Integer.parseInt(minutesToken);
         this.seconds = Double.parseDouble(secondsToken);
     }
+
+    public HourCoordinate convert() {
+        return new HourCoordinate(
+                this.hours,
+                this.minutes,
+                this.seconds
+        );
+    }
+
 }
