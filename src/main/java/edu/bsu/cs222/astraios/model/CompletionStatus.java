@@ -57,7 +57,8 @@ public class CompletionStatus {
 
         public Map<Header, String> getCLIViewValueMap() {
             HashMap<Header, String> cliViewValueMap = new HashMap<>();
-            // No completion = don't print everything. This is the current display of the view command.
+            // No completion = don't print anything. This will cause less visual clutter than printing
+            // something incomplete.
             String completionDateString = "";
             if(CompletionStatus.this.complete) {
                 completionDateString = CompletionStatus.this.dateOfCompletion.toString();

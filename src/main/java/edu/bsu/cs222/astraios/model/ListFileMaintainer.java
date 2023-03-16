@@ -46,7 +46,7 @@ public class ListFileMaintainer {
         }
         catch(NoSuchFileException exception) {
             // Do nothing - if the original does not exist to begin with, we will be able to write safely and
-            // so the goal of this method has already been accomplished
+            // so the goal of this method has already been accomplished.
         }
     }
 

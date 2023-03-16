@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class HalfCircleDegreeCoordinate {
 
-    // Resolution goes down to 1/1000 of an arcsecond
-    // (two inches long/lat or 1/15 of a millisecond of Earth's rotation).
+    // Units are chosen so that resolution goes down to 1/1000 of an arcsecond.
+    // This is equivalent to two inches of longitude/latitude or 1/15 of a millisecond of Earth's rotation.
     // This should be adequate for this project.
     private static final long UNITS_PER_DEGREE = 60*60*1000;
     private static final long UNITS_PER_ARCMINUTE = 60*1000;
@@ -24,7 +24,7 @@ public class HalfCircleDegreeCoordinate {
                             + " and degrees in (-90,90) except for coordinates <90,0,0> and <-90,0,0>."
             );
         }
-        // The sign for the entire expression is given on degrees. To make sure arcminutes and arcseconds
+        // The sign for the entire expression is given on the degrees variable. To make sure arcminutes and arcseconds
         // also calculate in the same direction, we momentarily drop the sign on degrees while adding them all up.
         int sign = (degrees == 0) ? 1 : degrees / Math.abs(degrees);
         long unitUnsigned = sign*UNITS_PER_DEGREE*degrees

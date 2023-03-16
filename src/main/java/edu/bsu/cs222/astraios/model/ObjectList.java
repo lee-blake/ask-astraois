@@ -69,7 +69,8 @@ public class ObjectList {
             }
             for(String entryName : this.nameToEntryMap.keySet()) {
                 ObjectListEntry thisEntry = this.nameToEntryMap.get(entryName);
-                // No need to check if they key exists in the other's map - if not, we'll get null and return false
+                // There is no need to check if the key exists in the other's map. If it is not,
+                // we'll get null and return false.
                 ObjectListEntry otherEntry = other.nameToEntryMap.get(entryName);
                 if(!thisEntry.equals(otherEntry)) {
                     return false;

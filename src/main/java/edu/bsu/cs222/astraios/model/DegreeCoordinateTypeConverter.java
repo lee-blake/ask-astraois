@@ -8,7 +8,6 @@ public class DegreeCoordinateTypeConverter {
 
     public DegreeCoordinateTypeConverter(String stringToConvert) {
         String compactString = removeWhitespace(stringToConvert);
-        // Standard format: 41\00b0 54' 43"
         this.parseStandardFormat(compactString);
     }
 
@@ -17,6 +16,7 @@ public class DegreeCoordinateTypeConverter {
     }
 
     private void parseStandardFormat(String stringToConvert) {
+        // Standard format: 41° 54' 43"
         String degreesToken = stringToConvert.split("°")[0];
         String arcminutesToken = stringToConvert.split("°")[1]
                 .split("'")[0];
@@ -28,9 +28,6 @@ public class DegreeCoordinateTypeConverter {
     }
 
     public HalfCircleDegreeCoordinate convertHalfCircle() {
-        // This may seem dangerous since the values are not initialized, but any non-initialization results
-        // in a throw in the constructor, so we only get this far if everything is OK in terms of parsing.
-        // The values may not be valid, however.
         return new HalfCircleDegreeCoordinate(
                 this.degrees,
                 this.arcminutes,

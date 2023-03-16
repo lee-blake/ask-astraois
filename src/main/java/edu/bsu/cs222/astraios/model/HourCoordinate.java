@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class HourCoordinate {
 
-    // Resolution goes down to 1/15 of a millisecond
-    // This translates to 1/1000 of an arcminute in degrees.
+    // Units are chosen so that resolution goes down to 1/15 of a millisecond.
+    // This is equivalent to two inches of longitude/latitude.
     // This should be adequate for this project.
     private static final long MAX_UNITS = 24*60*60*15000;
     private static final long UNITS_PER_HOUR = 60*60*15000;
@@ -24,9 +24,9 @@ public class HourCoordinate {
                             + "were not valid hour coordinates! Minutes and seconds must be in [0,60)."
             );
         }
-        int sign = (hours == 0) ? 1 :hours / Math.abs(hours);
-        // The sign for the entire expression is given on hours. To make sure arcminutes and arcseconds
+        // The sign for the entire expression is given on the hours variable. To make sure minutes and seconds
         // also calculate in the same direction, we momentarily drop the sign on hours while adding them all up.
+        int sign = (hours == 0) ? 1 :hours / Math.abs(hours);
         // It's also easiest to add them before taking the modulus.
         long unitsNoModNoSign = sign*UNITS_PER_HOUR*hours
                 + UNITS_PER_MINUTE*minutes
