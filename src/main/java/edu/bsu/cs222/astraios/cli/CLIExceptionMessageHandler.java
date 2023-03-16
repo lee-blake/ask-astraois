@@ -13,7 +13,7 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
     private CommandLine commandLine;
 
     @Override
-    public int handleExecutionException(Exception ex, CommandLine commandLine, ParseResult parseResult) {
+    public int handleExecutionException(Exception ex, CommandLine commandLine, ParseResult parseResultUnused) {
         this.commandLine = commandLine;
 
         if(ex instanceof NoSuchFileOnSaveException) {

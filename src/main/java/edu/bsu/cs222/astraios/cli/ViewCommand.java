@@ -39,7 +39,7 @@ public class ViewCommand implements Callable<Integer> {
         return 0;
     }
 
-    private void printObjects(ObjectList objectList, String[] namesToPrint) throws NoSuchEntryException {
+    private void printObjects(ObjectList objectList, String[] namesToPrint) {
         ObjectList.ObjectListCLIFormatter formatter = objectList.new ObjectListCLIFormatter();
         String toPrint;
         if (objectList.equals(new ObjectList())) {

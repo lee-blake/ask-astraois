@@ -14,7 +14,7 @@ public class CLIHalfCircleDegreeCoordinateTypeConverter implements ITypeConverte
             String standardizedValue = value.replace("*","°");
             converter = new DegreeCoordinateTypeConverter(standardizedValue);
         }
-        catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+        catch (IllegalArgumentException | ArrayIndexOutOfBoundsException invalidFormException) {
             throw new TypeConversionException(
                     "Value '"
                             + value
@@ -27,7 +27,7 @@ public class CLIHalfCircleDegreeCoordinateTypeConverter implements ITypeConverte
         try {
             return converter.convertHalfCircle();
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException invalidValuesException) {
             throw new TypeConversionException(
                     "Value '"
                             + value

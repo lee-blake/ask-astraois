@@ -78,7 +78,7 @@ public class AddCommand implements Callable<Integer> {
         try {
             maintainer.saveObjectListToFile(objectList);
         }
-        catch (NoSuchFileException exception) {
+        catch (NoSuchFileException saveException) {
             throw new NoSuchFileOnSaveException("Encountered a no such file exception on save!");
         }
         return 0;

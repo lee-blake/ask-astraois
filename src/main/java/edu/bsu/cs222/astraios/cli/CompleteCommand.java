@@ -38,7 +38,7 @@ public class CompleteCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
-            IOException, NoSuchEntryException, EntryAlreadyCompleteException {
+            IOException {
         ListFileMaintainer maintainer = new ListFileMaintainer(
                 ListFileMaintainer.defaultOriginalPath,
                 ListFileMaintainer.defaultBackupPath
