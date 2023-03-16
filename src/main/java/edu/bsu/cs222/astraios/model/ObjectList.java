@@ -11,7 +11,7 @@ public class ObjectList {
 
     private final HashMap<String, ObjectListEntry> nameToEntryMap = new HashMap<>();
 
-    public void addEntry(ObjectListEntry entry) throws EntryAlreadyExistsException {
+    public void addEntry(ObjectListEntry entry) {
         String entryName = entry.getName();
         if(nameToEntryMap.containsKey(entryName)) {
             throw new EntryAlreadyExistsException(
@@ -23,7 +23,7 @@ public class ObjectList {
         nameToEntryMap.put(entryName,entry);
     }
 
-    public ObjectListEntry getEntryByName(String entryName) throws NoSuchEntryException {
+    public ObjectListEntry getEntryByName(String entryName) {
         if(!nameToEntryMap.containsKey(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot get entry because no entry has name '"
@@ -34,12 +34,12 @@ public class ObjectList {
         return nameToEntryMap.get(entryName);
     }
 
-    public void removeEntry(ObjectListEntry entry) throws NoSuchEntryException {
+    public void removeEntry(ObjectListEntry entry) {
         String entryName = entry.getName();
         removeEntryByName(entryName);
     }
 
-    public void removeEntryByName(String entryName) throws NoSuchEntryException {
+    public void removeEntryByName(String entryName) {
         if(!nameToEntryMap.containsKey(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot remove entry because no entry has name '"
@@ -50,13 +50,12 @@ public class ObjectList {
         nameToEntryMap.remove(entryName);
     }
 
-    public void markCompleteByName(String name, LocalDate dateOfCompletion)
-            throws NoSuchEntryException, EntryAlreadyCompleteException {
+    public void markCompleteByName(String name, LocalDate dateOfCompletion) {
         ObjectListEntry entry = this.getEntryByName(name);
         entry.markComplete(dateOfCompletion);
     }
 
-    public void markIncompleteByName(String name) throws NoSuchEntryException, EntryAlreadyIncompleteException {
+    public void markIncompleteByName(String name) {
         ObjectListEntry entry = this.getEntryByName(name);
         entry.markIncomplete();
     }
@@ -107,13 +106,13 @@ public class ObjectList {
 
     public class ObjectListCLIFormatter {
 
-        public String getCLIViewString() throws NoSuchEntryException {
+        public String getCLIViewString() {
             String[] sortedNames = ObjectList.this.nameToEntryMap.keySet().toArray(new String[0]);
             Arrays.sort(sortedNames);
             return this.getCLIViewString(sortedNames);
         }
 
-        public String getCLIViewString(String[] namesOfEntriesToView) throws NoSuchEntryException {
+        public String getCLIViewString(String[] namesOfEntriesToView) {
             ObjectList parent = ObjectList.this;
             StringBuilder viewStringBuilder = new StringBuilder();
             viewStringBuilder.append(this.buildCLIViewHeaders());

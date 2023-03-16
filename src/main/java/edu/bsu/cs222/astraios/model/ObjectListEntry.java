@@ -29,14 +29,14 @@ public class ObjectListEntry {
         return this.astronomicalObject;
     }
 
-    public void markComplete(LocalDate dateOfCompletion) throws EntryAlreadyCompleteException {
+    public void markComplete(LocalDate dateOfCompletion) {
         if(this.completionStatus.isComplete()) {
             throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
         }
         this.completionStatus = new CompletionStatus(dateOfCompletion);
     }
 
-    public void markIncomplete() throws EntryAlreadyIncompleteException {
+    public void markIncomplete() {
         if(!this.completionStatus.isComplete()) {
             throw new EntryAlreadyIncompleteException("Cannot mark an entry incomplete if it is already incomplete!");
         }
