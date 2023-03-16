@@ -6,17 +6,17 @@ import java.util.Map;
 public class AstronomicalObject {
 
     private final String name;
-    private final RightAscensionDeclinationCoordinates raDecCoords;
+    private final RightAscensionDeclinationCoordinates celestialCoordinates;
 
-    public AstronomicalObject(String name, RightAscensionDeclinationCoordinates raDecCoords) {
+    public AstronomicalObject(String name, RightAscensionDeclinationCoordinates celestialCoordinates) {
         this.name = name;
-        this.raDecCoords = raDecCoords;
+        this.celestialCoordinates = celestialCoordinates;
     }
 
     @Override
     public boolean equals(Object o) {
         if(o instanceof AstronomicalObject other) {
-            return this.name.equals(other.name) && this.raDecCoords.equals(other.raDecCoords);
+            return this.name.equals(other.name) && this.celestialCoordinates.equals(other.celestialCoordinates);
         }
         return false;
     }
@@ -33,10 +33,10 @@ public class AstronomicalObject {
             AstronomicalObject parent = AstronomicalObject.this;
             Map<Header, String> objectCSVValueMap = new HashMap<>();
             objectCSVValueMap.put(Header.NAME,parent.name);
-            RightAscensionDeclinationCoordinates.RightAscensionDeclinationCoordinatesCSVFormatter raDecFormatter
-                    = parent.raDecCoords.new RightAscensionDeclinationCoordinatesCSVFormatter();
-            Map<Header, String> raDecCoordsCSVValueMap = raDecFormatter.getCSVValueMap();
-            objectCSVValueMap.putAll(raDecCoordsCSVValueMap);
+            RightAscensionDeclinationCoordinates.RightAscensionDeclinationCoordinatesCSVFormatter coordinatesFormatter
+                    = parent.celestialCoordinates.new RightAscensionDeclinationCoordinatesCSVFormatter();
+            Map<Header, String> coordinatesCSVValueMap = coordinatesFormatter.getCSVValueMap();
+            objectCSVValueMap.putAll(coordinatesCSVValueMap);
             return objectCSVValueMap;
         }
     }
@@ -47,10 +47,11 @@ public class AstronomicalObject {
             AstronomicalObject parent = AstronomicalObject.this;
             Map<Header, String> objectCLIViewValueMap = new HashMap<>();
             objectCLIViewValueMap.put(Header.NAME,parent.name);
-            RightAscensionDeclinationCoordinates.RightAscensionDeclinationCoordinatesCLIViewFormatter raDecFormatter
-                    = parent.raDecCoords.new RightAscensionDeclinationCoordinatesCLIViewFormatter();
-            Map<Header, String> raDecCoordsCSVValueMap = raDecFormatter.getCLIViewValueMap();
-            objectCLIViewValueMap.putAll(raDecCoordsCSVValueMap);
+            RightAscensionDeclinationCoordinates
+                    .RightAscensionDeclinationCoordinatesCLIViewFormatter coordinatesFormatter
+                    = parent.celestialCoordinates.new RightAscensionDeclinationCoordinatesCLIViewFormatter();
+            Map<Header, String> coordinatesCLIViewValueMap = coordinatesFormatter.getCLIViewValueMap();
+            objectCLIViewValueMap.putAll(coordinatesCLIViewValueMap);
             return objectCLIViewValueMap;
         }
     }

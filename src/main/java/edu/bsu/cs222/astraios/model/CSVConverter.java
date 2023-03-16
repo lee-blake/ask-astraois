@@ -71,13 +71,13 @@ public class CSVConverter {
         String name = record.get(Header.NAME.toString());
         String rightAscension = record.get(Header.RIGHT_ASCENSION.toString());
         String declination = record.get(Header.DECLINATION.toString());
-        RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationTypeConverter(
+        RightAscensionDeclinationCoordinates coordinates = new RightAscensionDeclinationTypeConverter(
                 rightAscension,
                 declination
         ).convert();
         return new AstronomicalObject(
                 name,
-                raDec
+                coordinates
         );
     }
 
