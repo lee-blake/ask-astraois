@@ -5,7 +5,7 @@ and can be read by other programs; however, editing with other programs is not r
 many common CSV-editing programs do not use the same formatting as our backend.
 
 ## Authors
-Nick Hively <nrhively@bsu.edu>  
+Nick Hively <nrhively@bsu.edu>  h
 Justyn Fox <jjfox@bsu.edu>  
 Lee Blake
 
