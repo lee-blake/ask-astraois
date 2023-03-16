@@ -30,19 +30,19 @@ public class ViewCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
-        ListFileMaintainer maintainer = new ListFileMaintainer(
-                ListFileMaintainer.defaultOriginalPath,
-                ListFileMaintainer.defaultBackupPath
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                JournalFileMaintainer.defaultOriginalPath,
+                JournalFileMaintainer.defaultBackupPath
         );
-        ObjectList objectList = maintainer.loadObjectListFromFile();
-        this.printObjects(objectList,names);
+        ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
+        this.printObjects(objectJournal,names);
         return 0;
     }
 
-    private void printObjects(ObjectList objectList, String[] namesToPrint) throws NoSuchEntryException {
-        ObjectList.ObjectListCLIFormatter formatter = objectList.new ObjectListCLIFormatter();
+    private void printObjects(ObjectJournal objectJournal, String[] namesToPrint) throws NoSuchEntryException {
+        ObjectJournal.ObjectJournalCLIFormatter formatter = objectJournal.new ObjectJournalCLIFormatter();
         String toPrint;
-        if (objectList.equals(new ObjectList())) {
+        if (objectJournal.equals(new ObjectJournal())) {
             toPrint = "The journal currently contains no entries. Please use the 'add' subcommand "
                     + "to add objects to the journal.";
         }

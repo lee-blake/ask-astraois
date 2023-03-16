@@ -11,14 +11,14 @@ import java.io.UncheckedIOException;
 
 public class CSVConverter {
 
-    public String convertObjectListToCSV(ObjectList listToConvert, Header[] headers) throws IOException {
+    public String convertObjectJournalToCSV(ObjectJournal journalToConvert, Header[] headers) throws IOException {
         StringBuilder csvStringBuilder = new StringBuilder();
         String[] headerNames = this.getHeaderNames(headers);
         CSVPrinter printer = CSVFormat.Builder.create(CSVFormat.DEFAULT)
                 .setHeader(headerNames)
                 .build()
                 .print(csvStringBuilder);
-        ObjectList.ObjectListCSVFormatter formatter = listToConvert.new ObjectListCSVFormatter(printer);
+        ObjectJournal.ObjectJournalCSVFormatter formatter = journalToConvert.new ObjectJournalCSVFormatter(printer);
         formatter.printFormattedCSV(headers);
         printer.close();
         return csvStringBuilder.toString();
@@ -32,9 +32,9 @@ public class CSVConverter {
         return headerNames;
     }
 
-    public ObjectList buildObjectListFromCSV(String csvString)
+    public ObjectJournal buildObjectJournalFromCSV(String csvString)
             throws CouldNotParseJournalFileException, InvalidJournalFileContentsException {
-        ObjectList parsedList = new ObjectList();
+        ObjectJournal parsedJournal = new ObjectJournal();
         StringReader reader = new StringReader(csvString);
         try {
             CSVParser parser = CSVFormat.Builder.create(CSVFormat.DEFAULT)
@@ -43,10 +43,10 @@ public class CSVConverter {
                     .build()
                     .parse(reader);
             for (CSVRecord record : parser) {
-                ObjectListEntry entryFromRecord = this.getEntryFromCSVRecord(record);
-                parsedList.addEntry(entryFromRecord);
+                ObjectJournalEntry entryFromRecord = this.getEntryFromCSVRecord(record);
+                parsedJournal.addEntry(entryFromRecord);
             }
-            return parsedList;
+            return parsedJournal;
         }
         catch(UncheckedIOException | IOException csvParsingException) {
             throw new CouldNotParseJournalFileException("Could not parse the journal file - the CSV was not valid!");
@@ -58,10 +58,10 @@ public class CSVConverter {
         }
     }
 
-    private ObjectListEntry getEntryFromCSVRecord(CSVRecord record) {
+    private ObjectJournalEntry getEntryFromCSVRecord(CSVRecord record) {
         AstronomicalObject objectFromRecord = this.getAstronomicalObjectFromCSVRecord(record);
         CompletionStatus completionStatus = this.getCompletionStatusFromCSVRecord(record);
-        return new ObjectListEntry(
+        return new ObjectJournalEntry(
                 objectFromRecord,
                 completionStatus
         );

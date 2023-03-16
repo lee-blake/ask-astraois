@@ -3,7 +3,7 @@ package edu.bsu.cs222.astraios.model;
 import java.io.IOException;
 import java.nio.file.*;
 
-public class ListFileMaintainer {
+public class JournalFileMaintainer {
 
     public static Path defaultOriginalPath = Paths.get("data/AstraiosJournal.csv");
     public static Path defaultBackupPath = Paths.get("data/AstraiosJournal.csv.backup");
@@ -17,14 +17,14 @@ public class ListFileMaintainer {
     private final Path originalFilePath;
     private final Path backupFilePath;
 
-    public ListFileMaintainer(Path originalPath, Path backupPath) {
+    public JournalFileMaintainer(Path originalPath, Path backupPath) {
         this.originalFilePath = originalPath;
         this.backupFilePath = backupPath;
     }
 
-    public void saveObjectListToFile(ObjectList listToSave) throws IOException {
+    public void saveObjectJournalToFile(ObjectJournal journalToSave) throws IOException {
         CSVConverter converter = new CSVConverter();
-        String fileContents = converter.convertObjectListToCSV(listToSave,canonicalHeaderOrder);
+        String fileContents = converter.convertObjectJournalToCSV(journalToSave,canonicalHeaderOrder);
         this.keepBackupCopy();
         this.writeStringToFile(fileContents);
     }
@@ -43,11 +43,11 @@ public class ListFileMaintainer {
         Files.writeString(this.originalFilePath, fileContents,StandardOpenOption.CREATE);
     }
 
-    public ObjectList loadObjectListFromFile()
+    public ObjectJournal loadObjectJournalFromFile()
             throws CouldNotParseJournalFileException, IOException, InvalidJournalFileContentsException {
         String fileCSV = this.readFileToString();
         CSVConverter converter = new CSVConverter();
-        return converter.buildObjectListFromCSV(fileCSV);
+        return converter.buildObjectJournalFromCSV(fileCSV);
     }
 
     private String readFileToString() throws IOException {

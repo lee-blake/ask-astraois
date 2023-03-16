@@ -7,11 +7,11 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class ObjectList {
+public class ObjectJournal {
 
-    private final HashMap<String, ObjectListEntry> nameToEntryMap = new HashMap<>();
+    private final HashMap<String, ObjectJournalEntry> nameToEntryMap = new HashMap<>();
 
-    public ObjectListEntry getEntryByName(String entryName) {
+    public ObjectJournalEntry getEntryByName(String entryName) {
         if(!nameToEntryMap.containsKey(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot get entry because no entry has name '"
@@ -22,7 +22,7 @@ public class ObjectList {
         return nameToEntryMap.get(entryName);
     }
 
-    public void addEntry(ObjectListEntry entry) {
+    public void addEntry(ObjectJournalEntry entry) {
         String entryName = entry.getName();
         if(nameToEntryMap.containsKey(entryName)) {
             throw new EntryAlreadyExistsException(
@@ -45,32 +45,32 @@ public class ObjectList {
         nameToEntryMap.remove(entryName);
     }
 
-    public void removeEntry(ObjectListEntry entry) {
+    public void removeEntry(ObjectJournalEntry entry) {
         String entryName = entry.getName();
         removeEntryByName(entryName);
     }
 
     public void markCompleteByName(String name, LocalDate dateOfCompletion) {
-        ObjectListEntry entry = this.getEntryByName(name);
+        ObjectJournalEntry entry = this.getEntryByName(name);
         entry.markComplete(dateOfCompletion);
     }
 
     public void markIncompleteByName(String name) {
-        ObjectListEntry entry = this.getEntryByName(name);
+        ObjectJournalEntry entry = this.getEntryByName(name);
         entry.markIncomplete();
     }
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof ObjectList other) {
+        if(o instanceof ObjectJournal other) {
             if(this.nameToEntryMap.size() != other.nameToEntryMap.size()) {
                 return false;
             }
             for(String entryName : this.nameToEntryMap.keySet()) {
-                ObjectListEntry thisEntry = this.nameToEntryMap.get(entryName);
+                ObjectJournalEntry thisEntry = this.nameToEntryMap.get(entryName);
                 // There is no need to check if the key exists in the other's map. If it is not,
                 // we'll get null and return false.
-                ObjectListEntry otherEntry = other.nameToEntryMap.get(entryName);
+                ObjectJournalEntry otherEntry = other.nameToEntryMap.get(entryName);
                 if(!thisEntry.equals(otherEntry)) {
                     return false;
                 }
@@ -82,21 +82,21 @@ public class ObjectList {
 
 
 
-    public class ObjectListCSVFormatter {
+    public class ObjectJournalCSVFormatter {
 
         private final CSVPrinter csvPrinter;
 
-        public ObjectListCSVFormatter(CSVPrinter printer) {
+        public ObjectJournalCSVFormatter(CSVPrinter printer) {
             this.csvPrinter = printer;
         }
 
         public void printFormattedCSV(Header[] headers) throws IOException {
-             String[] keyArray = ObjectList.this.nameToEntryMap.keySet().toArray(new String[0]);
+             String[] keyArray = ObjectJournal.this.nameToEntryMap.keySet().toArray(new String[0]);
              Arrays.sort(keyArray);
              for(String key : keyArray) {
-                 ObjectListEntry entry = ObjectList.this.nameToEntryMap.get(key);
-                 ObjectListEntry.ObjectListEntryCSVFormatter entryFormatter
-                         = entry.new ObjectListEntryCSVFormatter(this.csvPrinter);
+                 ObjectJournalEntry entry = ObjectJournal.this.nameToEntryMap.get(key);
+                 ObjectJournalEntry.ObjectJournalEntryCSVFormatter entryFormatter
+                         = entry.new ObjectJournalEntryCSVFormatter(this.csvPrinter);
                  entryFormatter.printFormattedCSV(headers);
              }
         }
@@ -104,21 +104,21 @@ public class ObjectList {
 
 
 
-    public class ObjectListCLIFormatter {
+    public class ObjectJournalCLIFormatter {
 
         public String getCLIViewString() {
-            String[] sortedNames = ObjectList.this.nameToEntryMap.keySet().toArray(new String[0]);
+            String[] sortedNames = ObjectJournal.this.nameToEntryMap.keySet().toArray(new String[0]);
             Arrays.sort(sortedNames);
             return this.getCLIViewString(sortedNames);
         }
 
         public String getCLIViewString(String[] namesOfEntriesToView) {
-            ObjectList parent = ObjectList.this;
+            ObjectJournal parent = ObjectJournal.this;
             StringBuilder viewStringBuilder = new StringBuilder();
             viewStringBuilder.append(this.buildCLIViewHeaders());
             for(String entryName : namesOfEntriesToView) {
-                ObjectListEntry entry = parent.getEntryByName(entryName);
-                ObjectListEntry.ObjectListEntryCLIFormatter viewFormatter = entry.new ObjectListEntryCLIFormatter();
+                ObjectJournalEntry entry = parent.getEntryByName(entryName);
+                ObjectJournalEntry.ObjectJournalEntryCLIFormatter viewFormatter = entry.new ObjectJournalEntryCLIFormatter();
                 viewStringBuilder.append(viewFormatter.getCLIViewStringOfEntry());
             }
             return viewStringBuilder.toString();

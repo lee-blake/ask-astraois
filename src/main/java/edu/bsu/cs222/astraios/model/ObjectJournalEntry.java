@@ -6,17 +6,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
-public class ObjectListEntry {
+public class ObjectJournalEntry {
 
     private final AstronomicalObject astronomicalObject;
     private CompletionStatus completionStatus;
 
-    public ObjectListEntry(AstronomicalObject astronomicalObject) {
+    public ObjectJournalEntry(AstronomicalObject astronomicalObject) {
         this.astronomicalObject = astronomicalObject;
         this.completionStatus = new CompletionStatus();
     }
 
-    public ObjectListEntry(AstronomicalObject astronomicalObject, CompletionStatus completionStatus) {
+    public ObjectJournalEntry(AstronomicalObject astronomicalObject, CompletionStatus completionStatus) {
         this.astronomicalObject = astronomicalObject;
         this.completionStatus = completionStatus;
     }
@@ -45,7 +45,7 @@ public class ObjectListEntry {
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof ObjectListEntry other) {
+        if(o instanceof ObjectJournalEntry other) {
             return this.astronomicalObject.equals(other.astronomicalObject)
                     && this.completionStatus.equals(other.completionStatus);
         }
@@ -54,11 +54,11 @@ public class ObjectListEntry {
 
 
 
-    public class ObjectListEntryCSVFormatter {
+    public class ObjectJournalEntryCSVFormatter {
 
         private final CSVPrinter csvPrinter;
 
-        public ObjectListEntryCSVFormatter(CSVPrinter printer) {
+        public ObjectJournalEntryCSVFormatter(CSVPrinter printer) {
             this.csvPrinter = printer;
         }
 
@@ -71,7 +71,7 @@ public class ObjectListEntry {
         }
 
         private Map<Header,String> buildMainCSVValueMap() {
-            ObjectListEntry parent = ObjectListEntry.this;
+            ObjectJournalEntry parent = ObjectJournalEntry.this;
             AstronomicalObject.AstronomicalObjectCSVFormatter objectFormatter
                     = parent.astronomicalObject.new AstronomicalObjectCSVFormatter();
             Map<Header,String> mainCSVValueMap = objectFormatter.getCSVValueMap();
@@ -85,7 +85,7 @@ public class ObjectListEntry {
 
 
 
-    public class ObjectListEntryCLIFormatter {
+    public class ObjectJournalEntryCLIFormatter {
 
         public String getCLIViewStringOfEntry() {
             Map<Header,String> mainCLIViewValueMap = this.buildMainCLIViewValueMap();
@@ -102,7 +102,7 @@ public class ObjectListEntry {
         }
 
         private Map<Header,String> buildMainCLIViewValueMap() {
-            ObjectListEntry parent = ObjectListEntry.this;
+            ObjectJournalEntry parent = ObjectJournalEntry.this;
             AstronomicalObject.AstronomicalObjectCLIViewFormatter objectFormatter
                     = parent.astronomicalObject.new AstronomicalObjectCLIViewFormatter();
             Map<Header,String> mainCLIViewValueMap = objectFormatter.getCLIViewValueMap();

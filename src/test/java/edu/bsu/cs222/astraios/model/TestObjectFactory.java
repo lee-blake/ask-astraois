@@ -27,18 +27,18 @@ public class TestObjectFactory {
         }
     }
 
-    public static class ObjectLists {
+    public static class ObjectJournals {
 
-        public static ObjectList buildM13M31ObjectList() {
-            ObjectList objectList = new ObjectList();
-            objectList.addEntry(new ObjectListEntry(
+        public static ObjectJournal buildM13M31ObjectJournal() {
+            ObjectJournal objectJournal = new ObjectJournal();
+            objectJournal.addEntry(new ObjectJournalEntry(
                     AstronomicalObjects.buildM13Object()
             ));
-            objectList.addEntry(new ObjectListEntry(
+            objectJournal.addEntry(new ObjectJournalEntry(
                     AstronomicalObjects.buildM31Object(),
                     new CompletionStatus(LocalDate.parse("2023-01-01"))
             ));
-            return objectList;
+            return objectJournal;
         }
     }
 }

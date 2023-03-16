@@ -29,13 +29,13 @@ public class UncompleteCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
-        ListFileMaintainer maintainer = new ListFileMaintainer(
-                ListFileMaintainer.defaultOriginalPath,
-                ListFileMaintainer.defaultBackupPath
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                JournalFileMaintainer.defaultOriginalPath,
+                JournalFileMaintainer.defaultBackupPath
         );
-        ObjectList objectList = maintainer.loadObjectListFromFile();
-        objectList.markIncompleteByName(name);
-        maintainer.saveObjectListToFile(objectList);
+        ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
+        objectJournal.markIncompleteByName(name);
+        maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
     }
 }

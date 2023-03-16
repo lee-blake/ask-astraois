@@ -7,48 +7,48 @@ import java.time.LocalDate;
 
 import static edu.bsu.cs222.astraios.model.TestObjectFactory.AstronomicalObjects.buildM13Object;
 import static edu.bsu.cs222.astraios.model.TestObjectFactory.AstronomicalObjects.buildM31Object;
-import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectLists.buildM13M31ObjectList;
+import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectJournals.buildM13M31ObjectJournal;
 
-public class ObjectListTest {
+public class ObjectJournalTest {
 
     @Test
     public void testAddEntry_GetObjectByName() {
-        // The list is the same as in TestObjectFactory but should NOT use that list construction
+        // The journal is the same as in TestObjectFactory but should NOT use that journal construction
         // because we need to test that addEntry works before using it in TestObjectFactory methods.
-        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
-        ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
-        ObjectList objectList = new ObjectList();
-        objectList.addEntry(m13Entry);
-        objectList.addEntry(m31Entry);
+        ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
+        ObjectJournalEntry m31Entry = new ObjectJournalEntry(buildM31Object());
+        ObjectJournal objectJournal = new ObjectJournal();
+        objectJournal.addEntry(m13Entry);
+        objectJournal.addEntry(m31Entry);
 
         AstronomicalObject freshM13Object = buildM13Object();
-        AstronomicalObject firstRetrieved = objectList.getEntryByName("M13").getAstronomicalObject();
+        AstronomicalObject firstRetrieved = objectJournal.getEntryByName("M13").getAstronomicalObject();
         Assertions.assertEquals(freshM13Object,firstRetrieved);
 
         AstronomicalObject freshM31Object = buildM31Object();
-        AstronomicalObject secondRetrieved = objectList.getEntryByName("M31").getAstronomicalObject();
+        AstronomicalObject secondRetrieved = objectJournal.getEntryByName("M31").getAstronomicalObject();
         Assertions.assertEquals(freshM31Object,secondRetrieved);
     }
 
     @Test
     public void testGetObjectByNameObjectThrowsExceptionWhenNameMissing() {
-        ObjectList objectList = buildM13M31ObjectList();
+        ObjectJournal objectJournal = buildM13M31ObjectJournal();
         Assertions.assertThrows(
                 NoSuchEntryException.class,
-                () -> objectList.getEntryByName("M14")
+                () -> objectJournal.getEntryByName("M14")
         );
     }
 
     @Test
     public void testAddEntryThrowsExceptionOnDuplicateKey() {
-        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
-        ObjectList objectList = new ObjectList();
-        objectList.addEntry(m13Entry);
+        ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
+        ObjectJournal objectJournal = new ObjectJournal();
+        objectJournal.addEntry(m13Entry);
 
-        ObjectListEntry duplicateEntry = new ObjectListEntry(buildM13Object());
+        ObjectJournalEntry duplicateEntry = new ObjectJournalEntry(buildM13Object());
         Assertions.assertThrows(
                 EntryAlreadyExistsException.class,
-                () -> objectList.addEntry(duplicateEntry)
+                () -> objectJournal.addEntry(duplicateEntry)
         );
     }
 
@@ -58,62 +58,62 @@ public class ObjectListTest {
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
     @Test
-    public void testEqualsNonObjectListNotEqual() {
-        ObjectList list = new ObjectList();
+    public void testEqualsNonObjectJournalNotEqual() {
+        ObjectJournal journal = new ObjectJournal();
         String otherObject = "";
-        boolean result = list.equals(otherObject);
+        boolean result = journal.equals(otherObject);
         Assertions.assertFalse(result);
     }
 
     @Test
     public void testEqualsBothEmptyIsEqual() {
-        ObjectList list1 = new ObjectList();
-        ObjectList list2 = new ObjectList();
-        boolean result = list1.equals(list2);
+        ObjectJournal journal1 = new ObjectJournal();
+        ObjectJournal journal2 = new ObjectJournal();
+        boolean result = journal1.equals(journal2);
         Assertions.assertTrue(result);
     }
 
     @Test
     public void testEqualsDifferentOneElementNotEqual() {
-        ObjectList list1 = new ObjectList();
-        list1.addEntry(new ObjectListEntry(buildM13Object()));
-        ObjectList list2 = new ObjectList();
-        list2.addEntry(new ObjectListEntry(buildM31Object()));
-        boolean result = list1.equals(list2);
+        ObjectJournal journal1 = new ObjectJournal();
+        journal1.addEntry(new ObjectJournalEntry(buildM13Object()));
+        ObjectJournal journal2 = new ObjectJournal();
+        journal2.addEntry(new ObjectJournalEntry(buildM31Object()));
+        boolean result = journal1.equals(journal2);
         Assertions.assertFalse(result);
     }
 
     @Test
     public void testEqualsIdenticalNonemptyIsEqual() {
-        ObjectList list1 = new ObjectList();
-        list1.addEntry(new ObjectListEntry(
+        ObjectJournal journal1 = new ObjectJournal();
+        journal1.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
-        list1.addEntry(new ObjectListEntry(buildM31Object()));
-        ObjectList list2 = new ObjectList();
-        list2.addEntry(new ObjectListEntry(
+        journal1.addEntry(new ObjectJournalEntry(buildM31Object()));
+        ObjectJournal journal2 = new ObjectJournal();
+        journal2.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
-        list2.addEntry(new ObjectListEntry(buildM31Object()));
-        boolean result = list1.equals(list2);
+        journal2.addEntry(new ObjectJournalEntry(buildM31Object()));
+        boolean result = journal1.equals(journal2);
         Assertions.assertTrue(result);
     }
 
     @Test
     public void testEqualsProperSubsetNotEqual() {
-        ObjectList subset = new ObjectList();
-        subset.addEntry(new ObjectListEntry(
+        ObjectJournal subset = new ObjectJournal();
+        subset.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
-        ObjectList superset = new ObjectList();
-        superset.addEntry(new ObjectListEntry(
+        ObjectJournal superset = new ObjectJournal();
+        superset.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
-        superset.addEntry(new ObjectListEntry(buildM31Object()));
+        superset.addEntry(new ObjectJournalEntry(buildM31Object()));
         boolean result = subset.equals(superset);
         Assertions.assertFalse(result);
     }
@@ -122,14 +122,14 @@ public class ObjectListTest {
 
     @Test
     public void testRemoveEntryActuallyRemoves() {
-        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
-        ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
-        ObjectList actual = new ObjectList();
+        ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
+        ObjectJournalEntry m31Entry = new ObjectJournalEntry(buildM31Object());
+        ObjectJournal actual = new ObjectJournal();
         actual.addEntry(m13Entry);
         actual.addEntry(m31Entry);
 
-        ObjectListEntry freshM13Entry = new ObjectListEntry(buildM13Object());
-        ObjectList expected = new ObjectList();
+        ObjectJournalEntry freshM13Entry = new ObjectJournalEntry(buildM13Object());
+        ObjectJournal expected = new ObjectJournal();
         expected.addEntry(freshM13Entry);
 
         actual.removeEntry(m31Entry);
@@ -138,14 +138,14 @@ public class ObjectListTest {
 
     @Test
     public void testRemoveEntryThrowsNoSuchEntryException() {
-        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
-        ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
-        ObjectList objectList = new ObjectList();
-        objectList.addEntry(m13Entry);
+        ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
+        ObjectJournalEntry m31Entry = new ObjectJournalEntry(buildM31Object());
+        ObjectJournal objectJournal = new ObjectJournal();
+        objectJournal.addEntry(m13Entry);
 
         Assertions.assertThrows(
                 NoSuchEntryException.class,
-                () -> objectList.removeEntry(m31Entry)
+                () -> objectJournal.removeEntry(m31Entry)
         );
     }
 
@@ -153,11 +153,11 @@ public class ObjectListTest {
 
     @Test
     public void testRemoveEntryByNameActuallyRemoves() {
-        ObjectListEntry freshM13Entry = new ObjectListEntry(buildM13Object());
-        ObjectList expected = new ObjectList();
+        ObjectJournalEntry freshM13Entry = new ObjectJournalEntry(buildM13Object());
+        ObjectJournal expected = new ObjectJournal();
         expected.addEntry(freshM13Entry);
 
-        ObjectList actual = buildM13M31ObjectList();
+        ObjectJournal actual = buildM13M31ObjectJournal();
         actual.removeEntryByName("M31");
 
         Assertions.assertEquals(expected,actual);
@@ -165,13 +165,13 @@ public class ObjectListTest {
 
     @Test
     public void testRemoveEntryByNameThrowsNoSuchEntryException() {
-        ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
-        ObjectList objectList = new ObjectList();
-        objectList.addEntry(m13Entry);
+        ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
+        ObjectJournal objectJournal = new ObjectJournal();
+        objectJournal.addEntry(m13Entry);
 
         Assertions.assertThrows(
                 NoSuchEntryException.class,
-                () -> objectList.removeEntryByName("M31")
+                () -> objectJournal.removeEntryByName("M31")
         );
     }
 
@@ -179,13 +179,13 @@ public class ObjectListTest {
 
     @Test
     public void testMarkCompleteByNameMarksCompleteM13() {
-        ObjectList expected = new ObjectList();
-        expected.addEntry(new ObjectListEntry(
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
-        ObjectList actual = new ObjectList();
-        actual.addEntry(new ObjectListEntry(
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus()
         ));
@@ -195,13 +195,13 @@ public class ObjectListTest {
 
     @Test
     public void testMarkCompleteByNameMarksCompleteM31() {
-        ObjectList expected = new ObjectList();
-        expected.addEntry(new ObjectListEntry(
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
                 buildM31Object(),
                 new CompletionStatus(LocalDate.parse("2022-12-31"))
         ));
-        ObjectList actual = new ObjectList();
-        actual.addEntry(new ObjectListEntry(
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
                 buildM31Object(),
                 new CompletionStatus()
         ));
@@ -211,10 +211,10 @@ public class ObjectListTest {
 
     @Test
     public void testMarkCompleteByNameThrowsIfMissing() {
-        ObjectList emptyList = new ObjectList();
+        ObjectJournal emptyJournal = new ObjectJournal();
         Assertions.assertThrows(
             NoSuchEntryException.class,
-                () -> emptyList.markCompleteByName("M13",LocalDate.parse("2023-01-01"))
+                () -> emptyJournal.markCompleteByName("M13",LocalDate.parse("2023-01-01"))
         );
     }
 
@@ -222,13 +222,13 @@ public class ObjectListTest {
 
     @Test
     public void testMarkIncompleteByNameMarksIncompleteM13() {
-        ObjectList expected = new ObjectList();
-        expected.addEntry(new ObjectListEntry(
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus()
         ));
-        ObjectList actual = new ObjectList();
-        actual.addEntry(new ObjectListEntry(
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         ));
@@ -238,13 +238,13 @@ public class ObjectListTest {
 
     @Test
     public void testMarkIncompleteByNameMarksIncompleteM31() {
-        ObjectList expected = new ObjectList();
-        expected.addEntry(new ObjectListEntry(
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
                 buildM31Object(),
                 new CompletionStatus()
         ));
-        ObjectList actual = new ObjectList();
-        actual.addEntry(new ObjectListEntry(
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
                 buildM31Object(),
                 new CompletionStatus(LocalDate.parse("2022-12-31"))
         ));
@@ -254,10 +254,10 @@ public class ObjectListTest {
 
     @Test
     public void testMarkIncompleteByNameThrowsIfMissing() {
-        ObjectList emptyList = new ObjectList();
+        ObjectJournal emptyJournal = new ObjectJournal();
         Assertions.assertThrows(
                 NoSuchEntryException.class,
-                () -> emptyList.markIncompleteByName("M13")
+                () -> emptyJournal.markIncompleteByName("M13")
         );
     }
 }
