@@ -92,7 +92,8 @@ public class ListFileMaintainerTest {
         maintainer.saveObjectListToFile(originalCopy);
         ObjectList freshCopy = buildM13M31ObjectList();
         ObjectList loadedFromFile = maintainer.loadObjectListFromFile();
-        // Cleanup before the assertion
+        // We need to clean up this test because this is where we don't make the file with to delete on exit flag.
+        // This must happen before assert because if assert is incorrect then nothing after will be executed.
         File original = new File(tempDir.resolve("original").toUri());
         File backup = new File(tempDir.resolve("backup").toUri());
         boolean deletesOk = original.delete() && backup.delete();

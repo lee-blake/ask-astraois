@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RightAscensionDeclinationCoordinatesTest {
+
     // This suppression is needed to verify this intended functionality where anything of another
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")

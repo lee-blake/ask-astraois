@@ -14,7 +14,7 @@ public class ObjectListTest {
     @Test
     public void testAddEntry_GetObjectByName() throws EntryAlreadyExistsException, NoSuchEntryException {
         // The list is the same as in TestObjectFactory but should NOT use that list construction
-        // because we need to test that AddEntry works before using it in TestObjectFactory methods
+        // because we need to test that addEntry works before using it in TestObjectFactory methods.
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList objectList = new ObjectList();
