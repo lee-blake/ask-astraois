@@ -12,7 +12,7 @@ import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectLists.buildM1
 public class ObjectListTest {
 
     @Test
-    public void testAddEntry_GetObjectByName() throws EntryAlreadyExistsException, NoSuchEntryException {
+    public void testAddEntry_GetObjectByName() {
         // The list is the same as in TestObjectFactory but should NOT use that list construction
         // because we need to test that addEntry works before using it in TestObjectFactory methods.
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
@@ -40,7 +40,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testAddEntryThrowsExceptionOnDuplicateKey() throws EntryAlreadyExistsException {
+    public void testAddEntryThrowsExceptionOnDuplicateKey() {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectList objectList = new ObjectList();
         objectList.addEntry(m13Entry);
@@ -74,7 +74,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testEqualsDifferentOneElementNotEqual() throws EntryAlreadyExistsException {
+    public void testEqualsDifferentOneElementNotEqual() {
         ObjectList list1 = new ObjectList();
         list1.addEntry(new ObjectListEntry(buildM13Object()));
         ObjectList list2 = new ObjectList();
@@ -84,7 +84,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testEqualsIdenticalNonemptyIsEqual() throws EntryAlreadyExistsException {
+    public void testEqualsIdenticalNonemptyIsEqual() {
         ObjectList list1 = new ObjectList();
         list1.addEntry(new ObjectListEntry(
                 buildM13Object(),
@@ -102,7 +102,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testEqualsProperSubsetNotEqual() throws EntryAlreadyExistsException {
+    public void testEqualsProperSubsetNotEqual() {
         ObjectList subset = new ObjectList();
         subset.addEntry(new ObjectListEntry(
                 buildM13Object(),
@@ -121,7 +121,7 @@ public class ObjectListTest {
 
 
     @Test
-    public void testRemoveEntryActuallyRemoves() throws EntryAlreadyExistsException, NoSuchEntryException {
+    public void testRemoveEntryActuallyRemoves() {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList actual = new ObjectList();
@@ -137,7 +137,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testRemoveEntryThrowsNoSuchEntryException() throws EntryAlreadyExistsException {
+    public void testRemoveEntryThrowsNoSuchEntryException() {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectListEntry m31Entry = new ObjectListEntry(buildM31Object());
         ObjectList objectList = new ObjectList();
@@ -152,8 +152,7 @@ public class ObjectListTest {
 
 
     @Test
-    public void testRemoveEntryByNameActuallyRemoves()
-            throws EntryAlreadyExistsException, NoSuchEntryException {
+    public void testRemoveEntryByNameActuallyRemoves() {
         ObjectListEntry freshM13Entry = new ObjectListEntry(buildM13Object());
         ObjectList expected = new ObjectList();
         expected.addEntry(freshM13Entry);
@@ -165,7 +164,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testRemoveEntryByNameThrowsNoSuchEntryException() throws EntryAlreadyExistsException {
+    public void testRemoveEntryByNameThrowsNoSuchEntryException() {
         ObjectListEntry m13Entry = new ObjectListEntry(buildM13Object());
         ObjectList objectList = new ObjectList();
         objectList.addEntry(m13Entry);
@@ -179,8 +178,7 @@ public class ObjectListTest {
 
 
     @Test
-    public void testMarkCompleteByNameMarksCompleteM13()
-            throws EntryAlreadyExistsException, NoSuchEntryException, EntryAlreadyCompleteException {
+    public void testMarkCompleteByNameMarksCompleteM13() {
         ObjectList expected = new ObjectList();
         expected.addEntry(new ObjectListEntry(
                 buildM13Object(),
@@ -196,8 +194,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testMarkCompleteByNameMarksCompleteM31()
-            throws EntryAlreadyExistsException, NoSuchEntryException, EntryAlreadyCompleteException {
+    public void testMarkCompleteByNameMarksCompleteM31() {
         ObjectList expected = new ObjectList();
         expected.addEntry(new ObjectListEntry(
                 buildM31Object(),
@@ -224,8 +221,7 @@ public class ObjectListTest {
 
 
     @Test
-    public void testMarkIncompleteByNameMarksIncompleteM13()
-            throws EntryAlreadyExistsException, EntryAlreadyIncompleteException, NoSuchEntryException {
+    public void testMarkIncompleteByNameMarksIncompleteM13() {
         ObjectList expected = new ObjectList();
         expected.addEntry(new ObjectListEntry(
                 buildM13Object(),
@@ -241,8 +237,7 @@ public class ObjectListTest {
     }
 
     @Test
-    public void testMarkIncompleteByNameMarksIncompleteM31()
-            throws EntryAlreadyExistsException, EntryAlreadyIncompleteException, NoSuchEntryException {
+    public void testMarkIncompleteByNameMarksIncompleteM31() {
         ObjectList expected = new ObjectList();
         expected.addEntry(new ObjectListEntry(
                 buildM31Object(),

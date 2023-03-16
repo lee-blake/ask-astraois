@@ -31,21 +31,14 @@ public class TestObjectFactory {
 
         public static ObjectList buildM13M31ObjectList() {
             ObjectList objectList = new ObjectList();
-            try {
-                objectList.addEntry(new ObjectListEntry(
-                        AstronomicalObjects.buildM13Object()
-                ));
-                objectList.addEntry(new ObjectListEntry(
-                        AstronomicalObjects.buildM31Object()
-                        , new CompletionStatus(LocalDate.parse("2023-01-01"))
-                ));
-                return objectList;
-            }
-            catch (EntryAlreadyExistsException e) {
-                // Should never happen in this method by construction, so we can throw a RuntimeException instead
-                throw new RuntimeException(e);
-            }
-
+            objectList.addEntry(new ObjectListEntry(
+                    AstronomicalObjects.buildM13Object()
+            ));
+            objectList.addEntry(new ObjectListEntry(
+                    AstronomicalObjects.buildM31Object(),
+                    new CompletionStatus(LocalDate.parse("2023-01-01"))
+            ));
+            return objectList;
         }
     }
 }

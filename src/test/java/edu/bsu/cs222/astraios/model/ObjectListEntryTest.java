@@ -88,7 +88,7 @@ public class ObjectListEntryTest {
 
 
     @Test
-    public void testMarkCompleteFirstOf2023() throws EntryAlreadyCompleteException {
+    public void testMarkCompleteFirstOf2023() {
         ObjectListEntry expected = new ObjectListEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
@@ -102,7 +102,7 @@ public class ObjectListEntryTest {
     }
 
     @Test
-    public void testMarkCompleteLastOf2022() throws EntryAlreadyCompleteException {
+    public void testMarkCompleteLastOf2022() {
         ObjectListEntry expected = new ObjectListEntry(
                 buildM31Object(),
                 new CompletionStatus(LocalDate.parse("2022-12-31"))
@@ -130,7 +130,7 @@ public class ObjectListEntryTest {
 
 
     @Test
-    public void testMarkIncompleteMarksIncomplete() throws EntryAlreadyIncompleteException {
+    public void testMarkIncompleteMarksIncomplete() {
         ObjectListEntry expected = new ObjectListEntry(
             buildM13Object(),
             new CompletionStatus()
