@@ -51,7 +51,7 @@ public class HalfCircleDegreeCoordinate {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof HalfCircleDegreeCoordinate other) {
+        if(o instanceof HalfCircleDegreeCoordinate other) {
             return this.units == other.units;
         }
         return false;

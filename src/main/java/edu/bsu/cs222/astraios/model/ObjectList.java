@@ -40,7 +40,7 @@ public class ObjectList {
     }
 
     public void removeEntryByName(String entryName) throws NoSuchEntryException {
-        if (!nameToEntryMap.containsKey(entryName)) {
+        if(!nameToEntryMap.containsKey(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot remove entry because no entry has name '"
                             + entryName
@@ -63,7 +63,7 @@ public class ObjectList {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof ObjectList other) {
+        if(o instanceof ObjectList other) {
             if(this.nameToEntryMap.size() != other.nameToEntryMap.size()) {
                 return false;
             }
@@ -71,7 +71,7 @@ public class ObjectList {
                 ObjectListEntry thisEntry = this.nameToEntryMap.get(entryName);
                 // No need to check if they key exists in the other's map - if not, we'll get null and return false
                 ObjectListEntry otherEntry = other.nameToEntryMap.get(entryName);
-                if(!thisEntry.equals(otherEntry)){
+                if(!thisEntry.equals(otherEntry)) {
                     return false;
                 }
             }

@@ -21,6 +21,8 @@ public class RightAscensionDeclinationCoordinates {
         return false;
     }
 
+
+
     public class RightAscensionDeclinationCoordinatesCSVFormatter {
 
         public Map<Header, String> getCSVValueMap() {
@@ -38,6 +40,8 @@ public class RightAscensionDeclinationCoordinates {
             return csvValueMap;
         }
     }
+
+
 
     public class RightAscensionDeclinationCoordinatesCLIViewFormatter {
 

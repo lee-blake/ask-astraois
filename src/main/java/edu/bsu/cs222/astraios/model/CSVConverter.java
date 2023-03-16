@@ -74,8 +74,7 @@ public class CSVConverter {
         RightAscensionDeclinationCoordinates raDec = new RightAscensionDeclinationTypeConverter(
                 rightAscension,
                 declination
-        )
-                .convert();
+        ).convert();
         return new AstronomicalObject(
                 name,
                 raDec

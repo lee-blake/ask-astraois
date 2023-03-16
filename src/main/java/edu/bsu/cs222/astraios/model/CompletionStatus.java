@@ -25,7 +25,7 @@ public class CompletionStatus {
     @Override
     public boolean equals(Object o) {
         if(o instanceof CompletionStatus other) {
-            if(this.complete && other.complete){
+            if(this.complete && other.complete) {
                 return this.dateOfCompletion.equals(other.dateOfCompletion);
             }
             else {
@@ -59,7 +59,7 @@ public class CompletionStatus {
             HashMap<Header, String> cliViewValueMap = new HashMap<>();
             // No completion = don't print everything. This is the current display of the view command.
             String completionDateString = "";
-            if (CompletionStatus.this.complete) {
+            if(CompletionStatus.this.complete) {
                 completionDateString = CompletionStatus.this.dateOfCompletion.toString();
             }
             cliViewValueMap.put(Header.COMPLETION_DATE, completionDateString);

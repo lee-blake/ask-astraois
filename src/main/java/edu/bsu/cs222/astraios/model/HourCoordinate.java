@@ -45,7 +45,7 @@ public class HourCoordinate {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof HourCoordinate other) {
+        if(o instanceof HourCoordinate other) {
             return this.units == other.units;
         }
             return false;
@@ -67,12 +67,12 @@ public class HourCoordinate {
 
         public String standardHourFormatSpaced() {
             return String.format("%02dh %02dm ",this.hours,this.minutes)
-                    +(new DecimalFormat("00.#########")).format(this.seconds) + "s";
+                    + (new DecimalFormat("00.#########")).format(this.seconds) + "s";
         }
 
         public String standardHourFormatNoSpacesOneDecimalPlace() {
             return String.format("%02dh%02dm",this.hours,this.minutes)
-                    +(new DecimalFormat("00.0")).format(this.seconds) + "s";
+                    + (new DecimalFormat("00.0")).format(this.seconds) + "s";
         }
     }
 }
