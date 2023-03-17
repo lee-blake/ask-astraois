@@ -5,7 +5,7 @@ and can be read by other programs; however, editing with other programs is not r
 many common CSV-editing programs do not use the same formatting as our backend.
 
 ## Authors
-Nick Hively <nrhively@bsu.edu>  h
+Nick Hively <nrhively@bsu.edu>  
 Justyn Fox <jjfox@bsu.edu>  
 Lee Blake
 
@@ -16,20 +16,38 @@ Lee Blake
     - PicoCLI 4.7.1+
     - Commons CSV 1.10.0+
 
-
-
-## Building and Running
+## Building, Installing, and Running
 ### Building
+To build the project, clone it from Github and run the following Gradle tasks to ensure the distribution is correct:
+1. `clean` (only if not the first time building)
+2. `build`
+3. `startScripts`
+4. `distZip`
+A .zip file will be produced in 'build/distributions' and is needed for installation.
+
+### Installing
+1. Extract the .zip file at a known location.
+2. Navigate to the extracted folder.
+3. On the same level as `bin` and `lib`, create a new folder called `data`. This is where the journal is saved.
+4. Verify installation by running the program.
 
 ### Running
-#### First-Time Use
+Open a new terminal and navigate to the folder that was extracted. The output of `ls` or `dir` should list `bin`, 
+`lib`, and `data`. It is important that you execute the program from this directory or the journal will not save to
+the correct location. Run the program by either `./bin/ask-astraios` (Linux) or `.\bin\ask-astraios.bat` (Windows). A
+help menu with details on the various subcommands should display in the terminal.
 
-### Warnings
+#### First-Time Use
+The journal file does not exist initially. There is no need to create it manually - adding the first object to it will
+create the file. If this creation fails, verify that the program can write to the `data` directory.
+
+### Project Warnings
 As part of this project, some warnings have been suppressed globally:
 - "unused": This inspection has been suppressed whenever there is one of the following annotations, as PicoCLI is 
 - responsible for injecting them at runtime:
   - `@picocli.CommandLine.Parameters`
   - `@picocli.CommandLine.Option`
+
 ### Troubleshooting
 #### Unicode
 If the program builds or runs with warnings or errors about character mappings, or if the degree character does not
