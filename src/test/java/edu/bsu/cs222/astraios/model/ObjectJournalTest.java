@@ -54,72 +54,6 @@ public class ObjectJournalTest {
 
 
 
-    // This suppression is needed to verify this intended functionality where anything of another
-    // type is not equal.
-    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
-    @Test
-    public void testEqualsNonObjectJournalNotEqual() {
-        ObjectJournal journal = new ObjectJournal();
-        String otherObject = "";
-        boolean result = journal.equals(otherObject);
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void testEqualsBothEmptyIsEqual() {
-        ObjectJournal journal1 = new ObjectJournal();
-        ObjectJournal journal2 = new ObjectJournal();
-        boolean result = journal1.equals(journal2);
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void testEqualsDifferentOneElementNotEqual() {
-        ObjectJournal journal1 = new ObjectJournal();
-        journal1.addEntry(new ObjectJournalEntry(buildM13Object()));
-        ObjectJournal journal2 = new ObjectJournal();
-        journal2.addEntry(new ObjectJournalEntry(buildM31Object()));
-        boolean result = journal1.equals(journal2);
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void testEqualsIdenticalNonemptyIsEqual() {
-        ObjectJournal journal1 = new ObjectJournal();
-        journal1.addEntry(new ObjectJournalEntry(
-                buildM13Object(),
-                new CompletionStatus(LocalDate.parse("2023-01-01"))
-        ));
-        journal1.addEntry(new ObjectJournalEntry(buildM31Object()));
-        ObjectJournal journal2 = new ObjectJournal();
-        journal2.addEntry(new ObjectJournalEntry(
-                buildM13Object(),
-                new CompletionStatus(LocalDate.parse("2023-01-01"))
-        ));
-        journal2.addEntry(new ObjectJournalEntry(buildM31Object()));
-        boolean result = journal1.equals(journal2);
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void testEqualsProperSubsetNotEqual() {
-        ObjectJournal subset = new ObjectJournal();
-        subset.addEntry(new ObjectJournalEntry(
-                buildM13Object(),
-                new CompletionStatus(LocalDate.parse("2023-01-01"))
-        ));
-        ObjectJournal superset = new ObjectJournal();
-        superset.addEntry(new ObjectJournalEntry(
-                buildM13Object(),
-                new CompletionStatus(LocalDate.parse("2023-01-01"))
-        ));
-        superset.addEntry(new ObjectJournalEntry(buildM31Object()));
-        boolean result = subset.equals(superset);
-        Assertions.assertFalse(result);
-    }
-
-
-
     @Test
     public void testRemoveEntryActuallyRemoves() {
         ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
@@ -259,5 +193,71 @@ public class ObjectJournalTest {
                 NoSuchEntryException.class,
                 () -> emptyJournal.markIncompleteByName("M13")
         );
+    }
+
+
+
+    // This suppression is needed to verify this intended functionality where anything of another
+    // type is not equal.
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Test
+    public void testEqualsNonObjectJournalNotEqual() {
+        ObjectJournal journal = new ObjectJournal();
+        String otherObject = "";
+        boolean result = journal.equals(otherObject);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsBothEmptyIsEqual() {
+        ObjectJournal journal1 = new ObjectJournal();
+        ObjectJournal journal2 = new ObjectJournal();
+        boolean result = journal1.equals(journal2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testEqualsDifferentOneElementNotEqual() {
+        ObjectJournal journal1 = new ObjectJournal();
+        journal1.addEntry(new ObjectJournalEntry(buildM13Object()));
+        ObjectJournal journal2 = new ObjectJournal();
+        journal2.addEntry(new ObjectJournalEntry(buildM31Object()));
+        boolean result = journal1.equals(journal2);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsIdenticalNonemptyIsEqual() {
+        ObjectJournal journal1 = new ObjectJournal();
+        journal1.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        journal1.addEntry(new ObjectJournalEntry(buildM31Object()));
+        ObjectJournal journal2 = new ObjectJournal();
+        journal2.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        journal2.addEntry(new ObjectJournalEntry(buildM31Object()));
+        boolean result = journal1.equals(journal2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testEqualsProperSubsetNotEqual() {
+        ObjectJournal subset = new ObjectJournal();
+        subset.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        ObjectJournal superset = new ObjectJournal();
+        superset.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        superset.addEntry(new ObjectJournalEntry(buildM31Object()));
+        boolean result = subset.equals(superset);
+        Assertions.assertFalse(result);
     }
 }

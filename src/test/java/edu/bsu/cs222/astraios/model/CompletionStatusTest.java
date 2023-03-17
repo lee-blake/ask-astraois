@@ -50,6 +50,8 @@ public class CompletionStatusTest {
         Assertions.assertTrue(result);
     }
 
+
+
     @Test
     public void testEqualsIsCompleteConstructedWithDate() {
         CompletionStatus status = new CompletionStatus(LocalDate.parse("2023-01-01"));

@@ -26,6 +26,8 @@ public class ObjectJournalEntryTest {
         Assertions.assertEquals("M31",nameRetrieved);
     }
 
+
+
     @Test
     public void testGetObjectM13() {
         AstronomicalObject m13Object = buildM13Object();
@@ -44,45 +46,6 @@ public class ObjectJournalEntryTest {
         AstronomicalObject retrievedObject = entry.getAstronomicalObject();
         boolean result = freshM31Object.equals(retrievedObject);
         Assertions.assertTrue(result);
-    }
-
-
-    // This suppression is needed to verify this intended functionality where anything of another
-    // type is not equal.
-    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
-    @Test
-    public void testEqualsNonObjectJournalEntryNotEqual() {
-        ObjectJournalEntry entry = new ObjectJournalEntry(buildM13Object());
-        String otherObject = "";
-        boolean result = entry.equals(otherObject);
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void testEqualsSameObjectAndCompletionIsEqual() {
-        ObjectJournalEntry entry1 = new ObjectJournalEntry(buildM13Object());
-        ObjectJournalEntry entry2 = new ObjectJournalEntry(buildM13Object());
-        boolean result = entry1.equals(entry2);
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void testEqualsDifferentObjectNotEqual() {
-        ObjectJournalEntry entry1 = new ObjectJournalEntry(buildM13Object());
-        ObjectJournalEntry entry2 = new ObjectJournalEntry(buildM31Object());
-        boolean result = entry1.equals(entry2);
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void testEqualsDifferentCompletionNotEqual() {
-        ObjectJournalEntry incomplete = new ObjectJournalEntry(buildM13Object());
-        ObjectJournalEntry complete = new ObjectJournalEntry(
-                buildM13Object(),
-                new CompletionStatus(LocalDate.parse("2023-01-01"))
-        );
-        boolean result = incomplete.equals(complete);
-        Assertions.assertFalse(result);
     }
 
 
@@ -153,5 +116,45 @@ public class ObjectJournalEntryTest {
             EntryAlreadyIncompleteException.class,
                 entry::markIncomplete
         );
+    }
+
+
+
+    // This suppression is needed to verify this intended functionality where anything of another
+    // type is not equal.
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Test
+    public void testEqualsNonObjectJournalEntryNotEqual() {
+        ObjectJournalEntry entry = new ObjectJournalEntry(buildM13Object());
+        String otherObject = "";
+        boolean result = entry.equals(otherObject);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsSameObjectAndCompletionIsEqual() {
+        ObjectJournalEntry entry1 = new ObjectJournalEntry(buildM13Object());
+        ObjectJournalEntry entry2 = new ObjectJournalEntry(buildM13Object());
+        boolean result = entry1.equals(entry2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testEqualsDifferentObjectNotEqual() {
+        ObjectJournalEntry entry1 = new ObjectJournalEntry(buildM13Object());
+        ObjectJournalEntry entry2 = new ObjectJournalEntry(buildM31Object());
+        boolean result = entry1.equals(entry2);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testEqualsDifferentCompletionNotEqual() {
+        ObjectJournalEntry incomplete = new ObjectJournalEntry(buildM13Object());
+        ObjectJournalEntry complete = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        boolean result = incomplete.equals(complete);
+        Assertions.assertFalse(result);
     }
 }
