@@ -18,7 +18,8 @@ public class AstronomicalObjectTest {
         );
         String name = "myObject";
         AstronomicalObject astronomicalObject = new AstronomicalObject(name, raDecCoords);
-        boolean result = astronomicalObject.equals(name);
+        String otherTypeObject = "x";
+        boolean result = astronomicalObject.equals(otherTypeObject);
         Assertions.assertFalse(result);
     }
 

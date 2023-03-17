@@ -34,10 +34,10 @@ public class DegreeCoordinateTypeConverterTest {
 
     @Test
     public void testConvertHalfCircleStandardFormArbitrarySpaces() {
-        String negativeStandardForm = "-85          °  03' 59.9\"";
-        DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeStandardForm);
-        HalfCircleDegreeCoordinate negative = new HalfCircleDegreeCoordinate(-85,3,59.9);
+        String arbitrarySpacesInStandardForm = "-85          °  03' 59.9\"";
+        DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(arbitrarySpacesInStandardForm);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(-85,3,59.9);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        Assertions.assertEquals(negative,actual);
+        Assertions.assertEquals(expected,actual);
     }
 }

@@ -98,8 +98,8 @@ public class HalfCircleDegreeCoordinateTest {
     @Test
     public void testEqualsNonHalfCircleDegreeCoordinateNotEqual() {
         HalfCircleDegreeCoordinate coordinate = new HalfCircleDegreeCoordinate(45, 30, 30.0);
-        String randomObject = "";
-        boolean result = coordinate.equals(randomObject);
+        String otherTypeObject = "";
+        boolean result = coordinate.equals(otherTypeObject);
         Assertions.assertFalse(result);
     }
 

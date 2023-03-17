@@ -25,8 +25,8 @@ public class HourCoordinateTypeConverterTest {
 
     @Test
     public void testConvertStandardFormArbitrarySpaces() {
-        String lastMilliStandardForm = "23h           59m  59.999s   ";
-        HourCoordinateTypeConverter converter = new HourCoordinateTypeConverter(lastMilliStandardForm);
+        String arbitrarySpacesInStandardForm = "23h           59m  59.999s   ";
+        HourCoordinateTypeConverter converter = new HourCoordinateTypeConverter(arbitrarySpacesInStandardForm);
         HourCoordinate lastMilli = new HourCoordinate(23,59,59.999);
         HourCoordinate actual = converter.convert();
         Assertions.assertEquals(lastMilli,actual);
