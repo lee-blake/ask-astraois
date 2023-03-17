@@ -23,6 +23,7 @@ To build the project, clone it from Github and run the following Gradle tasks to
 2. `build`
 3. `startScripts`
 4. `distZip`
+
 A .zip file will be produced in 'build/distributions' and is needed for installation.
 
 ### Installing
@@ -44,7 +45,7 @@ create the file. If this creation fails, verify that the program can write to th
 ### Project Warnings
 As part of this project, some warnings have been suppressed globally:
 - "unused": This inspection has been suppressed whenever there is one of the following annotations, as PicoCLI is 
-- responsible for injecting them at runtime:
+responsible for injecting them at runtime:
   - `@picocli.CommandLine.Parameters`
   - `@picocli.CommandLine.Option`
 
