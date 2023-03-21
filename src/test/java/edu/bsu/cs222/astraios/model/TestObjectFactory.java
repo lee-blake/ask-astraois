@@ -25,6 +25,17 @@ public class TestObjectFactory {
             );
             return new AstronomicalObject("M31",m31Coords);
         }
+
+        public static AstronomicalObject buildM83Object() {
+            HourCoordinate m83RightAscension = new HourCoordinate(13,37,00.9);
+            HalfCircleDegreeCoordinate m83Declination = new HalfCircleDegreeCoordinate(-29,51,57);
+            RightAscensionDeclinationCoordinates m83Coords = new RightAscensionDeclinationCoordinates(
+                    m83RightAscension,
+                    m83Declination
+            );
+            return new AstronomicalObject("M83",m83Coords);
+        }
+
     }
 
     public static class ObjectJournals {
@@ -36,6 +47,18 @@ public class TestObjectFactory {
             ));
             objectJournal.addEntry(new ObjectJournalEntry(
                     AstronomicalObjects.buildM31Object(),
+                    new CompletionStatus(LocalDate.parse("2023-01-01"))
+            ));
+            return objectJournal;
+        }
+
+        public static ObjectJournal buildM13M83ObjectJournal() {
+            ObjectJournal objectJournal = new ObjectJournal();
+            objectJournal.addEntry(new ObjectJournalEntry(
+                    AstronomicalObjects.buildM13Object()
+            ));
+            objectJournal.addEntry(new ObjectJournalEntry(
+                    AstronomicalObjects.buildM83Object(),
                     new CompletionStatus(LocalDate.parse("2023-01-01"))
             ));
             return objectJournal;

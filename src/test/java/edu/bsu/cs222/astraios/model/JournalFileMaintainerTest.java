@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectJournals.buildM13M31ObjectJournal;
+import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectJournals.buildM13M83ObjectJournal;
 
 public class JournalFileMaintainerTest {
 
@@ -87,10 +87,10 @@ public class JournalFileMaintainerTest {
     @Test
     public void testSaveToAndLoadFromFileGivesSameJournal()
             throws IOException, InvalidJournalFileContentsException, CouldNotParseJournalFileException {
-        ObjectJournal originalCopy = buildM13M31ObjectJournal();
+        ObjectJournal originalCopy = buildM13M83ObjectJournal();
         JournalFileMaintainer maintainer = new JournalFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
         maintainer.saveObjectJournalToFile(originalCopy);
-        ObjectJournal freshCopy = buildM13M31ObjectJournal();
+        ObjectJournal freshCopy = buildM13M83ObjectJournal();
         ObjectJournal loadedFromFile = maintainer.loadObjectJournalFromFile();
         // We need to clean up this test because this is where we don't make the file with to delete on exit flag.
         // This must happen before assert because if assert is incorrect then nothing after will be executed.

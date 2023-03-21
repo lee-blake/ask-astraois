@@ -67,8 +67,8 @@ public class HalfCircleDegreeCoordinate {
 
         public HalfCircleDegreeCoordinateFormatter() {
             this.degrees = units/UNITS_PER_DEGREE;
-            this.arcminutes = (units % UNITS_PER_DEGREE)/UNITS_PER_ARCMINUTE;
-            this.arcseconds = (units % UNITS_PER_ARCMINUTE)/(double)UNITS_PER_ARCSECOND;
+            this.arcminutes = Math.abs((units % UNITS_PER_DEGREE)/UNITS_PER_ARCMINUTE);
+            this.arcseconds = Math.abs((units % UNITS_PER_ARCMINUTE)/(double)UNITS_PER_ARCSECOND);
         }
 
         public String standardDegreeFormatSpaced() {
