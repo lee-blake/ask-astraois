@@ -36,7 +36,10 @@ public class JournalFileMaintainerTest {
 
     @Test
     public void testKeepBackupCopyNeitherPresentNoThrow() throws IOException {
-        JournalFileMaintainer maintainer = new JournalFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                tempDir.resolve("original"),
+                tempDir.resolve("backup")
+        );
         maintainer.keepBackupCopy();
     }
 
@@ -44,7 +47,10 @@ public class JournalFileMaintainerTest {
     public void testKeepBackupCopyOnlyBackupPresentNoRename() throws IOException {
         String contentText = "This is the backup";
         writeFile("backup",contentText);
-        JournalFileMaintainer maintainer = new JournalFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                tempDir.resolve("original"),
+                tempDir.resolve("backup")
+        );
         maintainer.keepBackupCopy();
         String backupContents = readFile("backup");
         Assertions.assertEquals(contentText,backupContents);
@@ -54,7 +60,10 @@ public class JournalFileMaintainerTest {
     public void testKeepBackupCopyOnlyOriginalPresentRename() throws IOException {
         String contentText = "This is the original";
         writeFile("original",contentText);
-        JournalFileMaintainer maintainer = new JournalFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                tempDir.resolve("original"),
+                tempDir.resolve("backup")
+        );
         maintainer.keepBackupCopy();
         String backupContents = readFile("backup");
         Assertions.assertEquals(contentText,backupContents);
@@ -65,7 +74,10 @@ public class JournalFileMaintainerTest {
         String contentText = "This is the original";
         writeFile("original",contentText);
         writeFile("backup","This is the backup");
-        JournalFileMaintainer maintainer = new JournalFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                tempDir.resolve("original"),
+                tempDir.resolve("backup")
+        );
         maintainer.keepBackupCopy();
         String backupContents = readFile("backup");
         Assertions.assertEquals(contentText,backupContents);
@@ -76,7 +88,10 @@ public class JournalFileMaintainerTest {
         String contentText = "This is the original";
         writeFile("source",contentText);
         writeFile("dest","This is the backup");
-        JournalFileMaintainer maintainer = new JournalFileMaintainer(tempDir.resolve("source"), tempDir.resolve("dest"));
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                tempDir.resolve("source"),
+                tempDir.resolve("dest")
+        );
         maintainer.keepBackupCopy();
         String backupContents = readFile("dest");
         Assertions.assertEquals(contentText,backupContents);
@@ -88,7 +103,10 @@ public class JournalFileMaintainerTest {
     public void testSaveToAndLoadFromFileGivesSameJournal()
             throws IOException, InvalidJournalFileContentsException, CouldNotParseJournalFileException {
         ObjectJournal originalCopy = buildM13M83ObjectJournal();
-        JournalFileMaintainer maintainer = new JournalFileMaintainer(tempDir.resolve("original"), tempDir.resolve("backup"));
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                tempDir.resolve("original"),
+                tempDir.resolve("backup")
+        );
         maintainer.saveObjectJournalToFile(originalCopy);
         ObjectJournal freshCopy = buildM13M83ObjectJournal();
         ObjectJournal loadedFromFile = maintainer.loadObjectJournalFromFile();
