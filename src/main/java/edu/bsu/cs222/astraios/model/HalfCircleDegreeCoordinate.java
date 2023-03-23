@@ -10,6 +10,7 @@ public class HalfCircleDegreeCoordinate {
     private static final long UNITS_PER_DEGREE = 60*60*1000;
     private static final long UNITS_PER_ARCMINUTE = 60*1000;
     private static final long UNITS_PER_ARCSECOND = 1000;
+    private static final long UNITS_FOR_PI_RADIANS = 180*60*60*1000;
 
     private final long units;
 
@@ -57,6 +58,9 @@ public class HalfCircleDegreeCoordinate {
         return false;
     }
 
+    public double toRadians() {
+        return Math.PI*units/UNITS_FOR_PI_RADIANS;
+    }
 
 
     public class HalfCircleDegreeCoordinateFormatter {

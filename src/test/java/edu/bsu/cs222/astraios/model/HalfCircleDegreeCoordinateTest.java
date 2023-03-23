@@ -158,4 +158,22 @@ public class HalfCircleDegreeCoordinateTest {
         boolean result = northPole.equals(southPole);
         Assertions.assertFalse(result);
     }
+
+
+
+    @Test
+    public void testToRadiansZeroConvertsCorrectly() {
+        HalfCircleDegreeCoordinate zero = new HalfCircleDegreeCoordinate(0,0,0);
+        double expected = 0;
+        double actual = zero.toRadians();
+        Assertions.assertEquals(expected,actual,0.000000001);
+    }
+
+    @Test
+    public void testToRadiansNorthPoleConvertsCorrectly() {
+        HalfCircleDegreeCoordinate northPole = new HalfCircleDegreeCoordinate(90,0,0);
+        double expected = Math.PI/2;
+        double actual = northPole.toRadians();
+        Assertions.assertEquals(expected,actual,0.000000001);
+    }
 }
