@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class FullCircleDegreeCoordinateTest {
 
     @Test
-    public void testFullCircleDegreeCoordinatesAreTheSame() {
+    public void testEqualsCoordinatesAreSameEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         boolean result = coordinate0.equals(coordinate1);
@@ -14,7 +14,7 @@ public class FullCircleDegreeCoordinateTest {
     }
 
     @Test
-    public void testFullCircleDegreeCoordinatesWithDifferentDegrees() {
+    public void testEqualsDifferentDegreesNotEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(99, 30, 20.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         boolean result = coordinate0.equals(coordinate1);
@@ -22,7 +22,7 @@ public class FullCircleDegreeCoordinateTest {
     }
 
     @Test
-    public void testFullCircleDegreeCoordinateWithDifferentMinutes() {
+    public void testEqualsDifferentArcMinutesNotEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(180, 45, 20.0);
         boolean result = coordinate0.equals(coordinate1);
@@ -30,7 +30,7 @@ public class FullCircleDegreeCoordinateTest {
     }
 
     @Test
-    public void testFullCircleDegreeCoordinatesWithDifferentSeconds() {
+    public void testEqualsDifferentArcSecondsNotEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(180, 30, 30.0);
         boolean result = coordinate0.equals(coordinate1);
@@ -41,7 +41,7 @@ public class FullCircleDegreeCoordinateTest {
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
     @Test
-    public void testFullCircleDegreeCoordinatesNonDegreeCoordinate() {
+    public void testEqualsOtherTypeNotEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         String coordinate1 = "180, 30, 20.0";
         boolean result = coordinate0.equals(coordinate1);
@@ -49,7 +49,7 @@ public class FullCircleDegreeCoordinateTest {
     }
 
     @Test
-    public void testFullCircleDegreeCoordinatesNegationNotEqual() {
+    public void testEqualsNegationNotEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(-180, 30, 20.0);
         boolean result = coordinate0.equals(coordinate1);
@@ -65,7 +65,7 @@ public class FullCircleDegreeCoordinateTest {
     }
 
     @Test
-    public void testFullCircleDegreeCoordinatesEquals() {
+    public void testEqualsModularEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(361, 30, 20.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(1, 30, 20.0);
         boolean result = coordinate0.equals(coordinate1);
@@ -73,7 +73,7 @@ public class FullCircleDegreeCoordinateTest {
     }
 
     @Test
-    public void testFullCircleDegreeCoordinatesNegationAndComplement() {
+    public void testEqualsNegationAndComplementEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(-30, 0, 0.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(330, 0, 0.0);
         boolean result = coordinate0.equals(coordinate1);
@@ -116,6 +116,8 @@ public class FullCircleDegreeCoordinateTest {
     public void testConstructorBarelyValidArcsecondsNoException() {
          new FullCircleDegreeCoordinate(145, 30, 59.9999999);
     }
+
+
 
     @Test
     public void testToRadiansZeroConvertsCorrectly() {
