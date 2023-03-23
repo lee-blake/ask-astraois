@@ -7,6 +7,7 @@ public class FullCircleDegreeCoordinate {
     private static final long UNITS_PER_DEGREE = 60*60*1000;
     private static final long UNITS_PER_ARCMINUTE = 60*1000;
     private static final long UNITS_PER_ARCSECOND = 1000;
+    private static final long UNITS_FOR_PI_RADIANS = 180*60*60*1000;
 
     private final long units;
 
@@ -43,4 +44,6 @@ public class FullCircleDegreeCoordinate {
         }
         return false;
     }
+
+    public double toRadians() {return Math.PI*this.units/UNITS_FOR_PI_RADIANS;}
 }

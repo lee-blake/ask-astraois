@@ -116,4 +116,20 @@ public class FullCircleDegreeCoordinateTest {
     public void testConstructorBarelyValidArcsecondsNoException() {
          new FullCircleDegreeCoordinate(145, 30, 59.9999999);
     }
+
+    @Test
+    public void testToRadiansZeroConvertsCorrectly() {
+        FullCircleDegreeCoordinate zero = new FullCircleDegreeCoordinate(0,0,0);
+        double expected = 0;
+        double actual = zero.toRadians();
+        Assertions.assertEquals(expected,actual,0.000000001);
+    }
+
+    @Test
+    public void testToRadians90ConvertsCorrectly() {
+        FullCircleDegreeCoordinate ninety = new FullCircleDegreeCoordinate(90,0,0);
+        double expected = Math.PI/2;
+        double actual = ninety.toRadians();
+        Assertions.assertEquals(expected,actual,0.000000001);
+    }
 }
