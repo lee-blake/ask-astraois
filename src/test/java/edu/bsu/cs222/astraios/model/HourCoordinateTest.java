@@ -110,4 +110,22 @@ public class HourCoordinateTest {
         boolean result = negation.equals(complement);
         Assertions.assertTrue(result);
     }
+
+
+
+    @Test
+    public void testToRadiansMidnightConvertsCorrectly() {
+        HourCoordinate midnight = new HourCoordinate(0,0,0);
+        double expected = 0;
+        double actual = midnight.toRadians();
+        Assertions.assertEquals(expected,actual,0.000000001);
+    }
+
+    @Test
+    public void testToRadiansNoonConvertsCorrectly() {
+        HourCoordinate noon = new HourCoordinate(12,0,0);
+        double expected = Math.PI;
+        double actual = noon.toRadians();
+        Assertions.assertEquals(expected,actual,0.000000001);
+    }
 }

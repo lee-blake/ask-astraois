@@ -11,6 +11,8 @@ public class HourCoordinate {
     private static final long UNITS_PER_HOUR = 60*60*15000;
     private static final long UNITS_PER_MINUTE = 60*15000;
     private static final long UNITS_PER_SECOND = 15000;
+    private static final long UNITS_FOR_PI_RADIANS = 12*60*60*15000;
+
 
     private final long units;
 
@@ -51,6 +53,9 @@ public class HourCoordinate {
             return false;
     }
 
+    public double toRadians() {
+        return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
+    }
 
 
     public class HourCoordinateFormatter {

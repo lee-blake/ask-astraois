@@ -59,7 +59,7 @@ public class HalfCircleDegreeCoordinate {
     }
 
     public double toRadians() {
-        return Math.PI*units/UNITS_FOR_PI_RADIANS;
+        return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
     }
 
 
