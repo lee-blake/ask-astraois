@@ -3,7 +3,7 @@ package edu.bsu.cs222.astraios.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class FullCircleDegreeCoordinatesTest {
+public class FullCircleDegreeCoordinateTest {
 
     @Test
     public void testFullCircleDegreeCoordinatesAreTheSame() {
@@ -78,5 +78,42 @@ public class FullCircleDegreeCoordinatesTest {
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(330, 0, 0.0);
         boolean result = coordinate0.equals(coordinate1);
         Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testConstructorNegativeArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, -30, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorNegativeArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, 30, -30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, 30, 60.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, 60, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorBarelyValidArcsecondsNoException() {
+         new FullCircleDegreeCoordinate(145, 30, 59.9999999);
     }
 }

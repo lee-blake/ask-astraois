@@ -10,17 +10,16 @@ public class FullCircleDegreeCoordinate {
 
     private final long units;
 
-
-
-    public boolean equals(Object o) {
-        if(o instanceof FullCircleDegreeCoordinate other) {
-            return this.units == other.units;
-        }
-        return false;
-    }
-
     public FullCircleDegreeCoordinate(int degrees, int arcminutes, double arcseconds) {
-
+        if(!coordinatesAreValid(degrees, arcminutes, arcseconds)) {
+            throw new IllegalArgumentException(
+                    "Degree coordinates '"
+                            + degrees + ","
+                            + arcminutes + ","
+                            + arcseconds + "'"
+                            + "were not valid full-circle coordinates! Arcminutes and arcseconds must be in [0,60) "
+            );
+        }
 
         // The sign for the entire expression is given on the degrees variable. To make sure arcminutes and arcseconds
         // also calculate in the same direction, we momentarily drop the sign on degrees while adding them all up.
@@ -30,5 +29,18 @@ public class FullCircleDegreeCoordinate {
                 + (long)(UNITS_PER_ARCSECOND*arcseconds);
         long unitsBeforePositiveNormalization = (sign*unitsNoModNoSign) % MAX_UNITS;
         this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
+    }
+
+    private boolean coordinatesAreValid(int ignoredDegrees, int arcminutes, double arcseconds) {
+        return arcminutes <= 59 && arcminutes >= 0
+                && !(arcseconds >= 60) && !(arcseconds < 0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof FullCircleDegreeCoordinate other) {
+            return this.units == other.units;
+        }
+        return false;
     }
 }
