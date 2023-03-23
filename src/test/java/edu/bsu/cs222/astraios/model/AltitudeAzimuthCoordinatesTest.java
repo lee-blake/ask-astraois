@@ -53,4 +53,32 @@ public class AltitudeAzimuthCoordinatesTest {
         boolean result = coordinates0.equals(coordinates1);
         Assertions.assertFalse(result);
     }
+
+
+
+    @Test
+    public void testDistanceToSameCoordinatesZero() {
+        HalfCircleDegreeCoordinate altitude0 = new HalfCircleDegreeCoordinate(0,0,0);
+        FullCircleDegreeCoordinate azimuth0 = new FullCircleDegreeCoordinate(45,0,0);
+        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(azimuth0, altitude0);
+        HalfCircleDegreeCoordinate altitude1 = new HalfCircleDegreeCoordinate(0,0,0);
+        FullCircleDegreeCoordinate azimuth1 = new FullCircleDegreeCoordinate(45,0,0);
+        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(azimuth1, altitude1);
+        AngularDistance actual = coordinates0.distanceTo(coordinates1);
+        AngularDistance expected = new AngularDistance(0,0,0);
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testDistanceToPoles180() {
+        HalfCircleDegreeCoordinate altitude0 = new HalfCircleDegreeCoordinate(90,0,0);
+        FullCircleDegreeCoordinate azimuth0 = new FullCircleDegreeCoordinate(45,0,0);
+        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(azimuth0, altitude0);
+        HalfCircleDegreeCoordinate altitude1 = new HalfCircleDegreeCoordinate(-90,0,0);
+        FullCircleDegreeCoordinate azimuth1 = new FullCircleDegreeCoordinate(45,0,0);
+        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(azimuth1, altitude1);
+        AngularDistance actual = coordinates0.distanceTo(coordinates1);
+        AngularDistance expected = new AngularDistance(180,0,0);
+        Assertions.assertEquals(expected,actual);
+    }
 }

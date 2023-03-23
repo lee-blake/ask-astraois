@@ -17,4 +17,13 @@ public class AltitudeAzimuthCoordinates {
         }
         return false;
     }
+
+    public AngularDistance distanceTo(AltitudeAzimuthCoordinates other) {
+        double alt1=this.altitude.toRadians();
+        double alt2=other.altitude.toRadians();
+        double az1=this.azimuth.toRadians();
+        double az2=other.azimuth.toRadians();
+        double radianResult=Math.acos(Math.sin(alt1)*Math.sin(alt2)+Math.cos(alt1)*Math.cos(alt2)*Math.cos(az1-az2));
+        return AngularDistance.fromRadians(radianResult);
+    }
 }
