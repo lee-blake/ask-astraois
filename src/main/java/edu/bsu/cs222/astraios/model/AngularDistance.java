@@ -4,10 +4,13 @@ import java.text.DecimalFormat;
 
 public class AngularDistance {
 
-    private static final long UNITS_FOR_PI_RADIANS = 180*60*60*1000;
+    // Units are chosen so that resolution goes down to 1/1000 of an arcsecond.
+    // This is equivalent to two inches of longitude/latitude or 1/15 of a millisecond of Earth's rotation.
+    // This should be adequate for this project.
     private static final long UNITS_PER_DEGREE = 60*60*1000;
     private static final long UNITS_PER_ARCMINUTE = 60*1000;
     private static final long UNITS_PER_ARCSECOND = 1000;
+    private static final long UNITS_FOR_PI_RADIANS = 180*60*60*1000;
 
     private final long units;
 
