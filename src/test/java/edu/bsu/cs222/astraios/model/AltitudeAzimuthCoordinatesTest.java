@@ -81,4 +81,17 @@ public class AltitudeAzimuthCoordinatesTest {
         AngularDistance expected = new AngularDistance(180,0,0);
         Assertions.assertEquals(expected,actual);
     }
+
+    @Test
+    public void testDistanceMixedCoordinates() {
+        HalfCircleDegreeCoordinate altitude0 = new HalfCircleDegreeCoordinate(45,0,0);
+        FullCircleDegreeCoordinate azimuth0 = new FullCircleDegreeCoordinate(0,0,0);
+        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(azimuth0, altitude0);
+        HalfCircleDegreeCoordinate altitude1 = new HalfCircleDegreeCoordinate(-45,0,0);
+        FullCircleDegreeCoordinate azimuth1 = new FullCircleDegreeCoordinate(90,0,0);
+        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(azimuth1, altitude1);
+        AngularDistance actual = coordinates0.distanceTo(coordinates1);
+        AngularDistance expected = new AngularDistance(120,0,0);
+        Assertions.assertEquals(expected,actual);
+    }
 }

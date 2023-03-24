@@ -42,7 +42,7 @@ public class AngularDistance {
         if(!coordinatesAreValid(radians)) {
             throw new IllegalArgumentException("An angular distance from radians must be in [0,pi]!");
         }
-        this.units = (long) (radians*UNITS_FOR_PI_RADIANS/Math.PI);
+        this.units = Math.round(radians*UNITS_FOR_PI_RADIANS/Math.PI);
     }
 
     private boolean coordinatesAreValid(double radians) {

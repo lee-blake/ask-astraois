@@ -1,5 +1,7 @@
 package edu.bsu.cs222.astraios.model;
 
+import static java.lang.Math.*;
+
 public class AltitudeAzimuthCoordinates {
 
     private final FullCircleDegreeCoordinate azimuth;
@@ -19,11 +21,13 @@ public class AltitudeAzimuthCoordinates {
     }
 
     public AngularDistance distanceTo(AltitudeAzimuthCoordinates other) {
-        double alt1=this.altitude.toRadians();
-        double alt2=other.altitude.toRadians();
-        double az1=this.azimuth.toRadians();
-        double az2=other.azimuth.toRadians();
-        double radianResult=Math.acos(Math.sin(alt1)*Math.sin(alt2)+Math.cos(alt1)*Math.cos(alt2)*Math.cos(az1-az2));
-        return AngularDistance.fromRadians(radianResult);
+        double alt1 = this.altitude.toRadians();
+        double alt2 = other.altitude.toRadians();
+        double az1 = this.azimuth.toRadians();
+        double az2 = other.azimuth.toRadians();
+        double angularDistanceRadians = acos(
+                sin(alt1)*sin(alt2) + cos(alt1)*cos(alt2)*cos(az1-az2)
+        );
+        return AngularDistance.fromRadians(angularDistanceRadians);
     }
 }
