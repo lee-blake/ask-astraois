@@ -32,7 +32,7 @@ public class HourCoordinate {
         // It's also easiest to add them before taking the modulus.
         long unitsNoModNoSign = sign*UNITS_PER_HOUR*hours
                 + UNITS_PER_MINUTE*minutes
-                + (int)(UNITS_PER_SECOND*seconds);
+                + Math.round(UNITS_PER_SECOND*seconds);
         long unitsBeforePositiveNormalization = (sign*unitsNoModNoSign) % MAX_UNITS;
         // The modulus must be taken again in case the original was negative.
         this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;

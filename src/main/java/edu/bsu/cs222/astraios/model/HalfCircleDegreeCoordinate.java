@@ -30,7 +30,7 @@ public class HalfCircleDegreeCoordinate {
         int sign = (degrees == 0) ? 1 : degrees / Math.abs(degrees);
         long unitUnsigned = sign*UNITS_PER_DEGREE*degrees
                 + UNITS_PER_ARCMINUTE *arcminutes
-                + (long)(UNITS_PER_ARCSECOND*arcseconds);
+                + Math.round(UNITS_PER_ARCSECOND*arcseconds);
         this.units = sign*unitUnsigned;
     }
 

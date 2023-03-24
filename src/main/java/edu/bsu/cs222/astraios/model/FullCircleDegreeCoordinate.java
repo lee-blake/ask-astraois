@@ -27,7 +27,7 @@ public class FullCircleDegreeCoordinate {
         int sign = (degrees == 0) ? 1 : degrees / Math.abs(degrees);
         long unitsNoModNoSign = sign*UNITS_PER_DEGREE*degrees
                 + UNITS_PER_ARCMINUTE *arcminutes
-                + (long)(UNITS_PER_ARCSECOND*arcseconds);
+                + Math.round(UNITS_PER_ARCSECOND*arcseconds);
         long unitsBeforePositiveNormalization = (sign*unitsNoModNoSign) % MAX_UNITS;
         this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
     }

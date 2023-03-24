@@ -20,7 +20,7 @@ public class AngularDistance {
                     + "and seconds in [0,60)!"
             );
         }
-        this.units = (long) (degrees*UNITS_PER_DEGREE
+        this.units = Math.round(degrees*UNITS_PER_DEGREE
                         + arcminutes*UNITS_PER_ARCMINUTE
                         + arcseconds*UNITS_PER_ARCSECOND);
     }
