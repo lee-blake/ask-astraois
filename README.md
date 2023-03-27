@@ -56,4 +56,12 @@ render correctly in the help menus or 'view' subcommand, check whether your syst
 encoding. Furthermore, consider replacing the degree character in the code with its escape sequence `\u00b0` - this
 should enable it to run correctly in IntelliJ and if display issues persist, it is likely caused by system
 configuration.
+#### Class Versions
+If the program builds but returns an error of the form "Main has been compiled by a more recent version of the 
+Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 
+<some number here>", this is not a problem with the project. This error occurs when Java attempts to run a program
+that was compiled with a later version of the JDK than the version of the JVM that is attempting to run the program. 
+To resolve this error, verify your `PATH` environment variable points to the correct version of Java, and if need be,
+install a version of Java at least as late as the one used in IntelliJ to build the project.
+
 
