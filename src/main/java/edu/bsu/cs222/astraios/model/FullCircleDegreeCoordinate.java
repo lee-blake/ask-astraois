@@ -1,6 +1,8 @@
 package edu.bsu.cs222.astraios.model;
 
 
+import java.text.DecimalFormat;
+
 public class FullCircleDegreeCoordinate {
 
     private static final long MAX_UNITS = 360*60*60*1000;
@@ -45,5 +47,32 @@ public class FullCircleDegreeCoordinate {
         return false;
     }
 
+    @Override
+    public String toString() {
+        FullCircleDegreeCoordinate.FullCircleDegreeCoordinateFormatter formatter =
+                this.new FullCircleDegreeCoordinateFormatter();
+        return formatter.standardDegreeFormatNoSpaces();
+    }
+
     public double toRadians() {return Math.PI*this.units/UNITS_FOR_PI_RADIANS;}
+
+
+
+    public class FullCircleDegreeCoordinateFormatter {
+
+        private final long degrees;
+        private final long arcminutes;
+        private final double arcseconds;
+
+        public FullCircleDegreeCoordinateFormatter() {
+            this.degrees = units/UNITS_PER_DEGREE;
+            this.arcminutes = (units % UNITS_PER_DEGREE)/UNITS_PER_ARCMINUTE;
+            this.arcseconds = (units % UNITS_PER_ARCMINUTE)/(double)UNITS_PER_ARCSECOND;
+        }
+
+        public String standardDegreeFormatNoSpaces() {
+            return String.format("%02d°%02d'",this.degrees,this.arcminutes)
+                    +(new DecimalFormat("00.#########")).format(this.arcseconds) + "\"";
+        }
+    }
 }

@@ -53,6 +53,12 @@ public class HourCoordinate {
             return false;
     }
 
+    @Override
+    public String toString() {
+        HourCoordinate.HourCoordinateFormatter formatter = this.new HourCoordinateFormatter();
+        return formatter.standardHourFormatNoSpaces();
+    }
+
     public double toRadians() {
         return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
     }
@@ -72,6 +78,11 @@ public class HourCoordinate {
 
         public String standardHourFormatSpaced() {
             return String.format("%02dh %02dm ",this.hours,this.minutes)
+                    + (new DecimalFormat("00.#########")).format(this.seconds) + "s";
+        }
+
+        public String standardHourFormatNoSpaces() {
+            return String.format("%02dh%02dm",this.hours,this.minutes)
                     + (new DecimalFormat("00.#########")).format(this.seconds) + "s";
         }
 

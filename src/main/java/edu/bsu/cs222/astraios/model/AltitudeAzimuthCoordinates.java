@@ -20,6 +20,11 @@ public class AltitudeAzimuthCoordinates {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "[ALT " + this.altitude + " AZ " + this.azimuth + "]";
+    }
+
     public AngularDistance distanceTo(AltitudeAzimuthCoordinates other) {
         double alt1 = this.altitude.toRadians();
         double alt2 = other.altitude.toRadians();

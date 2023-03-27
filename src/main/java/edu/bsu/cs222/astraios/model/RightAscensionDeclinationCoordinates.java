@@ -21,6 +21,11 @@ public class RightAscensionDeclinationCoordinates {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "[RA " + this.rightAscension + " DEC " + this.declination + "]";
+    }
+
 
 
     public class RightAscensionDeclinationCoordinatesCSVFormatter {
