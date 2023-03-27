@@ -15,6 +15,7 @@ Lee Blake
 - Gradle-managed dependencies
     - PicoCLI 4.7.1+
     - Commons CSV 1.10.0+
+    - Jansi 2.4+
 
 ## Building, Installing, and Running
 ### Building
