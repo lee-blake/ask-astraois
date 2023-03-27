@@ -19,8 +19,8 @@ Lee Blake
 ## Building, Installing, and Running
 ### Building
 To build the project, complete the following steps:
-- Clone the project from Github into IntelliJ 
-- Suppress the warnings detailed [here]{#project-warnings} 
+- Clone the project from GitHub into IntelliJ 
+- Suppress the warnings detailed below
 - Run the following Gradle tasks in order to ensure the distribution is correct:
   1. `clean` (only if not the first time building)
   2. `build`
