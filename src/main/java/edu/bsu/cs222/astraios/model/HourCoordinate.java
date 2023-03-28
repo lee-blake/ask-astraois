@@ -50,7 +50,7 @@ public class HourCoordinate {
     }
 
     private HourCoordinate(double radians) {
-        this.units = Math.round(UNITS_FOR_PI_RADIANS*radians/Math.PI);
+        this.units = ((Math.round(UNITS_FOR_PI_RADIANS*radians/Math.PI) % MAX_UNITS) + MAX_UNITS) % MAX_UNITS;
     }
 
     @Override
