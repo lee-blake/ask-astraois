@@ -134,4 +134,22 @@ public class FullCircleDegreeCoordinateTest {
         double actual = ninety.toRadians();
         Assertions.assertEquals(expected,actual,0.000000001);
     }
+
+
+
+    @Test
+    public void testFromRadiansZeroConvertsCorrectly() {
+        double zero = 0.0;
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0,0,0);
+        FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(zero);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFromRadiansRightAngleConvertsCorrectly() {
+        double rightAngle = Math.PI/2;
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(90,0,0);
+        FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(rightAngle);
+        Assertions.assertEquals(expected, actual);
+    }
 }

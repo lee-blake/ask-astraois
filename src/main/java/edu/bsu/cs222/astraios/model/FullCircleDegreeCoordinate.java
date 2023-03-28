@@ -34,6 +34,14 @@ public class FullCircleDegreeCoordinate {
         this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
     }
 
+    public static FullCircleDegreeCoordinate fromRadians(double radians) {
+        return new FullCircleDegreeCoordinate(radians);
+    }
+
+    private FullCircleDegreeCoordinate(double radians) {
+        this.units = Math.round(radians*UNITS_FOR_PI_RADIANS / Math.PI);
+    }
+
     private boolean coordinatesAreValid(int ignoredDegrees, int arcminutes, double arcseconds) {
         return arcminutes <= 59 && arcminutes >= 0
                 && !(arcseconds >= 60) && !(arcseconds < 0);
