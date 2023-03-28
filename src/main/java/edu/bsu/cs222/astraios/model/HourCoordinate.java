@@ -45,6 +45,14 @@ public class HourCoordinate {
                 && seconds < 60;
     }
 
+    public static HourCoordinate fromRadians(double radians) {
+        return new HourCoordinate(radians);
+    }
+
+    private HourCoordinate(double radians) {
+        this.units = Math.round(UNITS_FOR_PI_RADIANS*radians/Math.PI);
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof HourCoordinate other) {

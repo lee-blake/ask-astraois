@@ -128,4 +128,20 @@ public class HourCoordinateTest {
         double actual = noon.toRadians();
         Assertions.assertEquals(expected,actual,0.000000001);
     }
+
+
+
+    @Test
+    public void testFromRadiansMidnightConstructsCorrectly() {
+        HourCoordinate expected = new HourCoordinate(0,0,0);
+        HourCoordinate actual = HourCoordinate.fromRadians(0);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFromRadiansNoonConstructsCorrectly() {
+        HourCoordinate expected = new HourCoordinate(12,0,0);
+        HourCoordinate actual = HourCoordinate.fromRadians(Math.PI);
+        Assertions.assertEquals(expected,actual);
+    }
 }
