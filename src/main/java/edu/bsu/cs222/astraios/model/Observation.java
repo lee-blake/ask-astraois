@@ -1,3 +1,5 @@
+package edu.bsu.cs222.astraios.model;
+
 import edu.bsu.cs222.astraios.model.HourCoordinate;
 import edu.bsu.cs222.astraios.model.LongitudeLatitudeCoordinates;
 import java.time.Duration;

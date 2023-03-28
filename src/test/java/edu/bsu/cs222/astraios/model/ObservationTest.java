@@ -1,3 +1,5 @@
+package edu.bsu.cs222.astraios.model;
+
 import edu.bsu.cs222.astraios.model.FullCircleDegreeCoordinate;
 import edu.bsu.cs222.astraios.model.HalfCircleDegreeCoordinate;
 import edu.bsu.cs222.astraios.model.HourCoordinate;
