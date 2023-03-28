@@ -50,6 +50,26 @@ public class HalfCircleDegreeCoordinate {
         }
     }
 
+    public static HalfCircleDegreeCoordinate fromRadians(double radians) {
+        if(!radiansCoordinatesAreValid(radians)) {
+            throw new IllegalArgumentException(
+                    "Radians coordinates '"
+                            + radians
+                            + "' are not valid half circle coordinates because half circle coordinates must "
+                            + "be in [-π,π]!"
+            );
+        }
+        return new HalfCircleDegreeCoordinate(radians);
+    }
+
+    private static boolean radiansCoordinatesAreValid(double radians) {
+        return radians <= Math.PI/2 && radians >= -Math.PI/2;
+    }
+
+    private HalfCircleDegreeCoordinate(double radians) {
+        this.units = Math.round(UNITS_FOR_PI_RADIANS*radians/Math.PI);
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof HalfCircleDegreeCoordinate other) {
