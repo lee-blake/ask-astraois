@@ -1,14 +1,12 @@
 package edu.bsu.cs222.astraios.model;
 
-import edu.bsu.cs222.astraios.model.HourCoordinate;
-import edu.bsu.cs222.astraios.model.LongitudeLatitudeCoordinates;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 
 public class Observation {
 
-    private static final HourCoordinate LOCAL_SIDEREAL_TIME_AT_EPOCH = new HourCoordinate(18,41,50.4);
-    private static final double RADIANS_SHIFT_PER_DAY =  0.0172028;
+    private static final HourCoordinate LOCAL_SIDEREAL_TIME_AT_EPOCH = new HourCoordinate(18,41,50.548);
+    private static final double RADIANS_SHIFT_PER_DAY =  0.0172027925;
 
     private final OffsetDateTime time;
     private final LongitudeLatitudeCoordinates longitudeLatitude;

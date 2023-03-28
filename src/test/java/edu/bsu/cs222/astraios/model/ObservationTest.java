@@ -1,9 +1,5 @@
 package edu.bsu.cs222.astraios.model;
 
-import edu.bsu.cs222.astraios.model.FullCircleDegreeCoordinate;
-import edu.bsu.cs222.astraios.model.HalfCircleDegreeCoordinate;
-import edu.bsu.cs222.astraios.model.HourCoordinate;
-import edu.bsu.cs222.astraios.model.LongitudeLatitudeCoordinates;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +31,7 @@ public class ObservationTest {
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(18,41,50.4);
+        HourCoordinate expected = new HourCoordinate(18,41,50.548);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
@@ -49,7 +45,7 @@ public class ObservationTest {
                 OffsetDateTime.parse("2000-01-02T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(18,45,46.955);
+        HourCoordinate expected = new HourCoordinate(18,45,47.104);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
@@ -63,21 +59,49 @@ public class ObservationTest {
                 OffsetDateTime.parse("2000-01-01T13:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(19,42,0.2565);
+        HourCoordinate expected = new HourCoordinate(19,42,00.405);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
     @Test
-    public void testBallStateRecentComputesCorrectly() {
+    public void testGetLocalSiderealTimeEpochPlusOneCenturyComputesCorrectly() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2100-01-01T12:00:00Z")
+        );
+        HourCoordinate actual = observation.getLocalSiderealTime();
+        HourCoordinate expected = new HourCoordinate(18,44,55.454);
+        assertDifferenceLessThanOneSecond(expected, actual);
+    }
+
+    @Test
+    public void testBallStateEpochComputesCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
                         new FullCircleDegreeCoordinate(-85,24,32.2),
                         new HalfCircleDegreeCoordinate(40,11,53.96)
                 ),
-                OffsetDateTime.parse("2023-03-28T13:13:24Z")
+                OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(19,54,33);
+        HourCoordinate expected = new HourCoordinate(13,0,12.402);
+        assertDifferenceLessThanOneSecond(expected, actual);
+    }
+
+    @Test
+    public void testBallState2023DateComputesCorrectly() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(-85,24,32.2),
+                        new HalfCircleDegreeCoordinate(40,11,53.96)
+                ),
+                OffsetDateTime.parse("2023-03-28T13:01:11Z")
+        );
+        HourCoordinate actual = observation.getLocalSiderealTime();
+        HourCoordinate expected = new HourCoordinate(19,42,18.865);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 }
