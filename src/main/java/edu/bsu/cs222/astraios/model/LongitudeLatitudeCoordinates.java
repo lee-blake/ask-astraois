@@ -18,11 +18,11 @@ public class LongitudeLatitudeCoordinates {
         return false;
     }
 
-    public FullCircleDegreeCoordinate getLongitude() {
-        return longitude;
-    }
-
-    public HalfCircleDegreeCoordinate getLatitude() {
-        return latitude;
+    public double getLongitudeAsRadians() {
+        double longitudeAsRadians = longitude.toRadians();
+        if(longitudeAsRadians>Math.PI) {
+            longitudeAsRadians -= Math.PI*2;
+        }
+        return longitudeAsRadians;
     }
 }
