@@ -89,6 +89,10 @@ public class HalfCircleDegreeCoordinate {
         return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
     }
 
+    public HalfCircleDegreeCoordinate negate() {
+        return HalfCircleDegreeCoordinate.fromRadians(-this.toRadians());
+    }
+
 
     public class HalfCircleDegreeCoordinateFormatter {
 

@@ -144,4 +144,20 @@ public class HourCoordinateTest {
         HourCoordinate actual = HourCoordinate.fromRadians(Math.PI);
         Assertions.assertEquals(expected,actual);
     }
+
+
+
+    @Test
+    public void testNegateZeroToZero() {
+        HourCoordinate expected = new HourCoordinate(0,0,0);
+        HourCoordinate actual = new HourCoordinate(0,0,0).negate();
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testNegate6amTo6pm() {
+        HourCoordinate expected = new HourCoordinate(-6,0,0);
+        HourCoordinate actual = new HourCoordinate(6,0,0).negate();
+        Assertions.assertEquals(expected,actual);
+    }
 }

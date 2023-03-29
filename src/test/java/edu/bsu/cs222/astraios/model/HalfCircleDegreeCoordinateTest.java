@@ -208,4 +208,20 @@ public class HalfCircleDegreeCoordinateTest {
                 () -> HalfCircleDegreeCoordinate.fromRadians(-Math.PI/2 - 0.000001)
         );
     }
+
+
+
+    @Test
+    public void testNegateZeroToZero() {
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0,0,0);
+        HalfCircleDegreeCoordinate actual = new HalfCircleDegreeCoordinate(0,0,0).negate();
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testNegateNorthPoleToSouthPole() {
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(-90,0,0);
+        HalfCircleDegreeCoordinate actual = new HalfCircleDegreeCoordinate(90,0,0).negate();
+        Assertions.assertEquals(expected,actual);
+    }
 }

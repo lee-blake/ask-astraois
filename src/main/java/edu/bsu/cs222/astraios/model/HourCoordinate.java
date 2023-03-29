@@ -71,6 +71,10 @@ public class HourCoordinate {
         return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
     }
 
+    public HourCoordinate negate() {
+        return HourCoordinate.fromRadians(-this.toRadians());
+    }
+
 
     public class HourCoordinateFormatter {
 

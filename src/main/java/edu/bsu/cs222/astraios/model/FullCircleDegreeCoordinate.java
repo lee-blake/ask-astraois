@@ -39,7 +39,7 @@ public class FullCircleDegreeCoordinate {
     }
 
     private FullCircleDegreeCoordinate(double radians) {
-        this.units = Math.round(radians*UNITS_FOR_PI_RADIANS / Math.PI);
+        this.units = ((Math.round(radians*UNITS_FOR_PI_RADIANS / Math.PI) % MAX_UNITS) + MAX_UNITS) % MAX_UNITS;
     }
 
     private boolean coordinatesAreValid(int ignoredDegrees, int arcminutes, double arcseconds) {
@@ -64,6 +64,9 @@ public class FullCircleDegreeCoordinate {
 
     public double toRadians() {return Math.PI*this.units/UNITS_FOR_PI_RADIANS;}
 
+    public FullCircleDegreeCoordinate negate() {
+        return FullCircleDegreeCoordinate.fromRadians(-this.toRadians());
+    }
 
 
     public class FullCircleDegreeCoordinateFormatter {
