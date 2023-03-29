@@ -96,28 +96,37 @@ public class HalfCircleDegreeCoordinate {
 
     public class HalfCircleDegreeCoordinateFormatter {
 
+        private final boolean negative;
         private final long degrees;
         private final long arcminutes;
         private final double arcseconds;
 
         public HalfCircleDegreeCoordinateFormatter() {
-            this.degrees = units/UNITS_PER_DEGREE;
+            this.negative = units < 0;
+            this.degrees = Math.abs(units/UNITS_PER_DEGREE);
             this.arcminutes = Math.abs((units % UNITS_PER_DEGREE)/UNITS_PER_ARCMINUTE);
             this.arcseconds = Math.abs((units % UNITS_PER_ARCMINUTE)/(double)UNITS_PER_ARCSECOND);
         }
 
+        private String getSign() {
+            return this.negative ? "-" : "+";
+        }
+
         public String standardDegreeFormatSpaced() {
-            return String.format("%02d° %02d' ",this.degrees,this.arcminutes)
+            return this.getSign()
+                    + String.format("%02d° %02d' ",this.degrees,this.arcminutes)
                     +(new DecimalFormat("00.#########")).format(this.arcseconds) + "\"";
         }
 
         public String standardDegreeFormatNoSpaces() {
-            return String.format("%02d°%02d'",this.degrees,this.arcminutes)
+            return this.getSign()
+                    + String.format("%02d°%02d'",this.degrees,this.arcminutes)
                     +(new DecimalFormat("00.#########")).format(this.arcseconds) + "\"";
         }
 
         public String standardDegreeFormatNoSpacesOneDecimalPlace() {
-            return String.format("%02d°%02d'",this.degrees,this.arcminutes)
+            return this.getSign() +
+                    String.format("%02d°%02d'",this.degrees,this.arcminutes)
                     +(new DecimalFormat("00.0")).format(this.arcseconds) + "\"";
         }
     }

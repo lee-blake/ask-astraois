@@ -38,9 +38,6 @@ public class RightAscensionDeclinationCoordinates {
             HalfCircleDegreeCoordinate.HalfCircleDegreeCoordinateFormatter decFormatter
                     = parent.declination.new HalfCircleDegreeCoordinateFormatter();
             String declinationString = decFormatter.standardDegreeFormatSpaced();
-            if(!declinationString.contains("-")) {
-                declinationString = "+" + declinationString;
-            }
             csvValueMap.put(Header.DECLINATION,declinationString);
             return csvValueMap;
         }
@@ -58,9 +55,6 @@ public class RightAscensionDeclinationCoordinates {
             HalfCircleDegreeCoordinate.HalfCircleDegreeCoordinateFormatter decFormatter
                     = parent.declination.new HalfCircleDegreeCoordinateFormatter();
             String declinationString = decFormatter.standardDegreeFormatNoSpacesOneDecimalPlace();
-            if(!declinationString.contains("-")) {
-                declinationString = "+" + declinationString;
-            }
             cliViewValueMap.put(Header.DECLINATION,declinationString);
             return cliViewValueMap;
         }
