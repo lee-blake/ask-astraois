@@ -31,4 +31,13 @@ public class HourCoordinateTypeConverterTest {
         HourCoordinate actual = converter.convert();
         Assertions.assertEquals(lastMilli,actual);
     }
+
+    @Test
+    public void testConvertStandardFormNegativeLessThanOneHour() {
+        String negativeLessThanOneHour = "-0h 2m 7s";
+        HourCoordinateTypeConverter converter = new HourCoordinateTypeConverter(negativeLessThanOneHour);
+        HourCoordinate actual = converter.convert();
+        HourCoordinate expected = new HourCoordinate(0,2,7).negate();
+        Assertions.assertEquals(expected,actual);
+    }
 }

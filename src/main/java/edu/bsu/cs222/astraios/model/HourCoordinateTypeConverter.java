@@ -2,17 +2,30 @@ package edu.bsu.cs222.astraios.model;
 
 public class HourCoordinateTypeConverter {
 
+    private boolean negative;
     private int hours;
     private int minutes;
     private double seconds;
 
     public HourCoordinateTypeConverter(String stringToConvert) {
         String compactString = removeWhitespace(stringToConvert);
-        this.parseStandardFormat(compactString);
+        String noLongerNegativeString = extractNegative(compactString);
+        this.parseStandardFormat(noLongerNegativeString);
     }
 
     private String removeWhitespace(String stringToStrip) {
         return stringToStrip.replace(" ","");
+    }
+
+    private String extractNegative(String potentiallyNegativeString) {
+        if(potentiallyNegativeString.startsWith("-")) {
+            this.negative = true;
+            return potentiallyNegativeString.substring(1);
+        }
+        else {
+            this.negative = false;
+            return potentiallyNegativeString;
+        }
     }
 
     private void parseStandardFormat(String stringToConvert) {
@@ -27,11 +40,15 @@ public class HourCoordinateTypeConverter {
     }
 
     public HourCoordinate convert() {
-        return new HourCoordinate(
+        HourCoordinate coordinate = new HourCoordinate(
                 this.hours,
                 this.minutes,
                 this.seconds
         );
+        if(this.negative) {
+            coordinate = coordinate.negate();
+        }
+        return coordinate;
     }
 
 }
