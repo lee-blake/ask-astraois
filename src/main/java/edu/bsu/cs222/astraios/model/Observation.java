@@ -60,4 +60,14 @@ public class Observation {
             return 365;
         }
     }
+
+    public double getSolarHourAngleInRadians(double equationOfTimeInRadians) {
+        double offset = this.longitudeLatitude.getLongitudeAsRadians() + equationOfTimeInRadians;
+        int hour = this.observationTime.getHour();
+        int minute = this.observationTime.getMinute();
+        int second = this.observationTime.getSecond();
+        double fractionalHours = hour + minute/60.0 + second/3600.0;
+        double trueSolarTimeRadians = Math.PI*fractionalHours*15/180 + offset;
+        return trueSolarTimeRadians - Math.PI;
+    }
 }
