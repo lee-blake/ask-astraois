@@ -64,4 +64,14 @@ public class TestObjectFactory {
             return objectJournal;
         }
     }
+
+    public static class LongitudeLatitude {
+
+        public static LongitudeLatitudeCoordinates buildBallState() {
+            return new LongitudeLatitudeCoordinates(
+                    new FullCircleDegreeCoordinate(-85,24,32.2),
+                    new HalfCircleDegreeCoordinate(40,11,53.96)
+            );
+        }
+    }
 }

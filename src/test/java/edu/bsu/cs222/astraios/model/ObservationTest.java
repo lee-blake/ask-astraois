@@ -104,4 +104,70 @@ public class ObservationTest {
         HourCoordinate expected = new HourCoordinate(19,42,18.865);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
+
+    @Test
+    public void testGetFractionalYearEpochZero() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                OffsetDateTime.parse("2001-01-01T12:00:00Z")
+        );
+        double actual = observation.getFractionalYear();
+        double expected = 0;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetFractionalYearUTCOnePM1January2001() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                OffsetDateTime.parse("2001-01-01T13:00:00Z")
+        );
+        double actual = observation.getFractionalYear();
+        double expected = 2*Math.PI / (365*24);
+        Assertions.assertEquals(expected, actual, 0.00000001);
+    }
+
+    @Test
+    public void testGetFractionalYearUTCNoon2January2001() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                OffsetDateTime.parse("2001-01-02T12:00:00Z")
+        );
+        double actual = observation.getFractionalYear();
+        double expected = 2*Math.PI / 365;
+        Assertions.assertEquals(expected, actual, 0.00000001);
+    }
+
+    @Test
+    public void testGetFractionalYearUTCNoon2January2004() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                OffsetDateTime.parse("2004-01-02T12:00:00Z")
+        );
+        double actual = observation.getFractionalYear();
+        double expected = 2*Math.PI / 366;
+        Assertions.assertEquals(expected, actual, 0.00000001);
+    }
+
+    @Test
+    public void testGetFractionalYearUTCNoon2January2100() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                OffsetDateTime.parse("2100-01-02T12:00:00Z")
+        );
+        double actual = observation.getFractionalYear();
+        double expected = 2*Math.PI / 365;
+        Assertions.assertEquals(expected, actual, 0.00000001);
+    }
+
+    @Test
+    public void testGetFractionalYearUTCNoon2January2000() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                OffsetDateTime.parse("2000-01-02T12:00:00Z")
+        );
+        double actual = observation.getFractionalYear();
+        double expected = 2*Math.PI / 366;
+        Assertions.assertEquals(expected, actual, 0.00000001);
+    }
 }

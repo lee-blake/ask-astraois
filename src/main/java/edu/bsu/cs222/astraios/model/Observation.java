@@ -41,4 +41,23 @@ public class Observation {
     public double getLatitudeAsRadians() {
         return this.longitudeLatitude.getLatitudeAsRadians();
     }
+
+    public double getFractionalYear() {
+        OffsetDateTime zeroOfYear = EPOCH.withYear(this.observationTime.getYear());
+        long secondsElapsed = Duration.between(zeroOfYear, this.observationTime).getSeconds();
+        int daysInThisYear = getDaysInThisYear();
+        double fractionalDaysElapsed = secondsElapsed / SECONDS_PER_DAY;
+        return 2*Math.PI*fractionalDaysElapsed / daysInThisYear;
+    }
+
+    private int getDaysInThisYear() {
+        int year = this.observationTime.getYear();
+        boolean isLeapYear = (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0));
+        if(isLeapYear) {
+            return 366;
+        }
+        else {
+            return 365;
+        }
+    }
 }
