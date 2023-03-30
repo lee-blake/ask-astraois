@@ -26,6 +26,24 @@ public class AstronomicalObject {
     }
 
 
+    public AltitudeAzimuthCoordinates getAltAzAtObservation(Observation observation) {
+        double hourAngleAsRadians = - this.celestialCoordinates.getRA().toRadians();
+        double declinationAsRadians = this.celestialCoordinates.getDec().toRadians();
+        double sinOfAltitude = Math.cos(declinationAsRadians) * Math.cos(hourAngleAsRadians);
+
+        double altitudeAsRadians = Math.asin(sinOfAltitude);
+        double cosOfAzimuth = Math.sin(declinationAsRadians) / Math.cos(altitudeAsRadians);
+        double azimuthAsRadians = Math.acos(cosOfAzimuth);
+
+        if(Math.sin(hourAngleAsRadians) > 0) {
+            azimuthAsRadians *= -1;
+        }
+        return new AltitudeAzimuthCoordinates(
+                FullCircleDegreeCoordinate.fromRadians(azimuthAsRadians),
+                HalfCircleDegreeCoordinate.fromRadians(altitudeAsRadians)
+        );
+    }
+
 
     public class AstronomicalObjectCSVFormatter {
 

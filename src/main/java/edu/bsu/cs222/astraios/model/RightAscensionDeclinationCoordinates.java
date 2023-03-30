@@ -26,6 +26,13 @@ public class RightAscensionDeclinationCoordinates {
         return "[RA " + this.rightAscension + " DEC " + this.declination + "]";
     }
 
+    public HourCoordinate getRA() {
+        return this.rightAscension;
+    }
+
+    public HalfCircleDegreeCoordinate getDec() {
+        return this.declination;
+    }
 
 
     public class RightAscensionDeclinationCoordinatesCSVFormatter {

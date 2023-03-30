@@ -3,6 +3,8 @@ package edu.bsu.cs222.astraios.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.OffsetDateTime;
+
 public class AstronomicalObjectTest {
 
     // This suppression is needed to verify this intended functionality where anything of another
@@ -109,5 +111,43 @@ public class AstronomicalObjectTest {
         AstronomicalObject astronomicalObject2 = new AstronomicalObject(name2, raDecCoords2);
         boolean result = astronomicalObject1.equals(astronomicalObject2);
         Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testGetAltAzAtObservationAtZeroZeroGetLstM13ComputesCorrectly() {
+        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+                FullCircleDegreeCoordinate.fromRadians(5.3759725),
+                HalfCircleDegreeCoordinate.fromRadians(-0.2701406)
+        );
+        Observation zeroZeroAndLSTZero = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T17:17:18Z")
+        );
+        AstronomicalObject m13 = TestObjectFactory.AstronomicalObjects.buildM13Object();
+        AltitudeAzimuthCoordinates actual = m13.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AngularDistance error = expected.distanceTo(actual);
+        CustomAssertions.assertBounded(new AngularDistance(1,0,0), error);
+    }
+
+    @Test
+    public void testGetAltAzAtObservationAtZeroZeroGetLstM31ComputesCorrectly() {
+        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+                FullCircleDegreeCoordinate.fromRadians(.213050104),
+                HalfCircleDegreeCoordinate.fromRadians(.827764035)
+        );
+        Observation zeroZeroAndLSTZero = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T17:17:18Z")
+        );
+        AstronomicalObject m31 = TestObjectFactory.AstronomicalObjects.buildM31Object();
+        AltitudeAzimuthCoordinates actual = m31.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AngularDistance error = expected.distanceTo(actual);
+        CustomAssertions.assertBounded(new AngularDistance(1,0,0), error);
     }
 }
