@@ -25,4 +25,8 @@ public class LongitudeLatitudeCoordinates {
         }
         return longitudeAsRadians;
     }
+
+    public double getLatitudeAsRadians() {
+        return this.latitude.toRadians();
+    }
 }

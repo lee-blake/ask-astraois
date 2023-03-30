@@ -3,6 +3,9 @@ package edu.bsu.cs222.astraios.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
 public class AstronomicalObject {
 
     private final String name;
@@ -27,20 +30,22 @@ public class AstronomicalObject {
 
 
     public AltitudeAzimuthCoordinates getAltAzAtObservation(Observation observation) {
-        double hourAngleAsRadians = - this.celestialCoordinates.getRA().toRadians();
-        double declinationAsRadians = this.celestialCoordinates.getDec().toRadians();
-        double sinOfAltitude = Math.cos(declinationAsRadians) * Math.cos(hourAngleAsRadians);
+        double ha = observation.getLocalSiderealTime().toRadians()
+                - this.celestialCoordinates.getRA().toRadians();
+        double dec = this.celestialCoordinates.getDec().toRadians();
+        double lat = observation.getLatitudeAsRadians();
+        double sinOfAltitude = sin(dec)*sin(lat) + cos(dec)*cos(lat)*cos(ha);
 
-        double altitudeAsRadians = Math.asin(sinOfAltitude);
-        double cosOfAzimuth = Math.sin(declinationAsRadians) / Math.cos(altitudeAsRadians);
+        double alt = Math.asin(sinOfAltitude);
+        double cosOfAzimuth = (sin(dec) - sin(alt)*sin(lat))/(cos(alt)*cos(lat));
         double azimuthAsRadians = Math.acos(cosOfAzimuth);
 
-        if(Math.sin(hourAngleAsRadians) > 0) {
+        if(sin(ha) > 0) {
             azimuthAsRadians *= -1;
         }
         return new AltitudeAzimuthCoordinates(
                 FullCircleDegreeCoordinate.fromRadians(azimuthAsRadians),
-                HalfCircleDegreeCoordinate.fromRadians(altitudeAsRadians)
+                HalfCircleDegreeCoordinate.fromRadians(alt)
         );
     }
 

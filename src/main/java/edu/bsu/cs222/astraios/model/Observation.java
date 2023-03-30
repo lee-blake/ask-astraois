@@ -37,4 +37,8 @@ public class Observation {
                 this.observationTime.getSecond()
         );
     }
+
+    public double getLatitudeAsRadians() {
+        return this.longitudeLatitude.getLatitudeAsRadians();
+    }
 }
