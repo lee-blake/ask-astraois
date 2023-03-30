@@ -150,4 +150,23 @@ public class AstronomicalObjectTest {
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(new AngularDistance(1,0,0), error);
     }
+
+    @Test
+    public void testGetAltAzAtObservationAtZeroZeroGetLst1M13ComputesCorrectly() {
+        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+                new FullCircleDegreeCoordinate(37,42,20.2),
+                new HalfCircleDegreeCoordinate(-41,19,1.5)
+        );
+        Observation zeroZeroAndLSTZero = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(15,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T17:17:18Z")
+        );
+        AstronomicalObject m13 = TestObjectFactory.AstronomicalObjects.buildM13Object();
+        AltitudeAzimuthCoordinates actual = m13.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AngularDistance error = expected.distanceTo(actual);
+        CustomAssertions.assertBounded(new AngularDistance(1,0,0), error);
+    }
 }
