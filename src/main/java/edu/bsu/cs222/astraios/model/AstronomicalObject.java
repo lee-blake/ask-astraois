@@ -3,8 +3,6 @@ package edu.bsu.cs222.astraios.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 
 public class AstronomicalObject {
 
@@ -30,23 +28,7 @@ public class AstronomicalObject {
 
 
     public AltitudeAzimuthCoordinates getAltAzAtObservation(Observation observation) {
-        double ha = observation.getLocalSiderealTime().toRadians()
-                - this.celestialCoordinates.getRA().toRadians();
-        double dec = this.celestialCoordinates.getDec().toRadians();
-        double lat = observation.getLatitudeAsRadians();
-        double sinOfAltitude = sin(dec)*sin(lat) + cos(dec)*cos(lat)*cos(ha);
-
-        double alt = Math.asin(sinOfAltitude);
-        double cosOfAzimuth = (sin(dec) - sin(alt)*sin(lat))/(cos(alt)*cos(lat));
-        double azimuthAsRadians = Math.acos(cosOfAzimuth);
-
-        if(sin(ha) > 0) {
-            azimuthAsRadians *= -1;
-        }
-        return new AltitudeAzimuthCoordinates(
-                FullCircleDegreeCoordinate.fromRadians(azimuthAsRadians),
-                HalfCircleDegreeCoordinate.fromRadians(alt)
-        );
+        return this.celestialCoordinates.convertToAltAzAtObservation(observation);
     }
 
 

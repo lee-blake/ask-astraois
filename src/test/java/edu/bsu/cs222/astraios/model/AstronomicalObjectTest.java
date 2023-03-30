@@ -129,7 +129,7 @@ public class AstronomicalObjectTest {
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject zeroZero = new AstronomicalObject(
-                "zerozero",
+                "zeroZero",
                 new RightAscensionDeclinationCoordinates(
                         new HourCoordinate(0,0,0),
                         new HalfCircleDegreeCoordinate(0,0,0)
@@ -154,7 +154,7 @@ public class AstronomicalObjectTest {
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject oneZero = new AstronomicalObject(
-                "onezero",
+                "oneZero",
                 new RightAscensionDeclinationCoordinates(
                         new HourCoordinate(1,0,0),
                         new HalfCircleDegreeCoordinate(0,0,0)
@@ -179,7 +179,7 @@ public class AstronomicalObjectTest {
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject zeroZero = new AstronomicalObject(
-                "zerozero",
+                "zeroZero",
                 new RightAscensionDeclinationCoordinates(
                         new HourCoordinate(0,0,0),
                         new HalfCircleDegreeCoordinate(0,0,0)

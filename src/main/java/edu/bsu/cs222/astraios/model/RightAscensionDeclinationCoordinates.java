@@ -3,6 +3,9 @@ package edu.bsu.cs222.astraios.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
 public class RightAscensionDeclinationCoordinates {
 
     private final HourCoordinate rightAscension;
@@ -26,12 +29,24 @@ public class RightAscensionDeclinationCoordinates {
         return "[RA " + this.rightAscension + " DEC " + this.declination + "]";
     }
 
-    public HourCoordinate getRA() {
-        return this.rightAscension;
-    }
+    public AltitudeAzimuthCoordinates convertToAltAzAtObservation(Observation observation) {
+        double ha = observation.getLocalSiderealTime().toRadians()
+                - this.rightAscension.toRadians();
+        double dec = this.declination.toRadians();
+        double lat = observation.getLatitudeAsRadians();
+        double sinOfAltitude = sin(dec)*sin(lat) + cos(dec)*cos(lat)*cos(ha);
 
-    public HalfCircleDegreeCoordinate getDec() {
-        return this.declination;
+        double alt = Math.asin(sinOfAltitude);
+        double cosOfAzimuth = (sin(dec) - sin(alt)*sin(lat))/(cos(alt)*cos(lat));
+        double azimuthAsRadians = Math.acos(cosOfAzimuth);
+
+        if(sin(ha) > 0) {
+            azimuthAsRadians *= -1;
+        }
+        return new AltitudeAzimuthCoordinates(
+                FullCircleDegreeCoordinate.fromRadians(azimuthAsRadians),
+                HalfCircleDegreeCoordinate.fromRadians(alt)
+        );
     }
 
 
