@@ -78,7 +78,7 @@ public class ObservationTest {
     }
 
     @Test
-    public void testBallStateEpochComputesCorrectly() {
+    public void testGetLocalSiderealTimeBallStateEpochComputesCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
                         new FullCircleDegreeCoordinate(-85,24,32.2),
@@ -92,7 +92,7 @@ public class ObservationTest {
     }
 
     @Test
-    public void testBallState2023DateComputesCorrectly() {
+    public void testGetLocalSiderealTimeBallState2023DateComputesCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
                         new FullCircleDegreeCoordinate(-85,24,32.2),
@@ -104,6 +104,8 @@ public class ObservationTest {
         HourCoordinate expected = new HourCoordinate(19,42,18.865);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
+
+
 
     @Test
     public void testGetFractionalYearEpochZero() {
@@ -169,5 +171,16 @@ public class ObservationTest {
         double actual = observation.getFractionalYear();
         double expected = 2*Math.PI / 366;
         Assertions.assertEquals(expected, actual, 0.00000001);
+    }
+
+    @Test
+    public void testGetFractionalYearUTCPlusOneOnePM1January2000() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                OffsetDateTime.parse("2001-01-01T13:00:00+01:00")
+        );
+        double actual = observation.getFractionalYear();
+        double expected = 0;
+        Assertions.assertEquals(expected, actual);
     }
 }

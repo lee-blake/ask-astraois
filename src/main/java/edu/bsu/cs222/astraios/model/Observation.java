@@ -2,6 +2,7 @@ package edu.bsu.cs222.astraios.model;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 public class Observation {
 
@@ -16,7 +17,7 @@ public class Observation {
 
     public Observation(LongitudeLatitudeCoordinates longitudeLatitudeCoordinates, OffsetDateTime time) {
         this.longitudeLatitude = longitudeLatitudeCoordinates;
-        this.observationTime = time;
+        this.observationTime = time.withOffsetSameInstant(ZoneOffset.UTC);
     }
 
     public HourCoordinate getLocalSiderealTime() {

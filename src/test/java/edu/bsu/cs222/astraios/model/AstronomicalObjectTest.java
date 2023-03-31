@@ -239,4 +239,29 @@ public class AstronomicalObjectTest {
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(new AngularDistance(0, 1, 0), error);
     }
+
+    @Test
+    public void testGetAltAzAtObservationZeroZeroEpochZeroZeroNonUTCComputesCorrectly() {
+        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+                new FullCircleDegreeCoordinate(90,0,0),
+                new HalfCircleDegreeCoordinate(10,27,38.25)
+        );
+        Observation zeroZeroAndLSTZero = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T13:00:00+01:00")
+        );
+        AstronomicalObject zeroZero = new AstronomicalObject(
+                "zeroZero",
+                new RightAscensionDeclinationCoordinates(
+                        new HourCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                )
+        );
+        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AngularDistance error = expected.distanceTo(actual);
+        CustomAssertions.assertBounded(new AngularDistance(0,1,0), error);
+    }
 }

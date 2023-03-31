@@ -62,4 +62,23 @@ public class SunTest {
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(new AngularDistance(1,0,0),error);
     }
+
+    @Test
+    public void testGetLocationDuringObservationNOAASpreadsheetDefaultLocationLocal0_06ComputesCorrectly() {
+        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+                new FullCircleDegreeCoordinate(345,52,8.7682),
+                new HalfCircleDegreeCoordinate(-25,14,44.5866)
+        );
+        Observation zeroZeroEpoch = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(-105,0,0),
+                        new HalfCircleDegreeCoordinate(40,0,0)
+                ),
+                OffsetDateTime.parse("2010-06-21T00:06:00-06:00")
+        );
+        Sun sun = new Sun();
+        AltitudeAzimuthCoordinates actual = sun.getLocationDuringObservation(zeroZeroEpoch);
+        AngularDistance error = expected.distanceTo(actual);
+        CustomAssertions.assertBounded(new AngularDistance(1,0,0),error);
+    }
 }
