@@ -39,4 +39,8 @@ public class AltitudeAzimuthCoordinates {
     public boolean isAboveHorizon() {
         return this.altitude.toRadians() > 0;
     }
+
+    public double getAltitudeInRadians() {
+        return this.altitude.toRadians();
+    }
 }

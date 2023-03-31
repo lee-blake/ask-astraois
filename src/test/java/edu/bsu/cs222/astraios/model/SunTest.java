@@ -1,5 +1,6 @@
 package edu.bsu.cs222.astraios.model;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
@@ -80,5 +81,93 @@ public class SunTest {
         AltitudeAzimuthCoordinates actual = sun.getLocationDuringObservation(zeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(new AngularDistance(1,0,0),error);
+    }
+
+
+
+    @Test
+    public void testIsNightAround17DegreesBelowNotNight() {
+        Observation observation = new Observation(
+            new LongitudeLatitudeCoordinates(
+                    new FullCircleDegreeCoordinate(0,0,0),
+                    new HalfCircleDegreeCoordinate(0,0,0)
+            ),
+            OffsetDateTime.parse("2000-01-01T04:50:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.isNight(observation);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsNightAround19DegreesBelowIsNight() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T04:40:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.isNight(observation);
+        Assertions.assertTrue(result);
+    }
+
+
+
+    @Test
+    public void testIsAstronomicalTwilightAround17DegreesBelowIsTwilight() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T04:50:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.isAstronomicalTwilight(observation);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testIsAstronomicalTwilightAround19DegreesBelowNotTwilight() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T04:40:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.isAstronomicalTwilight(observation);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsAstronomicalTwilightAround11DegreesBelowNotTwilight() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T05:13:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.isAstronomicalTwilight(observation);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsAstronomicalTwilightAround13DegreesBelowIsTwilight() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T05:06:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.isAstronomicalTwilight(observation);
+        Assertions.assertTrue(result);
     }
 }

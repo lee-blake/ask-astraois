@@ -5,6 +5,9 @@ import static java.lang.Math.sin;
 
 public class Sun {
 
+    private static final double NIGHT_UPPER_CUTOFF_RADIANS = -Math.PI*18/180;
+    private static final double TWILIGHT_UPPER_CUTOFF_RADIANS = -Math.PI*12/180;
+
     public AltitudeAzimuthCoordinates getLocationDuringObservation(Observation observation) {
         double fractionalYear = observation.getFractionalYear();
         double equationOfTime = getEquationOfTime(fractionalYear);
@@ -50,5 +53,14 @@ public class Sun {
                 + 0.000907*sin(2*fractionalYear)
                 - 0.002697*cos(3*fractionalYear)
                 + 0.001480*sin(3*fractionalYear);
+    }
+
+    public boolean isNight(Observation observation) {
+        return this.getLocationDuringObservation(observation).getAltitudeInRadians() < NIGHT_UPPER_CUTOFF_RADIANS;
+    }
+
+    public boolean isAstronomicalTwilight(Observation observation) {
+        double altitudeRadians = this.getLocationDuringObservation(observation).getAltitudeInRadians();
+        return altitudeRadians >= NIGHT_UPPER_CUTOFF_RADIANS && altitudeRadians < TWILIGHT_UPPER_CUTOFF_RADIANS;
     }
 }
