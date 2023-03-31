@@ -63,4 +63,8 @@ public class Sun {
         double altitudeRadians = this.getLocationDuringObservation(observation).getAltitudeInRadians();
         return altitudeRadians >= NIGHT_UPPER_CUTOFF_RADIANS && altitudeRadians < TWILIGHT_UPPER_CUTOFF_RADIANS;
     }
+
+    public boolean sunInterferesWithViewing(Observation observation) {
+        return !(this.isNight(observation) || this.isAstronomicalTwilight(observation));
+    }
 }
