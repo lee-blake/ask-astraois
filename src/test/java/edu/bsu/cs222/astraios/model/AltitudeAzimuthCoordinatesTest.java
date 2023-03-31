@@ -94,4 +94,25 @@ public class AltitudeAzimuthCoordinatesTest {
         AngularDistance expected = new AngularDistance(120,0,0);
         Assertions.assertEquals(expected,actual);
     }
+
+
+
+    @Test
+    public void testIsAboveHorizonPlusOneThousandthOfOneArcsecondIsAbove() {
+        AltitudeAzimuthCoordinates above = new AltitudeAzimuthCoordinates(
+                new FullCircleDegreeCoordinate(0,0,0),
+                new HalfCircleDegreeCoordinate(0,0,0.001)
+        );
+        boolean result = above.isAboveHorizon();
+        Assertions.assertTrue(result);
+    }
+    @Test
+    public void testIsAboveHorizonMinusOneThousandthOfOneArcsecondIsNotAbove() {
+        AltitudeAzimuthCoordinates above = new AltitudeAzimuthCoordinates(
+                new FullCircleDegreeCoordinate(0,0,0),
+                new HalfCircleDegreeCoordinate(0,0,0.001).negate()
+        );
+        boolean result = above.isAboveHorizon();
+        Assertions.assertFalse(result);
+    }
 }

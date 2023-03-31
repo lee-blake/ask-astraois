@@ -35,4 +35,8 @@ public class AltitudeAzimuthCoordinates {
         );
         return AngularDistance.fromRadians(angularDistanceRadians);
     }
+
+    public boolean isAboveHorizon() {
+        return this.altitude.toRadians() > 0;
+    }
 }
