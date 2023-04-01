@@ -35,11 +35,24 @@ public class VisibilityChecker {
     }
 
     private String buildStatusStringWhenVisible(){
-        return buildStatusStringHeaders() + buildStatusStringBody();
+        return buildTwilightWarning() + buildStatusStringHeaders() + buildStatusStringBody();
+    }
+
+    private String buildTwilightWarning() {
+        if(astronomicalTwilight()) {
+            return "Warning: This observation is in astronomical twilight, "
+                    + "which may interfere with viewing faint objects.\n";
+        }
+        return "";
+    }
+
+    private boolean astronomicalTwilight() {
+        Sun sun = new Sun();
+        return sun.isAstronomicalTwilight(this.observation);
     }
 
     private String buildStatusStringHeaders() {
-        return "\n"+String.format("%-15s   %-10s   %-10s   %-10s   %-10s\n",
+        return String.format("%-15s   %-10s   %-10s   %-10s   %-10s\n",
                 "Name",
                 "R.A.",
                 "Dec.",

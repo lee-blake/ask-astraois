@@ -184,15 +184,14 @@ public class VisibilityCheckerTest {
         );
         VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
         String actual = checker.buildVisibilityStatusString();
-        String expected = """
-                
+        String expected = """                
                 Name              R.A.         Dec.         Az.          Alt.     \s
                 testObject12      12h00m00.0s   +00°00'00.0"   90°00'00"    +70°07'55.4\"""";
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void testBuildVisibilityStatusStringVisibleObjectEleventBuildsCorrectly() {
+    public void testBuildVisibilityStatusStringVisibleObjectElevenBuildsCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
                         new FullCircleDegreeCoordinate(0,0,0),
@@ -209,10 +208,34 @@ public class VisibilityCheckerTest {
         );
         VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
         String actual = checker.buildVisibilityStatusString();
-        String expected = """
-                
+        String expected = """         
                 Name              R.A.         Dec.         Az.          Alt.     \s
                 testObject11      11h00m00.0s   +00°00'00.0"   90°00'00"    +85°07'55.4\"""";
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testBuildVisibilityStatusStringTwilightBuildsCorrectly() {
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        new FullCircleDegreeCoordinate(0,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                ),
+                OffsetDateTime.parse("2000-01-01T05:00:00Z")
+        );
+        AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
+                "testObject11",
+                new RightAscensionDeclinationCoordinates(
+                        new HourCoordinate(11,0,0),
+                        new HalfCircleDegreeCoordinate(0,0,0)
+                )
+        );
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        String actual = checker.buildVisibilityStatusString();
+        String expected = """
+                Warning: This observation is in astronomical twilight, which may interfere with viewing faint objects.
+                Name              R.A.         Dec.         Az.          Alt.     \s
+                testObject11      11h00m00.0s   +00°00'00.0"   270°00'00"   +79°49'36.7\"""";
         Assertions.assertEquals(expected, actual);
     }
 }
