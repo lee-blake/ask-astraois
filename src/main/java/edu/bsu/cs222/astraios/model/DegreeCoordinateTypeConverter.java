@@ -51,4 +51,16 @@ public class DegreeCoordinateTypeConverter {
         }
         return coordinate;
     }
+
+    public FullCircleDegreeCoordinate convertFullCircle() {
+        FullCircleDegreeCoordinate coordinate = new FullCircleDegreeCoordinate(
+                this.degrees,
+                this.arcminutes,
+                this.arcseconds
+        );
+        if(this.negative) {
+            coordinate = coordinate.negate();
+        }
+        return coordinate;
+    }
 }

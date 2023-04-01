@@ -10,10 +10,11 @@ import picocli.CommandLine.Option;
         description = "Maintain a journal of astronomical objects to view via its subcommands.",
         subcommands = {
                 AddCommand.class,
-                RemoveCommand.class,
                 CompleteCommand.class,
+                RemoveCommand.class,
                 UncompleteCommand.class,
-                ViewCommand.class
+                ViewCommand.class,
+                VisibilityCommand.class
         }
 )
 public class Main {

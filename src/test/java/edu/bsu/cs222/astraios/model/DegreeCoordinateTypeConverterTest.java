@@ -49,4 +49,24 @@ public class DegreeCoordinateTypeConverterTest {
         HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0,1,3).negate();
         Assertions.assertEquals(expected,actual);
     }
+
+
+
+    @Test
+    public void testConvertFullCircleStandardFormNegativeLessThanOneDegree() {
+        String negativeLessThanOneDegree = "-0° 1' 3\"";
+        DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeLessThanOneDegree);
+        FullCircleDegreeCoordinate actual = converter.convertFullCircle();
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0,1,3).negate();
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testConvertFullCircleStandardFormHighModulus() {
+        String highModulus = "362° 17' 59.9\"";
+        DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(highModulus);
+        FullCircleDegreeCoordinate actual = converter.convertFullCircle();
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(2,17,59.9);
+        Assertions.assertEquals(expected,actual);
+    }
 }
