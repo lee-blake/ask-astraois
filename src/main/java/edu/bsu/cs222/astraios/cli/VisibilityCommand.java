@@ -1,12 +1,12 @@
 package edu.bsu.cs222.astraios.cli;
 
 
-import edu.bsu.cs222.astraios.model.FullCircleDegreeCoordinate;
-import edu.bsu.cs222.astraios.model.HalfCircleDegreeCoordinate;
+import edu.bsu.cs222.astraios.model.*;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.concurrent.Callable;
 
@@ -64,11 +64,27 @@ public class VisibilityCommand implements Callable<Integer> {
     private OffsetDateTime datetime;
 
     @Override
-    public Integer call() {
-        System.out.println(name);
-        System.out.println(longitude);
-        System.out.println(latitude);
-        System.out.println(datetime);
-        return null;
+    public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+                JournalFileMaintainer.defaultOriginalPath,
+                JournalFileMaintainer.defaultBackupPath
+        );
+        ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
+        AstronomicalObject objectToCheck = objectJournal.getEntryByName(name).getAstronomicalObject();
+        Observation observation = new Observation(
+                new LongitudeLatitudeCoordinates(
+                        longitude,
+                        latitude
+                ),
+                datetime
+        );
+        this.outputVisibilityStatusString(objectToCheck, observation);
+        return 0;
+    }
+
+    private void outputVisibilityStatusString(AstronomicalObject objectToCheck, Observation observation) {
+        VisibilityChecker visibilityChecker = new VisibilityChecker(objectToCheck, observation);
+        String stringToOutput = visibilityChecker.buildVisibilityStatusString();
+        System.out.println(stringToOutput);
     }
 }
