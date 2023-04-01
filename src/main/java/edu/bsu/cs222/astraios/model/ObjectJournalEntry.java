@@ -103,9 +103,9 @@ public class ObjectJournalEntry {
 
         private Map<Header,String> buildMainCLIViewValueMap() {
             ObjectJournalEntry parent = ObjectJournalEntry.this;
-            AstronomicalObject.AstronomicalObjectCLIViewFormatter objectFormatter
-                    = parent.astronomicalObject.new AstronomicalObjectCLIViewFormatter();
-            Map<Header,String> mainCLIViewValueMap = objectFormatter.getCLIViewValueMap();
+            AstronomicalObject.AstronomicalObjectCLIFormatter objectFormatter
+                    = parent.astronomicalObject.new AstronomicalObjectCLIFormatter();
+            Map<Header,String> mainCLIViewValueMap = objectFormatter.getCLIValueMap();
             CompletionStatus.CompletionStatusCLIViewFormatter completionFormatter
                     = parent.completionStatus.new CompletionStatusCLIViewFormatter();
             Map<Header,String> completionCLIViewValueMap = completionFormatter.getCLIViewValueMap();

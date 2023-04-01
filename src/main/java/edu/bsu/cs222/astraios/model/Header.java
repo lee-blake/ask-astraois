@@ -5,7 +5,9 @@ public enum Header {
     NAME("Name"),
     RIGHT_ASCENSION("Right Ascension"),
     DECLINATION("Declination"),
-    COMPLETION_DATE("Completion Date");
+    COMPLETION_DATE("Completion Date"),
+    ALTITUDE("Altitude"),
+    AZIMUTH("Azimuth");
 
     private final String value;
 

@@ -46,9 +46,9 @@ public class AstronomicalObject {
         }
     }
 
-    public class AstronomicalObjectCLIViewFormatter {
+    public class AstronomicalObjectCLIFormatter {
 
-        public Map<Header, String> getCLIViewValueMap() {
+        public Map<Header, String> getCLIValueMap() {
             AstronomicalObject parent = AstronomicalObject.this;
             Map<Header, String> objectCLIViewValueMap = new HashMap<>();
             objectCLIViewValueMap.put(Header.NAME,parent.name);

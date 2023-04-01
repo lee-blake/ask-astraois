@@ -1,5 +1,8 @@
 package edu.bsu.cs222.astraios.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static java.lang.Math.*;
 
 public class AltitudeAzimuthCoordinates {
@@ -42,5 +45,23 @@ public class AltitudeAzimuthCoordinates {
 
     public double getAltitudeInRadians() {
         return this.altitude.toRadians();
+    }
+
+
+
+    public class AltitudeAzimuthCoordinatesCLIFormatter {
+
+        public Map<Header, String> getCLIValueMap() {
+            Map<Header,String> cliValueMap = new HashMap<>();
+            FullCircleDegreeCoordinate.FullCircleDegreeCoordinateFormatter azFormatter =
+                    azimuth.new FullCircleDegreeCoordinateFormatter();
+            String azimuthString = azFormatter.standardDegreeFormatNoSpacesOneDecimalPlace();
+            cliValueMap.put(Header.AZIMUTH,azimuthString);
+            HalfCircleDegreeCoordinate.HalfCircleDegreeCoordinateFormatter altFormatter
+                    = altitude.new HalfCircleDegreeCoordinateFormatter();
+            String altitudeString = altFormatter.standardDegreeFormatNoSpacesOneDecimalPlace();
+            cliValueMap.put(Header.ALTITUDE,altitudeString);
+            return cliValueMap;
+        }
     }
 }

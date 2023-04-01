@@ -85,5 +85,10 @@ public class FullCircleDegreeCoordinate {
             return String.format("%02d°%02d'",this.degrees,this.arcminutes)
                     +(new DecimalFormat("00.#########")).format(this.arcseconds) + "\"";
         }
+
+        public String standardDegreeFormatNoSpacesOneDecimalPlace() {
+            return String.format("%02d°%02d'",this.degrees,this.arcminutes)
+                    +(new DecimalFormat("00.#")).format(this.arcseconds) + "\"";
+        }
     }
 }
