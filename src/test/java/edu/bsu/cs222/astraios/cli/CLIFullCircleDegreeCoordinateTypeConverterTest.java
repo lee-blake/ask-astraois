@@ -12,8 +12,8 @@ public class CLIFullCircleDegreeCoordinateTypeConverterTest {
         String messyNegativeLessThanOneDegreeAsteriskForm = "-0*             17'        59.9";
         CLIFullCircleDegreeCoordinateTypeConverter converter = new CLIFullCircleDegreeCoordinateTypeConverter();
         FullCircleDegreeCoordinate actual = converter.convert(messyNegativeLessThanOneDegreeAsteriskForm);
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0,17,59.9).negate();
-        Assertions.assertEquals(expected,actual);
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0, 17, 59.9).negate();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

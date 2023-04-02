@@ -121,18 +121,18 @@ public class FullCircleDegreeCoordinateTest {
 
     @Test
     public void testToRadiansZeroConvertsCorrectly() {
-        FullCircleDegreeCoordinate zero = new FullCircleDegreeCoordinate(0,0,0);
+        FullCircleDegreeCoordinate zero = new FullCircleDegreeCoordinate(0, 0, 0);
         double expected = 0;
         double actual = zero.toRadians();
-        Assertions.assertEquals(expected,actual,0.000000001);
+        Assertions.assertEquals(expected, actual, 0.000000001);
     }
 
     @Test
     public void testToRadians90ConvertsCorrectly() {
-        FullCircleDegreeCoordinate ninety = new FullCircleDegreeCoordinate(90,0,0);
+        FullCircleDegreeCoordinate ninety = new FullCircleDegreeCoordinate(90, 0, 0);
         double expected = Math.PI/2;
         double actual = ninety.toRadians();
-        Assertions.assertEquals(expected,actual,0.000000001);
+        Assertions.assertEquals(expected, actual, 0.000000001);
     }
 
 
@@ -140,7 +140,7 @@ public class FullCircleDegreeCoordinateTest {
     @Test
     public void testFromRadiansZeroConvertsCorrectly() {
         double zero = 0.0;
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0,0,0);
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0, 0, 0);
         FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(zero);
         Assertions.assertEquals(expected, actual);
     }
@@ -148,7 +148,7 @@ public class FullCircleDegreeCoordinateTest {
     @Test
     public void testFromRadiansRightAngleConvertsCorrectly() {
         double rightAngle = Math.PI/2;
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(90,0,0);
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(90, 0, 0);
         FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(rightAngle);
         Assertions.assertEquals(expected, actual);
     }
@@ -157,15 +157,15 @@ public class FullCircleDegreeCoordinateTest {
 
     @Test
     public void testNegateZeroToZero() {
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0,0,0);
-        FullCircleDegreeCoordinate actual = new FullCircleDegreeCoordinate(0,0,0).negate();
-        Assertions.assertEquals(expected,actual);
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0, 0, 0);
+        FullCircleDegreeCoordinate actual = new FullCircleDegreeCoordinate(0, 0, 0).negate();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testNegateRightAngleToNegativeRightAngle() {
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(-90,0,0);
-        FullCircleDegreeCoordinate actual = new FullCircleDegreeCoordinate(90,0,0).negate();
-        Assertions.assertEquals(expected,actual);
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(-90, 0, 0);
+        FullCircleDegreeCoordinate actual = new FullCircleDegreeCoordinate(90, 0, 0).negate();
+        Assertions.assertEquals(expected, actual);
     }
 }

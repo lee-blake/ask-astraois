@@ -12,7 +12,7 @@ public class CLIHourCoordinateTypeConverterTest {
         String messyNegativeLessThanOneDegreeAsteriskForm = "-0h             17m        59.9s";
         CLIHourCoordinateTypeConverter converter = new CLIHourCoordinateTypeConverter();
         HourCoordinate actual = converter.convert(messyNegativeLessThanOneDegreeAsteriskForm);
-        HourCoordinate expected = new HourCoordinate(0,17,59.9).negate();
+        HourCoordinate expected = new HourCoordinate(0, 17, 59.9).negate();
         Assertions.assertEquals(expected, actual);
     }
 

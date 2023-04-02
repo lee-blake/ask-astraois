@@ -115,49 +115,49 @@ public class HourCoordinateTest {
 
     @Test
     public void testToRadiansMidnightConvertsCorrectly() {
-        HourCoordinate midnight = new HourCoordinate(0,0,0);
+        HourCoordinate midnight = new HourCoordinate(0, 0, 0);
         double expected = 0;
         double actual = midnight.toRadians();
-        Assertions.assertEquals(expected,actual,0.000000001);
+        Assertions.assertEquals(expected, actual, 0.000000001);
     }
 
     @Test
     public void testToRadiansNoonConvertsCorrectly() {
-        HourCoordinate noon = new HourCoordinate(12,0,0);
+        HourCoordinate noon = new HourCoordinate(12, 0, 0);
         double expected = Math.PI;
         double actual = noon.toRadians();
-        Assertions.assertEquals(expected,actual,0.000000001);
+        Assertions.assertEquals(expected, actual, 0.000000001);
     }
 
 
 
     @Test
     public void testFromRadiansMidnightConstructsCorrectly() {
-        HourCoordinate expected = new HourCoordinate(0,0,0);
+        HourCoordinate expected = new HourCoordinate(0, 0, 0);
         HourCoordinate actual = HourCoordinate.fromRadians(0);
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testFromRadiansNoonConstructsCorrectly() {
-        HourCoordinate expected = new HourCoordinate(12,0,0);
+        HourCoordinate expected = new HourCoordinate(12, 0, 0);
         HourCoordinate actual = HourCoordinate.fromRadians(Math.PI);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
 
 
     @Test
     public void testNegateZeroToZero() {
-        HourCoordinate expected = new HourCoordinate(0,0,0);
-        HourCoordinate actual = new HourCoordinate(0,0,0).negate();
+        HourCoordinate expected = new HourCoordinate(0, 0, 0);
+        HourCoordinate actual = new HourCoordinate(0, 0, 0).negate();
         Assertions.assertEquals(expected,actual);
     }
 
     @Test
     public void testNegate6amTo6pm() {
-        HourCoordinate expected = new HourCoordinate(-6,0,0);
-        HourCoordinate actual = new HourCoordinate(6,0,0).negate();
-        Assertions.assertEquals(expected,actual);
+        HourCoordinate expected = new HourCoordinate(-6, 0, 0);
+        HourCoordinate actual = new HourCoordinate(6, 0, 0).negate();
+        Assertions.assertEquals(expected, actual);
     }
 }

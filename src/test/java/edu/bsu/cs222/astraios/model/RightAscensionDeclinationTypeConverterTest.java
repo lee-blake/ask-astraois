@@ -14,11 +14,11 @@ public class RightAscensionDeclinationTypeConverterTest {
                 declinationOfZeroStandardForm
         );
         RightAscensionDeclinationCoordinates zero = new RightAscensionDeclinationCoordinates(
-            new HourCoordinate(0,0,0),
-            new HalfCircleDegreeCoordinate(0,0,0)
+            new HourCoordinate(0, 0, 0),
+            new HalfCircleDegreeCoordinate(0, 0, 0)
         );
         RightAscensionDeclinationCoordinates actual = converter.convert();
-        Assertions.assertEquals(zero,actual);
+        Assertions.assertEquals(zero, actual);
     }
 
     @Test
@@ -30,10 +30,10 @@ public class RightAscensionDeclinationTypeConverterTest {
                 declinationOfM13StandardForm
         );
         RightAscensionDeclinationCoordinates m13Coords = new RightAscensionDeclinationCoordinates(
-                new HourCoordinate(16,41,41.24),
-                new HalfCircleDegreeCoordinate(36,27,35.5)
+                new HourCoordinate(16, 41, 41.24),
+                new HalfCircleDegreeCoordinate(36, 27, 35.5)
         );
         RightAscensionDeclinationCoordinates actual = converter.convert();
-        Assertions.assertEquals(m13Coords,actual);
+        Assertions.assertEquals(m13Coords, actual);
     }
 }

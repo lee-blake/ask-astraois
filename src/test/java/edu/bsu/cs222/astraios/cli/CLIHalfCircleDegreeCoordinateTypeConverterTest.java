@@ -12,7 +12,7 @@ public class CLIHalfCircleDegreeCoordinateTypeConverterTest {
         String messyNegativeLessThanOneDegreeAsteriskForm = "-0*             17'        59.9";
         CLIHalfCircleDegreeCoordinateTypeConverter converter = new CLIHalfCircleDegreeCoordinateTypeConverter();
         HalfCircleDegreeCoordinate actual = converter.convert(messyNegativeLessThanOneDegreeAsteriskForm);
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0,17,59.9).negate();
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0, 17, 59.9).negate();
         Assertions.assertEquals(expected, actual);
     }
 

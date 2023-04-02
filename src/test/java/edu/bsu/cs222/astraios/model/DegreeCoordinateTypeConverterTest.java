@@ -9,36 +9,36 @@ public class DegreeCoordinateTypeConverterTest {
     public void testConvertHalfCircleStandardFormZero() {
         String zeroStandardForm = "0°00'00\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(zeroStandardForm);
-        HalfCircleDegreeCoordinate zero = new HalfCircleDegreeCoordinate(0,0,0);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0, 0, 0);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        Assertions.assertEquals(zero,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testConvertHalfCircleStandardFormPositive() {
         String positiveStandardForm = "+72°36'03.2\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(positiveStandardForm);
-        HalfCircleDegreeCoordinate positive = new HalfCircleDegreeCoordinate(72,36,3.2);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(72, 36, 3.2);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        Assertions.assertEquals(positive,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testConvertHalfCircleStandardFormNegative() {
         String negativeStandardForm = "-85°03'59.9\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeStandardForm);
-        HalfCircleDegreeCoordinate negative = new HalfCircleDegreeCoordinate(-85,3,59.9);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(-85, 3, 59.9);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        Assertions.assertEquals(negative,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testConvertHalfCircleStandardFormArbitrarySpaces() {
         String arbitrarySpacesInStandardForm = "-85          °  03' 59.9\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(arbitrarySpacesInStandardForm);
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(-85,3,59.9);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(-85, 3, 59.9);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class DegreeCoordinateTypeConverterTest {
         String negativeLessThanOneDegree = "-0° 1' 3\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeLessThanOneDegree);
         HalfCircleDegreeCoordinate actual = converter.convertHalfCircle();
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0,1,3).negate();
-        Assertions.assertEquals(expected,actual);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0, 1, 3).negate();
+        Assertions.assertEquals(expected, actual);
     }
 
 
@@ -57,8 +57,8 @@ public class DegreeCoordinateTypeConverterTest {
         String negativeLessThanOneDegree = "-0° 1' 3\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeLessThanOneDegree);
         FullCircleDegreeCoordinate actual = converter.convertFullCircle();
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0,1,3).negate();
-        Assertions.assertEquals(expected,actual);
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0 ,1 ,3).negate();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class DegreeCoordinateTypeConverterTest {
         String highModulus = "362° 17' 59.9\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(highModulus);
         FullCircleDegreeCoordinate actual = converter.convertFullCircle();
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(2,17,59.9);
-        Assertions.assertEquals(expected,actual);
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(2, 17, 59.9);
+        Assertions.assertEquals(expected, actual);
     }
 }

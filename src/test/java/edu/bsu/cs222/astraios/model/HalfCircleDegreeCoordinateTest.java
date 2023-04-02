@@ -163,18 +163,18 @@ public class HalfCircleDegreeCoordinateTest {
 
     @Test
     public void testToRadiansZeroConvertsCorrectly() {
-        HalfCircleDegreeCoordinate zero = new HalfCircleDegreeCoordinate(0,0,0);
+        HalfCircleDegreeCoordinate zero = new HalfCircleDegreeCoordinate(0, 0, 0);
         double expected = 0;
         double actual = zero.toRadians();
-        Assertions.assertEquals(expected,actual,0.000000001);
+        Assertions.assertEquals(expected, actual, 0.000000001);
     }
 
     @Test
     public void testToRadiansNorthPoleConvertsCorrectly() {
-        HalfCircleDegreeCoordinate northPole = new HalfCircleDegreeCoordinate(90,0,0);
+        HalfCircleDegreeCoordinate northPole = new HalfCircleDegreeCoordinate(90, 0, 0);
         double expected = Math.PI/2;
         double actual = northPole.toRadians();
-        Assertions.assertEquals(expected,actual,0.000000001);
+        Assertions.assertEquals(expected, actual, 0.000000001);
     }
 
 
@@ -182,15 +182,15 @@ public class HalfCircleDegreeCoordinateTest {
     @Test
     public void testFromRadiansZeroConvertsCorrectly() {
         HalfCircleDegreeCoordinate actual = HalfCircleDegreeCoordinate.fromRadians(0);
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0,0,0);
-        Assertions.assertEquals(expected,actual);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0, 0, 0);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testFromRadiansRightAngleConvertsCorrectly() {
         HalfCircleDegreeCoordinate actual = HalfCircleDegreeCoordinate.fromRadians(Math.PI/2);
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(90,0,0);
-        Assertions.assertEquals(expected,actual);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(90, 0, 0);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -213,15 +213,15 @@ public class HalfCircleDegreeCoordinateTest {
 
     @Test
     public void testNegateZeroToZero() {
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0,0,0);
-        HalfCircleDegreeCoordinate actual = new HalfCircleDegreeCoordinate(0,0,0).negate();
-        Assertions.assertEquals(expected,actual);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0, 0, 0);
+        HalfCircleDegreeCoordinate actual = new HalfCircleDegreeCoordinate(0, 0, 0).negate();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testNegateNorthPoleToSouthPole() {
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(-90,0,0);
-        HalfCircleDegreeCoordinate actual = new HalfCircleDegreeCoordinate(90,0,0).negate();
-        Assertions.assertEquals(expected,actual);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(-90, 0, 0);
+        HalfCircleDegreeCoordinate actual = new HalfCircleDegreeCoordinate(90, 0, 0).negate();
+        Assertions.assertEquals(expected, actual);
     }
 }
