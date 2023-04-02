@@ -25,7 +25,7 @@ public class ObjectJournalCLIFormatterTest {
                 M13               16h41m41.2s   +36°27'35.5"            \s
                 M31               00h42m44.3s   +41°16'09.0"   2023-01-01
                 """;
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -38,6 +38,6 @@ public class ObjectJournalCLIFormatterTest {
                 Name              R.A.          Dec.           Completed\s
                 M13               16h41m41.2s   +36°27'35.5"            \s
                 """;
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 }

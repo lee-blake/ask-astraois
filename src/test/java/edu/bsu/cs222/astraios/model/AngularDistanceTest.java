@@ -193,7 +193,7 @@ public class AngularDistanceTest {
         String expected = "Δ{0°}";
         AngularDistance zero = new AngularDistance(0, 0, 0);
         String actual = zero.toString();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -201,7 +201,7 @@ public class AngularDistanceTest {
         String expected = "Δ{0°0'1\"}";
         AngularDistance arcsecond = new AngularDistance(0, 0, 1);
         String actual = arcsecond.toString();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -209,7 +209,7 @@ public class AngularDistanceTest {
         String expected = "Δ{2°30'}";
         AngularDistance noSeconds = new AngularDistance(2, 30, 0);
         String actual = noSeconds.toString();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -217,6 +217,6 @@ public class AngularDistanceTest {
         String expected = "Δ{17°}";
         AngularDistance noSeconds = new AngularDistance(17, 0, 0);
         String actual = noSeconds.toString();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 }

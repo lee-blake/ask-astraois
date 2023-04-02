@@ -11,27 +11,27 @@ public class ObservationTest {
         double expectedRadians = expected.toRadians();
         double actualRadians = actual.toRadians();
         double difference = Math.abs(expectedRadians - actualRadians);
-        double oneSecond = Math.PI/43200;
+        double oneSecondRadians = Math.PI/43200;
         String messageIfAssertFails = "Assertions failed, difference between expected '"
                 + expected
                 + "' and actual '"
                 + actual
                 + "' was not less than a second.";
 
-        Assertions.assertTrue(difference < oneSecond, messageIfAssertFails);
+        Assertions.assertTrue(difference < oneSecondRadians, messageIfAssertFails);
     }
 
     @Test
     public void testGetLocalSiderealTimeZeroEpochFixedValue() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(18,41,50.548);
+        HourCoordinate expected = new HourCoordinate(18, 41, 50.548);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
@@ -39,13 +39,13 @@ public class ObservationTest {
     public void testGetLocalSiderealTimeEpochPlusOneDayComputesCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-02T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(18,45,47.104);
+        HourCoordinate expected = new HourCoordinate(18, 45, 47.104);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
@@ -53,13 +53,13 @@ public class ObservationTest {
     public void testGetLocalSiderealTimeEpochPlusOneHourComputesCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T13:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(19,42,00.405);
+        HourCoordinate expected = new HourCoordinate(19, 42, 0.405);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
@@ -67,41 +67,35 @@ public class ObservationTest {
     public void testGetLocalSiderealTimeEpochPlusOneCenturyComputesCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2100-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(18,44,55.454);
+        HourCoordinate expected = new HourCoordinate(18, 44, 55.454);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
     @Test
     public void testGetLocalSiderealTimeBallStateEpochComputesCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(-85,24,32.2),
-                        new HalfCircleDegreeCoordinate(40,11,53.96)
-                ),
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(13,0,12.402);
+        HourCoordinate expected = new HourCoordinate(13, 0, 12.402);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 
     @Test
     public void testGetLocalSiderealTimeBallState2023DateComputesCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(-85,24,32.2),
-                        new HalfCircleDegreeCoordinate(40,11,53.96)
-                ),
+                TestObjectFactory.LongitudeLatitude.buildBallState(),
                 OffsetDateTime.parse("2023-03-28T13:01:11Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
-        HourCoordinate expected = new HourCoordinate(19,42,18.865);
+        HourCoordinate expected = new HourCoordinate(19, 42, 18.865);
         assertDifferenceLessThanOneSecond(expected, actual);
     }
 

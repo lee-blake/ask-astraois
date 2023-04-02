@@ -15,7 +15,7 @@ public class ObjectJournalEntryTest {
         AstronomicalObject m13Object = buildM13Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m13Object);
         String nameRetrieved = entry.getName();
-        Assertions.assertEquals("M13",nameRetrieved);
+        Assertions.assertEquals("M13", nameRetrieved);
     }
 
     @Test
@@ -23,7 +23,7 @@ public class ObjectJournalEntryTest {
         AstronomicalObject m31Object = buildM31Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m31Object);
         String nameRetrieved = entry.getName();
-        Assertions.assertEquals("M31",nameRetrieved);
+        Assertions.assertEquals("M31", nameRetrieved);
     }
 
 
@@ -34,8 +34,7 @@ public class ObjectJournalEntryTest {
         ObjectJournalEntry entry = new ObjectJournalEntry(m13Object);
         AstronomicalObject freshM13Object = buildM13Object();
         AstronomicalObject objectRetrieved = entry.getAstronomicalObject();
-        boolean result = freshM13Object.equals(objectRetrieved);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(freshM13Object, objectRetrieved);
     }
 
     @Test
@@ -44,8 +43,7 @@ public class ObjectJournalEntryTest {
         ObjectJournalEntry entry = new ObjectJournalEntry(m31Object);
         AstronomicalObject freshM31Object = buildM31Object();
         AstronomicalObject retrievedObject = entry.getAstronomicalObject();
-        boolean result = freshM31Object.equals(retrievedObject);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(freshM31Object, retrievedObject);
     }
 
 
@@ -61,7 +59,7 @@ public class ObjectJournalEntryTest {
                 new CompletionStatus()
         );
         actual.markComplete(LocalDate.parse("2023-01-01"));
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -75,7 +73,7 @@ public class ObjectJournalEntryTest {
                 new CompletionStatus()
         );
         actual.markComplete(LocalDate.parse("2022-12-31"));
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -103,7 +101,7 @@ public class ObjectJournalEntryTest {
             new CompletionStatus(LocalDate.parse("2023-01-01"))
         );
         actual.markIncomplete();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

@@ -23,7 +23,7 @@ public class TestObjectFactory {
                     m31RightAscension,
                     m31Declination
             );
-            return new AstronomicalObject("M31",m31Coords);
+            return new AstronomicalObject("M31", m31Coords);
         }
 
         public static AstronomicalObject buildM83Object() {
@@ -33,7 +33,7 @@ public class TestObjectFactory {
                     m83RightAscension,
                     m83Declination
             );
-            return new AstronomicalObject("M83",m83Coords);
+            return new AstronomicalObject("M83", m83Coords);
         }
 
     }
@@ -69,8 +69,8 @@ public class TestObjectFactory {
 
         public static LongitudeLatitudeCoordinates buildBallState() {
             return new LongitudeLatitudeCoordinates(
-                    new FullCircleDegreeCoordinate(-85,24,32.2),
-                    new HalfCircleDegreeCoordinate(40,11,53.96)
+                    new FullCircleDegreeCoordinate(-85, 24, 32.2),
+                    new HalfCircleDegreeCoordinate(40, 11, 53.96)
             );
         }
     }

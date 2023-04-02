@@ -11,6 +11,6 @@ public class CustomAssertions {
                 + bound.toString()
                 + "!";
         boolean isBounded = actual.lessThan(bound);
-        Assertions.assertTrue(isBounded,messageIfAssertionFails);
+        Assertions.assertTrue(isBounded, messageIfAssertionFails);
     }
 }
