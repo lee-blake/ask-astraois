@@ -20,7 +20,7 @@ public class LongitudeLatitudeCoordinates {
 
     public double getLongitudeAsRadians() {
         double longitudeAsRadians = longitude.toRadians();
-        if(longitudeAsRadians>Math.PI) {
+        if(longitudeAsRadians > Math.PI) {
             longitudeAsRadians -= Math.PI*2;
         }
         return longitudeAsRadians;

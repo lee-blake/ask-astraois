@@ -29,12 +29,13 @@ public class AltitudeAzimuthCoordinates {
     }
 
     public AngularDistance distanceTo(AltitudeAzimuthCoordinates other) {
-        double alt1 = this.altitude.toRadians();
-        double alt2 = other.altitude.toRadians();
-        double az1 = this.azimuth.toRadians();
-        double az2 = other.azimuth.toRadians();
+        double altitude1 = this.altitude.toRadians();
+        double altitude2 = other.altitude.toRadians();
+        double azimuth1 = this.azimuth.toRadians();
+        double azimuth2 = other.azimuth.toRadians();
         double angularDistanceRadians = acos(
-                sin(alt1)*sin(alt2) + cos(alt1)*cos(alt2)*cos(az1-az2)
+                sin(altitude1)*sin(altitude2)
+                        + cos(altitude1)*cos(altitude2)*cos(azimuth1-azimuth2)
         );
         return AngularDistance.fromRadians(angularDistanceRadians);
     }

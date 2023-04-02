@@ -118,101 +118,113 @@ public class AstronomicalObjectTest {
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochZeroZeroComputesCorrectly() {
         AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
-                new FullCircleDegreeCoordinate(90,0,0),
-                new HalfCircleDegreeCoordinate(10,27,38.25)
+                new FullCircleDegreeCoordinate(90, 0, 0),
+                new HalfCircleDegreeCoordinate(10, 27, 38.25)
         );
-        Observation zeroZeroAndLSTZero = new Observation(
+        Observation zeroZeroEpoch = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject zeroZero = new AstronomicalObject(
                 "zeroZero",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
-        CustomAssertions.assertBounded(new AngularDistance(0,1,0), error);
+        CustomAssertions.assertBounded(
+                new AngularDistance(0, 1, 0),
+                error
+        );
     }
 
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochOneZeroComputesCorrectly() {
         AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
-                new FullCircleDegreeCoordinate(90,0,0),
-                new HalfCircleDegreeCoordinate(-4,32,21.76)
+                new FullCircleDegreeCoordinate(90, 0, 0),
+                new HalfCircleDegreeCoordinate(-4, 32, 21.76)
         );
-        Observation zeroZeroAndLSTZero = new Observation(
+        Observation oneHourWestOfZeroZeroEpoch = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject oneZero = new AstronomicalObject(
                 "oneZero",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(1,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(1, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = oneZero.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AltitudeAzimuthCoordinates actual = oneZero.getAltAzAtObservation(oneHourWestOfZeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
-        CustomAssertions.assertBounded(new AngularDistance(0,1,0), error);
+        CustomAssertions.assertBounded(
+                new AngularDistance(0, 1, 0),
+                error
+        );
     }
 
     @Test
     public void testGetAltAzAtObservationMinusFifteenZeroEpochZeroZeroComputesCorrectly() {
         AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
-                new FullCircleDegreeCoordinate(90,0,0),
-                new HalfCircleDegreeCoordinate(-4,32,21.76)
+                new FullCircleDegreeCoordinate(90, 0, 0),
+                new HalfCircleDegreeCoordinate(-4, 32, 21.76)
         );
-        Observation zeroZeroAndLSTZero = new Observation(
+        Observation oneHourWestOfZeroZeroEpoch = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(-15,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(-15, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject zeroZero = new AstronomicalObject(
                 "zeroZero",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(oneHourWestOfZeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
-        CustomAssertions.assertBounded(new AngularDistance(0,1,0), error);
+        CustomAssertions.assertBounded(
+                new AngularDistance(0, 1, 0),
+                error
+        );
     }
 
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochNorthCelestialPoleComputesCorrectly() {
         AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
-                new FullCircleDegreeCoordinate(0,0,0),
-                new HalfCircleDegreeCoordinate(0,0,0)
+                new FullCircleDegreeCoordinate(0, 0, 0),
+                new HalfCircleDegreeCoordinate(0, 0, 0)
         );
-        Observation zeroZeroAndLSTZero = new Observation(
+        Observation zeroZeroEpoch = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
-        AstronomicalObject zeroZero = new AstronomicalObject(
+        AstronomicalObject northCelestialPole = new AstronomicalObject(
                 "north celestial pole",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(90,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(90, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AltitudeAzimuthCoordinates actual = northCelestialPole.getAltAzAtObservation(zeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
-        CustomAssertions.assertBounded(new AngularDistance(0,1,0), error);
+        CustomAssertions.assertBounded(
+                new AngularDistance(0, 1, 0),
+                error
+        );
     }
 
     @Test
@@ -221,47 +233,53 @@ public class AstronomicalObjectTest {
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(90, 0, 0)
         );
-        Observation zeroZeroAndLSTZero = new Observation(
+        Observation northPoleEpoch = new Observation(
                 new LongitudeLatitudeCoordinates(
                         new FullCircleDegreeCoordinate(0, 0, 0),
                         new HalfCircleDegreeCoordinate(90, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
-        AstronomicalObject zeroZero = new AstronomicalObject(
+        AstronomicalObject northCelestialPole = new AstronomicalObject(
                 "north celestial pole",
                 new RightAscensionDeclinationCoordinates(
                         new HourCoordinate(0, 0, 0),
                         new HalfCircleDegreeCoordinate(90, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AltitudeAzimuthCoordinates actual = northCelestialPole.getAltAzAtObservation(northPoleEpoch);
         AngularDistance error = expected.distanceTo(actual);
-        CustomAssertions.assertBounded(new AngularDistance(0, 1, 0), error);
+        CustomAssertions.assertBounded(
+                new AngularDistance(0, 1, 0),
+                error
+        );
     }
 
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochZeroZeroNonUTCComputesCorrectly() {
         AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
-                new FullCircleDegreeCoordinate(90,0,0),
-                new HalfCircleDegreeCoordinate(10,27,38.25)
+                new FullCircleDegreeCoordinate(90, 0, 0),
+                new HalfCircleDegreeCoordinate(10, 27, 38.25)
         );
         Observation zeroZeroAndLSTZero = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T13:00:00+01:00")
         );
         AstronomicalObject zeroZero = new AstronomicalObject(
                 "zeroZero",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
         AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
         AngularDistance error = expected.distanceTo(actual);
-        CustomAssertions.assertBounded(new AngularDistance(0,1,0), error);
+        CustomAssertions.assertBounded(
+                new AngularDistance(0, 1, 0),
+                error
+        );
     }
 }

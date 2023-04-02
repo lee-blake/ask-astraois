@@ -68,7 +68,7 @@ public class AngularDistance {
         double arcseconds = (units % UNITS_PER_ARCMINUTE) / (double) UNITS_PER_ARCSECOND;
         String degreesToken = "Δ{" + degrees + "°";
         String arcminutesToken = "" + arcminutes +"'";
-        String arcsecondsToken = (new DecimalFormat("#0.#########")).format(arcseconds) + "\"";
+        String arcsecondsToken = new DecimalFormat("#0.#########").format(arcseconds) + "\"";
         if(arcseconds > 0) {
             return degreesToken + arcminutesToken + arcsecondsToken + "}";
         }

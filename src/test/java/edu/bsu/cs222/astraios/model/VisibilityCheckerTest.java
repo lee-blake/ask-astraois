@@ -11,19 +11,19 @@ public class VisibilityCheckerTest {
     public void testObjectIsVisibleIdealConditionsIsVisible() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "71 degrees above the horizon",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(12,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(12, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         boolean result = checker.objectIsVisible();
         Assertions.assertTrue(result);
     }
@@ -32,19 +32,19 @@ public class VisibilityCheckerTest {
     public void testObjectIsVisibleDaytimeNotVisible() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "doesn't matter, it's day",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         boolean result = checker.objectIsVisible();
         Assertions.assertFalse(result);
     }
@@ -53,19 +53,19 @@ public class VisibilityCheckerTest {
     public void testObjectIsVisibleBelowTheHorizonNotVisible() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectBelowHorizonAtTime = new AstronomicalObject(
                 "71 degrees below the horizon",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectBelowHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectBelowHorizonAtTime, observation);
         boolean result = checker.objectIsVisible();
         Assertions.assertFalse(result);
     }
@@ -74,19 +74,19 @@ public class VisibilityCheckerTest {
     public void testObjectIsVisibleTwilightAboveTheHorizonIsVisible() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T05:06:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "85 degrees above the horizon",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(12,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(12, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         boolean result = checker.objectIsVisible();
         Assertions.assertTrue(result);
     }
@@ -97,92 +97,92 @@ public class VisibilityCheckerTest {
     public void testBuildVisibilityStatusStringSunInterferesBuildsCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "above the horizon",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         String actual = checker.buildVisibilityStatusString();
         String expected = """
                 The object 'above the horizon' is not visible due to the following reasons:
                 -It is neither night nor astronomical twilight.""";
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testBuildVisibilityStatusStringBelowTheHorizonBuildsCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectBelowHorizonAtTime = new AstronomicalObject(
                 "71 degrees below the horizon",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectBelowHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectBelowHorizonAtTime, observation);
         String actual = checker.buildVisibilityStatusString();
         String expected = """
                 The object '71 degrees below the horizon' is not visible due to the following reasons:
                 -The object is below the horizon.""";
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testBuildVisibilityStatusStringMultipleReasonsBuildsCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "below the horizon",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(12,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(12, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         String actual = checker.buildVisibilityStatusString();
         String expected = """
                 The object 'below the horizon' is not visible due to the following reasons:
                 -It is neither night nor astronomical twilight.
                 -The object is below the horizon.""";
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testBuildVisibilityStatusStringVisibleObjectTwelveBuildsCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "testObject12",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(12,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(12, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         String actual = checker.buildVisibilityStatusString();
         String expected = """                
                 Name              R.A.         Dec.         Az.          Alt.     \s
@@ -194,19 +194,19 @@ public class VisibilityCheckerTest {
     public void testBuildVisibilityStatusStringVisibleObjectElevenBuildsCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "testObject11",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(11,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(11, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         String actual = checker.buildVisibilityStatusString();
         String expected = """         
                 Name              R.A.         Dec.         Az.          Alt.     \s
@@ -218,19 +218,19 @@ public class VisibilityCheckerTest {
     public void testBuildVisibilityStatusStringTwilightBuildsCorrectly() {
         Observation observation = new Observation(
                 new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new FullCircleDegreeCoordinate(0, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 ),
                 OffsetDateTime.parse("2000-01-01T05:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
                 "testObject11",
                 new RightAscensionDeclinationCoordinates(
-                        new HourCoordinate(11,0,0),
-                        new HalfCircleDegreeCoordinate(0,0,0)
+                        new HourCoordinate(11, 0, 0),
+                        new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime,observation);
+        VisibilityChecker checker = new VisibilityChecker(objectAboveHorizonAtTime, observation);
         String actual = checker.buildVisibilityStatusString();
         String expected = """
                 Warning: This observation is in astronomical twilight, which may interfere with viewing faint objects.
