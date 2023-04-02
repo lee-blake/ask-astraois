@@ -10,11 +10,9 @@ public class RightAscensionDeclinationCoordinatesTest {
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
     @Test
     public void testEqualsNonRightAscensionDeclinationsCoordinatesNotEqual() {
-        HourCoordinate rightAscension = new HourCoordinate(17, 30, 30);
-        HalfCircleDegreeCoordinate declination = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords = new RightAscensionDeclinationCoordinates(
-                rightAscension,
-                declination
+                new HourCoordinate(17, 30, 30),
+                new HalfCircleDegreeCoordinate(43, 20, 17)
         );
         boolean result = raDecCoords.equals("");
         Assertions.assertFalse(result);
@@ -22,17 +20,13 @@ public class RightAscensionDeclinationCoordinatesTest {
 
     @Test
     public void testEqualsSameRightAscensionAndDeclinationEqual() {
-        HourCoordinate rightAscension1 = new HourCoordinate(17, 30, 30);
-        HalfCircleDegreeCoordinate declination1 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(
-                rightAscension1,
-                declination1
+                new HourCoordinate(17, 30, 30),
+                new HalfCircleDegreeCoordinate(43, 20, 17)
         );
-        HourCoordinate rightAscension2 = new HourCoordinate(17, 30, 30);
-        HalfCircleDegreeCoordinate declination2 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords2 = new RightAscensionDeclinationCoordinates(
-                rightAscension2,
-                declination2
+                new HourCoordinate(17, 30, 30),
+                new HalfCircleDegreeCoordinate(43, 20, 17)
         );
         boolean result = raDecCoords1.equals(raDecCoords2);
         Assertions.assertTrue(result);
@@ -40,17 +34,13 @@ public class RightAscensionDeclinationCoordinatesTest {
 
     @Test
     public void testEqualsRightAscensionDifferentNotEqual() {
-        HourCoordinate rightAscension1 = new HourCoordinate(18, 30, 30);
-        HalfCircleDegreeCoordinate declination1 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(
-                rightAscension1,
-                declination1
+                new HourCoordinate(18, 30, 30),
+                new HalfCircleDegreeCoordinate(43, 20, 17)
         );
-        HourCoordinate rightAscension2 = new HourCoordinate(17, 30, 30);
-        HalfCircleDegreeCoordinate declination2 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords2 = new RightAscensionDeclinationCoordinates(
-                rightAscension2,
-                declination2
+                new HourCoordinate(17, 30, 30),
+                new HalfCircleDegreeCoordinate(43, 20, 17)
         );
         boolean result = raDecCoords1.equals(raDecCoords2);
         Assertions.assertFalse(result);
@@ -58,17 +48,13 @@ public class RightAscensionDeclinationCoordinatesTest {
 
     @Test
     public void testEqualsDeclinationDifferentNotEqual() {
-        HourCoordinate rightAscension1 = new HourCoordinate(17, 30, 30);
-        HalfCircleDegreeCoordinate declination1 = new HalfCircleDegreeCoordinate(44, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(
-                rightAscension1,
-                declination1
+                new HourCoordinate(17, 30, 30),
+                new HalfCircleDegreeCoordinate(44, 20, 17)
         );
-        HourCoordinate rightAscension2 = new HourCoordinate(17, 30, 30);
-        HalfCircleDegreeCoordinate declination2 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords2 = new RightAscensionDeclinationCoordinates(
-                rightAscension2,
-                declination2
+                new HourCoordinate(17, 30, 30),
+                new HalfCircleDegreeCoordinate(43, 20, 17)
         );
         boolean result = raDecCoords1.equals(raDecCoords2);
         Assertions.assertFalse(result);
@@ -76,17 +62,13 @@ public class RightAscensionDeclinationCoordinatesTest {
 
     @Test
     public void testEqualsDeclinationAndRightAscensionDifferentNotEqual() {
-        HourCoordinate rightAscension1 = new HourCoordinate(18, 30, 30);
-        HalfCircleDegreeCoordinate declination1 = new HalfCircleDegreeCoordinate(44, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords1 = new RightAscensionDeclinationCoordinates(
-                rightAscension1,
-                declination1
+                new HourCoordinate(18, 30, 30),
+                new HalfCircleDegreeCoordinate(44, 20, 17)
         );
-        HourCoordinate rightAscension2 = new HourCoordinate(17, 30, 30);
-        HalfCircleDegreeCoordinate declination2 = new HalfCircleDegreeCoordinate(43, 20, 17);
         RightAscensionDeclinationCoordinates raDecCoords2 = new RightAscensionDeclinationCoordinates(
-                rightAscension2,
-                declination2
+                new HourCoordinate(17, 30, 30),
+                new HalfCircleDegreeCoordinate(43, 20, 17)
         );
         boolean result = raDecCoords1.equals(raDecCoords2);
         Assertions.assertFalse(result);
