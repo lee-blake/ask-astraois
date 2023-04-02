@@ -50,14 +50,13 @@ public class AstronomicalObject {
 
         public Map<Header, String> getCLIValueMap() {
             AstronomicalObject parent = AstronomicalObject.this;
-            Map<Header, String> objectCLIViewValueMap = new HashMap<>();
-            objectCLIViewValueMap.put(Header.NAME,parent.name);
-            RightAscensionDeclinationCoordinates
-                    .RightAscensionDeclinationCoordinatesCLIViewFormatter coordinatesFormatter
-                    = parent.celestialCoordinates.new RightAscensionDeclinationCoordinatesCLIViewFormatter();
-            Map<Header, String> coordinatesCLIViewValueMap = coordinatesFormatter.getCLIViewValueMap();
-            objectCLIViewValueMap.putAll(coordinatesCLIViewValueMap);
-            return objectCLIViewValueMap;
+            Map<Header, String> objectCLIValueMap = new HashMap<>();
+            objectCLIValueMap.put(Header.NAME,parent.name);
+            RightAscensionDeclinationCoordinates.RightAscensionDeclinationCoordinatesCLIFormatter coordinatesFormatter
+                    = parent.celestialCoordinates.new RightAscensionDeclinationCoordinatesCLIFormatter();
+            Map<Header, String> coordinatesCLIValueMap = coordinatesFormatter.getCLIValueMap();
+            objectCLIValueMap.putAll(coordinatesCLIValueMap);
+            return objectCLIValueMap;
         }
     }
 }

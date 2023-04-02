@@ -88,11 +88,11 @@ public class ObjectJournalEntry {
     public class ObjectJournalEntryCLIFormatter {
 
         public String getCLIViewStringOfEntry() {
-            Map<Header,String> mainCLIViewValueMap = this.buildMainCLIViewValueMap();
-            String name = mainCLIViewValueMap.get(Header.NAME);
-            String rightAscension = mainCLIViewValueMap.get(Header.RIGHT_ASCENSION);
-            String declination = mainCLIViewValueMap.get(Header.DECLINATION);
-            String completion = mainCLIViewValueMap.get(Header.COMPLETION_DATE);
+            Map<Header,String> mainCLIValueMap = this.buildMainCLIValueMap();
+            String name = mainCLIValueMap.get(Header.NAME);
+            String rightAscension = mainCLIValueMap.get(Header.RIGHT_ASCENSION);
+            String declination = mainCLIValueMap.get(Header.DECLINATION);
+            String completion = mainCLIValueMap.get(Header.COMPLETION_DATE);
             return String.format("%-15s   %-11s   %-12s   %-10s\n",
                     name,
                     rightAscension,
@@ -101,16 +101,16 @@ public class ObjectJournalEntry {
             );
         }
 
-        private Map<Header,String> buildMainCLIViewValueMap() {
+        private Map<Header,String> buildMainCLIValueMap() {
             ObjectJournalEntry parent = ObjectJournalEntry.this;
             AstronomicalObject.AstronomicalObjectCLIFormatter objectFormatter
                     = parent.astronomicalObject.new AstronomicalObjectCLIFormatter();
-            Map<Header,String> mainCLIViewValueMap = objectFormatter.getCLIValueMap();
-            CompletionStatus.CompletionStatusCLIViewFormatter completionFormatter
-                    = parent.completionStatus.new CompletionStatusCLIViewFormatter();
-            Map<Header,String> completionCLIViewValueMap = completionFormatter.getCLIViewValueMap();
-            mainCLIViewValueMap.putAll(completionCLIViewValueMap);
-            return mainCLIViewValueMap;
+            Map<Header,String> mainCLIValueMap = objectFormatter.getCLIValueMap();
+            CompletionStatus.CompletionStatusCLIFormatter completionFormatter
+                    = parent.completionStatus.new CompletionStatusCLIFormatter();
+            Map<Header,String> completionCLIValueMap = completionFormatter.getCLIValueMap();
+            mainCLIValueMap.putAll(completionCLIValueMap);
+            return mainCLIValueMap;
         }
     }
 }

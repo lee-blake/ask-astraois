@@ -53,18 +53,18 @@ public class CompletionStatus {
 
 
 
-    public class CompletionStatusCLIViewFormatter {
+    public class CompletionStatusCLIFormatter {
 
-        public Map<Header, String> getCLIViewValueMap() {
-            HashMap<Header, String> cliViewValueMap = new HashMap<>();
+        public Map<Header, String> getCLIValueMap() {
+            HashMap<Header, String> cliValueMap = new HashMap<>();
             // No completion = don't print anything. This will cause less visual clutter than printing
             // something incomplete.
             String completionDateString = "";
             if(CompletionStatus.this.complete) {
                 completionDateString = CompletionStatus.this.dateOfCompletion.toString();
             }
-            cliViewValueMap.put(Header.COMPLETION_DATE, completionDateString);
-            return cliViewValueMap;
+            cliValueMap.put(Header.COMPLETION_DATE, completionDateString);
+            return cliValueMap;
         }
     }
 }

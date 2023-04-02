@@ -67,18 +67,18 @@ public class RightAscensionDeclinationCoordinates {
 
 
 
-    public class RightAscensionDeclinationCoordinatesCLIViewFormatter {
+    public class RightAscensionDeclinationCoordinatesCLIFormatter {
 
-        public Map<Header, String> getCLIViewValueMap() {
+        public Map<Header, String> getCLIValueMap() {
             RightAscensionDeclinationCoordinates parent = RightAscensionDeclinationCoordinates.this;
-            Map<Header,String> cliViewValueMap = new HashMap<>();
+            Map<Header,String> cliValueMap = new HashMap<>();
             HourCoordinate.HourCoordinateFormatter raFormatter = parent.rightAscension.new HourCoordinateFormatter();
-            cliViewValueMap.put(Header.RIGHT_ASCENSION,raFormatter.standardHourFormatNoSpacesOneDecimalPlace());
+            cliValueMap.put(Header.RIGHT_ASCENSION,raFormatter.standardHourFormatNoSpacesOneDecimalPlace());
             HalfCircleDegreeCoordinate.HalfCircleDegreeCoordinateFormatter decFormatter
                     = parent.declination.new HalfCircleDegreeCoordinateFormatter();
             String declinationString = decFormatter.standardDegreeFormatNoSpacesOneDecimalPlace();
-            cliViewValueMap.put(Header.DECLINATION,declinationString);
-            return cliViewValueMap;
+            cliValueMap.put(Header.DECLINATION,declinationString);
+            return cliValueMap;
         }
     }
 }

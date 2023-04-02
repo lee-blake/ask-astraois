@@ -118,8 +118,9 @@ public class ObjectJournal {
             viewStringBuilder.append(this.buildCLIViewHeaders());
             for(String entryName : namesOfEntriesToView) {
                 ObjectJournalEntry entry = parent.getEntryByName(entryName);
-                ObjectJournalEntry.ObjectJournalEntryCLIFormatter viewFormatter = entry.new ObjectJournalEntryCLIFormatter();
-                viewStringBuilder.append(viewFormatter.getCLIViewStringOfEntry());
+                ObjectJournalEntry.ObjectJournalEntryCLIFormatter cliFormatter =
+                        entry.new ObjectJournalEntryCLIFormatter();
+                viewStringBuilder.append(cliFormatter.getCLIViewStringOfEntry());
             }
             return viewStringBuilder.toString();
         }
