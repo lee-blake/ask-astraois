@@ -121,4 +121,17 @@ public class JournalFileMaintainerTest {
         }
         Assertions.assertEquals(freshCopy,loadedFromFile);
     }
+
+    @Test
+    public void testSaveObjectJournalToFileThrowsSpecialExceptionWhenFileIsMissing() {
+        ObjectJournal journal = new ObjectJournal();
+        JournalFileMaintainer maintainer = new JournalFileMaintainer(
+            tempDir.resolve("missingDir/unreachable"),
+            tempDir.resolve("reachable")
+        );
+        Assertions.assertThrows(
+                NoSuchFileOnSaveException.class,
+                () -> maintainer.saveObjectJournalToFile(journal)
+        );
+    }
 }

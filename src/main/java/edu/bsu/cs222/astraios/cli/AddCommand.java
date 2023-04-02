@@ -73,12 +73,7 @@ public class AddCommand implements Callable<Integer> {
                         new CompletionStatus()
                 )
         );
-        try {
-            maintainer.saveObjectJournalToFile(objectJournal);
-        }
-        catch (NoSuchFileException saveException) {
-            throw new NoSuchFileOnSaveException("Encountered a no such file exception on save!");
-        }
+        maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
     }
 }

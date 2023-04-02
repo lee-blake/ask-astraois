@@ -25,8 +25,13 @@ public class JournalFileMaintainer {
     public void saveObjectJournalToFile(ObjectJournal journalToSave) throws IOException {
         CSVConverter converter = new CSVConverter();
         String fileContents = converter.convertObjectJournalToCSV(journalToSave,canonicalHeaderOrder);
-        this.keepBackupCopy();
-        this.writeStringToFile(fileContents);
+        try {
+            this.keepBackupCopy();
+            this.writeStringToFile(fileContents);
+        }
+        catch(NoSuchFileException exception) {
+            throw new NoSuchFileOnSaveException("Encountered a no such file exception on save!");
+        }
     }
 
     protected void keepBackupCopy() throws IOException {
