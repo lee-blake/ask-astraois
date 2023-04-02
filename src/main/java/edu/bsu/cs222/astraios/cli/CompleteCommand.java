@@ -31,8 +31,8 @@ public class CompleteCommand implements Callable<Integer> {
     @Option(
             names = {"--on","--date"},
             description = "The date the completion should be marked for. Defaults to current day if not specified. "
-                    + "Accepted formats are:\n"
-                    + "Dash form (2023-12-31)",
+                    + "Accepted forms are:\n"
+                    + CLIAcceptedFormats.ACCEPTED_DATE_FORMATS,
             defaultValue = "today",
             converter = CLILocalDateTypeConverter.class
     )

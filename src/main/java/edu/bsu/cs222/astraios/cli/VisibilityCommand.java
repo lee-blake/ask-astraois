@@ -52,9 +52,8 @@ public class VisibilityCommand implements Callable<Integer> {
     @Option(
             names = {"--datetime"},
             required = true,
-            description = """
-                    The date and time the observation will occur at. Accepted forms are:
-                    \tISO 8601 (2023-12-31T23:59:59+01:00)""",
+            description = "The date and time the observation will occur at. Accepted forms are:\n"
+                    + CLIAcceptedFormats.ACCEPTED_DATETIME_FORMATS,
             converter = CLIOffsetDateTimeTypeConverter.class
     )
     private OffsetDateTime datetime;
