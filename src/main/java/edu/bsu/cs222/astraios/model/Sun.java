@@ -18,7 +18,7 @@ public class Sun {
                 sin(latitude)*sin(declination)+ cos(latitude)*cos(declination)*cos(hourAngle)
         );
         double azimuth = Math.PI - Math.acos(
-                (sin(latitude)*cos(zenithAngle) - sin(declination))/(cos(latitude)*sin(zenithAngle))
+                (sin(latitude)*cos(zenithAngle) - sin(declination)) / (cos(latitude)*sin(zenithAngle))
         );
         if(sin(hourAngle) > 0) {
             azimuth *= -1;

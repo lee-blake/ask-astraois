@@ -30,22 +30,22 @@ public class RightAscensionDeclinationCoordinates {
     }
 
     public AltitudeAzimuthCoordinates convertToAltAzAtObservation(Observation observation) {
-        double ha = observation.getLocalSiderealTime().toRadians()
+        double hourAngle = observation.getLocalSiderealTime().toRadians()
                 - this.rightAscension.toRadians();
-        double dec = this.declination.toRadians();
-        double lat = observation.getLatitudeAsRadians();
-        double sinOfAltitude = sin(dec)*sin(lat) + cos(dec)*cos(lat)*cos(ha);
-
-        double alt = Math.asin(sinOfAltitude);
-        double cosOfAzimuth = (sin(dec) - sin(alt)*sin(lat))/(cos(alt)*cos(lat));
+        double declination = this.declination.toRadians();
+        double latitude = observation.getLatitudeAsRadians();
+        double sinOfAltitude = sin(declination)*sin(latitude)
+                + cos(declination)*cos(latitude)*cos(hourAngle);
+        double altitude = Math.asin(sinOfAltitude);
+        double cosOfAzimuth = (sin(declination) - sin(altitude)*sin(latitude))
+                / (cos(altitude)*cos(latitude));
         double azimuthAsRadians = Math.acos(cosOfAzimuth);
-
-        if(sin(ha) > 0) {
+        if(sin(hourAngle) > 0) {
             azimuthAsRadians *= -1;
         }
         return new AltitudeAzimuthCoordinates(
                 FullCircleDegreeCoordinate.fromRadians(azimuthAsRadians),
-                HalfCircleDegreeCoordinate.fromRadians(alt)
+                HalfCircleDegreeCoordinate.fromRadians(altitude)
         );
     }
 

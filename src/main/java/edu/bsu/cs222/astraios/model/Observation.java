@@ -17,6 +17,8 @@ public class Observation {
 
     public Observation(LongitudeLatitudeCoordinates longitudeLatitudeCoordinates, OffsetDateTime time) {
         this.longitudeLatitude = longitudeLatitudeCoordinates;
+        // By storing internally as UTC, we drastically simplify much of the conversion math.
+        // Changing this is a very bad idea.
         this.observationTime = time.withOffsetSameInstant(ZoneOffset.UTC);
     }
 
@@ -46,8 +48,8 @@ public class Observation {
     public double getFractionalYear() {
         OffsetDateTime zeroOfYear = EPOCH.withYear(this.observationTime.getYear());
         long secondsElapsed = Duration.between(zeroOfYear, this.observationTime).getSeconds();
-        int daysInThisYear = getDaysInThisYear();
         double fractionalDaysElapsed = secondsElapsed / SECONDS_PER_DAY;
+        int daysInThisYear = getDaysInThisYear();
         return 2*Math.PI*fractionalDaysElapsed / daysInThisYear;
     }
 
