@@ -113,4 +113,69 @@ public class CSVConverterTest {
         ObjectJournal convertedJournal = converter.buildObjectJournalFromCSV(csvString);
         Assertions.assertEquals(twoElementJournal,convertedJournal);
     }
+
+    @Test
+    public void testBuildObjectJournalFromCSVTooFewEntriesThrowsCouldNotParseJournalFileException() {
+        CSVConverter converter = new CSVConverter();
+        String crashString = """
+                Name,Right Ascension,Declination,Completion Date\r
+                M13,16h 41m 41.24s,"+36° 27' 35.5""\"\r
+                """;
+        Assertions.assertThrows(
+            CouldNotParseJournalFileException.class,
+                () -> converter.buildObjectJournalFromCSV(crashString)
+        );
+    }
+
+    @Test
+    public void testBuildObjectJournalFromCSVWayTooFewEntriesThrowsCouldNotParseJournalFileException() {
+        CSVConverter converter = new CSVConverter();
+        String crashString = """
+                Name,Right Ascension,Declination,Completion Date\r
+                M13\r
+                """;
+        Assertions.assertThrows(
+                CouldNotParseJournalFileException.class,
+                () -> converter.buildObjectJournalFromCSV(crashString)
+        );
+    }
+
+    @Test
+    public void testBuildObjectJournalFromCSVBadCompletionDateThrowsInvalidJournalContentsException() {
+        CSVConverter converter = new CSVConverter();
+        String crashString = """
+                Name,Right Ascension,Declination,Completion Date\r
+                M13,16h 41m 41.24s,"+36° 27' 35.5""\",x\r
+                """;
+        Assertions.assertThrows(
+                InvalidJournalFileContentsException.class,
+                () -> converter.buildObjectJournalFromCSV(crashString)
+        );
+    }
+
+    @Test
+    public void testBuildObjectJournalFromCSVBadRACoordinateThrowsInvalidJournalContentsException() {
+        CSVConverter converter = new CSVConverter();
+        String crashString = """
+                Name,Right Ascension,Declination,Completion Date\r
+                M13,16h 41x 41.24s,"+36° 27' 35.5""\",\r
+                """;
+        Assertions.assertThrows(
+                InvalidJournalFileContentsException.class,
+                () -> converter.buildObjectJournalFromCSV(crashString)
+        );
+    }
+
+    @Test
+    public void testBuildObjectJournalFromCSVBadDecCoordinateThrowsInvalidJournalContentsException() {
+        CSVConverter converter = new CSVConverter();
+        String crashString = """
+                Name,Right Ascension,Declination,Completion Date\r
+                M13,16h 41m 41.24s,"+36u° 27' 35.5""\",\r
+                """;
+        Assertions.assertThrows(
+                InvalidJournalFileContentsException.class,
+                () -> converter.buildObjectJournalFromCSV(crashString)
+        );
+    }
 }

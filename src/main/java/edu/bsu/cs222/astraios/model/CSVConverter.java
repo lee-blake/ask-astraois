@@ -8,6 +8,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UncheckedIOException;
+import java.time.format.DateTimeParseException;
 
 public class CSVConverter {
 
@@ -58,7 +59,8 @@ public class CSVConverter {
         }
     }
 
-    private ObjectJournalEntry getEntryFromCSVRecord(CSVRecord record) {
+    private ObjectJournalEntry getEntryFromCSVRecord(CSVRecord record)
+            throws CouldNotParseJournalFileException, InvalidJournalFileContentsException {
         AstronomicalObject objectFromRecord = this.getAstronomicalObjectFromCSVRecord(record);
         CompletionStatus completionStatus = this.getCompletionStatusFromCSVRecord(record);
         return new ObjectJournalEntry(
@@ -67,23 +69,65 @@ public class CSVConverter {
         );
     }
 
-    private AstronomicalObject getAstronomicalObjectFromCSVRecord(CSVRecord record) {
-        String name = record.get(Header.NAME.toString());
-        String rightAscension = record.get(Header.RIGHT_ASCENSION.toString());
-        String declination = record.get(Header.DECLINATION.toString());
-        RightAscensionDeclinationCoordinates coordinates = new RightAscensionDeclinationTypeConverter(
-                rightAscension,
-                declination
-        ).convert();
+    private AstronomicalObject getAstronomicalObjectFromCSVRecord(CSVRecord record)
+            throws CouldNotParseJournalFileException, InvalidJournalFileContentsException {
+        String rightAscension;
+        String declination;
+        String name;
+        try {
+            name = record.get(Header.NAME.toString());
+            rightAscension = record.get(Header.RIGHT_ASCENSION.toString());
+            declination = record.get(Header.DECLINATION.toString());
+        } catch (IllegalArgumentException exception) {
+            throw new CouldNotParseJournalFileException("A problem occurred when trying to parse the astronomical " +
+                    "object from the record '"
+                    + record
+                    + "'!"
+            );
+        }
+        RightAscensionDeclinationCoordinates coordinates;
+        try {
+            coordinates = new RightAscensionDeclinationTypeConverter(
+                    rightAscension,
+                    declination
+            ).convert();
+        }
+        catch(ArrayIndexOutOfBoundsException | NumberFormatException exception) {
+            throw new InvalidJournalFileContentsException(
+                    "One of the coordinates in record '"
+                            + record
+                            + "' was not valid!"
+            );
+        }
         return new AstronomicalObject(
                 name,
                 coordinates
         );
     }
 
-    private CompletionStatus getCompletionStatusFromCSVRecord(CSVRecord record) {
-        String completionDate = record.get(Header.COMPLETION_DATE.toString());
-        return new CSVToCompletionStatusTypeConverter(completionDate)
-                        .convert();
+    private CompletionStatus getCompletionStatusFromCSVRecord(CSVRecord record)
+            throws CouldNotParseJournalFileException, InvalidJournalFileContentsException {
+        String completionDate;
+        try {
+            completionDate = record.get(Header.COMPLETION_DATE.toString());
+        }
+        catch (IllegalArgumentException exception) {
+            throw new CouldNotParseJournalFileException("A problem occurred when trying to parse completion status " +
+                    "from the record '"
+                    + record
+                    + "'!"
+            );
+        }
+        try {
+            return new CSVToCompletionStatusTypeConverter(completionDate)
+                    .convert();
+        }
+        catch(DateTimeParseException exception) {
+            throw new InvalidJournalFileContentsException(
+                    "Could not parse the completion date '"
+                            + completionDate
+                            + "' because it is neither empty nor an accepted date format!"
+            );
+        }
     }
 }
