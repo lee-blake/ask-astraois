@@ -10,10 +10,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testObjectIsVisibleIdealConditionsIsVisible() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
@@ -31,10 +28,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testObjectIsVisibleDaytimeNotVisible() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
@@ -52,10 +46,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testObjectIsVisibleBelowTheHorizonNotVisible() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectBelowHorizonAtTime = new AstronomicalObject(
@@ -73,10 +64,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testObjectIsVisibleTwilightAboveTheHorizonIsVisible() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T05:06:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
@@ -96,10 +84,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testBuildVisibilityStatusStringSunInterferesBuildsCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
@@ -120,10 +105,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testBuildVisibilityStatusStringBelowTheHorizonBuildsCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectBelowHorizonAtTime = new AstronomicalObject(
@@ -144,10 +126,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testBuildVisibilityStatusStringMultipleReasonsBuildsCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
@@ -169,10 +148,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testBuildVisibilityStatusStringVisibleObjectTwelveBuildsCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
@@ -193,10 +169,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testBuildVisibilityStatusStringVisibleObjectElevenBuildsCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(
@@ -217,10 +190,7 @@ public class VisibilityCheckerTest {
     @Test
     public void testBuildVisibilityStatusStringTwilightBuildsCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T05:00:00Z")
         );
         AstronomicalObject objectAboveHorizonAtTime = new AstronomicalObject(

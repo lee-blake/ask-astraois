@@ -24,10 +24,7 @@ public class ObservationTest {
     @Test
     public void testGetLocalSiderealTimeZeroEpochFixedValue() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
@@ -38,10 +35,7 @@ public class ObservationTest {
     @Test
     public void testGetLocalSiderealTimeEpochPlusOneDayComputesCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-02T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
@@ -52,10 +46,7 @@ public class ObservationTest {
     @Test
     public void testGetLocalSiderealTimeEpochPlusOneHourComputesCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T13:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
@@ -66,10 +57,7 @@ public class ObservationTest {
     @Test
     public void testGetLocalSiderealTimeEpochPlusOneCenturyComputesCorrectly() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2100-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
@@ -80,7 +68,7 @@ public class ObservationTest {
     @Test
     public void testGetLocalSiderealTimeBallStateEpochComputesCorrectly() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
@@ -91,7 +79,7 @@ public class ObservationTest {
     @Test
     public void testGetLocalSiderealTimeBallState2023DateComputesCorrectly() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2023-03-28T13:01:11Z")
         );
         HourCoordinate actual = observation.getLocalSiderealTime();
@@ -104,7 +92,7 @@ public class ObservationTest {
     @Test
     public void testGetFractionalYearEpochZero() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2001-01-01T12:00:00Z")
         );
         double actual = observation.getFractionalYear();
@@ -115,7 +103,7 @@ public class ObservationTest {
     @Test
     public void testGetFractionalYearUTCOnePM1January2001() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2001-01-01T13:00:00Z")
         );
         double actual = observation.getFractionalYear();
@@ -126,7 +114,7 @@ public class ObservationTest {
     @Test
     public void testGetFractionalYearUTCNoon2January2001() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2001-01-02T12:00:00Z")
         );
         double actual = observation.getFractionalYear();
@@ -137,7 +125,7 @@ public class ObservationTest {
     @Test
     public void testGetFractionalYearUTCNoon2January2004() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2004-01-02T12:00:00Z")
         );
         double actual = observation.getFractionalYear();
@@ -148,7 +136,7 @@ public class ObservationTest {
     @Test
     public void testGetFractionalYearUTCNoon2January2100() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2100-01-02T12:00:00Z")
         );
         double actual = observation.getFractionalYear();
@@ -159,7 +147,7 @@ public class ObservationTest {
     @Test
     public void testGetFractionalYearUTCNoon2January2000() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2000-01-02T12:00:00Z")
         );
         double actual = observation.getFractionalYear();
@@ -170,7 +158,7 @@ public class ObservationTest {
     @Test
     public void testGetFractionalYearUTCPlusOneOnePM1January2000() {
         Observation observation = new Observation(
-                TestObjectFactory.LongitudeLatitude.buildBallState(),
+                TestObjectFactory.LongitudeLatitudes.buildBallState(),
                 OffsetDateTime.parse("2001-01-01T13:00:00+01:00")
         );
         double actual = observation.getFractionalYear();

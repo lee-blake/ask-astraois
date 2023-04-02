@@ -14,10 +14,7 @@ public class SunTest {
                 new HalfCircleDegreeCoordinate(66, 57, 37.3356)
         );
         Observation zeroZeroEpoch = new Observation(
-                new LongitudeLatitudeCoordinates(
-                new FullCircleDegreeCoordinate(0, 0, 0),
-                new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T12:00:00Z")
         );
         Sun sun = new Sun();
@@ -36,10 +33,7 @@ public class SunTest {
                 new HalfCircleDegreeCoordinate(63, 10, 20.9928)
         );
         Observation zeroZeroEpoch = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T13:00:00Z")
         );
         Sun sun = new Sun();
@@ -100,10 +94,7 @@ public class SunTest {
     @Test
     public void testIsNightAround17DegreesBelowNotNight() {
         Observation observation = new Observation(
-            new LongitudeLatitudeCoordinates(
-                    new FullCircleDegreeCoordinate(0, 0, 0),
-                    new HalfCircleDegreeCoordinate(0, 0, 0)
-            ),
+            TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
             OffsetDateTime.parse("2000-01-01T04:50:00Z")
         );
         Sun sun = new Sun();
@@ -114,10 +105,7 @@ public class SunTest {
     @Test
     public void testIsNightAround19DegreesBelowIsNight() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:40:00Z")
         );
         Sun sun = new Sun();
@@ -130,10 +118,7 @@ public class SunTest {
     @Test
     public void testIsAstronomicalTwilightAround17DegreesBelowIsTwilight() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:50:00Z")
         );
         Sun sun = new Sun();
@@ -144,10 +129,7 @@ public class SunTest {
     @Test
     public void testIsAstronomicalTwilightAround19DegreesBelowNotTwilight() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T04:40:00Z")
         );
         Sun sun = new Sun();
@@ -158,10 +140,7 @@ public class SunTest {
     @Test
     public void testIsAstronomicalTwilightAround11DegreesBelowNotTwilight() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T05:13:00Z")
         );
         Sun sun = new Sun();
@@ -172,10 +151,7 @@ public class SunTest {
     @Test
     public void testIsAstronomicalTwilightAround13DegreesBelowIsTwilight() {
         Observation observation = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T05:06:00Z")
         );
         Sun sun = new Sun();

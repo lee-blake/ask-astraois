@@ -121,13 +121,7 @@ public class AstronomicalObjectTest {
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(10, 27, 38.25)
         );
-        Observation zeroZeroEpoch = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
-                OffsetDateTime.parse("2000-01-01T12:00:00Z")
-        );
+        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpoch();
         AstronomicalObject zeroZero = new AstronomicalObject(
                 "zeroZero",
                 new RightAscensionDeclinationCoordinates(
@@ -149,13 +143,7 @@ public class AstronomicalObjectTest {
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(-4, 32, 21.76)
         );
-        Observation oneHourWestOfZeroZeroEpoch = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
-                OffsetDateTime.parse("2000-01-01T12:00:00Z")
-        );
+        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpoch();
         AstronomicalObject oneZero = new AstronomicalObject(
                 "oneZero",
                 new RightAscensionDeclinationCoordinates(
@@ -163,7 +151,7 @@ public class AstronomicalObjectTest {
                         new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = oneZero.getAltAzAtObservation(oneHourWestOfZeroZeroEpoch);
+        AltitudeAzimuthCoordinates actual = oneZero.getAltAzAtObservation(zeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(
                 new AngularDistance(0, 1, 0),
@@ -205,13 +193,7 @@ public class AstronomicalObjectTest {
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
-        Observation zeroZeroEpoch = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
-                OffsetDateTime.parse("2000-01-01T12:00:00Z")
-        );
+        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpoch();
         AstronomicalObject northCelestialPole = new AstronomicalObject(
                 "north celestial pole",
                 new RightAscensionDeclinationCoordinates(
@@ -262,10 +244,7 @@ public class AstronomicalObjectTest {
                 new HalfCircleDegreeCoordinate(10, 27, 38.25)
         );
         Observation zeroZeroAndLSTZero = new Observation(
-                new LongitudeLatitudeCoordinates(
-                        new FullCircleDegreeCoordinate(0, 0, 0),
-                        new HalfCircleDegreeCoordinate(0, 0, 0)
-                ),
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                 OffsetDateTime.parse("2000-01-01T13:00:00+01:00")
         );
         AstronomicalObject zeroZero = new AstronomicalObject(

@@ -1,6 +1,7 @@
 package edu.bsu.cs222.astraios.model;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 public class TestObjectFactory {
 
@@ -65,12 +66,36 @@ public class TestObjectFactory {
         }
     }
 
-    public static class LongitudeLatitude {
+    public static class LongitudeLatitudes {
+
+        public static LongitudeLatitudeCoordinates buildZeroZero() {
+            return new LongitudeLatitudeCoordinates(
+                    new FullCircleDegreeCoordinate(0, 0, 0),
+                    new HalfCircleDegreeCoordinate(0, 0, 0)
+            );
+        }
 
         public static LongitudeLatitudeCoordinates buildBallState() {
             return new LongitudeLatitudeCoordinates(
                     new FullCircleDegreeCoordinate(-85, 24, 32.2),
                     new HalfCircleDegreeCoordinate(40, 11, 53.96)
+            );
+        }
+    }
+
+    public static class DateTimes {
+
+        public static OffsetDateTime buildEpochUTC() {
+            return OffsetDateTime.parse("2000-01-01T12:00:00Z");
+        }
+    }
+
+    public static class Observations {
+
+        public static Observation buildZeroZeroEpoch() {
+            return new Observation(
+                    TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
+                    TestObjectFactory.DateTimes.buildEpochUTC()
             );
         }
     }
