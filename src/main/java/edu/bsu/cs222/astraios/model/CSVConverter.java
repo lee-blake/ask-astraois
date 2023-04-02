@@ -92,11 +92,12 @@ public class CSVConverter {
                     declination
             ).convert();
         }
-        catch(ArrayIndexOutOfBoundsException | NumberFormatException exception) {
+        catch(ArrayIndexOutOfBoundsException | IllegalArgumentException exception) {
             throw new InvalidJournalFileContentsException(
                     "One of the coordinates in record '"
                             + record
-                            + "' was not valid!"
+                            + "' was not valid: "
+                            + exception
             );
         }
         return new AstronomicalObject(

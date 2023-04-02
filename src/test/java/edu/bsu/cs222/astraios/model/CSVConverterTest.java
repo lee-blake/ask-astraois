@@ -178,4 +178,17 @@ public class CSVConverterTest {
                 () -> converter.buildObjectJournalFromCSV(crashString)
         );
     }
+
+    @Test
+    public void testBuildObjectJournalFromCSVInvalidDecCoordinateThrowsInvalidJournalContentsException() {
+        CSVConverter converter = new CSVConverter();
+        String crashString = """
+                Name,Right Ascension,Declination,Completion Date\r
+                M13,16h 41m 41.24s,"+360° 27' 35.5""\",\r
+                """;
+        Assertions.assertThrows(
+                InvalidJournalFileContentsException.class,
+                () -> converter.buildObjectJournalFromCSV(crashString)
+        );
+    }
 }
