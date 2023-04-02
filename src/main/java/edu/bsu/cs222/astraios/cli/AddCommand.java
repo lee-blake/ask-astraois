@@ -34,7 +34,7 @@ public class AddCommand implements Callable<Integer> {
            names = {"--ra"},
            required = true,
            description = "The right ascension of the object to add. Accepted forms are:\n"
-                   + "\tStandard hour form (22h 30m 26s)",
+                   + CLIAcceptedFormats.ACCEPTED_HOUR_COORDINATE_FORMATS,
            converter = CLIHourCoordinateTypeConverter.class
     )
     private HourCoordinate rightAscension;
@@ -42,10 +42,8 @@ public class AddCommand implements Callable<Integer> {
     @Option(
             names = {"--dec"},
             required = true,
-            description = """
-                    The declination of the object to add. Accepted forms are:
-                    \tStandard degree form (45° 30' 26")
-                    \tAsterisk degree form (45* 30' 26")""",
+            description = "The declination of the object to add. Accepted forms are:\n"
+                    + CLIAcceptedFormats.ACCEPTED_DEGREE_COORDINATE_FORMATS,
             converter = CLIHalfCircleDegreeCoordinateTypeConverter.class
     )
     private HalfCircleDegreeCoordinate declination;

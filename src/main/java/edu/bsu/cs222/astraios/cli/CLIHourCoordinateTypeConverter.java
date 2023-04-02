@@ -23,7 +23,7 @@ public class CLIHourCoordinateTypeConverter implements ITypeConverter<HourCoordi
                             + value
                             + "' is not a valid hour coordinate - it was not in an acceptable form. "
                             + "Accepted forms:\n"
-                            + "\tStandard hour form (22h 30m 26s)\n"
+                            + CLIAcceptedFormats.ACCEPTED_HOUR_COORDINATE_FORMATS
             );
         }
         try {

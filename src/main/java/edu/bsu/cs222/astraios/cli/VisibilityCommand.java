@@ -34,10 +34,8 @@ public class VisibilityCommand implements Callable<Integer> {
     @Option(
             names = {"--longitude"},
             required = true,
-            description = """
-                    The longitude of the observation site. Accepted forms are:
-                    \tStandard degree form (45° 30' 26")
-                    \tAsterisk degree form (45* 30' 26")""",
+            description = "The longitude of the observation site. Accepted forms are:\n"
+                    + CLIAcceptedFormats.ACCEPTED_DEGREE_COORDINATE_FORMATS,
             converter = CLIFullCircleDegreeCoordinateTypeConverter.class
     )
     private FullCircleDegreeCoordinate longitude;
@@ -45,10 +43,8 @@ public class VisibilityCommand implements Callable<Integer> {
     @Option(
             names = {"--latitude"},
             required = true,
-            description = """
-                    The latitude of the observation site. Accepted forms are:
-                    \tStandard degree form (45° 30' 26")
-                    \tAsterisk degree form (45* 30' 26")""",
+            description = "The latitude of the observation site. Accepted forms are:\n"
+                    + CLIAcceptedFormats.ACCEPTED_DEGREE_COORDINATE_FORMATS,
             converter = CLIHalfCircleDegreeCoordinateTypeConverter.class
     )
     private HalfCircleDegreeCoordinate latitude;

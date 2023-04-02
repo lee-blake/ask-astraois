@@ -20,8 +20,7 @@ public class CLIFullCircleDegreeCoordinateTypeConverter
                             + value
                             + "' is not a valid degree coordinate - it was not in an acceptable form. "
                             + "Accepted forms:\n"
-                            + "\tStandard degree form (40° 30' 26\")\n"
-                            + "\tAsterisk degree form (40* 30' 26\")\n"
+                            + CLIAcceptedFormats.ACCEPTED_DEGREE_COORDINATE_FORMATS
             );
         }
         return converter.convertFullCircle();
