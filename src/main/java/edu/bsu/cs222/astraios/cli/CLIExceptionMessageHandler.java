@@ -13,7 +13,7 @@ public class CLIExceptionMessageHandler implements IExecutionExceptionHandler {
         this.commandLine = commandLine;
         try {
             CLIExceptionMessageFactory messageFactory = new CLIExceptionMessageFactory();
-            String message =messageFactory.translateExceptionToErrorMessage(ex);
+            String message = messageFactory.translateExceptionToErrorMessage(ex);
             this.printAsErrorText(message);
         }
         catch(Exception exception) {

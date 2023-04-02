@@ -15,7 +15,13 @@ public class CLIOffsetDateTimeTypeConverter implements ITypeConverter<OffsetDate
             return OffsetDateTime.parse(value);
         }
         catch(DateTimeParseException exception) {
-            throw new TypeConversionException("The date and time was not in valid ISO 8601 format!");
+            throw new TypeConversionException(
+                    "Value '"
+                            + value
+                            + "' is not a valid date & time- it was not in an acceptable form. "
+                            + "Accepted forms:\n"
+                            + CLIAcceptedFormats.ACCEPTED_DATETIME_FORMATS
+            );
         }
     }
 }

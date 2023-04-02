@@ -17,7 +17,13 @@ public class CLILocalDateTypeConverter implements ITypeConverter<LocalDate> {
             return LocalDate.parse(value);
         }
         catch(DateTimeParseException exception) {
-            throw new TypeConversionException("Date must either be 'today' or in yyyy-mm-dd format!");
+            throw new TypeConversionException(
+                    "Value '"
+                            + value
+                            + "' is not a valid date - it was not in an acceptable form. "
+                            + "Accepted forms:\n"
+                            + CLIAcceptedFormats.ACCEPTED_DATE_FORMATS
+            );
         }
     }
 }
