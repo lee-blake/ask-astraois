@@ -109,7 +109,12 @@ public class ObjectJournal {
         public String getCLIViewString() {
             String[] sortedNames = ObjectJournal.this.nameToEntryMap.keySet().toArray(new String[0]);
             Arrays.sort(sortedNames);
-            return this.getCLIViewString(sortedNames);
+            if(sortedNames.length > 0) {
+                return this.getCLIViewString(sortedNames);
+            }
+            else {
+                return this.getEmptyJournalCLIViewString();
+            }
         }
 
         public String getCLIViewString(String[] namesOfEntriesToView) {
@@ -123,6 +128,11 @@ public class ObjectJournal {
                 viewStringBuilder.append(cliFormatter.getCLIViewStringOfEntry());
             }
             return viewStringBuilder.toString();
+        }
+
+        private String getEmptyJournalCLIViewString() {
+            return "The journal currently contains no entries. Please use the 'add' subcommand "
+                    + "to add objects to the journal.";
         }
 
         private String buildCLIViewHeaders() {

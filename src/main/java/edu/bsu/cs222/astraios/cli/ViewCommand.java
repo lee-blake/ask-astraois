@@ -42,13 +42,9 @@ public class ViewCommand implements Callable<Integer> {
     private void printObjects(ObjectJournal objectJournal, String[] namesToPrint) {
         ObjectJournal.ObjectJournalCLIFormatter formatter = objectJournal.new ObjectJournalCLIFormatter();
         String toPrint;
-        if (objectJournal.equals(new ObjectJournal())) {
-            toPrint = "The journal currently contains no entries. Please use the 'add' subcommand "
-                    + "to add objects to the journal.";
-        }
         // Unfortunately, we do have to check 'null' because if no arguments are passed to a positional parameter,
         // 'null' is what PicoCLI will set the parameter value to.
-        else if(namesToPrint == null) {
+        if(namesToPrint == null) {
             toPrint = formatter.getCLIViewString();
         }
         else {
