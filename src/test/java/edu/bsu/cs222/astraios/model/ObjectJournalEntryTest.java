@@ -11,7 +11,7 @@ import static edu.bsu.cs222.astraios.model.TestObjectFactory.AstronomicalObjects
 public class ObjectJournalEntryTest {
 
     @Test
-    public void testGetNameM13() {
+    public void testGetNameM13ReturnsM31() {
         AstronomicalObject m13Object = buildM13Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m13Object);
         String nameRetrieved = entry.getName();
@@ -19,7 +19,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testGetNameM31() {
+    public void testGetNameM31ReturnsM31() {
         AstronomicalObject m31Object = buildM31Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m31Object);
         String nameRetrieved = entry.getName();
@@ -29,7 +29,7 @@ public class ObjectJournalEntryTest {
 
 
     @Test
-    public void testGetObjectM13() {
+    public void testGetObjectM13ReturnsM13() {
         AstronomicalObject m13Object = buildM13Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m13Object);
         AstronomicalObject freshM13Object = buildM13Object();
@@ -38,7 +38,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testGetObjectM31() {
+    public void testGetObjectM31ReturnsM31() {
         AstronomicalObject m31Object = buildM31Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m31Object);
         AstronomicalObject freshM31Object = buildM31Object();
@@ -49,7 +49,7 @@ public class ObjectJournalEntryTest {
 
 
     @Test
-    public void testMarkCompleteFirstOf2023() {
+    public void testMarkCompleteFirstOf2023MarksCorrectDate() {
         ObjectJournalEntry expected = new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
@@ -63,7 +63,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testMarkCompleteLastOf2022() {
+    public void testMarkCompleteLastOf2022MarksCorrectDate() {
         ObjectJournalEntry expected = new ObjectJournalEntry(
                 buildM31Object(),
                 new CompletionStatus(LocalDate.parse("2022-12-31"))
@@ -77,7 +77,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testMarkCompleteThrowsWhenAlreadyComplete() {
+    public void testMarkCompleteAlreadyCompleteThrowsException() {
         ObjectJournalEntry entry = new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
@@ -91,7 +91,7 @@ public class ObjectJournalEntryTest {
 
 
     @Test
-    public void testMarkIncompleteMarksIncomplete() {
+    public void testMarkIncompleteCompleteEntryMarksIncomplete() {
         ObjectJournalEntry expected = new ObjectJournalEntry(
             buildM13Object(),
             new CompletionStatus()
@@ -105,7 +105,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testMarkIncompleteThrowsExceptionIfAlreadyIncomplete() {
+    public void testMarkIncompleteAlreadyIncompleteThrowsException() {
         ObjectJournalEntry entry = new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus()
@@ -130,7 +130,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testEqualsSameObjectAndCompletionIsEqual() {
+    public void testEqualsSameObjectAndCompletionEqual() {
         ObjectJournalEntry entry1 = new ObjectJournalEntry(buildM13Object());
         ObjectJournalEntry entry2 = new ObjectJournalEntry(buildM13Object());
         boolean result = entry1.equals(entry2);

@@ -12,7 +12,7 @@ import static edu.bsu.cs222.astraios.model.TestObjectFactory.ObjectJournals.buil
 public class ObjectJournalTest {
 
     @Test
-    public void testAddEntry_GetObjectByName() {
+    public void testAddEntry_GetObjectByNameReturnsAddedEntries() {
         // The journal is the same as in TestObjectFactory but should NOT use that journal construction
         // because we need to test that addEntry works before using it in TestObjectFactory methods.
         ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
@@ -55,7 +55,7 @@ public class ObjectJournalTest {
 
 
     @Test
-    public void testRemoveEntryActuallyRemoves() {
+    public void testRemoveEntryPresentEntryActuallyRemoves() {
         ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
         ObjectJournalEntry m31Entry = new ObjectJournalEntry(buildM31Object());
         ObjectJournal actual = new ObjectJournal();
@@ -71,7 +71,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testRemoveEntryThrowsNoSuchEntryException() {
+    public void testRemoveEntryMissingEntryThrowsNoSuchEntryException() {
         ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
         ObjectJournalEntry m31Entry = new ObjectJournalEntry(buildM31Object());
         ObjectJournal objectJournal = new ObjectJournal();
@@ -86,7 +86,7 @@ public class ObjectJournalTest {
 
 
     @Test
-    public void testRemoveEntryByNameActuallyRemoves() {
+    public void testRemoveEntryByNamePresentEntryActuallyRemoves() {
         ObjectJournalEntry freshM13Entry = new ObjectJournalEntry(buildM13Object());
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(freshM13Entry);
@@ -98,7 +98,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testRemoveEntryByNameThrowsNoSuchEntryException() {
+    public void testRemoveEntryByNameMissingEntryThrowsNoSuchEntryException() {
         ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
         ObjectJournal objectJournal = new ObjectJournal();
         objectJournal.addEntry(m13Entry);
@@ -112,7 +112,7 @@ public class ObjectJournalTest {
 
 
     @Test
-    public void testMarkCompleteByNameMarksCompleteM13() {
+    public void testMarkCompleteByNameM13MarksComplete() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
@@ -128,7 +128,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testMarkCompleteByNameMarksCompleteM31() {
+    public void testMarkCompleteByNameM31MarksComplete() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 buildM31Object(),
@@ -144,7 +144,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testMarkCompleteByNameThrowsIfMissing() {
+    public void testMarkCompleteByNameMissingEntryThrowsException() {
         ObjectJournal emptyJournal = new ObjectJournal();
         Assertions.assertThrows(
             NoSuchEntryException.class,
@@ -155,7 +155,7 @@ public class ObjectJournalTest {
 
 
     @Test
-    public void testMarkIncompleteByNameMarksIncompleteM13() {
+    public void testMarkIncompleteByNameM13MarksIncomplete() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
@@ -171,7 +171,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testMarkIncompleteByNameMarksIncompleteM31() {
+    public void testMarkIncompleteByNameM31MarksIncomplete() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 buildM31Object(),
@@ -187,7 +187,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testMarkIncompleteByNameThrowsIfMissing() {
+    public void testMarkIncompleteByNameMissingEntryThrowsException() {
         ObjectJournal emptyJournal = new ObjectJournal();
         Assertions.assertThrows(
                 NoSuchEntryException.class,
@@ -209,7 +209,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testEqualsBothEmptyIsEqual() {
+    public void testEqualsBothEmptyEqual() {
         ObjectJournal journal1 = new ObjectJournal();
         ObjectJournal journal2 = new ObjectJournal();
         boolean result = journal1.equals(journal2);
@@ -217,7 +217,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testEqualsDifferentOneElementNotEqual() {
+    public void testEqualsDifferentSingleEntriesNotEqual() {
         ObjectJournal journal1 = new ObjectJournal();
         journal1.addEntry(new ObjectJournalEntry(buildM13Object()));
         ObjectJournal journal2 = new ObjectJournal();
@@ -227,7 +227,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testEqualsIdenticalNonemptyIsEqual() {
+    public void testEqualsIdenticalEntriesEqual() {
         ObjectJournal journal1 = new ObjectJournal();
         journal1.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
