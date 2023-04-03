@@ -33,10 +33,9 @@ public class AltitudeAzimuthCoordinates {
         double altitude2 = other.altitude.toRadians();
         double azimuth1 = this.azimuth.toRadians();
         double azimuth2 = other.azimuth.toRadians();
-        double angularDistanceRadians = acos(
-                sin(altitude1)*sin(altitude2)
-                        + cos(altitude1)*cos(altitude2)*cos(azimuth1-azimuth2)
-        );
+        double cosOfAngularDistance = sin(altitude1)*sin(altitude2)
+                + cos(altitude1)*cos(altitude2)*cos(azimuth1-azimuth2);
+        double angularDistanceRadians = acos(cosOfAngularDistance);
         return AngularDistance.fromRadians(angularDistanceRadians);
     }
 

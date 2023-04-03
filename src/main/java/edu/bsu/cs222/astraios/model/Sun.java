@@ -11,15 +11,16 @@ public class Sun {
     public AltitudeAzimuthCoordinates getLocationDuringObservation(Observation observation) {
         double fractionalYear = observation.getFractionalYear();
         double equationOfTime = getEquationOfTime(fractionalYear);
-        double declination = getSolarDeclination(fractionalYear);
         double hourAngle = observation.getSolarHourAngleInRadians(equationOfTime);
+        double declination = getSolarDeclination(fractionalYear);
         double latitude = observation.getLatitudeAsRadians();
-        double zenithAngle = Math.acos(
-                sin(latitude)*sin(declination)+ cos(latitude)*cos(declination)*cos(hourAngle)
-        );
-        double azimuth = Math.PI - Math.acos(
-                (sin(latitude)*cos(zenithAngle) - sin(declination)) / (cos(latitude)*sin(zenithAngle))
-        );
+
+        double cosOfZenith = sin(latitude)*sin(declination)
+                + cos(latitude)*cos(declination)*cos(hourAngle);
+        double zenithAngle = Math.acos(cosOfZenith);
+        double cosOfAzimuthComplement = (sin(latitude)*cos(zenithAngle) - sin(declination))
+                / (cos(latitude)*sin(zenithAngle));
+        double azimuth = Math.PI - Math.acos(cosOfAzimuthComplement);
         if(sin(hourAngle) > 0) {
             azimuth *= -1;
         }
@@ -55,6 +56,10 @@ public class Sun {
                 + 0.001480*sin(3*fractionalYear);
     }
 
+    public boolean sunInterferesWithViewing(Observation observation) {
+        return !(this.isNight(observation) || this.isAstronomicalTwilight(observation));
+    }
+
     public boolean isNight(Observation observation) {
         return this.getLocationDuringObservation(observation).getAltitudeInRadians() < NIGHT_UPPER_CUTOFF_RADIANS;
     }
@@ -62,9 +67,5 @@ public class Sun {
     public boolean isAstronomicalTwilight(Observation observation) {
         double altitudeRadians = this.getLocationDuringObservation(observation).getAltitudeInRadians();
         return altitudeRadians >= NIGHT_UPPER_CUTOFF_RADIANS && altitudeRadians < TWILIGHT_UPPER_CUTOFF_RADIANS;
-    }
-
-    public boolean sunInterferesWithViewing(Observation observation) {
-        return !(this.isNight(observation) || this.isAstronomicalTwilight(observation));
     }
 }

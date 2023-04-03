@@ -41,10 +41,6 @@ public class Observation {
         );
     }
 
-    public double getLatitudeAsRadians() {
-        return this.longitudeLatitude.getLatitudeAsRadians();
-    }
-
     public double getFractionalYear() {
         OffsetDateTime zeroOfYear = EPOCH.withYear(this.observationTime.getYear());
         long secondsElapsed = Duration.between(zeroOfYear, this.observationTime).getSeconds();
@@ -72,5 +68,9 @@ public class Observation {
         double fractionalHours = hour + minute/60.0 + second/3600.0;
         double trueSolarTimeRadians = Math.PI*fractionalHours*15/180 + offset;
         return trueSolarTimeRadians - Math.PI;
+    }
+
+    public double getLatitudeAsRadians() {
+        return this.longitudeLatitude.getLatitudeAsRadians();
     }
 }
