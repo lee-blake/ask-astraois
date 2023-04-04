@@ -70,6 +70,8 @@ public class HalfCircleDegreeCoordinate {
         this.units = Math.round(UNITS_FOR_PI_RADIANS*radians/Math.PI);
     }
 
+    public HalfCircleDegreeCoordinate negate() {return HalfCircleDegreeCoordinate.fromRadians(-this.toRadians());}
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof HalfCircleDegreeCoordinate other) {
@@ -87,10 +89,6 @@ public class HalfCircleDegreeCoordinate {
 
     public double toRadians() {
         return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
-    }
-
-    public HalfCircleDegreeCoordinate negate() {
-        return HalfCircleDegreeCoordinate.fromRadians(-this.toRadians());
     }
 
 

@@ -47,6 +47,10 @@ public class FullCircleDegreeCoordinate {
                 && !(arcseconds >= 60) && !(arcseconds < 0);
     }
 
+    public FullCircleDegreeCoordinate negate() {
+        return FullCircleDegreeCoordinate.fromRadians(-this.toRadians());
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof FullCircleDegreeCoordinate other) {
@@ -63,10 +67,6 @@ public class FullCircleDegreeCoordinate {
     }
 
     public double toRadians() {return Math.PI*this.units/UNITS_FOR_PI_RADIANS;}
-
-    public FullCircleDegreeCoordinate negate() {
-        return FullCircleDegreeCoordinate.fromRadians(-this.toRadians());
-    }
 
 
     public class FullCircleDegreeCoordinateFormatter {

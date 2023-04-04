@@ -53,6 +53,10 @@ public class HourCoordinate {
         this.units = ((Math.round(UNITS_FOR_PI_RADIANS*radians/Math.PI) % MAX_UNITS) + MAX_UNITS) % MAX_UNITS;
     }
 
+    public HourCoordinate negate() {
+        return HourCoordinate.fromRadians(-this.toRadians());
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof HourCoordinate other) {
@@ -69,10 +73,6 @@ public class HourCoordinate {
 
     public double toRadians() {
         return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
-    }
-
-    public HourCoordinate negate() {
-        return HourCoordinate.fromRadians(-this.toRadians());
     }
 
 
