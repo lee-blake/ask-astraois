@@ -86,7 +86,8 @@ public class CSVConverter {
             name = record.get(Header.NAME.toString());
             rightAscension = record.get(Header.RIGHT_ASCENSION.toString());
             declination = record.get(Header.DECLINATION.toString());
-        } catch (IllegalArgumentException exception) {
+        }
+        catch (IllegalArgumentException exception) {
             throw new CouldNotParseJournalFileException("A problem occurred when trying to parse the astronomical " +
                     "object from the record '"
                     + record
