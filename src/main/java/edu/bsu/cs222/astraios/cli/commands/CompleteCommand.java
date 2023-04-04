@@ -34,7 +34,7 @@ public class CompleteCommand implements Callable<Integer> {
     private String name;
 
     @Option(
-            names = {"--on","--date"},
+            names = {"--on", "--date"},
             description = "The date the completion should be marked for. Defaults to current day if not specified. "
                     + "Accepted forms are:\n"
                     + CLIAcceptedFormats.ACCEPTED_DATE_FORMATS,

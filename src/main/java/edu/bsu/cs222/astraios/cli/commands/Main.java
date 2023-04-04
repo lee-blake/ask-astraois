@@ -21,7 +21,7 @@ import picocli.CommandLine.Option;
 public class Main {
 
     @Option(
-            names = {"-h","--help"},
+            names = {"-h", "--help"},
             usageHelp = true,
             description = "Display this help message"
     )

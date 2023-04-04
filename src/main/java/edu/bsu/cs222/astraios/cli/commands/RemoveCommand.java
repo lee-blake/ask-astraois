@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
 public class RemoveCommand implements Callable<Integer> {
 
     @Option(
-            names = {"-h","--help"},
+            names = {"-h", "--help"},
             usageHelp = true,
             description = "Display this help message"
     )

@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
 public class ViewCommand implements Callable<Integer> {
 
     @CommandLine.Option(
-            names = {"-h","--help"},
+            names = {"-h", "--help"},
             usageHelp = true,
             description = "Display this help message"
     )
