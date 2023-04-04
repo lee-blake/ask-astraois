@@ -4,9 +4,9 @@ import edu.bsu.cs222.astraios.model.journal.ObjectJournal;
 import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
 import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
 import edu.bsu.cs222.astraios.persistence.JournalFileMaintainer;
-import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
+import picocli.CommandLine.Option;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -17,7 +17,7 @@ import java.util.concurrent.Callable;
 )
 public class ViewCommand implements Callable<Integer> {
 
-    @CommandLine.Option(
+    @Option(
             names = {"-h", "--help"},
             usageHelp = true,
             description = "Display this help message"
