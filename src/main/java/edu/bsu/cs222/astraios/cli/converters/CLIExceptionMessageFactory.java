@@ -4,9 +4,9 @@ import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyCompleteException;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyIncompleteException;
 import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
-import edu.bsu.cs222.astraios.presistence.CouldNotParseJournalFileException;
-import edu.bsu.cs222.astraios.presistence.InvalidJournalFileContentsException;
-import edu.bsu.cs222.astraios.presistence.NoSuchFileOnSaveException;
+import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
+import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
+import edu.bsu.cs222.astraios.persistence.NoSuchFileOnSaveException;
 
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;

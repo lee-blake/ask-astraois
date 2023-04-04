@@ -1,4 +1,4 @@
-package edu.bsu.cs222.astraios.presistence;
+package edu.bsu.cs222.astraios.persistence;
 
 import java.nio.file.NoSuchFileException;
 

@@ -10,9 +10,9 @@ import edu.bsu.cs222.astraios.model.astronomy.RightAscensionDeclinationCoordinat
 import edu.bsu.cs222.astraios.model.journal.CompletionStatus;
 import edu.bsu.cs222.astraios.model.journal.ObjectJournal;
 import edu.bsu.cs222.astraios.model.journal.ObjectJournalEntry;
-import edu.bsu.cs222.astraios.presistence.CouldNotParseJournalFileException;
-import edu.bsu.cs222.astraios.presistence.InvalidJournalFileContentsException;
-import edu.bsu.cs222.astraios.presistence.JournalFileMaintainer;
+import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
+import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
+import edu.bsu.cs222.astraios.persistence.JournalFileMaintainer;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
