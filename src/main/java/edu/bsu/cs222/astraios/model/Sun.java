@@ -8,7 +8,7 @@ public class Sun {
     private static final double NIGHT_UPPER_CUTOFF_RADIANS = -Math.PI*18/180;
     private static final double TWILIGHT_UPPER_CUTOFF_RADIANS = -Math.PI*12/180;
 
-    public AltitudeAzimuthCoordinates getLocationDuringObservation(Observation observation) {
+    public AzimuthAltitudeCoordinates getLocationDuringObservation(Observation observation) {
         double fractionalYear = observation.getFractionalYear();
         double equationOfTime = getEquationOfTime(fractionalYear);
         double hourAngle = observation.getSolarHourAngleInRadians(equationOfTime);
@@ -25,7 +25,7 @@ public class Sun {
             azimuth *= -1;
         }
         double altitude = Math.PI/2-zenithAngle;
-        return new AltitudeAzimuthCoordinates(
+        return new AzimuthAltitudeCoordinates(
                 FullCircleDegreeCoordinate.fromRadians(azimuth),
                 HalfCircleDegreeCoordinate.fromRadians(altitude)
         );

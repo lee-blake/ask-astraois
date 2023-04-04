@@ -81,9 +81,9 @@ public class VisibilityChecker {
         AstronomicalObject.AstronomicalObjectCLIFormatter objectFormatter =
                 this.objectToCheck.new AstronomicalObjectCLIFormatter();
         Map<Header,String> bodyValueMap = objectFormatter.getCLIValueMap();
-        AltitudeAzimuthCoordinates objectLocation = this.objectToCheck.getAltAzAtObservation(this.observation);
-        AltitudeAzimuthCoordinates.AltitudeAzimuthCoordinatesCLIFormatter locationFormatter =
-                objectLocation.new AltitudeAzimuthCoordinatesCLIFormatter();
+        AzimuthAltitudeCoordinates objectLocation = this.objectToCheck.getAltAzAtObservation(this.observation);
+        AzimuthAltitudeCoordinates.AzimuthAltitudeCoordinatesCLIFormatter locationFormatter =
+                objectLocation.new AzimuthAltitudeCoordinatesCLIFormatter();
         Map<Header,String> locationValueMap = locationFormatter.getCLIValueMap();
         bodyValueMap.putAll(locationValueMap);
         return bodyValueMap;

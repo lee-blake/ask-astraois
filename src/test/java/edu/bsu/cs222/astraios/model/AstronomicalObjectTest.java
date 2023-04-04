@@ -108,7 +108,7 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochZeroZeroComputesCorrectly() {
-        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates expected = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(10, 27, 38.25)
         );
@@ -120,7 +120,7 @@ public class AstronomicalObjectTest {
                         new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroEpoch);
+        AzimuthAltitudeCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(
                 new AngularDistance(0, 1, 0),
@@ -130,7 +130,7 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochOneZeroComputesCorrectly() {
-        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates expected = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(-4, 32, 21.76)
         );
@@ -142,7 +142,7 @@ public class AstronomicalObjectTest {
                         new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = oneZero.getAltAzAtObservation(zeroZeroEpoch);
+        AzimuthAltitudeCoordinates actual = oneZero.getAltAzAtObservation(zeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(
                 new AngularDistance(0, 1, 0),
@@ -152,7 +152,7 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testGetAltAzAtObservationMinusFifteenZeroEpochZeroZeroComputesCorrectly() {
-        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates expected = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(-4, 32, 21.76)
         );
@@ -170,7 +170,7 @@ public class AstronomicalObjectTest {
                         new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(oneHourWestOfZeroZeroEpoch);
+        AzimuthAltitudeCoordinates actual = zeroZero.getAltAzAtObservation(oneHourWestOfZeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(
                 new AngularDistance(0, 1, 0),
@@ -180,7 +180,7 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochNorthCelestialPoleComputesCorrectly() {
-        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates expected = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
@@ -192,7 +192,7 @@ public class AstronomicalObjectTest {
                         new HalfCircleDegreeCoordinate(90, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = northCelestialPole.getAltAzAtObservation(zeroZeroEpoch);
+        AzimuthAltitudeCoordinates actual = northCelestialPole.getAltAzAtObservation(zeroZeroEpoch);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(
                 new AngularDistance(0, 1, 0),
@@ -202,7 +202,7 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testGetAltAzAtObservationNorthPoleEpochNorthCelestialPoleComputesCorrectly() {
-        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates expected = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(90, 0, 0)
         );
@@ -220,7 +220,7 @@ public class AstronomicalObjectTest {
                         new HalfCircleDegreeCoordinate(90, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = northCelestialPole.getAltAzAtObservation(northPoleEpoch);
+        AzimuthAltitudeCoordinates actual = northCelestialPole.getAltAzAtObservation(northPoleEpoch);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(
                 new AngularDistance(0, 1, 0),
@@ -230,7 +230,7 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testGetAltAzAtObservationZeroZeroEpochZeroZeroNonUTCComputesCorrectly() {
-        AltitudeAzimuthCoordinates expected = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates expected = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(10, 27, 38.25)
         );
@@ -245,7 +245,7 @@ public class AstronomicalObjectTest {
                         new HalfCircleDegreeCoordinate(0, 0, 0)
                 )
         );
-        AltitudeAzimuthCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
+        AzimuthAltitudeCoordinates actual = zeroZero.getAltAzAtObservation(zeroZeroAndLSTZero);
         AngularDistance error = expected.distanceTo(actual);
         CustomAssertions.assertBounded(
                 new AngularDistance(0, 1, 0),

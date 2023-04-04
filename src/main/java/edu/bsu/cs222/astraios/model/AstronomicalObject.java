@@ -27,7 +27,7 @@ public class AstronomicalObject {
     }
 
 
-    public AltitudeAzimuthCoordinates getAltAzAtObservation(Observation observation) {
+    public AzimuthAltitudeCoordinates getAltAzAtObservation(Observation observation) {
         return this.celestialCoordinates.convertToAltAzAtObservation(observation);
     }
 

@@ -29,7 +29,7 @@ public class RightAscensionDeclinationCoordinates {
         return "[RA " + this.rightAscension + " DEC " + this.declination + "]";
     }
 
-    public AltitudeAzimuthCoordinates convertToAltAzAtObservation(Observation observation) {
+    public AzimuthAltitudeCoordinates convertToAltAzAtObservation(Observation observation) {
         double hourAngle = observation.getLocalSiderealTime().toRadians()
                 - this.rightAscension.toRadians();
         double declination = this.declination.toRadians();
@@ -43,7 +43,7 @@ public class RightAscensionDeclinationCoordinates {
         if(sin(hourAngle) > 0) {
             azimuthAsRadians *= -1;
         }
-        return new AltitudeAzimuthCoordinates(
+        return new AzimuthAltitudeCoordinates(
                 FullCircleDegreeCoordinate.fromRadians(azimuthAsRadians),
                 HalfCircleDegreeCoordinate.fromRadians(altitude)
         );

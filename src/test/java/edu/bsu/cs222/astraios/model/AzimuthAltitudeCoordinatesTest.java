@@ -3,14 +3,14 @@ package edu.bsu.cs222.astraios.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AltitudeAzimuthCoordinatesTest {
+public class AzimuthAltitudeCoordinatesTest {
 
     // This suppression is needed to verify this intended functionality where anything of another
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
     @Test
     public void testEqualsDifferentTypeNotEqual() {
-        AltitudeAzimuthCoordinates coordinates = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
@@ -21,11 +21,11 @@ public class AltitudeAzimuthCoordinatesTest {
 
     @Test
     public void testEqualsBothSameEqual() {
-        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates0 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
-        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates1 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
@@ -35,11 +35,11 @@ public class AltitudeAzimuthCoordinatesTest {
 
     @Test
     public void testEqualsAltitudeCoordinateDifferentNotEqual() {
-        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates0 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(45, 10, 10)
         );
-        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates1 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
@@ -49,11 +49,11 @@ public class AltitudeAzimuthCoordinatesTest {
 
     @Test
     public void testEqualsAzimuthCoordinateDifferentNotEqual() {
-        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates0 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(45, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
-        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates1 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
@@ -65,11 +65,11 @@ public class AltitudeAzimuthCoordinatesTest {
 
     @Test
     public void testDistanceToSameCoordinatesZero() {
-        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates0 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(45, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
-        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates1 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(45, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
@@ -80,11 +80,11 @@ public class AltitudeAzimuthCoordinatesTest {
 
     @Test
     public void testDistanceToPoles180() {
-        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates0 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(45, 0, 0),
                 new HalfCircleDegreeCoordinate(90, 0, 0)
         );
-        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates1 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(45, 0, 0),
                 new HalfCircleDegreeCoordinate(-90, 0, 0)
         );
@@ -95,11 +95,11 @@ public class AltitudeAzimuthCoordinatesTest {
 
     @Test
     public void testDistanceMixedCoordinates() {
-        AltitudeAzimuthCoordinates coordinates0 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates0 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(45, 0, 0)
         );
-        AltitudeAzimuthCoordinates coordinates1 = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates coordinates1 = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(-45, 0, 0)
         );
@@ -112,7 +112,7 @@ public class AltitudeAzimuthCoordinatesTest {
 
     @Test
     public void testIsAboveHorizonPlusOneThousandthOfOneArcsecondIsAbove() {
-        AltitudeAzimuthCoordinates above = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates above = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0.001)
         );
@@ -121,7 +121,7 @@ public class AltitudeAzimuthCoordinatesTest {
     }
     @Test
     public void testIsAboveHorizonMinusOneThousandthOfOneArcsecondIsNotAbove() {
-        AltitudeAzimuthCoordinates above = new AltitudeAzimuthCoordinates(
+        AzimuthAltitudeCoordinates above = new AzimuthAltitudeCoordinates(
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0.001).negate()
         );
