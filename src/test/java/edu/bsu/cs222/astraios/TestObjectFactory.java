@@ -23,8 +23,8 @@ public class TestObjectFactory {
         }
 
         public static AstronomicalObject buildM31Object() {
-            HourCoordinate m31RightAscension = new HourCoordinate(0,42,44.30);
-            HalfCircleDegreeCoordinate m31Declination = new HalfCircleDegreeCoordinate(41,16,9);
+            HourCoordinate m31RightAscension = new HourCoordinate(0, 42, 44.30);
+            HalfCircleDegreeCoordinate m31Declination = new HalfCircleDegreeCoordinate(41, 16, 9);
             RightAscensionDeclinationCoordinates m31Coords = new RightAscensionDeclinationCoordinates(
                     m31RightAscension,
                     m31Declination
@@ -33,8 +33,8 @@ public class TestObjectFactory {
         }
 
         public static AstronomicalObject buildM83Object() {
-            HourCoordinate m83RightAscension = new HourCoordinate(13,37,00.9);
-            HalfCircleDegreeCoordinate m83Declination = new HalfCircleDegreeCoordinate(-29,51,57);
+            HourCoordinate m83RightAscension = new HourCoordinate(13, 37, 00.9);
+            HalfCircleDegreeCoordinate m83Declination = new HalfCircleDegreeCoordinate(-29, 51, 57);
             RightAscensionDeclinationCoordinates m83Coords = new RightAscensionDeclinationCoordinates(
                     m83RightAscension,
                     m83Declination
