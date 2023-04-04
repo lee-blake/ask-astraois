@@ -23,7 +23,7 @@ test {
 }
 
 application {
-    mainClass = 'edu.bsu.cs222.astraios.cli.Main'
+    mainClass = 'edu.bsu.cs222.astraios.cli.commands.Main'
 }
 
 startScripts {
