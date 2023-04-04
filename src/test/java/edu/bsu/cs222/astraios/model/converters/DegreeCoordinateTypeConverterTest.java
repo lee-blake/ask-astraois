@@ -59,7 +59,7 @@ public class DegreeCoordinateTypeConverterTest {
         String negativeLessThanOneDegree = "-0° 1' 3\"";
         DegreeCoordinateTypeConverter converter = new DegreeCoordinateTypeConverter(negativeLessThanOneDegree);
         FullCircleDegreeCoordinate actual = converter.convertFullCircle();
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0 ,1 ,3).negate();
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0, 1, 3).negate();
         Assertions.assertEquals(expected, actual);
     }
 

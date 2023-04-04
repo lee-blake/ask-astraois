@@ -18,11 +18,11 @@ public class CLIHalfCircleDegreeCoordinateTypeConverterTest {
 
     @Test
     public void testConvertThrowsExceptionOnGarbageInput() {
-        String garbage = "CRASH IMMEDIATELY";
+        String garbageInput = "CRASH IMMEDIATELY";
         CLIHalfCircleDegreeCoordinateTypeConverter converter = new CLIHalfCircleDegreeCoordinateTypeConverter();
         Assertions.assertThrows(
                 TypeConversionException.class,
-                () -> converter.convert(garbage)
+                () -> converter.convert(garbageInput)
         );
     }
 

@@ -18,11 +18,11 @@ public class CLIHourCoordinateTypeConverterTest {
 
     @Test
     public void testConvertThrowsExceptionOnGarbageInput() {
-        String garbage = "CRASH IMMEDIATELY";
+        String garbageInput = "CRASH IMMEDIATELY";
         CLIHourCoordinateTypeConverter converter = new CLIHourCoordinateTypeConverter();
         Assertions.assertThrows(
                 TypeConversionException.class,
-                () -> converter.convert(garbage)
+                () -> converter.convert(garbageInput)
         );
     }
 }

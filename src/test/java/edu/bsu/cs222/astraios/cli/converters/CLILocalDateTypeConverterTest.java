@@ -30,11 +30,11 @@ public class CLILocalDateTypeConverterTest {
 
     @Test
     public void testConvertGarbageThrowsException() {
-        String garbage = "nope.avi";
+        String garbageInput = "nope.avi";
         CLILocalDateTypeConverter converter = new CLILocalDateTypeConverter();
         Assertions.assertThrows(
                 TypeConversionException.class,
-                () -> converter.convert(garbage)
+                () -> converter.convert(garbageInput)
         );
     }
 }
