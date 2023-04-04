@@ -13,7 +13,7 @@ public class CSVToCompletionStatusTypeConverterTest {
         CSVToCompletionStatusTypeConverter converter = new CSVToCompletionStatusTypeConverter("");
         CompletionStatus notComplete = new CompletionStatus();
         CompletionStatus actual = converter.convert();
-        Assertions.assertEquals(notComplete,actual);
+        Assertions.assertEquals(notComplete, actual);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class CSVToCompletionStatusTypeConverterTest {
         CSVToCompletionStatusTypeConverter converter = new CSVToCompletionStatusTypeConverter("2023-01-01");
         CompletionStatus firstOf2023 = new CompletionStatus(LocalDate.parse("2023-01-01"));
         CompletionStatus actual = converter.convert();
-        Assertions.assertEquals(firstOf2023,actual);
+        Assertions.assertEquals(firstOf2023, actual);
     }
 
     @Test
@@ -29,6 +29,6 @@ public class CSVToCompletionStatusTypeConverterTest {
         CSVToCompletionStatusTypeConverter converter = new CSVToCompletionStatusTypeConverter("2022-12-31");
         CompletionStatus lastOf2022 = new CompletionStatus(LocalDate.parse("2022-12-31"));
         CompletionStatus actual = converter.convert();
-        Assertions.assertEquals(lastOf2022,actual);
+        Assertions.assertEquals(lastOf2022, actual);
     }
 }

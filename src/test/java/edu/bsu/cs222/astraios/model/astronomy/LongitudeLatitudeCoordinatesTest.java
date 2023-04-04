@@ -36,7 +36,7 @@ public class LongitudeLatitudeCoordinatesTest {
     @Test
     public void testEqualsLatitudeDifferentNotEqual() {
         LongitudeLatitudeCoordinates coordinates0 = new LongitudeLatitudeCoordinates(
-                new FullCircleDegreeCoordinate(90 , 0, 0),
+                new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(5, 0, 0)
         );
         LongitudeLatitudeCoordinates coordinates1 = new LongitudeLatitudeCoordinates(

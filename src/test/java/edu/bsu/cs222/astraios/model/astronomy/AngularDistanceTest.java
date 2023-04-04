@@ -80,7 +80,7 @@ public class AngularDistanceTest {
     public void testFromRadiansConstructsZeroCorrectly() {
         AngularDistance expected = new AngularDistance(0, 0, 0);
         AngularDistance actual = AngularDistance.fromRadians(0);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class AngularDistanceTest {
         double halfPi = Math.PI/2;
         AngularDistance expected = new AngularDistance(90, 0, 0);
         AngularDistance actual = AngularDistance.fromRadians(halfPi);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

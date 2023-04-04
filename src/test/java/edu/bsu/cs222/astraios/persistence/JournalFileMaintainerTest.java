@@ -54,7 +54,7 @@ public class JournalFileMaintainerTest {
         );
         maintainer.keepBackupCopy();
         String backupContents = readFile("backup");
-        Assertions.assertEquals(contentText,backupContents);
+        Assertions.assertEquals(contentText, backupContents);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class JournalFileMaintainerTest {
         );
         maintainer.keepBackupCopy();
         String backupContents = readFile("backup");
-        Assertions.assertEquals(contentText,backupContents);
+        Assertions.assertEquals(contentText, backupContents);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class JournalFileMaintainerTest {
         );
         maintainer.keepBackupCopy();
         String backupContents = readFile("backup");
-        Assertions.assertEquals(contentText,backupContents);
+        Assertions.assertEquals(contentText, backupContents);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class JournalFileMaintainerTest {
         );
         maintainer.keepBackupCopy();
         String backupContents = readFile("dest");
-        Assertions.assertEquals(contentText,backupContents);
+        Assertions.assertEquals(contentText, backupContents);
     }
 
 
@@ -120,7 +120,7 @@ public class JournalFileMaintainerTest {
             System.out.println("Cleanup failed for the FI/O integration tests! "
                     + "Consider checking your temp directory and removing manually.");
         }
-        Assertions.assertEquals(freshCopy,loadedFromFile);
+        Assertions.assertEquals(freshCopy, loadedFromFile);
     }
 
     @Test

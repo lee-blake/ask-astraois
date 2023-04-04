@@ -20,7 +20,7 @@ public class CSVConverterTest {
                 Header.RIGHT_ASCENSION,
                 Header.DECLINATION
         };
-        String outputCSVString = converter.convertObjectJournalToCSV(emptyJournal,canonicalHeadersNoCompletion);
+        String outputCSVString = converter.convertObjectJournalToCSV(emptyJournal, canonicalHeadersNoCompletion);
         String expectedString = "Name,Right Ascension,Declination\r\n";
         Assertions.assertEquals(expectedString,outputCSVString);
     }
@@ -45,7 +45,7 @@ public class CSVConverterTest {
                 M13,16h 41m 41.24s,"+36° 27' 35.5""\"\r
                 M31,00h 42m 44.3s,"+41° 16' 09""\"\r
                 """;
-        Assertions.assertEquals(expectedString,outputCSVString);
+        Assertions.assertEquals(expectedString, outputCSVString);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CSVConverterTest {
                 M13,"+36° 27' 35.5""\",16h 41m 41.24s\r
                 M31,"+41° 16' 09""\",00h 42m 44.3s\r
                 """;
-        Assertions.assertEquals(expectedString,outputCSVString);
+        Assertions.assertEquals(expectedString, outputCSVString);
     }
 
     @Test
@@ -81,13 +81,13 @@ public class CSVConverterTest {
                 Header.DECLINATION,
                 Header.COMPLETION_DATE
         };
-        String outputCSVString = converter.convertObjectJournalToCSV(twoElementJournal,canonicalHeaders);
+        String outputCSVString = converter.convertObjectJournalToCSV(twoElementJournal, canonicalHeaders);
         String expectedString = """
                 Name,Right Ascension,Declination,Completion Date\r
                 M13,16h 41m 41.24s,"+36° 27' 35.5""\",\r
                 M31,00h 42m 44.3s,"+41° 16' 09""\",2023-01-01\r
                 """;
-        Assertions.assertEquals(expectedString,outputCSVString);
+        Assertions.assertEquals(expectedString, outputCSVString);
     }
 
 
@@ -99,7 +99,7 @@ public class CSVConverterTest {
         ObjectJournal emptyJournal = new ObjectJournal();
         String csvString = "Name,Right Ascension,Declination,Completion Date\r";
         ObjectJournal convertedJournal = converter.buildObjectJournalFromCSV(csvString);
-        Assertions.assertEquals(emptyJournal,convertedJournal);
+        Assertions.assertEquals(emptyJournal, convertedJournal);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class CSVConverterTest {
                 M31,00h 42m 44.3s,"+41° 16' 09""\",2023-01-01\r
                 """;
         ObjectJournal convertedJournal = converter.buildObjectJournalFromCSV(csvString);
-        Assertions.assertEquals(twoElementJournal,convertedJournal);
+        Assertions.assertEquals(twoElementJournal, convertedJournal);
     }
 
     @Test

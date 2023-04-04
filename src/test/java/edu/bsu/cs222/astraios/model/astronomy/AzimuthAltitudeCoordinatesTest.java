@@ -75,7 +75,7 @@ public class AzimuthAltitudeCoordinatesTest {
         );
         AngularDistance actual = coordinates0.distanceTo(coordinates1);
         AngularDistance expected = new AngularDistance(0, 0, 0);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class AzimuthAltitudeCoordinatesTest {
         );
         AngularDistance actual = coordinates0.distanceTo(coordinates1);
         AngularDistance expected = new AngularDistance(180, 0, 0);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class AzimuthAltitudeCoordinatesTest {
         );
         AngularDistance actual = coordinates0.distanceTo(coordinates1);
         AngularDistance expected = new AngularDistance(120, 0, 0);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
 

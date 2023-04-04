@@ -18,8 +18,10 @@ public class ObservationTest {
                 + "' and actual '"
                 + actual
                 + "' was not less than a second.";
-
-        Assertions.assertTrue(difference < oneSecondRadians, messageIfAssertFails);
+        Assertions.assertTrue(
+                difference < oneSecondRadians,
+                messageIfAssertFails
+        );
     }
 
     @Test
