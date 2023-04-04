@@ -41,7 +41,7 @@ public class CompletionStatus {
 
         public Map<Header, String> getCSVValueMap() {
             HashMap<Header, String> csvValueMap = new HashMap<>();
-            // No completion = empty cell. This is how most users store N/A in CSV.
+            // Incomplete = empty cell. This is how most users store N/A in CSV.
             String completionDateString = "";
             if(CompletionStatus.this.complete) {
                 completionDateString = CompletionStatus.this.dateOfCompletion.toString();
@@ -57,7 +57,7 @@ public class CompletionStatus {
 
         public Map<Header, String> getCLIValueMap() {
             HashMap<Header, String> cliValueMap = new HashMap<>();
-            // No completion = don't print anything. This will cause less visual clutter than printing
+            // Incomplete = don't print anything. This will cause less visual clutter than printing
             // something incomplete.
             String completionDateString = "";
             if(CompletionStatus.this.complete) {

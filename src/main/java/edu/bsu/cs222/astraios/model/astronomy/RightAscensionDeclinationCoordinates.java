@@ -19,7 +19,7 @@ public class RightAscensionDeclinationCoordinates {
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if(o instanceof RightAscensionDeclinationCoordinates other) {
             return this.rightAscension.equals(other.rightAscension) && this.declination.equals(other.declination);
         }

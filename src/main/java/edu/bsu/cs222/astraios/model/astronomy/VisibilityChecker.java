@@ -36,7 +36,7 @@ public class VisibilityChecker {
         }
     }
 
-    private String buildStatusStringWhenVisible(){
+    private String buildStatusStringWhenVisible() {
         return buildTwilightWarning() + buildStatusStringHeaders() + buildStatusStringBody();
     }
 
