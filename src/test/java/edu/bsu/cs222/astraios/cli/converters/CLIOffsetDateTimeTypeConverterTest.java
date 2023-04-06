@@ -27,18 +27,14 @@ public class CLIOffsetDateTimeTypeConverterTest {
         Assertions.assertEquals(expected,actual);
     }
 
-    // Suppressing this warning because it says the construction of "expected" always fails when opening the test
-    // in the debugger clearly demonstrates it constructs correctly. While we could use OffsetDateTime.parse here,
-    // it is better to construct with an alternate method to avoid a test that is basically A=A.
-    @SuppressWarnings("DataFlowIssue")
     @Test
     public void testConvertValidOffsetConvertsCorrectly() {
-        String validOffset = "2023-12-31T23:59:59+01:00";
+        String validOffset = "2022-01-01T00:00:00+01:00";
         CLIOffsetDateTimeTypeConverter converter = new CLIOffsetDateTimeTypeConverter();
         OffsetDateTime actual = converter.convert(validOffset);
         OffsetDateTime expected = OffsetDateTime.of(
-                2023,12,31,
-                23,59,59,
+                2022,1,1,
+                0,0,0,
                 0,
                 ZoneOffset.UTC
         ).withOffsetSameLocal(ZoneOffset.ofHours(1));
