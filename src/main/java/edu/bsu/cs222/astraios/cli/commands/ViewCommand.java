@@ -38,7 +38,7 @@ public class ViewCommand implements Callable<Integer> {
                 JournalFileMaintainer.defaultBackupPath
         );
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
-        this.printObjects(objectJournal,names);
+        this.printObjects(objectJournal, names);
         return 0;
     }
 
