@@ -160,4 +160,39 @@ public class SunTest {
         boolean result = sun.isAstronomicalTwilight(observation);
         Assertions.assertTrue(result);
     }
+
+
+
+    @Test
+    public void testSunInterferesWithViewingAround11DegreesSunInterferes() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
+                OffsetDateTime.parse("2000-01-01T05:13:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.sunInterferesWithViewing(observation);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testSunInterferesWithViewingAround13DegreesSunNoInterference() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
+                OffsetDateTime.parse("2000-01-01T05:06:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.sunInterferesWithViewing(observation);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testSunInterferesWithViewingAround19DegreesSunNoInterference() {
+        Observation observation = new Observation(
+                TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
+                OffsetDateTime.parse("2000-01-01T04:40:00Z")
+        );
+        Sun sun = new Sun();
+        boolean result = sun.sunInterferesWithViewing(observation);
+        Assertions.assertFalse(result);
+    }
 }
