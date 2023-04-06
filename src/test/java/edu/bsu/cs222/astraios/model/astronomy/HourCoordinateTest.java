@@ -44,6 +44,22 @@ public class HourCoordinateTest {
 
 
 
+    @Test
+    public void testFromRadiansMidnightConstructsCorrectly() {
+        HourCoordinate expected = new HourCoordinate(0, 0, 0);
+        HourCoordinate actual = HourCoordinate.fromRadians(0);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFromRadiansNoonConstructsCorrectly() {
+        HourCoordinate expected = new HourCoordinate(12, 0, 0);
+        HourCoordinate actual = HourCoordinate.fromRadians(Math.PI);
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
     // This suppression is needed to verify this intended functionality where anything of another
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
@@ -127,22 +143,6 @@ public class HourCoordinateTest {
         double expected = Math.PI;
         double actual = noon.toRadians();
         Assertions.assertEquals(expected, actual, 0.000000001);
-    }
-
-
-
-    @Test
-    public void testFromRadiansMidnightConstructsCorrectly() {
-        HourCoordinate expected = new HourCoordinate(0, 0, 0);
-        HourCoordinate actual = HourCoordinate.fromRadians(0);
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFromRadiansNoonConstructsCorrectly() {
-        HourCoordinate expected = new HourCoordinate(12, 0, 0);
-        HourCoordinate actual = HourCoordinate.fromRadians(Math.PI);
-        Assertions.assertEquals(expected, actual);
     }
 
 
