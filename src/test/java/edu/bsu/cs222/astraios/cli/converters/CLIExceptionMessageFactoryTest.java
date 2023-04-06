@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class CLIExceptionMessageFactoryTest {
 
     @Test
-    public void testThatItJustWorks() throws Exception {
+    public void testGetMessageJustWorks() throws Exception {
         CLIExceptionMessageFactory factory = new CLIExceptionMessageFactory();
         String actual = factory.translateExceptionToErrorMessage(new NoSuchEntryException("x"));
         String expected = "One or more requested journal entries could not be retrieved:\nx";
