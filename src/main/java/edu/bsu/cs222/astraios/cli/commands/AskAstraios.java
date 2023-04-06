@@ -18,7 +18,7 @@ import picocli.CommandLine.Option;
                 VisibilityCommand.class
         }
 )
-public class Main {
+public class AskAstraios {
 
     @Option(
             names = {"-h", "--help"},
@@ -29,7 +29,7 @@ public class Main {
 
     public static void main(String[] args) {
         AnsiConsole.systemInstall();
-        int exitCode = new CommandLine(new Main())
+        int exitCode = new CommandLine(new AskAstraios())
                 .setExecutionExceptionHandler(new CLIExceptionMessageHandler())
                 .execute(args);
         AnsiConsole.systemUninstall();
