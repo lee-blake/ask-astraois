@@ -32,7 +32,7 @@ public class ObjectJournalEntryTest {
 
 
     @Test
-    public void testGetObjectM13ReturnsM13() {
+    public void testGetAstronomicalObjectM13ReturnsM13() {
         AstronomicalObject m13Object = buildM13Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m13Object);
         AstronomicalObject freshM13Object = buildM13Object();
@@ -41,7 +41,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testGetObjectM31ReturnsM31() {
+    public void testGetAstronomicalObjectM31ReturnsM31() {
         AstronomicalObject m31Object = buildM31Object();
         ObjectJournalEntry entry = new ObjectJournalEntry(m31Object);
         AstronomicalObject freshM31Object = buildM31Object();
