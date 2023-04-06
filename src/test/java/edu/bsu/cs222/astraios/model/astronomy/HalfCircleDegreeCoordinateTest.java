@@ -92,6 +92,38 @@ public class HalfCircleDegreeCoordinateTest {
 
 
 
+    @Test
+    public void testFromRadiansZeroConvertsCorrectly() {
+        HalfCircleDegreeCoordinate actual = HalfCircleDegreeCoordinate.fromRadians(0);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0, 0, 0);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFromRadiansRightAngleConvertsCorrectly() {
+        HalfCircleDegreeCoordinate actual = HalfCircleDegreeCoordinate.fromRadians(Math.PI/2);
+        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(90, 0, 0);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFromRadiansAboveNorthPoleThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> HalfCircleDegreeCoordinate.fromRadians(Math.PI/2 + 0.000001)
+        );
+    }
+
+    @Test
+    public void testFromRadiansBelowSouthPoleThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> HalfCircleDegreeCoordinate.fromRadians(-Math.PI/2 - 0.000001)
+        );
+    }
+
+
+
     // This suppression is needed to verify this intended functionality where anything of another
     // type is not equal.
     @SuppressWarnings("EqualsBetweenInconvertibleTypes")
@@ -175,38 +207,6 @@ public class HalfCircleDegreeCoordinateTest {
         double expected = Math.PI/2;
         double actual = northPole.toRadians();
         Assertions.assertEquals(expected, actual, 0.000000001);
-    }
-
-
-
-    @Test
-    public void testFromRadiansZeroConvertsCorrectly() {
-        HalfCircleDegreeCoordinate actual = HalfCircleDegreeCoordinate.fromRadians(0);
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(0, 0, 0);
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFromRadiansRightAngleConvertsCorrectly() {
-        HalfCircleDegreeCoordinate actual = HalfCircleDegreeCoordinate.fromRadians(Math.PI/2);
-        HalfCircleDegreeCoordinate expected = new HalfCircleDegreeCoordinate(90, 0, 0);
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFromRadiansAboveNorthPoleThrowsException() {
-        Assertions.assertThrows(
-            IllegalArgumentException.class,
-                () -> HalfCircleDegreeCoordinate.fromRadians(Math.PI/2 + 0.000001)
-        );
-    }
-
-    @Test
-    public void testFromRadiansBelowSouthPoleThrowsException() {
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> HalfCircleDegreeCoordinate.fromRadians(-Math.PI/2 - 0.000001)
-        );
     }
 
 
