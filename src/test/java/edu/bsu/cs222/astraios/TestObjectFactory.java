@@ -41,7 +41,6 @@ public class TestObjectFactory {
             );
             return new AstronomicalObject("M83", m83Coords);
         }
-
     }
 
 
