@@ -34,17 +34,17 @@ public class FullCircleDegreeCoordinate {
         this.units = (unitsBeforePositiveNormalization + MAX_UNITS) % MAX_UNITS;
     }
 
+    private boolean coordinatesAreValid(int ignoredDegrees, int arcminutes, double arcseconds) {
+        return arcminutes <= 59 && arcminutes >= 0
+                && !(arcseconds >= 60) && !(arcseconds < 0);
+    }
+
     public static FullCircleDegreeCoordinate fromRadians(double radians) {
         return new FullCircleDegreeCoordinate(radians);
     }
 
     private FullCircleDegreeCoordinate(double radians) {
         this.units = ((Math.round(radians*UNITS_FOR_PI_RADIANS / Math.PI) % MAX_UNITS) + MAX_UNITS) % MAX_UNITS;
-    }
-
-    private boolean coordinatesAreValid(int ignoredDegrees, int arcminutes, double arcseconds) {
-        return arcminutes <= 59 && arcminutes >= 0
-                && !(arcseconds >= 60) && !(arcseconds < 0);
     }
 
     public FullCircleDegreeCoordinate negate() {

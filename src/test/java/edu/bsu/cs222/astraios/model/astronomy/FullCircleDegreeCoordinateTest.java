@@ -6,6 +6,63 @@ import org.junit.jupiter.api.Test;
 public class FullCircleDegreeCoordinateTest {
 
     @Test
+    public void testConstructorNegativeArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, -30, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorNegativeArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, 30, -30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeArcsecondsThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, 30, 60.0)
+        );
+    }
+
+    @Test
+    public void testConstructorLargeArcminutesThrowsException() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new FullCircleDegreeCoordinate(145, 60, 30.0)
+        );
+    }
+
+    @Test
+    public void testConstructorBarelyValidArcsecondsNoException() {
+        new FullCircleDegreeCoordinate(145, 30, 59.9999999);
+    }
+
+
+
+    @Test
+    public void testFromRadiansZeroConvertsCorrectly() {
+        double zero = 0.0;
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0, 0, 0);
+        FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(zero);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFromRadiansRightAngleConvertsCorrectly() {
+        double rightAngle = Math.PI/2;
+        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(90, 0, 0);
+        FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(rightAngle);
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+    @Test
     public void testEqualsCoordinatesAreSameEqual() {
         FullCircleDegreeCoordinate coordinate0 = new FullCircleDegreeCoordinate(180, 30, 20.0);
         FullCircleDegreeCoordinate coordinate1 = new FullCircleDegreeCoordinate(180, 30, 20.0);
@@ -80,43 +137,6 @@ public class FullCircleDegreeCoordinateTest {
         Assertions.assertTrue(result);
     }
 
-    @Test
-    public void testConstructorNegativeArcminutesThrowsException() {
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new FullCircleDegreeCoordinate(145, -30, 30.0)
-        );
-    }
-
-    @Test
-    public void testConstructorNegativeArcsecondsThrowsException() {
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new FullCircleDegreeCoordinate(145, 30, -30.0)
-        );
-    }
-
-    @Test
-    public void testConstructorLargeArcsecondsThrowsException() {
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new FullCircleDegreeCoordinate(145, 30, 60.0)
-        );
-    }
-
-    @Test
-    public void testConstructorLargeArcminutesThrowsException() {
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new FullCircleDegreeCoordinate(145, 60, 30.0)
-        );
-    }
-
-    @Test
-    public void testConstructorBarelyValidArcsecondsNoException() {
-         new FullCircleDegreeCoordinate(145, 30, 59.9999999);
-    }
-
 
 
     @Test
@@ -133,24 +153,6 @@ public class FullCircleDegreeCoordinateTest {
         double expected = Math.PI/2;
         double actual = ninety.toRadians();
         Assertions.assertEquals(expected, actual, 0.000000001);
-    }
-
-
-
-    @Test
-    public void testFromRadiansZeroConvertsCorrectly() {
-        double zero = 0.0;
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(0, 0, 0);
-        FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(zero);
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFromRadiansRightAngleConvertsCorrectly() {
-        double rightAngle = Math.PI/2;
-        FullCircleDegreeCoordinate expected = new FullCircleDegreeCoordinate(90, 0, 0);
-        FullCircleDegreeCoordinate actual = FullCircleDegreeCoordinate.fromRadians(rightAngle);
-        Assertions.assertEquals(expected, actual);
     }
 
 
