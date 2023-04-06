@@ -47,11 +47,6 @@ public class ObjectJournal {
         nameToEntryMap.remove(entryName);
     }
 
-    public void removeEntry(ObjectJournalEntry entry) {
-        String entryName = entry.getName();
-        removeEntryByName(entryName);
-    }
-
     public void markCompleteByName(String name, LocalDate dateOfCompletion) {
         ObjectJournalEntry entry = this.getEntryByName(name);
         entry.markComplete(dateOfCompletion);

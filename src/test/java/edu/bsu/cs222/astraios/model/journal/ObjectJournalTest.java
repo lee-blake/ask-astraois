@@ -58,37 +58,6 @@ public class ObjectJournalTest {
 
 
     @Test
-    public void testRemoveEntryPresentEntryActuallyRemoves() {
-        ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
-        ObjectJournalEntry m31Entry = new ObjectJournalEntry(buildM31Object());
-        ObjectJournal actual = new ObjectJournal();
-        actual.addEntry(m13Entry);
-        actual.addEntry(m31Entry);
-        actual.removeEntry(m31Entry);
-
-        ObjectJournalEntry freshM13Entry = new ObjectJournalEntry(buildM13Object());
-        ObjectJournal expected = new ObjectJournal();
-        expected.addEntry(freshM13Entry);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testRemoveEntryMissingEntryThrowsNoSuchEntryException() {
-        ObjectJournalEntry m13Entry = new ObjectJournalEntry(buildM13Object());
-        ObjectJournalEntry m31Entry = new ObjectJournalEntry(buildM31Object());
-        ObjectJournal objectJournal = new ObjectJournal();
-        objectJournal.addEntry(m13Entry);
-
-        Assertions.assertThrows(
-                NoSuchEntryException.class,
-                () -> objectJournal.removeEntry(m31Entry)
-        );
-    }
-
-
-
-    @Test
     public void testRemoveEntryByNamePresentEntryActuallyRemoves() {
         ObjectJournalEntry freshM13Entry = new ObjectJournalEntry(buildM13Object());
         ObjectJournal expected = new ObjectJournal();
