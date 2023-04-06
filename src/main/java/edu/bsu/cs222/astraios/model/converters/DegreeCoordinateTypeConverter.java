@@ -12,7 +12,7 @@ public class DegreeCoordinateTypeConverter {
 
     public DegreeCoordinateTypeConverter(String stringToConvert) {
         String compactString = removeWhitespace(stringToConvert);
-        String noLongerNegativeString = extractNegative(compactString);
+        String noLongerNegativeString = extractNegativeSignForConversion(compactString);
         this.parseStandardFormat(noLongerNegativeString);
     }
 
@@ -20,7 +20,7 @@ public class DegreeCoordinateTypeConverter {
         return stringToStrip.replace(" ","");
     }
 
-    private String extractNegative(String potentiallyNegativeString) {
+    private String extractNegativeSignForConversion(String potentiallyNegativeString) {
         if(potentiallyNegativeString.startsWith("-")) {
             this.negative = true;
             return potentiallyNegativeString.substring(1);
