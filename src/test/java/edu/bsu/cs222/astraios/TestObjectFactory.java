@@ -44,6 +44,8 @@ public class TestObjectFactory {
 
     }
 
+
+
     public static class ObjectJournals {
 
         public static ObjectJournal buildM13M31ObjectJournal() {
@@ -71,6 +73,8 @@ public class TestObjectFactory {
         }
     }
 
+
+
     public static class LongitudeLatitudes {
 
         public static LongitudeLatitudeCoordinates buildZeroZero() {
@@ -88,12 +92,16 @@ public class TestObjectFactory {
         }
     }
 
+
+
     public static class DateTimes {
 
         public static OffsetDateTime buildEpochUTC() {
             return OffsetDateTime.parse("2000-01-01T12:00:00Z");
         }
     }
+
+
 
     public static class Observations {
 
