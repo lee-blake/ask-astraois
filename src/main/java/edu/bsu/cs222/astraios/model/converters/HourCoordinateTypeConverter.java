@@ -52,5 +52,4 @@ public class HourCoordinateTypeConverter {
         }
         return coordinate;
     }
-
 }
