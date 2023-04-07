@@ -5,6 +5,7 @@ import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.ParseResult;
 import picocli.CommandLine.ScopeType;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class AskAstraios {
         AskAstraios astraios = new AskAstraios();
         astraios.commandLine = new CommandLine(astraios)
                 .setExecutionExceptionHandler(new CLIExceptionMessageHandler());
-        CommandLine.ParseResult parseResult = astraios.commandLine.parseArgs(args);
+        ParseResult parseResult = astraios.commandLine.parseArgs(args);
         int exitCode;
         if(astraios.exampleRequested) {
             exitCode = astraios.executeExampleOption(parseResult);
@@ -59,7 +60,7 @@ public class AskAstraios {
         System.exit(exitCode);
     }
 
-    private int executeExampleOption(CommandLine.ParseResult parseResult) {
+    private int executeExampleOption(ParseResult parseResult) {
         List<CommandLine.ParseResult> subcommandsParsed = parseResult.subcommands();
         if(subcommandsParsed.isEmpty()) {
             this.commandLine.getErr().println(
