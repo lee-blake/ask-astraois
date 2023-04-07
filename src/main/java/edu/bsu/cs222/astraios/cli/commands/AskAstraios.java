@@ -63,9 +63,7 @@ public class AskAstraios {
     private int executeExampleOption(ParseResult parseResult) {
         List<CommandLine.ParseResult> subcommandsParsed = parseResult.subcommands();
         if(subcommandsParsed.isEmpty()) {
-            this.commandLine.getErr().println(
-                    "The '--example' option must be run with a valid subcommand! "
-                    + "See --help for a list of subcommands.");
+            this.printInvalidSubcommandError();
             return 1;
         }
         else {
@@ -78,6 +76,16 @@ public class AskAstraios {
             String[] argsToExecuteExampleCorrectly = new String[]{"example", subcommandWhereThisWasCalledFrom};
             return this.commandLine.execute(argsToExecuteExampleCorrectly);
         }
+    }
+
+    private void printInvalidSubcommandError() {
+        this.commandLine.getErr().println(
+                this.commandLine.getColorScheme()
+                        .errorText(
+                                "The '--example' option must be run with a valid subcommand! "
+                                        + "See --help for a list of subcommands."
+                        )
+        );
     }
 
     private int executeNormalLogic(String[] args) {
