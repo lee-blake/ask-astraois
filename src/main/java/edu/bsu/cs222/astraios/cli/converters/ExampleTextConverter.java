@@ -5,6 +5,8 @@ public class ExampleTextConverter {
         switch (subcommand) {
             case "add" -> {
                 return """
+                        Examples for 'add':
+                        
                         Add M13 to the object journal:
                         ask-astraios add M13 --ra "16h 41m 41.24s" 	--dec "+36* 27' 35.5\\""
                         
@@ -17,6 +19,8 @@ public class ExampleTextConverter {
             }
             case "check-visibility" -> {
                 return """
+                        Examples for 'check-visibility':
+                        
                         Check the visibility of M13 at noon UTC on Jan 1, 2000 at longitude and latitude 0:
                         ask-astraios check-visibility M13 --datetime "2000-01-01T12:00:00Z"
                         --longitude "0*0'0\\"" --latitude "0*0'0\\""
@@ -36,6 +40,8 @@ public class ExampleTextConverter {
             }
             case "complete" -> {
                 return """
+                        Examples for 'complete':
+                        
                         Mark M13 complete in the journal on today's date:
                         ask-astraios complete M13
                         
@@ -48,6 +54,8 @@ public class ExampleTextConverter {
             }
             case "example" -> {
                 return """
+                        Examples for 'example' (which is running right now):
+                        
                         Get examples for the example command:
                         ask-astraios example example
                         
@@ -57,6 +65,8 @@ public class ExampleTextConverter {
             }
             case "remove" -> {
                 return """
+                        Examples for 'remove':
+                        
                         Remove M13 from the journal:
                         ask-astraios remove M13
                                         
@@ -66,7 +76,9 @@ public class ExampleTextConverter {
             }
             case "uncomplete" -> {
                 return """
-                        Mark M13 incomplete in the hournal:
+                        Examples for 'uncomplete':
+                        
+                        Mark M13 incomplete in the journal:
                         ask-astraios uncomplete M13
                                         
                         Remove an object if it has spaces in its name:
@@ -75,6 +87,8 @@ public class ExampleTextConverter {
             }
             case "view" -> {
                 return """
+                        Examples for 'view':
+                        
                         View all objects in journal:
                         ask-astraios view
                                             
@@ -86,6 +100,6 @@ public class ExampleTextConverter {
                         """;
             }
         }
-        throw new IllegalArgumentException("No such subcommand");
+        throw new IllegalArgumentException("No such subcommand is supported in ExampleTextConverter!");
     }
 }
