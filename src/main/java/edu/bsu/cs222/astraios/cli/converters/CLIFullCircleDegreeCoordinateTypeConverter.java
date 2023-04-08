@@ -2,10 +2,11 @@ package edu.bsu.cs222.astraios.cli.converters;
 
 import edu.bsu.cs222.astraios.model.converters.DegreeCoordinateTypeConverter;
 import edu.bsu.cs222.astraios.model.astronomy.FullCircleDegreeCoordinate;
-import picocli.CommandLine;
+import picocli.CommandLine.ITypeConverter;
+import picocli.CommandLine.TypeConversionException;
 
 public class CLIFullCircleDegreeCoordinateTypeConverter
-        implements CommandLine.ITypeConverter<FullCircleDegreeCoordinate>  {
+        implements ITypeConverter<FullCircleDegreeCoordinate>  {
 
     @Override
     public FullCircleDegreeCoordinate convert(String value) {
@@ -15,7 +16,7 @@ public class CLIFullCircleDegreeCoordinateTypeConverter
             converter = new DegreeCoordinateTypeConverter(standardizedValue);
         }
         catch (IllegalArgumentException | ArrayIndexOutOfBoundsException invalidFormException) {
-            throw new CommandLine.TypeConversionException(
+            throw new TypeConversionException(
                     "Value '"
                             + value
                             + "' is not a valid degree coordinate - it was not in an acceptable form. "
