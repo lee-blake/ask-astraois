@@ -22,19 +22,19 @@ public class ExampleTextConverter {
                         Examples for 'check-visibility':
                         
                         Check the visibility of M13 at noon UTC on Jan 1, 2000 at longitude and latitude 0:
-                        ask-astraios check-visibility M13 --datetime "2000-01-01T12:00:00Z"
+                        ask-astraios check-visibility M13 --datetime "2000-01-01T12:00:00Z" \
                         --longitude "0*0'0\\"" --latitude "0*0'0\\""
                         
                         Check the visibility of M31 at 10pm local on Apr 7, 2023 at Ball State University:
-                        ask-astraios check-visibility M13 --datetime "2023-04-07T22:00:00-04:00"
+                        ask-astraios check-visibility M13 --datetime "2023-04-07T22:00:00-04:00" \
                         --longitude "-85°24'32.20\\"" --latitude "40°11'53.96\\""
                         
                         Check the visibility of M31 at BSU again, but with the arcsecond markers left off:
-                        ask-astraios check-visibility M13 --datetime "2023-04-07T22:00:00-04:00"
+                        ask-astraios check-visibility M13 --datetime "2023-04-07T22:00:00-04:00" \
                         --longitude "-85°24'32.20" --latitude "40°11'53.96"
                         
                         Check the visibility of an object with spaces in its name:
-                        ask-astraios check-visibility "Name has spaces" --datetime "2023-04-07T22:00:00-04:00"
+                        ask-astraios check-visibility "Name has spaces" --datetime "2023-04-07T22:00:00-04:00" \
                         --longitude "-85°24'32.20" --latitude "40°11'53.96"
                         """;
             }
