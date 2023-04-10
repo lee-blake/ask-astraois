@@ -11,7 +11,7 @@ public class ExampleTextConverter {
                         ask-astraios add M13 --ra "16h 41m 41.24s" 	--dec "+36* 27' 35.5\\""
                         
                         Add M83 to the object journal, leaving of second and arcsecond markers:
-                        ask-astraios add M83 --ra "13h 37m 00.9" --dec "−29* 51' 57"
+                        ask-astraios add M83 --ra "13h 37m 00.9" --dec "-29* 51' 57"
                         
                         Add an object with spaces in its name to the journal:
                         ask-astraios add "Name has spaces" --ra "2h 18m 36" --dec "-0* 59' 59.9"
