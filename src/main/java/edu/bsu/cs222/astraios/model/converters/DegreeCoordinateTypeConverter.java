@@ -21,7 +21,7 @@ public class DegreeCoordinateTypeConverter {
     }
 
     private String extractNegativeSignForConversion(String potentiallyNegativeString) {
-        if(potentiallyNegativeString.startsWith("-")) {
+        if(potentiallyNegativeString.startsWith("-") || potentiallyNegativeString.startsWith("−")) {
             this.negative = true;
             return potentiallyNegativeString.substring(1);
         }
