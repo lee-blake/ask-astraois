@@ -1,7 +1,7 @@
 # Ask Astraios
-Ask Astraios is a command-line utility for amateur astronomers. Version 0.2.0 can maintain a journal of astronomcal
-objects to observe, with their names, RA/Dec coordinates, and date of completion. Additional, the program can check 
-whether or not an object is visible at a given time and location. The journal is saved in CSV format and can be read 
+Ask Astraios is a command-line utility for amateur astronomers. Version 0.2.0 can maintain a journal of astronomical
+objects to observe, with their names, RA/Dec coordinates, and date of completion. Additionally, the program can check 
+whether an object is visible at a given time and location. The journal is saved in CSV format and can be read 
 by other programs; however, editing with other programs is not recommended at the present time as many common CSV-editing
 programs do not use the same formatting as our backend. 
 
@@ -69,5 +69,8 @@ Java Runtime (class file version 61.0), this version of the Java Runtime only re
 that was compiled with a later version of the JDK than the version of the JVM that is attempting to run the program. 
 To resolve this error, verify your `PATH` environment variable points to the correct version of Java, and if need be,
 install a version of Java at least as late as the one used in IntelliJ to build the project.
-
-
+#### Valid input isn't considered valid
+If input is given to the program that appears valid, but the program still complains it is in an invalid format,
+it is likely the consequence of one or more Unicode characters. For example, Unicode has more than half a dozen dashes
+that can look identical in certain fonts. At the present time, the program does not support all Unicode variants that
+conceivably may occur in a coordinate. Thus, if this error occurs, retype the input from the keyboard.
