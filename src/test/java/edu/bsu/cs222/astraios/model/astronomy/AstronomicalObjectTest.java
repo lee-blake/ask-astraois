@@ -254,4 +254,28 @@ public class AstronomicalObjectTest {
                 error
         );
     }
+
+
+
+    @Test
+    public void testEditNameOriginalNameStaysTheSame() {
+        AstronomicalObject expected = TestObjectFactory.AstronomicalObjects.buildM83Object();
+        AstronomicalObject actual = TestObjectFactory.AstronomicalObjects.buildM83Object();
+        actual.editName("M83");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditNameDifferentNameDoesChange() {
+        HourCoordinate m83RightAscension = new HourCoordinate(13, 37, 00.9);
+        HalfCircleDegreeCoordinate m83Declination = new HalfCircleDegreeCoordinate(-29, 51, 57);
+        RightAscensionDeclinationCoordinates m83Coords = new RightAscensionDeclinationCoordinates(
+                m83RightAscension,
+                m83Declination
+        );
+        AstronomicalObject expected = new AstronomicalObject("M83B", m83Coords);
+        AstronomicalObject actual = TestObjectFactory.AstronomicalObjects.buildM83Object();
+        actual.editName("M83B");
+        Assertions.assertEquals(expected, actual);
+    }
 }

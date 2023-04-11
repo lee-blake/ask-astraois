@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class AstronomicalObject {
 
-    private final String name;
+    private String name;
     private final RightAscensionDeclinationCoordinates celestialCoordinates;
 
     public AstronomicalObject(String name, RightAscensionDeclinationCoordinates celestialCoordinates) {
@@ -31,6 +31,10 @@ public class AstronomicalObject {
 
     public AzimuthAltitudeCoordinates getAltAzAtObservation(Observation observation) {
         return this.celestialCoordinates.convertToAltAzAtObservation(observation);
+    }
+
+    public void editName(String newName) {
+        this.name = newName;
     }
 
 
