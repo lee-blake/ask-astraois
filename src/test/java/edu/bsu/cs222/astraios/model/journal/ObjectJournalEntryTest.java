@@ -158,4 +158,43 @@ public class ObjectJournalEntryTest {
         boolean result = incomplete.equals(complete);
         Assertions.assertFalse(result);
     }
+
+
+
+    @Test
+    public void testForceCompleteFirstOf2023MarksCorrectDate() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.forceComplete(LocalDate.parse("2023-01-01"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteLastOf2022MarksCorrectDate() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.forceComplete(LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteAlreadyCompleteDoesNotThrow() {
+        ObjectJournalEntry entry = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        entry.forceComplete(LocalDate.parse("2022-12-31"));
+    }
 }

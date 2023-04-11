@@ -36,6 +36,10 @@ public class ObjectJournalEntry {
         if(this.completionStatus.isComplete()) {
             throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
         }
+        forceComplete(dateOfCompletion);
+    }
+
+    public void forceComplete(LocalDate dateOfCompletion) {
         this.completionStatus = new CompletionStatus(dateOfCompletion);
     }
 
@@ -54,6 +58,7 @@ public class ObjectJournalEntry {
         }
         return false;
     }
+
 
 
 
