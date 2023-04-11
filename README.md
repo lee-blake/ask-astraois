@@ -1,8 +1,9 @@
 # Ask Astraios
-Ask Astraios is a command-line utility for amateur astronomers. Version 0.1.0 can maintain a journal of astronomcal
-objects to observe, with their names, RA/Dec coordinates, and date of completion. The journal is saved in CSV format
-and can be read by other programs; however, editing with other programs is not recommended at the present time as 
-many common CSV-editing programs do not use the same formatting as our backend.
+Ask Astraios is a command-line utility for amateur astronomers. Version 0.2.0 can maintain a journal of astronomcal
+objects to observe, with their names, RA/Dec coordinates, and date of completion. Additional, the program can check 
+whether or not an object is visible at a given time and location. The journal is saved in CSV format and can be read 
+by other programs; however, editing with other programs is not recommended at the present time as many common CSV-editing
+programs do not use the same formatting as our backend. 
 
 ## Authors
 Nick Hively <nrhively@bsu.edu>  
@@ -40,7 +41,8 @@ A .zip file will be produced in 'build/distributions' and is needed for installa
 Open a new terminal and navigate to the folder that was extracted. The output of `ls` or `dir` should list `bin`, 
 `lib`, and `data`. It is important that you execute the program from this directory or the journal will not save to
 the correct location. Run the program by either `./bin/ask-astraios` (Linux) or `.\bin\ask-astraios.bat` (Windows). A
-help menu with details on the various subcommands should display in the terminal.
+help menu with details on the various subcommands should display in the terminal. Users might find the example command 
+to be useful to see how the other commands are formatted.
 
 #### First-Time Use
 The journal file does not exist initially. There is no need to create it manually - adding the first object to it will
