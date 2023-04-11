@@ -47,6 +47,10 @@ public class ObjectJournalEntry {
         if(!this.completionStatus.isComplete()) {
             throw new EntryAlreadyIncompleteException("Cannot mark an entry incomplete if it is already incomplete!");
         }
+        forceIncomplete();
+    }
+
+    public void forceIncomplete() {
         this.completionStatus = new CompletionStatus();
     }
 

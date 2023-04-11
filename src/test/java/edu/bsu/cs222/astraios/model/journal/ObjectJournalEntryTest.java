@@ -197,4 +197,29 @@ public class ObjectJournalEntryTest {
         );
         entry.forceComplete(LocalDate.parse("2022-12-31"));
     }
+
+
+
+    @Test
+    public void testForceIncompleteCompleteEntryMarksIncomplete() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        actual.forceIncomplete();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceIncompleteAlreadyIncompleteDoesNotThrowException() {
+        ObjectJournalEntry entry = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        entry.forceIncomplete();
+    }
 }
