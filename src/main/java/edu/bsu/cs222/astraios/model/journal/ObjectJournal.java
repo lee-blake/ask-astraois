@@ -62,6 +62,11 @@ public class ObjectJournal {
         entry.markIncomplete();
     }
 
+    public void forceIncompleteByName(String name) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.forceIncomplete();
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof ObjectJournal other) {

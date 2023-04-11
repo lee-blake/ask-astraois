@@ -275,4 +275,47 @@ public class ObjectJournalTest {
                 () -> emptyJournal.forceCompleteByName("M13",LocalDate.parse("2023-01-01"))
         );
     }
+
+
+
+    @Test
+    public void testForceIncompleteByNameM13MarksIncomplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        actual.forceIncompleteByName("M13");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceIncompleteByNameM31MarksIncomplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        ));
+        actual.forceIncompleteByName("M31");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceIncompleteByNameMissingEntryThrowsException() {
+        ObjectJournal emptyJournal = new ObjectJournal();
+        Assertions.assertThrows(
+                NoSuchEntryException.class,
+                () -> emptyJournal.forceIncompleteByName("M13")
+        );
+    }
 }
