@@ -232,4 +232,47 @@ public class ObjectJournalTest {
         boolean result = subset.equals(superset);
         Assertions.assertFalse(result);
     }
+
+
+
+    @Test
+    public void testForceCompleteByNameM13MarksComplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        actual.forceCompleteByName("M13",LocalDate.parse("2023-01-01"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteByNameM31MarksComplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        actual.forceCompleteByName("M31",LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteByNameMissingEntryThrowsException() {
+        ObjectJournal emptyJournal = new ObjectJournal();
+        Assertions.assertThrows(
+                NoSuchEntryException.class,
+                () -> emptyJournal.forceCompleteByName("M13",LocalDate.parse("2023-01-01"))
+        );
+    }
 }

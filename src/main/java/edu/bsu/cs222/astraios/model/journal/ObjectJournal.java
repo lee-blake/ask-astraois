@@ -52,6 +52,11 @@ public class ObjectJournal {
         entry.markComplete(dateOfCompletion);
     }
 
+    public void forceCompleteByName(String name, LocalDate dateOfCompletion) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.forceComplete(dateOfCompletion);
+    }
+
     public void markIncompleteByName(String name) {
         ObjectJournalEntry entry = this.getEntryByName(name);
         entry.markIncomplete();

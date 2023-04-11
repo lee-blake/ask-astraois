@@ -61,7 +61,6 @@ public class ObjectJournalEntry {
 
 
 
-
     public class ObjectJournalEntryCSVFormatter {
 
         private final CSVPrinter csvPrinter;
