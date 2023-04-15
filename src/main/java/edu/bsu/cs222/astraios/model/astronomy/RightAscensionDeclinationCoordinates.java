@@ -10,7 +10,7 @@ import static java.lang.Math.sin;
 
 public class RightAscensionDeclinationCoordinates {
 
-    private final HourCoordinate rightAscension;
+    private HourCoordinate rightAscension;
     private final HalfCircleDegreeCoordinate declination;
 
     public RightAscensionDeclinationCoordinates(HourCoordinate ra, HalfCircleDegreeCoordinate dec) {
@@ -50,6 +50,8 @@ public class RightAscensionDeclinationCoordinates {
                 HalfCircleDegreeCoordinate.fromRadians(altitude)
         );
     }
+
+    public void editRightAscension(HourCoordinate newRightAscension) { this.rightAscension = newRightAscension;}
 
 
     public class RightAscensionDeclinationCoordinatesCSVFormatter {
