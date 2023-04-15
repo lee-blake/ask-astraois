@@ -73,4 +73,40 @@ public class RightAscensionDeclinationCoordinatesTest {
         boolean result = raDecCoords1.equals(raDecCoords2);
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testEditRightAscensionOriginalRightAscensionDoesNotChange() {
+        HourCoordinate rightAscension1 = new HourCoordinate(13, 37, 00.9);
+        HalfCircleDegreeCoordinate declination1 = new HalfCircleDegreeCoordinate(-29, 51, 57);
+        RightAscensionDeclinationCoordinates expected = new RightAscensionDeclinationCoordinates(
+                rightAscension1,
+                declination1
+        );
+        HourCoordinate rightAscension2 = new HourCoordinate(13, 37, 00.9);
+        HalfCircleDegreeCoordinate declination2 = new HalfCircleDegreeCoordinate(-29, 51, 57);
+        RightAscensionDeclinationCoordinates actual = new RightAscensionDeclinationCoordinates(
+                rightAscension2,
+                declination2
+        );
+        actual.editRightAscension(new HourCoordinate(13, 37, 00.9));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditRightAscensionDifferentRightAscensionDoesChange() {
+        HourCoordinate rightAscension1 = new HourCoordinate(14, 37, 00.9);
+        HalfCircleDegreeCoordinate declination1 = new HalfCircleDegreeCoordinate(-29, 51, 57);
+        RightAscensionDeclinationCoordinates expected = new RightAscensionDeclinationCoordinates(
+                rightAscension1,
+                declination1
+        );
+        HourCoordinate rightAscension2 = new HourCoordinate(13, 37, 00.9);
+        HalfCircleDegreeCoordinate declination2 = new HalfCircleDegreeCoordinate(-29, 51, 57);
+        RightAscensionDeclinationCoordinates actual = new RightAscensionDeclinationCoordinates(
+                rightAscension2,
+                declination2
+        );
+        actual.editRightAscension(new HourCoordinate(14, 37, 00.9));
+        Assertions.assertEquals(expected, actual);
+    }
 }
