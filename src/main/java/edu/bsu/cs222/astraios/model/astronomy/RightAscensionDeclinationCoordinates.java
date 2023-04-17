@@ -11,7 +11,7 @@ import static java.lang.Math.sin;
 public class RightAscensionDeclinationCoordinates {
 
     private HourCoordinate rightAscension;
-    private final HalfCircleDegreeCoordinate declination;
+    private HalfCircleDegreeCoordinate declination;
 
     public RightAscensionDeclinationCoordinates(HourCoordinate ra, HalfCircleDegreeCoordinate dec) {
         this.rightAscension = ra;
@@ -52,6 +52,8 @@ public class RightAscensionDeclinationCoordinates {
     }
 
     public void editRightAscension(HourCoordinate newRightAscension) { this.rightAscension = newRightAscension;}
+
+    public void editDeclination(HalfCircleDegreeCoordinate newDeclination) { this.declination = newDeclination;}
 
 
     public class RightAscensionDeclinationCoordinatesCSVFormatter {
