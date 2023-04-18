@@ -12,6 +12,7 @@ import picocli.CommandLine.Option;
         subcommands = {
                 AddCommand.class,
                 CompleteCommand.class,
+                EditCommand.class,
                 ExampleCommand.class,
                 RemoveCommand.class,
                 UncompleteCommand.class,
