@@ -124,6 +124,7 @@ public class EditCommand implements Callable<Integer> {
             );
         }
         catch (NoSuchEntryException ignored) {
+            // The name is not taken, so we can deal with this without an exception.
 
         }
     }

@@ -29,7 +29,7 @@ public class CompleteCommand implements Callable<Integer> {
 
     @Parameters(
             index = "0",
-            description = "The name of the object to mark complete, as stored in the journal"
+            description = "The name of the object to mark complete, as stored in the journal."
     )
     private String name;
 
@@ -43,6 +43,12 @@ public class CompleteCommand implements Callable<Integer> {
     )
     private LocalDate dateOfCompletion;
 
+    @Option(
+            names = {"--force"},
+            description = "Whether to ignore an already complete status. This can be used to fix an incorrect date."
+    )
+    private boolean force;
+
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
             IOException {
@@ -51,8 +57,17 @@ public class CompleteCommand implements Callable<Integer> {
                 JournalFileMaintainer.defaultBackupPath
         );
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
-        objectJournal.markCompleteByName(name, dateOfCompletion);
+        this.executeComplete(objectJournal);
         maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
+    }
+
+    private void executeComplete(ObjectJournal journal) {
+        if(this.force) {
+            journal.forceCompleteByName(this.name, this.dateOfCompletion);
+        }
+        else {
+            journal.markCompleteByName(this.name, this.dateOfCompletion);
+        }
     }
 }
