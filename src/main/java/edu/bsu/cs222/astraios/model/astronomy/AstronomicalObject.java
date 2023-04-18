@@ -37,6 +37,13 @@ public class AstronomicalObject {
         this.name = newName;
     }
 
+    public void editRightAscension(HourCoordinate newRightAscension) {
+        this.celestialCoordinates.editRightAscension(newRightAscension);
+    }
+
+    public void editDeclination(HalfCircleDegreeCoordinate newDeclination) {
+        this.celestialCoordinates.editDeclination(newDeclination);
+    }
 
     public class AstronomicalObjectCSVFormatter {
 

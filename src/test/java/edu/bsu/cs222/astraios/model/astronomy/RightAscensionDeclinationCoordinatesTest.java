@@ -74,6 +74,8 @@ public class RightAscensionDeclinationCoordinatesTest {
         Assertions.assertFalse(result);
     }
 
+
+
     @Test
     public void testEditRightAscensionOriginalRightAscensionDoesNotChange() {
         HourCoordinate rightAscension1 = new HourCoordinate(13, 37, 00.9);
