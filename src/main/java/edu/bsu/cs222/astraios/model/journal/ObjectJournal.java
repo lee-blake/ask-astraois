@@ -1,7 +1,8 @@
 package edu.bsu.cs222.astraios.model.journal;
 
-import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
+import edu.bsu.cs222.astraios.cli.exceptions.NewNameAlreadyTakenDuringEditException;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
+import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
 import org.apache.commons.csv.CSVPrinter;
 
 import java.io.IOException;
@@ -90,6 +91,28 @@ public class ObjectJournal {
     public boolean nameIsTaken(String newName) {
         return this.nameToEntryMap.containsKey(newName);
     }
+
+    public void editNameByName(String oldName, String newName) {
+        this.verifyThatNewNameIsNotTaken(oldName, newName);
+        ObjectJournalEntry entryToEdit = this.getEntryByName(oldName);
+        this.removeEntryByName(oldName);
+        entryToEdit.editName(newName);
+        this.addEntry(entryToEdit);
+    }
+
+    private void verifyThatNewNameIsNotTaken(String oldName, String newName) {
+        if(oldName.equals(newName)) {
+            return; // Since this object is being change, it doesn't cause a conflict
+        }
+        if(this.nameIsTaken(newName)) {
+            throw new NewNameAlreadyTakenDuringEditException(
+                    "The edit could not be completed because name '"
+                            + newName
+                            + "' already exists in the object journal!"
+            );
+        }
+    }
+
 
 
     public class ObjectJournalCSVFormatter {

@@ -1,6 +1,10 @@
 package edu.bsu.cs222.astraios.model.journal;
 
+import edu.bsu.cs222.astraios.cli.exceptions.NewNameAlreadyTakenDuringEditException;
 import edu.bsu.cs222.astraios.model.astronomy.AstronomicalObject;
+import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.RightAscensionDeclinationCoordinates;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
 import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
 import org.junit.jupiter.api.Assertions;
@@ -339,5 +343,74 @@ public class ObjectJournalTest {
         );
         boolean result = objectJournal.nameIsTaken("M30");
         Assertions.assertFalse(result);
+    }
+
+
+
+    @Test
+    public void testEditNameByNameM13NameChanges() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        buildM31Object(),
+                        new CompletionStatus(LocalDate.parse("2023-01-01"))
+                )
+        );
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        new AstronomicalObject(
+                                "m13",
+                                new RightAscensionDeclinationCoordinates(
+                                        new HourCoordinate(16, 41, 41.24),
+                                        new HalfCircleDegreeCoordinate(36, 27, 35.5)
+                                )
+                        ),
+                        new CompletionStatus()
+                )
+        );
+        ObjectJournal actual = buildM13M31ObjectJournal();
+        actual.editNameByName("M13", "m13");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditNameByNameM31NameChanges() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        new AstronomicalObject(
+                                "Andromeda Galaxy",
+                                new RightAscensionDeclinationCoordinates(
+                                        new HourCoordinate(0, 42, 44.30),
+                                        new HalfCircleDegreeCoordinate(41, 16, 9)
+                                )
+                        ),
+                        new CompletionStatus(LocalDate.parse("2023-01-01"))
+                )
+        );
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        buildM13Object(),
+                        new CompletionStatus()
+                )
+        );
+        ObjectJournal actual = buildM13M31ObjectJournal();
+        actual.editNameByName("M31", "Andromeda Galaxy");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditNameByNameAlreadyTakenThrowsException() {
+        ObjectJournal journal = buildM13M31ObjectJournal();
+        Assertions.assertThrows(
+                NewNameAlreadyTakenDuringEditException.class,
+                () -> journal.editNameByName("M13", "M31")
+        );
+    }
+
+    @Test
+    public void testEditNameByNameBothSameNoException() {
+        ObjectJournal journal = buildM13M31ObjectJournal();
+        journal.editNameByName("M13", "M13");
     }
 }
