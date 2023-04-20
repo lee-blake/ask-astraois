@@ -87,6 +87,9 @@ public class ObjectJournal {
         return false;
     }
 
+    public boolean nameIsTaken(String newName) {
+        return this.nameToEntryMap.containsKey(newName);
+    }
 
 
     public class ObjectJournalCSVFormatter {
