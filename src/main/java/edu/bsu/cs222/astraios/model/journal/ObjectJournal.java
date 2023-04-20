@@ -1,6 +1,7 @@
 package edu.bsu.cs222.astraios.model.journal;
 
 import edu.bsu.cs222.astraios.cli.exceptions.NewNameAlreadyTakenDuringEditException;
+import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
 import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
 import org.apache.commons.csv.CSVPrinter;
@@ -90,6 +91,11 @@ public class ObjectJournal {
 
     public boolean nameIsTaken(String newName) {
         return this.nameToEntryMap.containsKey(newName);
+    }
+
+    public void editRightAscensionByName(String name, HourCoordinate newRightAscension) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.editRightAscension(newRightAscension);
     }
 
     public void editNameByName(String oldName, String newName) {
