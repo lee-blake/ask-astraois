@@ -1,5 +1,6 @@
 package edu.bsu.cs222.astraios.cli.converters;
 
+import edu.bsu.cs222.astraios.cli.exceptions.NothingChangedDuringEditException;
 import edu.bsu.cs222.astraios.model.exceptions.*;
 import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
 import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
@@ -50,7 +51,10 @@ public class CLIExceptionMessageFactory {
         }
         else if(ex instanceof NewNameAlreadyTakenDuringEditException) {
             return "The object could not be edited because the new name is already taken "
-                    + "by a different object in the journal";
+                    + "by a different object in the journal.";
+        }
+        else if(ex instanceof NothingChangedDuringEditException) {
+            return "No changes were passed to the edit command. Please use one of the options displayed by --help.";
         }
         throw ex;
     }
