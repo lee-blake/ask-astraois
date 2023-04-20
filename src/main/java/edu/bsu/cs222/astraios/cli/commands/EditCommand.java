@@ -6,12 +6,10 @@ import edu.bsu.cs222.astraios.cli.converters.CLIHourCoordinateTypeConverter;
 import edu.bsu.cs222.astraios.cli.exceptions.NewNameAlreadyTakenDuringEditException;
 import edu.bsu.cs222.astraios.cli.exceptions.NewNameWasOldNameDuringEditException;
 import edu.bsu.cs222.astraios.cli.exceptions.NothingChangedDuringEditException;
-import edu.bsu.cs222.astraios.model.astronomy.AstronomicalObject;
 import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
 import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
 import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
 import edu.bsu.cs222.astraios.model.journal.ObjectJournal;
-import edu.bsu.cs222.astraios.model.journal.ObjectJournalEntry;
 import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
 import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
 import edu.bsu.cs222.astraios.persistence.JournalFileMaintainer;
@@ -75,9 +73,7 @@ public class EditCommand implements Callable<Integer> {
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
         this.verifyThatSomethingHasChanged();
         this.verifyNewNameIsNotTakenAlready(objectJournal);
-        ObjectJournalEntry entryToEdit = objectJournal.getEntryByName(name);
-        this.editTheObject(entryToEdit);
-        this.updateEntryInJournal(objectJournal, entryToEdit);
+        this.editTheObject(objectJournal);
         maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
     }
@@ -92,21 +88,15 @@ public class EditCommand implements Callable<Integer> {
         }
     }
 
-    private void updateEntryInJournal(ObjectJournal journal, ObjectJournalEntry entry) {
-        journal.removeEntryByName(entry.getName());
-        journal.addEntry(entry);
-    }
-
-    private void editTheObject(ObjectJournalEntry entry) {
-        AstronomicalObject toEdit = entry.getAstronomicalObject();
+    private void editTheObject(ObjectJournal journal) {
         if(newName != null) {
-            toEdit.editName(newName);
+            journal.editNameByName(this.name, this.newName);
         }
         if(newRightAscension != null) {
-            toEdit.editRightAscension(newRightAscension);
+            journal.editRightAscensionByName(this.name, this.newRightAscension);
         }
         if(newDeclination != null) {
-            toEdit.editDeclination(newDeclination);
+            journal.editDeclinationByName(this.name, this.newDeclination);
         }
     }
 
