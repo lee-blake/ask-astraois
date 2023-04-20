@@ -28,7 +28,6 @@ public class AstronomicalObject {
         return this.name;
     }
 
-
     public AzimuthAltitudeCoordinates getAltAzAtObservation(Observation observation) {
         return this.celestialCoordinates.convertToAltAzAtObservation(observation);
     }
@@ -45,6 +44,8 @@ public class AstronomicalObject {
         this.celestialCoordinates.editDeclination(newDeclination);
     }
 
+
+
     public class AstronomicalObjectCSVFormatter {
 
         public Map<Header, String> getCSVValueMap() {
@@ -58,6 +59,8 @@ public class AstronomicalObject {
             return objectCSVValueMap;
         }
     }
+
+
 
     public class AstronomicalObjectCLIFormatter {
 

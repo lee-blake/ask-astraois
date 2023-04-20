@@ -56,6 +56,7 @@ public class RightAscensionDeclinationCoordinates {
     public void editDeclination(HalfCircleDegreeCoordinate newDeclination) { this.declination = newDeclination;}
 
 
+
     public class RightAscensionDeclinationCoordinatesCSVFormatter {
 
         public Map<Header, String> getCSVValueMap() {
