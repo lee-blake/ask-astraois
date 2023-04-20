@@ -63,6 +63,10 @@ public class ObjectJournalEntry {
         return false;
     }
 
+    public void editName(String newName) {
+        this.astronomicalObject.editName(newName);
+    }
+
 
 
     public class ObjectJournalEntryCSVFormatter {
