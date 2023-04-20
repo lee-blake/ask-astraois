@@ -326,28 +326,6 @@ public class ObjectJournalTest {
 
 
     @Test
-    public void testObjectNameIsTaken() {
-        ObjectJournal objectJournal = new ObjectJournal();
-        objectJournal.addEntry(new ObjectJournalEntry(
-                buildM13Object())
-        );
-        boolean result = objectJournal.nameIsTaken("M13");
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void testObjectNameIsNotTaken() {
-        ObjectJournal objectJournal = new ObjectJournal();
-        objectJournal.addEntry(new ObjectJournalEntry(
-                buildM13Object())
-        );
-        boolean result = objectJournal.nameIsTaken("M30");
-        Assertions.assertFalse(result);
-    }
-
-
-
-    @Test
     public void testEditNameByNameM13NameChanges() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(

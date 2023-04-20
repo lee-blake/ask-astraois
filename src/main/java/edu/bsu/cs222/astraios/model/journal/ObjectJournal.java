@@ -90,10 +90,6 @@ public class ObjectJournal {
         return false;
     }
 
-    public boolean nameIsTaken(String newName) {
-        return this.nameToEntryMap.containsKey(newName);
-    }
-
     public void editRightAscensionByName(String name, HourCoordinate newRightAscension) {
         ObjectJournalEntry entry = this.getEntryByName(name);
         entry.editRightAscension(newRightAscension);
@@ -123,6 +119,10 @@ public class ObjectJournal {
                             + "' already exists in the object journal!"
             );
         }
+    }
+
+    private boolean nameIsTaken(String newName) {
+        return this.nameToEntryMap.containsKey(newName);
     }
 
 
