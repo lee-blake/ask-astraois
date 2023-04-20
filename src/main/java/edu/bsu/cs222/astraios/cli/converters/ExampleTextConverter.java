@@ -51,7 +51,8 @@ public class ExampleTextConverter {
                         Mark an object complete if it has spaces in its name:
                         ask-astraios complete "Name has spaces"
                         
-                        Change the completion date of an object that is already marked complete:
+                        Mark an object complete or change date without triggering\
+                         an exception if it is already complete:
                         ask-astraios complete M13 --on "2023-01-01" --force
                         """;
             }
