@@ -3,12 +3,9 @@ package edu.bsu.cs222.astraios.cli.commands;
 import edu.bsu.cs222.astraios.cli.converters.CLIAcceptedFormats;
 import edu.bsu.cs222.astraios.cli.converters.CLIHalfCircleDegreeCoordinateTypeConverter;
 import edu.bsu.cs222.astraios.cli.converters.CLIHourCoordinateTypeConverter;
-import edu.bsu.cs222.astraios.cli.exceptions.NewNameAlreadyTakenDuringEditException;
-import edu.bsu.cs222.astraios.cli.exceptions.NewNameWasOldNameDuringEditException;
 import edu.bsu.cs222.astraios.cli.exceptions.NothingChangedDuringEditException;
 import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
 import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
-import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
 import edu.bsu.cs222.astraios.model.journal.ObjectJournal;
 import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
 import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
@@ -72,7 +69,6 @@ public class EditCommand implements Callable<Integer> {
         );
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
         this.verifyThatSomethingHasChanged();
-        this.verifyNewNameIsNotTakenAlready(objectJournal);
         this.editTheObject(objectJournal);
         maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
@@ -97,27 +93,6 @@ public class EditCommand implements Callable<Integer> {
         }
         if(newDeclination != null) {
             journal.editDeclinationByName(this.name, this.newDeclination);
-        }
-    }
-
-    private void verifyNewNameIsNotTakenAlready(ObjectJournal journal) {
-        if(this.newName == null) {
-            return;
-        }
-        else if(this.name.equals(this.newName)) {
-            throw new NewNameWasOldNameDuringEditException(
-                    "This new name that was entered, was already the name of the object being added."
-            );
-        }
-        try {
-            journal.getEntryByName(this.newName);
-            throw new NewNameAlreadyTakenDuringEditException(
-                    "This new name was already taken during the edit command."
-            );
-        }
-        catch (NoSuchEntryException ignored) {
-            // The name is not taken, so we can deal with this without an exception.
-
         }
     }
 }
