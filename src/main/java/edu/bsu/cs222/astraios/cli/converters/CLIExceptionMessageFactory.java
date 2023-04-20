@@ -1,9 +1,6 @@
 package edu.bsu.cs222.astraios.cli.converters;
 
-import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyCompleteException;
-import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
-import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyIncompleteException;
-import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
+import edu.bsu.cs222.astraios.model.exceptions.*;
 import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
 import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
 import edu.bsu.cs222.astraios.persistence.NoSuchFileOnSaveException;
@@ -50,6 +47,10 @@ public class CLIExceptionMessageFactory {
         else if(ex instanceof EntryAlreadyIncompleteException) {
             return "The object could not be marked as incomplete because "
                     + "it is already incomplete in the journal!";
+        }
+        else if(ex instanceof NewNameAlreadyTakenDuringEditException) {
+            return "The object could not be edited because the new name is already taken "
+                    + "by a different object in the journal";
         }
         throw ex;
     }
