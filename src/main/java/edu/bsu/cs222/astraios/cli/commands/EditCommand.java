@@ -15,32 +15,34 @@ import edu.bsu.cs222.astraios.model.journal.ObjectJournalEntry;
 import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
 import edu.bsu.cs222.astraios.persistence.InvalidJournalFileContentsException;
 import edu.bsu.cs222.astraios.persistence.JournalFileMaintainer;
-import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-@CommandLine.Command(
+@Command(
         name = "edit",
         description = "Edits the details of an astronomical object in the journal. Not to be used for editing " +
                 "completion status of an object!"
     )
 public class EditCommand implements Callable<Integer> {
 
-    @CommandLine.Option(
+    @Option(
             names = {"-h", "--help"},
             usageHelp = true,
             description = "Display this help message"
     )
     private boolean helpRequested;
 
-    @CommandLine.Parameters(
+    @Parameters(
             index = "0",
             description = "The name of the object to edit, as stored in the journal"
     )
     private String name;
 
-    @CommandLine.Option(
+    @Option(
             names = {"--new-ra"},
             description = "The new right ascension of the object. Accepted forms are:\n"
                     + CLIAcceptedFormats.ACCEPTED_HOUR_COORDINATE_FORMATS,
@@ -48,7 +50,7 @@ public class EditCommand implements Callable<Integer> {
     )
     private HourCoordinate newRightAscension;
 
-    @CommandLine.Option(
+    @Option(
             names = {"--new-dec"},
             description = "The new declination of the object. Accepted forms are:\n"
                     + CLIAcceptedFormats.ACCEPTED_DEGREE_COORDINATE_FORMATS,
@@ -56,7 +58,7 @@ public class EditCommand implements Callable<Integer> {
     )
     private HalfCircleDegreeCoordinate newDeclination;
 
-    @CommandLine.Option(
+    @Option(
             names = {"--new-name"},
             description = "The new name that the object will have."
     )
