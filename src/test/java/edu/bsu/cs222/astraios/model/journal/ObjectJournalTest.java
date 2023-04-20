@@ -453,4 +453,44 @@ public class ObjectJournalTest {
         actual.editRightAscensionByName("M31", new HourCoordinate(1, 42, 44.30));
         Assertions.assertEquals(expected, actual);
     }
+
+
+
+    @Test
+    public void testEditDeclinationDoesNotChange() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        actual.editDeclinationByName("M13", new HalfCircleDegreeCoordinate(36, 27, 35.5));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditDeclinationDoesChange() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "M31",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(0, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(1, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        actual.editDeclinationByName("M31", new HalfCircleDegreeCoordinate(1, 16, 9));
+        Assertions.assertEquals(expected, actual);
+    }
 }

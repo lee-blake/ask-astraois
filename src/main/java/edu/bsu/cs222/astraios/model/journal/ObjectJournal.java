@@ -1,6 +1,7 @@
 package edu.bsu.cs222.astraios.model.journal;
 
 import edu.bsu.cs222.astraios.cli.exceptions.NewNameAlreadyTakenDuringEditException;
+import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
 import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
 import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
@@ -96,6 +97,11 @@ public class ObjectJournal {
     public void editRightAscensionByName(String name, HourCoordinate newRightAscension) {
         ObjectJournalEntry entry = this.getEntryByName(name);
         entry.editRightAscension(newRightAscension);
+    }
+
+    public void editDeclinationByName(String name, HalfCircleDegreeCoordinate newDeclination) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.editDeclination(newDeclination);
     }
 
     public void editNameByName(String oldName, String newName) {
