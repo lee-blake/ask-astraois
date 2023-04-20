@@ -69,12 +69,12 @@ public class ObjectJournalEntry {
         this.astronomicalObject.editName(newName);
     }
 
-    public void editRightAscension(HourCoordinate newRA) {
-        this.astronomicalObject.editRightAscension(newRA);
+    public void editRightAscension(HourCoordinate newRightAscension) {
+        this.astronomicalObject.editRightAscension(newRightAscension);
     }
 
-    public void editDeclination(HalfCircleDegreeCoordinate newDec) {
-        this.astronomicalObject.editDeclination(newDec);
+    public void editDeclination(HalfCircleDegreeCoordinate newDeclination) {
+        this.astronomicalObject.editDeclination(newDeclination);
     }
 
     public class ObjectJournalEntryCSVFormatter {
