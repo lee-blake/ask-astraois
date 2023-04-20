@@ -1,6 +1,6 @@
 package edu.bsu.cs222.astraios.model.journal;
 
-import edu.bsu.cs222.astraios.cli.exceptions.NewNameAlreadyTakenDuringEditException;
+import edu.bsu.cs222.astraios.model.exceptions.NewNameAlreadyTakenDuringEditException;
 import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
 import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
