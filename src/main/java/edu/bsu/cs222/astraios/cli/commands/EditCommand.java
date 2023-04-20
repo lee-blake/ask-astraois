@@ -112,7 +112,7 @@ public class EditCommand implements Callable<Integer> {
         if(this.newName == null) {
             return;
         }
-        else if(this.newName.equals(this.name)) {
+        else if(this.name.equals(this.newName)) {
             throw new NewNameWasOldNameDuringEditException(
                     "This new name that was entered, was already the name of the object being added."
             );
