@@ -55,6 +55,24 @@ public class ExampleTextConverter {
                         ask-astraios complete M13 --on "2023-01-01" --force
                         """;
             }
+            case "edit" -> {
+                return """
+                        Examples for 'edit':
+                        
+                        Change the name of an object:
+                        ask-astraios edit M31 --new-name "Andromeda Galaxy"
+                        
+                        Change the right ascension of an object:
+                        ask-astraios edit M13 --new-ra "16h 41m 41.25s"
+                        
+                        Change the declination of an object, leaving off the arcseconds marker:
+                        ask-astraios edit M31 --new-dec "-29* 51' 59"
+                        
+                        Change everything at once on an object with spaces in its name:
+                        ask-astraios edit "Andromeda Galaxy" --new-name M31 --new-ra "13h 37m 00.9" \
+                        --new-dec"-29* 51' 59"
+                        """;
+            }
             case "example" -> {
                 return """
                         Examples for 'example' (which is running right now):
