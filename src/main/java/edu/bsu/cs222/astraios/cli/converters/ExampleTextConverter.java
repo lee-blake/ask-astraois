@@ -86,6 +86,9 @@ public class ExampleTextConverter {
                                         
                         Remove an object if it has spaces in its name:
                         ask-astraios uncomplete "Name has spaces"
+                        
+                        Mark an object incomplete without triggering an exception if it is already incomplete:
+                        ask-astraios uncomplete M13 --force
                         """;
             }
             case "view" -> {
