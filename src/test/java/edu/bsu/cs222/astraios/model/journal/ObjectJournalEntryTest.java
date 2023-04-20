@@ -259,4 +259,40 @@ public class ObjectJournalEntryTest {
         actual.editName("Andromeda Galaxy");
         Assertions.assertEquals(expected, actual);
     }
+
+
+
+    @Test
+    public void testEditRightAscensionSameRADoesNotChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.editRightAscension(new HourCoordinate(16, 41, 41.24));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditRightAscensionDifferentRADoesChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "M31",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(1, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(41, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.editRightAscension(new HourCoordinate(1, 42, 44.30));
+        Assertions.assertEquals(expected, actual);
+    }
 }

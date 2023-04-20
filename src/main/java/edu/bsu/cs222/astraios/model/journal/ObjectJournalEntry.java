@@ -1,6 +1,7 @@
 package edu.bsu.cs222.astraios.model.journal;
 
 import edu.bsu.cs222.astraios.model.astronomy.AstronomicalObject;
+import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyCompleteException;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyIncompleteException;
 import org.apache.commons.csv.CSVPrinter;
@@ -67,7 +68,9 @@ public class ObjectJournalEntry {
         this.astronomicalObject.editName(newName);
     }
 
-
+    public void editRightAscension(HourCoordinate newRA) {
+        this.astronomicalObject.editRightAscension(newRA);
+    }
 
     public class ObjectJournalEntryCSVFormatter {
 
