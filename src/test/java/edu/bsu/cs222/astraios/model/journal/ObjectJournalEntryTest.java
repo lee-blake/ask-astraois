@@ -295,4 +295,40 @@ public class ObjectJournalEntryTest {
         actual.editRightAscension(new HourCoordinate(1, 42, 44.30));
         Assertions.assertEquals(expected, actual);
     }
+
+
+
+    @Test
+    public void testEditDeclinationSameDecDoesNotChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.editDeclination(new HalfCircleDegreeCoordinate(36, 27, 35.5));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditDeclinationDifferentDecDoesChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "M31",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(0, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(42, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.editDeclination(new HalfCircleDegreeCoordinate(42, 16, 9));
+        Assertions.assertEquals(expected, actual);
+    }
 }
