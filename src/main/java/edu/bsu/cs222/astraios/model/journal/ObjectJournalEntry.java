@@ -38,7 +38,7 @@ public class ObjectJournalEntry {
         if(this.completionStatus.isComplete()) {
             throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
         }
-        forceComplete(dateOfCompletion);
+        this.forceComplete(dateOfCompletion);
     }
 
     public void forceComplete(LocalDate dateOfCompletion) {
@@ -49,7 +49,7 @@ public class ObjectJournalEntry {
         if(!this.completionStatus.isComplete()) {
             throw new EntryAlreadyIncompleteException("Cannot mark an entry incomplete if it is already incomplete!");
         }
-        forceIncomplete();
+        this.forceIncomplete();
     }
 
     public void forceIncomplete() {
@@ -76,6 +76,8 @@ public class ObjectJournalEntry {
     public void editDeclination(HalfCircleDegreeCoordinate newDeclination) {
         this.astronomicalObject.editDeclination(newDeclination);
     }
+
+
 
     public class ObjectJournalEntryCSVFormatter {
 
