@@ -267,13 +267,13 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testEditNameDifferentNameDoesChange() {
-        HourCoordinate m83RightAscension = new HourCoordinate(13, 37, 00.9);
-        HalfCircleDegreeCoordinate m83Declination = new HalfCircleDegreeCoordinate(-29, 51, 57);
-        RightAscensionDeclinationCoordinates m83Coords = new RightAscensionDeclinationCoordinates(
-                m83RightAscension,
-                m83Declination
+        AstronomicalObject expected = new AstronomicalObject(
+                "M83B",
+                new RightAscensionDeclinationCoordinates(
+                        new HourCoordinate(13, 37, 00.9),
+                        new HalfCircleDegreeCoordinate(-29, 51, 57)
+                )
         );
-        AstronomicalObject expected = new AstronomicalObject("M83B", m83Coords);
         AstronomicalObject actual = TestObjectFactory.AstronomicalObjects.buildM83Object();
         actual.editName("M83B");
         Assertions.assertEquals(expected, actual);
@@ -291,13 +291,13 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testEditRightAscensionRADifferent() {
-        HourCoordinate m83BRightAscension = new HourCoordinate(14, 37, 00.9);
-        HalfCircleDegreeCoordinate m83BDeclination = new HalfCircleDegreeCoordinate(-29, 51, 57);
-        RightAscensionDeclinationCoordinates m83BCoords = new RightAscensionDeclinationCoordinates(
-                m83BRightAscension,
-                m83BDeclination
+        AstronomicalObject expected = new AstronomicalObject(
+                "M83",
+                new RightAscensionDeclinationCoordinates(
+                        new HourCoordinate(14, 37, 00.9),
+                        new HalfCircleDegreeCoordinate(-29, 51, 57)
+                )
         );
-        AstronomicalObject expected = new AstronomicalObject("M83", m83BCoords);
         AstronomicalObject actual = TestObjectFactory.AstronomicalObjects.buildM83Object();
         actual.editRightAscension(new HourCoordinate(14, 37, 00.9));
         Assertions.assertEquals(expected, actual);
@@ -315,13 +315,13 @@ public class AstronomicalObjectTest {
 
     @Test
     public void testEditDeclinationDecDifferent() {
-        HourCoordinate m83BRightAscension = new HourCoordinate(13, 37, 00.9);
-        HalfCircleDegreeCoordinate m83BDeclination = new HalfCircleDegreeCoordinate(-30, 51, 57);
-        RightAscensionDeclinationCoordinates m83BCoords = new RightAscensionDeclinationCoordinates(
-                m83BRightAscension,
-                m83BDeclination
+        AstronomicalObject expected = new AstronomicalObject(
+                "M83",
+                new RightAscensionDeclinationCoordinates(
+                        new HourCoordinate(13, 37, 00.9),
+                        new HalfCircleDegreeCoordinate(-30, 51, 57)
+                )
         );
-        AstronomicalObject expected = new AstronomicalObject("M83", m83BCoords);
         AstronomicalObject actual = TestObjectFactory.AstronomicalObjects.buildM83Object();
         actual.editDeclination(new HalfCircleDegreeCoordinate(-30, 51, 57));
         Assertions.assertEquals(expected, actual);
