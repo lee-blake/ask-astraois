@@ -236,6 +236,8 @@ public class ObjectJournalEntryTest {
         Assertions.assertEquals(expected, actual);
     }
 
+
+
     @Test
     public void testEditNameSameNameDoesNotChange() {
         ObjectJournalEntry expected = new ObjectJournalEntry(
