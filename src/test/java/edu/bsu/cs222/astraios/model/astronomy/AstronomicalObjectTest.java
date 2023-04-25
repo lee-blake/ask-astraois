@@ -282,7 +282,7 @@ public class AstronomicalObjectTest {
 
 
     @Test
-    public void testEditRightAscensionRAStaysTheSame() {
+    public void testEditRightAscensionOriginalRAStaysTheSame() {
         AstronomicalObject expected = TestObjectFactory.AstronomicalObjects.buildM83Object();
         AstronomicalObject actual = TestObjectFactory.AstronomicalObjects.buildM83Object();
         actual.editRightAscension(new HourCoordinate(13, 37, 00.9));
@@ -290,7 +290,7 @@ public class AstronomicalObjectTest {
     }
 
     @Test
-    public void testEditRightAscensionRADifferent() {
+    public void testEditRightAscensionDifferentRADoesChange() {
         AstronomicalObject expected = new AstronomicalObject(
                 "M83",
                 new RightAscensionDeclinationCoordinates(
@@ -306,7 +306,7 @@ public class AstronomicalObjectTest {
 
 
     @Test
-    public void testEditDeclinationDecStaysTheSame() {
+    public void testEditDeclinationOriginalDecStaysTheSame() {
         AstronomicalObject expected = TestObjectFactory.AstronomicalObjects.buildM83Object();
         AstronomicalObject actual = TestObjectFactory.AstronomicalObjects.buildM83Object();
         actual.editDeclination(new HalfCircleDegreeCoordinate(-29, 51, 57));
@@ -314,7 +314,7 @@ public class AstronomicalObjectTest {
     }
 
     @Test
-    public void testEditDeclinationDecDifferent() {
+    public void testEditDeclinationDifferentDecDoesChange() {
         AstronomicalObject expected = new AstronomicalObject(
                 "M83",
                 new RightAscensionDeclinationCoordinates(
