@@ -114,7 +114,7 @@ public class AstronomicalObjectTest {
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(10, 27, 38.25)
         );
-        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpoch();
+        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpochUTC();
         AstronomicalObject zeroZero = new AstronomicalObject(
                 "zeroZero",
                 new RightAscensionDeclinationCoordinates(
@@ -136,7 +136,7 @@ public class AstronomicalObjectTest {
                 new FullCircleDegreeCoordinate(90, 0, 0),
                 new HalfCircleDegreeCoordinate(-4, 32, 21.76)
         );
-        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpoch();
+        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpochUTC();
         AstronomicalObject oneZero = new AstronomicalObject(
                 "oneZero",
                 new RightAscensionDeclinationCoordinates(
@@ -186,7 +186,7 @@ public class AstronomicalObjectTest {
                 new FullCircleDegreeCoordinate(0, 0, 0),
                 new HalfCircleDegreeCoordinate(0, 0, 0)
         );
-        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpoch();
+        Observation zeroZeroEpoch = TestObjectFactory.Observations.buildZeroZeroEpochUTC();
         AstronomicalObject northCelestialPole = new AstronomicalObject(
                 "north celestial pole",
                 new RightAscensionDeclinationCoordinates(

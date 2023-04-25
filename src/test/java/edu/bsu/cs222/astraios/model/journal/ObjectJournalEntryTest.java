@@ -311,7 +311,7 @@ public class ObjectJournalEntryTest {
 
 
     @Test
-    public void testEditDeclinationSameDeclinationDoesNotChange() {
+    public void testEditDeclinationSameDecDoesNotChange() {
         ObjectJournalEntry expected = new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus()
@@ -325,7 +325,7 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testEditDeclinationDifferentDeclinationDoesChange() {
+    public void testEditDeclinationDifferentDecDoesChange() {
         ObjectJournalEntry expected = new ObjectJournalEntry(
                 new AstronomicalObject(
                         "M31",

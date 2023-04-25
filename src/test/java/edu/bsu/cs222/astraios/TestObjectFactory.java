@@ -104,7 +104,7 @@ public class TestObjectFactory {
 
     public static class Observations {
 
-        public static Observation buildZeroZeroEpoch() {
+        public static Observation buildZeroZeroEpochUTC() {
             return new Observation(
                     TestObjectFactory.LongitudeLatitudes.buildZeroZero(),
                     TestObjectFactory.DateTimes.buildEpochUTC()

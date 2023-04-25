@@ -337,7 +337,7 @@ public class ObjectJournalTest {
         expected.addEntry(
                 new ObjectJournalEntry(
                         new AstronomicalObject(
-                                "m13",
+                                "newName",
                                 new RightAscensionDeclinationCoordinates(
                                         new HourCoordinate(16, 41, 41.24),
                                         new HalfCircleDegreeCoordinate(36, 27, 35.5)
@@ -347,7 +347,7 @@ public class ObjectJournalTest {
                 )
         );
         ObjectJournal actual = buildM13M31ObjectJournal();
-        actual.editNameByOriginalName("M13", "m13");
+        actual.editNameByOriginalName("M13", "newName");
         Assertions.assertEquals(expected, actual);
     }
 
