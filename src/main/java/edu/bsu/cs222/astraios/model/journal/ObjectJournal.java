@@ -17,7 +17,7 @@ public class ObjectJournal {
     private final HashMap<String, ObjectJournalEntry> nameToEntryMap = new HashMap<>();
 
     public ObjectJournalEntry getEntryByName(String entryName) {
-        if(!nameToEntryMap.containsKey(entryName)) {
+        if(!nameIsInJournal(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot get entry because no entry has name '"
                             + entryName
@@ -27,9 +27,13 @@ public class ObjectJournal {
         return nameToEntryMap.get(entryName);
     }
 
+    private boolean nameIsInJournal(String newName) {
+        return this.nameToEntryMap.containsKey(newName);
+    }
+
     public void addEntry(ObjectJournalEntry entry) {
         String entryName = entry.getName();
-        if(nameToEntryMap.containsKey(entryName)) {
+        if(nameIsInJournal(entryName)) {
             throw new EntryAlreadyExistsException(
                     "Cannot add entry because an entry with name '"
                             + entryName
@@ -40,7 +44,7 @@ public class ObjectJournal {
     }
 
     public void removeEntryByName(String entryName) {
-        if(!nameToEntryMap.containsKey(entryName)) {
+        if(!nameIsInJournal(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot remove entry because no entry has name '"
                             + entryName
@@ -70,26 +74,6 @@ public class ObjectJournal {
         entry.forceIncomplete();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if(o instanceof ObjectJournal other) {
-            if(this.nameToEntryMap.size() != other.nameToEntryMap.size()) {
-                return false;
-            }
-            for(String entryName : this.nameToEntryMap.keySet()) {
-                ObjectJournalEntry thisEntry = this.nameToEntryMap.get(entryName);
-                // There is no need to check if the key exists in the other's map. If it is not,
-                // we'll get null and return false.
-                ObjectJournalEntry otherEntry = other.nameToEntryMap.get(entryName);
-                if(!thisEntry.equals(otherEntry)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
     public void editRightAscensionByName(String name, HourCoordinate newRightAscension) {
         ObjectJournalEntry entry = this.getEntryByName(name);
         entry.editRightAscension(newRightAscension);
@@ -112,7 +96,7 @@ public class ObjectJournal {
         if(oldName.equals(newName)) {
             return; // Since this object is being change, it doesn't cause a conflict
         }
-        if(this.nameIsTaken(newName)) {
+        if(this.nameIsInJournal(newName)) {
             throw new NewNameAlreadyTakenDuringEditException(
                     "The edit could not be completed because name '"
                             + newName
@@ -121,8 +105,24 @@ public class ObjectJournal {
         }
     }
 
-    private boolean nameIsTaken(String newName) {
-        return this.nameToEntryMap.containsKey(newName);
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof ObjectJournal other) {
+            if(this.nameToEntryMap.size() != other.nameToEntryMap.size()) {
+                return false;
+            }
+            for(String entryName : this.nameToEntryMap.keySet()) {
+                ObjectJournalEntry thisEntry = this.nameToEntryMap.get(entryName);
+                // There is no need to check if the key exists in the other's map. If it is not,
+                // we'll get null and return false.
+                ObjectJournalEntry otherEntry = other.nameToEntryMap.get(entryName);
+                if(!thisEntry.equals(otherEntry)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
 

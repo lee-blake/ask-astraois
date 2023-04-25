@@ -26,14 +26,6 @@ public class ObjectJournalEntry {
         this.completionStatus = completionStatus;
     }
 
-    public String getName() {
-        return this.astronomicalObject.getName();
-    }
-
-    public AstronomicalObject getAstronomicalObject() {
-        return this.astronomicalObject;
-    }
-
     public void markComplete(LocalDate dateOfCompletion) {
         if(this.completionStatus.isComplete()) {
             throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
@@ -65,8 +57,16 @@ public class ObjectJournalEntry {
         return false;
     }
 
+    public String getName() {
+        return this.astronomicalObject.getName();
+    }
+
     public void editName(String newName) {
         this.astronomicalObject.editName(newName);
+    }
+
+    public AstronomicalObject getAstronomicalObject() {
+        return this.astronomicalObject;
     }
 
     public void editRightAscension(HourCoordinate newRightAscension) {
