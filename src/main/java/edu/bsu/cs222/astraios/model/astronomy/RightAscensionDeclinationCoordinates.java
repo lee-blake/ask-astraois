@@ -7,6 +7,8 @@ import java.util.Map;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import static java.lang.Math.acos;
+import static java.lang.Math.asin;
 
 public class RightAscensionDeclinationCoordinates {
 
@@ -26,11 +28,6 @@ public class RightAscensionDeclinationCoordinates {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "[RA " + this.rightAscension + " DEC " + this.declination + "]";
-    }
-
     public void editRightAscension(HourCoordinate newRightAscension) { this.rightAscension = newRightAscension;}
 
     public void editDeclination(HalfCircleDegreeCoordinate newDeclination) { this.declination = newDeclination;}
@@ -42,11 +39,15 @@ public class RightAscensionDeclinationCoordinates {
         double latitude = observation.getLatitudeAsRadians();
         double sinOfAltitude = sin(declination)*sin(latitude)
                 + cos(declination)*cos(latitude)*cos(hourAngle);
-        double altitude = Math.asin(sinOfAltitude);
+        double altitude = asin(sinOfAltitude);
         double cosOfAzimuth = (sin(declination) - sin(altitude)*sin(latitude))
                 / (cos(altitude)*cos(latitude));
-        double azimuthAsRadians = Math.acos(cosOfAzimuth);
+        double azimuthAsRadians = acos(cosOfAzimuth);
         if(sin(hourAngle) > 0) {
+            // Remember that acos only returns values in a 180 degree interval. Therefore, the negative angles will be
+            // interpreted as their absolute values once acos compose cos is applied to them. Correcting this entails
+            // returning to a negative value when appropriate, and for the calculation we use, that is when the hour
+            // angle is in (0, pi).
             azimuthAsRadians *= -1;
         }
         return new AzimuthAltitudeCoordinates(

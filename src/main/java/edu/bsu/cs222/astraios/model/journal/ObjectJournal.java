@@ -40,7 +40,7 @@ public class ObjectJournal {
                             + "' already exists!"
             );
         }
-        nameToEntryMap.put(entryName,entry);
+        nameToEntryMap.put(entryName, entry);
     }
 
     public void removeEntryByName(String entryName) {
