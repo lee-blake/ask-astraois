@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class ExampleTextConverterTest {
 
     @Test
-    public void testExampleTextConverterSelfTestJustWorks() {
+    public void testExampleTextConverterSelfTestReturnsCorrectMessage() {
         ExampleTextConverter converter = new ExampleTextConverter();
         String actual = converter.getExampleStringForSubcommand("example");
         String expected = """
@@ -26,7 +26,7 @@ public class ExampleTextConverterTest {
         ExampleTextConverter converter = new ExampleTextConverter();
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> converter.getExampleStringForSubcommand("THIS WILL NEVER BE A COMMAND! ALL CAPS!")
+                () -> converter.getExampleStringForSubcommand("THIS WILL NEVER BE A COMMAND!")
         );
     }
 }
