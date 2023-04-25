@@ -90,7 +90,7 @@ public class EditCommand implements Callable<Integer> {
         // We need to check that these are not equal to null because that is what picocli initializes them too if those
         // options are not actually present.
         if(newName != null) {
-            journal.editNameByName(this.name, this.newName);
+            journal.editNameByOriginalName(this.name, this.newName);
             this.name = this.newName; // Any remaining changes will need to reference the new name of the object.
         }
         if(newRightAscension != null) {

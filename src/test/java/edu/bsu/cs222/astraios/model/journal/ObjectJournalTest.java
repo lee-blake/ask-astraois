@@ -347,7 +347,7 @@ public class ObjectJournalTest {
                 )
         );
         ObjectJournal actual = buildM13M31ObjectJournal();
-        actual.editNameByName("M13", "m13");
+        actual.editNameByOriginalName("M13", "m13");
         Assertions.assertEquals(expected, actual);
     }
 
@@ -373,7 +373,7 @@ public class ObjectJournalTest {
                 )
         );
         ObjectJournal actual = buildM13M31ObjectJournal();
-        actual.editNameByName("M31", "Andromeda Galaxy");
+        actual.editNameByOriginalName("M31", "Andromeda Galaxy");
         Assertions.assertEquals(expected, actual);
     }
 
@@ -382,14 +382,14 @@ public class ObjectJournalTest {
         ObjectJournal journal = buildM13M31ObjectJournal();
         Assertions.assertThrows(
                 NewNameAlreadyTakenDuringEditException.class,
-                () -> journal.editNameByName("M13", "M31")
+                () -> journal.editNameByOriginalName("M13", "M31")
         );
     }
 
     @Test
     public void testEditNameByNameBothSameNameNoException() {
         ObjectJournal actual = buildM13M31ObjectJournal();
-        actual.editNameByName("M13", "M13");
+        actual.editNameByOriginalName("M13", "M13");
         ObjectJournal expected = buildM13M31ObjectJournal();
         Assertions.assertEquals(expected, actual);
     }

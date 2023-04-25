@@ -84,7 +84,7 @@ public class ObjectJournal {
         entry.editDeclination(newDeclination);
     }
 
-    public void editNameByName(String oldName, String newName) {
+    public void editNameByOriginalName(String oldName, String newName) {
         this.verifyThatNewNameIsNotTaken(oldName, newName);
         ObjectJournalEntry entryToEdit = this.getEntryByName(oldName);
         this.removeEntryByName(oldName);

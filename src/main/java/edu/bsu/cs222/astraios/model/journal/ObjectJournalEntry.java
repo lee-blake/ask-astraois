@@ -57,16 +57,16 @@ public class ObjectJournalEntry {
         return false;
     }
 
+    public AstronomicalObject getAstronomicalObject() {
+        return this.astronomicalObject;
+    }
+
     public String getName() {
         return this.astronomicalObject.getName();
     }
 
     public void editName(String newName) {
         this.astronomicalObject.editName(newName);
-    }
-
-    public AstronomicalObject getAstronomicalObject() {
-        return this.astronomicalObject;
     }
 
     public void editRightAscension(HourCoordinate newRightAscension) {
