@@ -30,6 +30,12 @@ public class UncompleteCommand implements Callable<Integer> {
     )
     private String name;
 
+    @Option(
+            names = {"--force"},
+            description = "Whether to ignore an already incomplete status."
+    )
+    private boolean force;
+
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
         JournalFileMaintainer maintainer = new JournalFileMaintainer(
@@ -37,8 +43,17 @@ public class UncompleteCommand implements Callable<Integer> {
                 JournalFileMaintainer.defaultBackupPath
         );
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
-        objectJournal.markIncompleteByName(name);
+        this.executeIncomplete(objectJournal);
         maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
+    }
+
+    private void executeIncomplete(ObjectJournal journal) {
+        if(this.force) {
+            journal.forceIncompleteByName(this.name);
+        }
+        else {
+            journal.markIncompleteByName(this.name);
+        }
     }
 }

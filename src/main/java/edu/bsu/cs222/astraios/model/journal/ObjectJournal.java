@@ -1,7 +1,10 @@
 package edu.bsu.cs222.astraios.model.journal;
 
-import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
+import edu.bsu.cs222.astraios.model.exceptions.NewNameAlreadyTakenDuringEditException;
+import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
+import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
 import org.apache.commons.csv.CSVPrinter;
 
 import java.io.IOException;
@@ -14,7 +17,7 @@ public class ObjectJournal {
     private final HashMap<String, ObjectJournalEntry> nameToEntryMap = new HashMap<>();
 
     public ObjectJournalEntry getEntryByName(String entryName) {
-        if(!nameToEntryMap.containsKey(entryName)) {
+        if(!nameIsInJournal(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot get entry because no entry has name '"
                             + entryName
@@ -24,20 +27,24 @@ public class ObjectJournal {
         return nameToEntryMap.get(entryName);
     }
 
+    private boolean nameIsInJournal(String newName) {
+        return this.nameToEntryMap.containsKey(newName);
+    }
+
     public void addEntry(ObjectJournalEntry entry) {
         String entryName = entry.getName();
-        if(nameToEntryMap.containsKey(entryName)) {
+        if(nameIsInJournal(entryName)) {
             throw new EntryAlreadyExistsException(
                     "Cannot add entry because an entry with name '"
                             + entryName
                             + "' already exists!"
             );
         }
-        nameToEntryMap.put(entryName,entry);
+        nameToEntryMap.put(entryName, entry);
     }
 
     public void removeEntryByName(String entryName) {
-        if(!nameToEntryMap.containsKey(entryName)) {
+        if(!nameIsInJournal(entryName)) {
             throw new NoSuchEntryException(
                     "Cannot remove entry because no entry has name '"
                             + entryName
@@ -52,9 +59,50 @@ public class ObjectJournal {
         entry.markComplete(dateOfCompletion);
     }
 
+    public void forceCompleteByName(String name, LocalDate dateOfCompletion) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.forceComplete(dateOfCompletion);
+    }
+
     public void markIncompleteByName(String name) {
         ObjectJournalEntry entry = this.getEntryByName(name);
         entry.markIncomplete();
+    }
+
+    public void forceIncompleteByName(String name) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.forceIncomplete();
+    }
+
+    public void editRightAscensionByName(String name, HourCoordinate newRightAscension) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.editRightAscension(newRightAscension);
+    }
+
+    public void editDeclinationByName(String name, HalfCircleDegreeCoordinate newDeclination) {
+        ObjectJournalEntry entry = this.getEntryByName(name);
+        entry.editDeclination(newDeclination);
+    }
+
+    public void editNameByName(String oldName, String newName) {
+        this.verifyThatNewNameIsNotTaken(oldName, newName);
+        ObjectJournalEntry entryToEdit = this.getEntryByName(oldName);
+        this.removeEntryByName(oldName);
+        entryToEdit.editName(newName);
+        this.addEntry(entryToEdit);
+    }
+
+    private void verifyThatNewNameIsNotTaken(String oldName, String newName) {
+        if(oldName.equals(newName)) {
+            return; // Since this object is being change, it doesn't cause a conflict
+        }
+        if(this.nameIsInJournal(newName)) {
+            throw new NewNameAlreadyTakenDuringEditException(
+                    "The edit could not be completed because name '"
+                            + newName
+                            + "' already exists in the object journal!"
+            );
+        }
     }
 
     @Override

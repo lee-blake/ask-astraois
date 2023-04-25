@@ -2,6 +2,7 @@ package edu.bsu.cs222.astraios.model.astronomy;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import static java.lang.Math.acos;
 
 public class Sun {
 
@@ -17,11 +18,15 @@ public class Sun {
 
         double cosOfZenith = sin(latitude)*sin(declination)
                 + cos(latitude)*cos(declination)*cos(hourAngle);
-        double zenithAngle = Math.acos(cosOfZenith);
+        double zenithAngle = acos(cosOfZenith);
         double cosOfAzimuthComplement = (sin(latitude)*cos(zenithAngle) - sin(declination))
                 / (cos(latitude)*sin(zenithAngle));
-        double azimuth = Math.PI - Math.acos(cosOfAzimuthComplement);
+        double azimuth = Math.PI - acos(cosOfAzimuthComplement);
         if(sin(hourAngle) > 0) {
+            // Remember that acos only returns values in a 180 degree interval. Therefore, the negative angles will be
+            // interpreted as their absolute values once acos compose cos is applied to them. Correcting this entails
+            // returning to a negative value when appropriate, and for the calculation we use, that is when the hour
+            // angle is in (0, pi).
             azimuth *= -1;
         }
         double altitude = Math.PI/2-zenithAngle;

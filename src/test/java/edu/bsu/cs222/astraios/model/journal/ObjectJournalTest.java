@@ -1,6 +1,10 @@
 package edu.bsu.cs222.astraios.model.journal;
 
+import edu.bsu.cs222.astraios.model.exceptions.NewNameAlreadyTakenDuringEditException;
 import edu.bsu.cs222.astraios.model.astronomy.AstronomicalObject;
+import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.RightAscensionDeclinationCoordinates;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyExistsException;
 import edu.bsu.cs222.astraios.model.exceptions.NoSuchEntryException;
 import org.junit.jupiter.api.Assertions;
@@ -231,5 +235,242 @@ public class ObjectJournalTest {
         superset.addEntry(new ObjectJournalEntry(buildM31Object()));
         boolean result = subset.equals(superset);
         Assertions.assertFalse(result);
+    }
+
+
+
+    @Test
+    public void testForceCompleteByNameM13MarksComplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        actual.forceCompleteByName("M13",LocalDate.parse("2023-01-01"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteByNameM31MarksComplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        actual.forceCompleteByName("M31",LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteByNameMissingEntryThrowsException() {
+        ObjectJournal emptyJournal = new ObjectJournal();
+        Assertions.assertThrows(
+                NoSuchEntryException.class,
+                () -> emptyJournal.forceCompleteByName("M13",LocalDate.parse("2023-01-01"))
+        );
+    }
+
+
+
+    @Test
+    public void testForceIncompleteByNameM13MarksIncomplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        ));
+        actual.forceIncompleteByName("M13");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceIncompleteByNameM31MarksIncomplete() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        ));
+        actual.forceIncompleteByName("M31");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceIncompleteByNameMissingEntryThrowsException() {
+        ObjectJournal emptyJournal = new ObjectJournal();
+        Assertions.assertThrows(
+                NoSuchEntryException.class,
+                () -> emptyJournal.forceIncompleteByName("M13")
+        );
+    }
+
+
+
+    @Test
+    public void testEditNameByNameM13NameChanges() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        buildM31Object(),
+                        new CompletionStatus(LocalDate.parse("2023-01-01"))
+                )
+        );
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        new AstronomicalObject(
+                                "m13",
+                                new RightAscensionDeclinationCoordinates(
+                                        new HourCoordinate(16, 41, 41.24),
+                                        new HalfCircleDegreeCoordinate(36, 27, 35.5)
+                                )
+                        ),
+                        new CompletionStatus()
+                )
+        );
+        ObjectJournal actual = buildM13M31ObjectJournal();
+        actual.editNameByName("M13", "m13");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditNameByNameM31NameChanges() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        new AstronomicalObject(
+                                "Andromeda Galaxy",
+                                new RightAscensionDeclinationCoordinates(
+                                        new HourCoordinate(0, 42, 44.30),
+                                        new HalfCircleDegreeCoordinate(41, 16, 9)
+                                )
+                        ),
+                        new CompletionStatus(LocalDate.parse("2023-01-01"))
+                )
+        );
+        expected.addEntry(
+                new ObjectJournalEntry(
+                        buildM13Object(),
+                        new CompletionStatus()
+                )
+        );
+        ObjectJournal actual = buildM13M31ObjectJournal();
+        actual.editNameByName("M31", "Andromeda Galaxy");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditNameByNameAlreadyTakenThrowsException() {
+        ObjectJournal journal = buildM13M31ObjectJournal();
+        Assertions.assertThrows(
+                NewNameAlreadyTakenDuringEditException.class,
+                () -> journal.editNameByName("M13", "M31")
+        );
+    }
+
+    @Test
+    public void testEditNameByNameBothSameNameNoException() {
+        ObjectJournal actual = buildM13M31ObjectJournal();
+        actual.editNameByName("M13", "M13");
+        ObjectJournal expected = buildM13M31ObjectJournal();
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    public void testEditRightAscensionSameRADoesNotChange() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        actual.editRightAscensionByName("M13", new HourCoordinate(16, 41, 41.24));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditRightAscensionDifferentRADoesChange() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "M31",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(1, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(41, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        actual.editRightAscensionByName("M31", new HourCoordinate(1, 42, 44.30));
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    public void testEditDeclinationSameDecDoesNotChange() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        ));
+        actual.editDeclinationByName("M13", new HalfCircleDegreeCoordinate(36, 27, 35.5));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditDeclinationDifferentDecDoesChange() {
+        ObjectJournal expected = new ObjectJournal();
+        expected.addEntry(new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "M31",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(0, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(1, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        ));
+        ObjectJournal actual = new ObjectJournal();
+        actual.addEntry(new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        ));
+        actual.editDeclinationByName("M31", new HalfCircleDegreeCoordinate(1, 16, 9));
+        Assertions.assertEquals(expected, actual);
     }
 }

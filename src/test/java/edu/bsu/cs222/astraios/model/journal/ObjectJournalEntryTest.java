@@ -1,6 +1,9 @@
 package edu.bsu.cs222.astraios.model.journal;
 
 import edu.bsu.cs222.astraios.model.astronomy.AstronomicalObject;
+import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.RightAscensionDeclinationCoordinates;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyCompleteException;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyIncompleteException;
 import org.junit.jupiter.api.Assertions;
@@ -157,5 +160,187 @@ public class ObjectJournalEntryTest {
         );
         boolean result = incomplete.equals(complete);
         Assertions.assertFalse(result);
+    }
+
+
+
+    @Test
+    public void testForceCompleteFirstOf2023MarksCorrectDate() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.forceComplete(LocalDate.parse("2023-01-01"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteLastOf2022MarksCorrectDate() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.forceComplete(LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceCompleteAlreadyCompleteDoesNotThrowException() {
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        );
+        actual.forceComplete(LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    public void testForceIncompleteCompleteEntryMarksIncomplete() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2023-01-01"))
+        );
+        actual.forceIncomplete();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testForceIncompleteAlreadyIncompleteDoesNotThrowException() {
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.forceIncomplete();
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    public void testEditNameSameNameDoesNotChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.editName("M13");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditNameDifferentNameDoesChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "Andromeda Galaxy",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(0, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(41, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.editName("Andromeda Galaxy");
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    public void testEditRightAscensionSameRADoesNotChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.editRightAscension(new HourCoordinate(16, 41, 41.24));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditRightAscensionDifferentRADoesChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "M31",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(1, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(41, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.editRightAscension(new HourCoordinate(1, 42, 44.30));
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+
+    @Test
+    public void testEditDeclinationSameDeclinationDoesNotChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.editDeclination(new HalfCircleDegreeCoordinate(36, 27, 35.5));
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEditDeclinationDifferentDeclinationDoesChange() {
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                new AstronomicalObject(
+                        "M31",
+                        new RightAscensionDeclinationCoordinates(
+                                new HourCoordinate(0, 42, 44.30),
+                                new HalfCircleDegreeCoordinate(42, 16, 9)
+                        )
+                ),
+                new CompletionStatus()
+        );
+        ObjectJournalEntry actual = new ObjectJournalEntry(
+                buildM31Object(),
+                new CompletionStatus()
+        );
+        actual.editDeclination(new HalfCircleDegreeCoordinate(42, 16, 9));
+        Assertions.assertEquals(expected, actual);
     }
 }

@@ -1,6 +1,8 @@
 package edu.bsu.cs222.astraios.model.journal;
 
 import edu.bsu.cs222.astraios.model.astronomy.AstronomicalObject;
+import edu.bsu.cs222.astraios.model.astronomy.HalfCircleDegreeCoordinate;
+import edu.bsu.cs222.astraios.model.astronomy.HourCoordinate;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyCompleteException;
 import edu.bsu.cs222.astraios.model.exceptions.EntryAlreadyIncompleteException;
 import org.apache.commons.csv.CSVPrinter;
@@ -24,18 +26,14 @@ public class ObjectJournalEntry {
         this.completionStatus = completionStatus;
     }
 
-    public String getName() {
-        return this.astronomicalObject.getName();
-    }
-
-    public AstronomicalObject getAstronomicalObject() {
-        return this.astronomicalObject;
-    }
-
     public void markComplete(LocalDate dateOfCompletion) {
         if(this.completionStatus.isComplete()) {
             throw new EntryAlreadyCompleteException("Cannot mark an entry complete if it is already complete!");
         }
+        this.forceComplete(dateOfCompletion);
+    }
+
+    public void forceComplete(LocalDate dateOfCompletion) {
         this.completionStatus = new CompletionStatus(dateOfCompletion);
     }
 
@@ -43,6 +41,10 @@ public class ObjectJournalEntry {
         if(!this.completionStatus.isComplete()) {
             throw new EntryAlreadyIncompleteException("Cannot mark an entry incomplete if it is already incomplete!");
         }
+        this.forceIncomplete();
+    }
+
+    public void forceIncomplete() {
         this.completionStatus = new CompletionStatus();
     }
 
@@ -53,6 +55,26 @@ public class ObjectJournalEntry {
                     && this.completionStatus.equals(other.completionStatus);
         }
         return false;
+    }
+
+    public String getName() {
+        return this.astronomicalObject.getName();
+    }
+
+    public void editName(String newName) {
+        this.astronomicalObject.editName(newName);
+    }
+
+    public AstronomicalObject getAstronomicalObject() {
+        return this.astronomicalObject;
+    }
+
+    public void editRightAscension(HourCoordinate newRightAscension) {
+        this.astronomicalObject.editRightAscension(newRightAscension);
+    }
+
+    public void editDeclination(HalfCircleDegreeCoordinate newDeclination) {
+        this.astronomicalObject.editDeclination(newDeclination);
     }
 
 
