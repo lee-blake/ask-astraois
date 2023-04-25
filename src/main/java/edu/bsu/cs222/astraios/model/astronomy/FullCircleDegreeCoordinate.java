@@ -59,13 +59,6 @@ public class FullCircleDegreeCoordinate {
         return false;
     }
 
-    @Override
-    public String toString() {
-        FullCircleDegreeCoordinate.FullCircleDegreeCoordinateFormatter formatter =
-                this.new FullCircleDegreeCoordinateFormatter();
-        return formatter.standardDegreeFormatNoSpaces();
-    }
-
     public double toRadians() {return Math.PI*this.units/UNITS_FOR_PI_RADIANS;}
 
 
@@ -79,11 +72,6 @@ public class FullCircleDegreeCoordinate {
             this.degrees = units/UNITS_PER_DEGREE;
             this.arcminutes = (units % UNITS_PER_DEGREE)/UNITS_PER_ARCMINUTE;
             this.arcseconds = (units % UNITS_PER_ARCMINUTE)/(double)UNITS_PER_ARCSECOND;
-        }
-
-        public String standardDegreeFormatNoSpaces() {
-            return String.format("%02d°%02d'",this.degrees,this.arcminutes)
-                    + new DecimalFormat("00.#########").format(this.arcseconds) + "\"";
         }
 
         public String standardDegreeFormatNoSpacesOneDecimalPlace() {

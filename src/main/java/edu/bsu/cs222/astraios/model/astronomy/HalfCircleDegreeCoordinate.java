@@ -80,13 +80,6 @@ public class HalfCircleDegreeCoordinate {
         return false;
     }
 
-    @Override
-    public String toString() {
-        HalfCircleDegreeCoordinate.HalfCircleDegreeCoordinateFormatter formatter =
-                this.new HalfCircleDegreeCoordinateFormatter();
-        return formatter.standardDegreeFormatNoSpaces();
-    }
-
     public double toRadians() {
         return Math.PI*this.units/UNITS_FOR_PI_RADIANS;
     }
@@ -113,12 +106,6 @@ public class HalfCircleDegreeCoordinate {
         public String standardDegreeFormatSpaced() {
             return this.getSign()
                     + String.format("%02d° %02d' ",this.degrees,this.arcminutes)
-                    + new DecimalFormat("00.#########").format(this.arcseconds) + "\"";
-        }
-
-        public String standardDegreeFormatNoSpaces() {
-            return this.getSign()
-                    + String.format("%02d°%02d'",this.degrees,this.arcminutes)
                     + new DecimalFormat("00.#########").format(this.arcseconds) + "\"";
         }
 
