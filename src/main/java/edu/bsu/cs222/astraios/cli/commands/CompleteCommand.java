@@ -47,7 +47,7 @@ public class CompleteCommand implements Callable<Integer> {
             names = {"--force"},
             description = "Whether to ignore an already complete status. This can be used to fix an incorrect date."
     )
-    private boolean force;
+    private boolean isForced;
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException,
@@ -57,13 +57,13 @@ public class CompleteCommand implements Callable<Integer> {
                 JournalFileMaintainer.defaultBackupPath
         );
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
-        this.executeComplete(objectJournal);
+        this.completeWithAppropriateMethod(objectJournal);
         maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
     }
 
-    private void executeComplete(ObjectJournal journal) {
-        if(this.force) {
+    private void completeWithAppropriateMethod(ObjectJournal journal) {
+        if(this.isForced) {
             journal.forceCompleteByName(this.name, this.dateOfCompletion);
         }
         else {

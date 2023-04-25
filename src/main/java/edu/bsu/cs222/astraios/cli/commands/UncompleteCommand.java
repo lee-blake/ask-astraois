@@ -34,7 +34,7 @@ public class UncompleteCommand implements Callable<Integer> {
             names = {"--force"},
             description = "Whether to ignore an already incomplete status."
     )
-    private boolean force;
+    private boolean isForced;
 
     @Override
     public Integer call() throws InvalidJournalFileContentsException, CouldNotParseJournalFileException, IOException {
@@ -43,13 +43,13 @@ public class UncompleteCommand implements Callable<Integer> {
                 JournalFileMaintainer.defaultBackupPath
         );
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
-        this.executeIncomplete(objectJournal);
+        this.uncompleteWithAppropriateMethod(objectJournal);
         maintainer.saveObjectJournalToFile(objectJournal);
         return 0;
     }
 
-    private void executeIncomplete(ObjectJournal journal) {
-        if(this.force) {
+    private void uncompleteWithAppropriateMethod(ObjectJournal journal) {
+        if(this.isForced) {
             journal.forceIncompleteByName(this.name);
         }
         else {
