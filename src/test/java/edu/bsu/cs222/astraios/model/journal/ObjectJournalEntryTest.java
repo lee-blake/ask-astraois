@@ -193,12 +193,17 @@ public class ObjectJournalEntryTest {
     }
 
     @Test
-    public void testForceCompleteAlreadyCompleteDoesNotThrow() {
-        ObjectJournalEntry entry = new ObjectJournalEntry(
+    public void testForceCompleteAlreadyCompleteDoesNotThrowException() {
+        ObjectJournalEntry actual = new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus(LocalDate.parse("2023-01-01"))
         );
-        entry.forceComplete(LocalDate.parse("2022-12-31"));
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus(LocalDate.parse("2022-12-31"))
+        );
+        actual.forceComplete(LocalDate.parse("2022-12-31"));
+        Assertions.assertEquals(expected, actual);
     }
 
 
@@ -219,11 +224,16 @@ public class ObjectJournalEntryTest {
 
     @Test
     public void testForceIncompleteAlreadyIncompleteDoesNotThrowException() {
-        ObjectJournalEntry entry = new ObjectJournalEntry(
+        ObjectJournalEntry actual = new ObjectJournalEntry(
                 buildM13Object(),
                 new CompletionStatus()
         );
-        entry.forceIncomplete();
+        ObjectJournalEntry expected = new ObjectJournalEntry(
+                buildM13Object(),
+                new CompletionStatus()
+        );
+        actual.forceIncomplete();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
