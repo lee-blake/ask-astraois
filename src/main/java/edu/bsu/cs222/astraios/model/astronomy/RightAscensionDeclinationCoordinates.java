@@ -28,11 +28,6 @@ public class RightAscensionDeclinationCoordinates {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "[RA " + this.rightAscension + " DEC " + this.declination + "]";
-    }
-
     public void editRightAscension(HourCoordinate newRightAscension) { this.rightAscension = newRightAscension;}
 
     public void editDeclination(HalfCircleDegreeCoordinate newDeclination) { this.declination = newDeclination;}
