@@ -28,10 +28,6 @@ public class AstronomicalObject {
         return this.name;
     }
 
-    public AzimuthAltitudeCoordinates getAltAzAtObservation(Observation observation) {
-        return this.celestialCoordinates.convertToAltAzAtObservation(observation);
-    }
-
     public void editName(String newName) {
         this.name = newName;
     }
@@ -42,6 +38,10 @@ public class AstronomicalObject {
 
     public void editDeclination(HalfCircleDegreeCoordinate newDeclination) {
         this.celestialCoordinates.editDeclination(newDeclination);
+    }
+
+    public AzimuthAltitudeCoordinates getAltAzAtObservation(Observation observation) {
+        return this.celestialCoordinates.convertToAltAzAtObservation(observation);
     }
 
 

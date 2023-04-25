@@ -31,6 +31,10 @@ public class RightAscensionDeclinationCoordinates {
         return "[RA " + this.rightAscension + " DEC " + this.declination + "]";
     }
 
+    public void editRightAscension(HourCoordinate newRightAscension) { this.rightAscension = newRightAscension;}
+
+    public void editDeclination(HalfCircleDegreeCoordinate newDeclination) { this.declination = newDeclination;}
+
     public AzimuthAltitudeCoordinates convertToAltAzAtObservation(Observation observation) {
         double hourAngle = observation.getLocalSiderealTime().toRadians()
                 - this.rightAscension.toRadians();
@@ -50,10 +54,6 @@ public class RightAscensionDeclinationCoordinates {
                 HalfCircleDegreeCoordinate.fromRadians(altitude)
         );
     }
-
-    public void editRightAscension(HourCoordinate newRightAscension) { this.rightAscension = newRightAscension;}
-
-    public void editDeclination(HalfCircleDegreeCoordinate newDeclination) { this.declination = newDeclination;}
 
 
 
