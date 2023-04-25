@@ -70,6 +70,7 @@ public class HourCoordinate {
     }
 
 
+
     public class HourCoordinateFormatter {
 
         private final long hours;

@@ -85,6 +85,7 @@ public class HalfCircleDegreeCoordinate {
     }
 
 
+
     public class HalfCircleDegreeCoordinateFormatter {
 
         private final boolean negative;

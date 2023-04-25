@@ -62,6 +62,7 @@ public class FullCircleDegreeCoordinate {
     public double toRadians() {return Math.PI*this.units/UNITS_FOR_PI_RADIANS;}
 
 
+
     public class FullCircleDegreeCoordinateFormatter {
 
         private final long degrees;
