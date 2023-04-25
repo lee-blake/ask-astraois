@@ -91,7 +91,7 @@ public class EditCommand implements Callable<Integer> {
         // options are not actually present.
         if(newName != null) {
             journal.editNameByName(this.name, this.newName);
-            this.name = this.newName; // Update the name for future edits
+            this.name = this.newName; // Any remaining changes will need to reference the new name of the object.
         }
         if(newRightAscension != null) {
             journal.editRightAscensionByName(this.name, this.newRightAscension);
