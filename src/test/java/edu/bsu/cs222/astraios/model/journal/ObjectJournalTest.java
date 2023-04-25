@@ -387,15 +387,17 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testEditNameByNameBothSameNoException() {
-        ObjectJournal journal = buildM13M31ObjectJournal();
-        journal.editNameByName("M13", "M13");
+    public void testEditNameByNameBothSameNameNoException() {
+        ObjectJournal actual = buildM13M31ObjectJournal();
+        actual.editNameByName("M13", "M13");
+        ObjectJournal expected = buildM13M31ObjectJournal();
+        Assertions.assertEquals(expected, actual);
     }
 
 
 
     @Test
-    public void testEditRightAscensionDoesNotChange() {
+    public void testEditRightAscensionSameRADoesNotChange() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
@@ -411,7 +413,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testEditRightAscensionDoesChange() {
+    public void testEditRightAscensionDifferentRADoesChange() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 new AstronomicalObject(
@@ -435,7 +437,7 @@ public class ObjectJournalTest {
 
 
     @Test
-    public void testEditDeclinationDoesNotChange() {
+    public void testEditDeclinationSameDecDoesNotChange() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 buildM13Object(),
@@ -451,7 +453,7 @@ public class ObjectJournalTest {
     }
 
     @Test
-    public void testEditDeclinationDoesChange() {
+    public void testEditDeclinationDifferentDecDoesChange() {
         ObjectJournal expected = new ObjectJournal();
         expected.addEntry(new ObjectJournalEntry(
                 new AstronomicalObject(
