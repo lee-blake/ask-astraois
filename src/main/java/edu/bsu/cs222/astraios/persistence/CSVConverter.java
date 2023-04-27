@@ -20,6 +20,12 @@ import java.time.format.DateTimeParseException;
 
 public class CSVConverter {
 
+    // IntelliJ says that journalToConvert is unused; however, we do use it to initialize a formatter. Furthermore,
+    // the construction of this formatter requires a CSVPrinter that we initialize in this method. The alternative
+    // would be to pass the formatter to the constructor and initialize the CSVPrinter using a setter method,
+    // which is to be avoided under encapsulation. Thus, it is best to suppress this, as the variable *is*
+    // implicitly used even if not recognized by IntelliJ.
+    @SuppressWarnings("unused")
     public String convertObjectJournalToCSV(ObjectJournal journalToConvert, Header[] headers) throws IOException {
         StringBuilder csvStringBuilder = new StringBuilder();
         String[] headerNames = this.getHeaderNames(headers);
