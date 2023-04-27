@@ -8,7 +8,7 @@ public class ExampleTextConverter {
                 return """
                         Examples for 'add':
                         
-                        Note that Powershell users should leave the arcsecond markers off or replace '\\"' with '""'.
+                        Note that Powershell users should leave the arcsecond markers off or replace '\\"' with '`"'.
                         
                         Add M13 to the object journal:
                         ask-astraios add M13 --ra "16h 41m 41.24s" 	--dec "+36* 27' 35.5\\""
@@ -24,7 +24,7 @@ public class ExampleTextConverter {
                 return """
                         Examples for 'check-visibility':
                         
-                        Note that Powershell users should leave the arcsecond markers off or replace '\\"' with '""'.
+                        Note that Powershell users should leave the arcsecond markers off or replace '\\"' with '`"'.
                         
                         Check the visibility of M13 at noon UTC on Jan 1, 2000 at longitude and latitude 0:
                         ask-astraios check-visibility M13 --datetime "2000-01-01T12:00:00Z" \
@@ -65,7 +65,7 @@ public class ExampleTextConverter {
                 return """
                         Examples for 'edit':
                         
-                        Note that Powershell users should leave the arcsecond markers off or replace '\\"' with '""'.
+                        Note that Powershell users should leave the arcsecond markers off or replace '\\"' with '`"'.
                         
                         Change the name of an object:
                         ask-astraios edit M31 --new-name "Andromeda Galaxy"
