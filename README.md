@@ -54,7 +54,6 @@ As part of this project, some warnings have been suppressed globally:
   annotations, as PicoCLI is responsible for injecting them at runtime:
   - `@picocli.CommandLine.Parameters`
   - `@picocli.CommandLine.Option`
-  - `@picocli.CommandLine.Spec`
 
 ### Troubleshooting
 #### Unicode
