@@ -1,5 +1,6 @@
 package edu.bsu.cs222.astraios.cli.converters;
 
+import edu.bsu.cs222.astraios.cli.exceptions.InvalidSubcommandForExampleException;
 import edu.bsu.cs222.astraios.cli.exceptions.NothingChangedDuringEditException;
 import edu.bsu.cs222.astraios.model.exceptions.*;
 import edu.bsu.cs222.astraios.persistence.CouldNotParseJournalFileException;
@@ -55,6 +56,10 @@ public class CLIExceptionMessageFactory {
         }
         else if(ex instanceof NothingChangedDuringEditException) {
             return "No changes were passed to the edit command. Please use one of the options displayed by --help.";
+        }
+        else if(ex instanceof InvalidSubcommandForExampleException exception) {
+            return "Could not give examples for an unrecognized subcommand\n"
+                    + exception.getMessage();
         }
         throw ex;
     }

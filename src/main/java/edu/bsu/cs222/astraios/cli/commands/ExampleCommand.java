@@ -1,12 +1,10 @@
 package edu.bsu.cs222.astraios.cli.commands;
 
 import edu.bsu.cs222.astraios.cli.converters.ExampleTextConverter;
-import picocli.CommandLine;
+import edu.bsu.cs222.astraios.cli.exceptions.InvalidSubcommandForExampleException;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import picocli.CommandLine.Spec;
-import picocli.CommandLine.Model.CommandSpec;
 
 import java.util.concurrent.Callable;
 
@@ -16,9 +14,6 @@ import java.util.concurrent.Callable;
                 "its variables."
 )
 public class ExampleCommand implements Callable<Integer> {
-
-    @Spec
-    CommandSpec specForThisInvocation;
 
     @Option(
             names = {"-h", "--help"},
@@ -40,15 +35,14 @@ public class ExampleCommand implements Callable<Integer> {
             return 0;
         }
         catch(IllegalArgumentException ex) {
-            // We could make a "converter" to validate input instead, but this is the way picocli recommends.
-            // Also, if we were to implement a different view, there would be no need for this - input could be
-            // restricted to a set. Therefore, this message should live here.
-            throw new CommandLine.ParameterException(
-                    specForThisInvocation.commandLine(),
-                    "'"
+            // While we could make a "converter" to throw an exception if the subcommand isn't valid, that would
+            // cause duplication and would be less recommended by picocli. This is only necessary because picocli
+            // has no option like Python's 'argparse' to restrict a string argument to a specific set.
+            throw new InvalidSubcommandForExampleException(
+                    "Argument '"
                             + subcommand
-                            + "' is not a recognized subcommand! Use 'ask-astraios --help' for a list of subcommands."
-                    );
+                            + "' is not a recognized subcommand!"
+            );
         }
     }
 
