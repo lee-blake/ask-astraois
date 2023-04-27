@@ -38,20 +38,20 @@ public class ViewCommand implements Callable<Integer> {
                 JournalFileMaintainer.defaultBackupPath
         );
         ObjectJournal objectJournal = maintainer.loadObjectJournalFromFile();
-        this.printObjects(objectJournal, names);
+        ObjectJournal.ObjectJournalCLIFormatter journalCLIFormatter = objectJournal.new ObjectJournalCLIFormatter();
+        this.printObjects(journalCLIFormatter, names);
         return 0;
     }
 
-    private void printObjects(ObjectJournal objectJournal, String[] namesToPrint) {
-        ObjectJournal.ObjectJournalCLIFormatter formatter = objectJournal.new ObjectJournalCLIFormatter();
+    private void printObjects(ObjectJournal.ObjectJournalCLIFormatter journalCLIFormatter, String[] namesToPrint) {
         String toPrint;
         // Unfortunately, we do have to check 'null' because if no arguments are passed to a positional parameter,
         // 'null' is what PicoCLI will set the parameter value to.
         if(namesToPrint == null) {
-            toPrint = formatter.getCLIViewString();
+            toPrint = journalCLIFormatter.getCLIViewString();
         }
         else {
-            toPrint = formatter.getCLIViewString(namesToPrint);
+            toPrint = journalCLIFormatter.getCLIViewString(namesToPrint);
         }
         System.out.println(toPrint);
     }
