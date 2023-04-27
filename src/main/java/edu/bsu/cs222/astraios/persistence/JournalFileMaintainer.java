@@ -8,8 +8,8 @@ import java.nio.file.*;
 
 public class JournalFileMaintainer {
 
-    public static Path defaultOriginalPath = Paths.get("data/AstraiosJournal.csv");
-    public static Path defaultBackupPath = Paths.get("data/AstraiosJournal.csv.backup");
+    public static final Path defaultOriginalPath = Paths.get("data/AstraiosJournal.csv");
+    public static final Path defaultBackupPath = Paths.get("data/AstraiosJournal.csv.backup");
     public static final Header[] canonicalHeaderOrder = new Header[]{
             Header.NAME,
             Header.RIGHT_ASCENSION,
