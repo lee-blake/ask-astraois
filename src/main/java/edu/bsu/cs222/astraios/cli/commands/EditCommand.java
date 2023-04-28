@@ -24,6 +24,7 @@ import java.util.concurrent.Callable;
     )
 public class EditCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -37,6 +38,7 @@ public class EditCommand implements Callable<Integer> {
     )
     private String name;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--new-ra"},
             description = "The new right ascension of the object. Accepted forms are:\n"
@@ -45,6 +47,7 @@ public class EditCommand implements Callable<Integer> {
     )
     private HourCoordinate newRightAscension;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--new-dec"},
             description = "The new declination of the object. Accepted forms are:\n"
@@ -53,6 +56,7 @@ public class EditCommand implements Callable<Integer> {
     )
     private HalfCircleDegreeCoordinate newDeclination;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--new-name"},
             description = "The new name that the object will have."

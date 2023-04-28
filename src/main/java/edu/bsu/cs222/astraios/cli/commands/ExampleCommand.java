@@ -15,6 +15,7 @@ import java.util.concurrent.Callable;
 )
 public class ExampleCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -22,6 +23,7 @@ public class ExampleCommand implements Callable<Integer> {
     )
     private boolean helpRequested;
 
+    @SuppressWarnings("unused")
     @Parameters(
             index = "0",
             description = "The subcommand provides examples for"

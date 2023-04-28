@@ -17,6 +17,7 @@ import java.util.concurrent.Callable;
 )
 public class UncompleteCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -24,12 +25,14 @@ public class UncompleteCommand implements Callable<Integer> {
     )
     private boolean helpRequested;
 
+    @SuppressWarnings("unused")
     @Parameters(
             index = "0",
             description = "The name of the object to mark incomplete, as stored in the journal"
     )
     private String name;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--force"},
             description = "Whether to ignore an already incomplete status."

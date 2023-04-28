@@ -20,6 +20,7 @@ import java.util.concurrent.Callable;
 )
 public class CompleteCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -27,12 +28,14 @@ public class CompleteCommand implements Callable<Integer> {
     )
     private boolean helpRequested;
 
+    @SuppressWarnings("unused")
     @Parameters(
             index = "0",
             description = "The name of the object to mark complete, as stored in the journal."
     )
     private String name;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--on", "--date"},
             description = "The date the completion should be marked for. Defaults to current day if not specified. "
@@ -43,6 +46,7 @@ public class CompleteCommand implements Callable<Integer> {
     )
     private LocalDate dateOfCompletion;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--force"},
             description = "Whether to ignore an already complete status. This can be used to fix an incorrect date."

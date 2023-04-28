@@ -26,6 +26,7 @@ import java.util.concurrent.Callable;
 )
 public class VisibilityCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -33,12 +34,14 @@ public class VisibilityCommand implements Callable<Integer> {
     )
     private boolean helpRequested;
 
+    @SuppressWarnings("unused")
     @Parameters(
             index = "0",
             description = "The name of the object to add, as will be stored in the journal"
     )
     private String name;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--longitude"},
             required = true,
@@ -48,6 +51,7 @@ public class VisibilityCommand implements Callable<Integer> {
     )
     private FullCircleDegreeCoordinate longitude;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--latitude"},
             required = true,
@@ -57,6 +61,7 @@ public class VisibilityCommand implements Callable<Integer> {
     )
     private HalfCircleDegreeCoordinate latitude;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--datetime"},
             required = true,

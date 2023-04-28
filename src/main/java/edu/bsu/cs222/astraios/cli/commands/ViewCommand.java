@@ -17,6 +17,7 @@ import java.util.concurrent.Callable;
 )
 public class ViewCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -24,6 +25,7 @@ public class ViewCommand implements Callable<Integer> {
     )
     private boolean helpRequested;
 
+    @SuppressWarnings("unused")
     @Parameters(
             index = "0..*",
             description = "The names of specific objects to display. If none are specified, all objects in the "

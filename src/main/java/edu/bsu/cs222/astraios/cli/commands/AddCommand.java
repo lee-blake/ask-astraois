@@ -29,6 +29,7 @@ import java.util.concurrent.Callable;
 )
 public class AddCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -36,12 +37,14 @@ public class AddCommand implements Callable<Integer> {
     )
     private boolean helpRequested;
 
+    @SuppressWarnings("unused")
     @Parameters(
             index = "0",
             description = "The name of the object to add, as will be stored in the journal"
     )
     private String name;
 
+    @SuppressWarnings("unused")
     @Option(
            names = {"--ra"},
            required = true,
@@ -51,6 +54,7 @@ public class AddCommand implements Callable<Integer> {
     )
     private HourCoordinate rightAscension;
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"--dec"},
             required = true,

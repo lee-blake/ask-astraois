@@ -17,6 +17,7 @@ import java.util.concurrent.Callable;
 )
 public class RemoveCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
@@ -24,6 +25,7 @@ public class RemoveCommand implements Callable<Integer> {
     )
     private boolean helpRequested;
 
+    @SuppressWarnings("unused")
     @Parameters(
             index = "0",
             description = "The name of the object to remove, as stored in the journal"

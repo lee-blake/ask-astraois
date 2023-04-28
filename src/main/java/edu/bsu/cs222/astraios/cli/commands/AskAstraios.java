@@ -22,6 +22,7 @@ import picocli.CommandLine.Option;
 )
 public class AskAstraios {
 
+    @SuppressWarnings("unused")
     @Option(
             names = {"-h", "--help"},
             usageHelp = true,
